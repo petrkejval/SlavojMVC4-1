@@ -3,7 +3,7 @@
 <div class="pagedList"
     data-otf-target="#listClanky"
     >
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< První", LinkToPreviousPageFormat = "< Předchozí", LinkToNextPageFormat = "Další >", LinkToLastPageFormat = "Poslední >>" })
+    @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< První", LinkToPreviousPageFormat = "< Předchozí", LinkToNextPageFormat = "Další >", LinkToLastPageFormat = "Poslední >>" })*@
 
-    @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }),  PagedListRenderOptions.OnlyShowFivePagesAtATime)*@
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),  PagedListRenderOptions.OnlyShowFivePagesAtATime)
 </div>
