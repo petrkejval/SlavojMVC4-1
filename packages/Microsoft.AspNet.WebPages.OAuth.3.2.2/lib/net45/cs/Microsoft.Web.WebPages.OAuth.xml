@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.Web.WebPages.OAuth</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Web.WebPages.OAuth.AuthenticationClientData">
+      <summary>Reprezentuje klientská data ověřování.</summary>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.AuthenticationClientData.#ctor(DotNetOpenAuth.AspNet.IAuthenticationClient,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+      <summary>Inicializuje novou instanci třídy <see cref="T:Microsoft.Web.WebPages.OAuth.AuthenticationClientData" />.</summary>
+      <param name="authenticationClient">Klient ověření.</param>
+      <param name="displayName">Zobrazovaný název dat</param>
+      <param name="extraData">Další data</param>
+    </member>
+    <member name="P:Microsoft.Web.WebPages.OAuth.AuthenticationClientData.AuthenticationClient">
+      <summary>Získá klienta ověření.</summary>
+      <returns>Klient ověření.</returns>
+    </member>
+    <member name="P:Microsoft.Web.WebPages.OAuth.AuthenticationClientData.DisplayName">
+      <summary>Získá nebo nastaví zobrazovaný název dat.</summary>
+      <returns>Zobrazovaný název dat</returns>
+    </member>
+    <member name="P:Microsoft.Web.WebPages.OAuth.AuthenticationClientData.ExtraData">
+      <summary>Získá doplňující data objektu.</summary>
+      <returns>Doplňující data objektu</returns>
+    </member>
+    <member name="T:Microsoft.Web.WebPages.OAuth.OAuthAccount">
+      <summary>Představuje účet OAuth nebo OpenID.</summary>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthAccount.#ctor(System.String,System.String)">
+      <summary>Inicializuje novou instanci třídy <see cref="T:Microsoft.Web.WebPages.OAuth.OAuthAccount" />.</summary>
+      <param name="provider">Název zprostředkovatele</param>
+      <param name="providerUserId">Uživatelské ID zprostředkovatele</param>
+    </member>
+    <member name="P:Microsoft.Web.WebPages.OAuth.OAuthAccount.Provider">
+      <summary>Získá jméno zprostředkovatele.</summary>
+      <returns>Název zprostředkovatele</returns>
+    </member>
+    <member name="P:Microsoft.Web.WebPages.OAuth.OAuthAccount.ProviderUserId">
+      <summary>Získá uživatelské ID zprostředkovatele.</summary>
+      <returns>Uživatelské ID zprostředkovatele</returns>
+    </member>
+    <member name="T:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity">
+      <summary>Spravuje zabezpečení, které využívá zprostředkovatele ověřování OAuth, jako je Facebook, Twitter, LinkedIn, Windows Live, a zprostředkovatele ověřování OpenID, jako je Google a Yahoo.</summary>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.CreateOrUpdateAccount(System.String,System.String,System.String)">
+      <summary>Vytvoří nebo aktualizuje účet pomocí stanoveného zprostředkovatele a uživatelského ID pro ID zprostředkovatele a asociuje nový účet se stanoveným uživatelským jménem.</summary>
+      <param name="providerName">Název zprostředkovatele</param>
+      <param name="providerUserId">Uživatelské ID pro zadaného zprostředkovatele</param>
+      <param name="userName">Jméno uživatele</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.DeleteAccount(System.String,System.String)">
+      <summary>Odstraní zadaný členský účet.</summary>
+      <returns>Má hodnotu true, pokud byl účet smazán, nebo hodnotu false, pokud nebyl.</returns>
+      <param name="providerName">Název zprostředkovatele</param>
+      <param name="providerUserId">Uživatelské ID pro zadaného zprostředkovatele</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.GetAccountsFromUserName(System.String)">
+      <summary>Získá účet nebo účty, které jsou asociovány pomocí stanoveného uživatelského jména.</summary>
+      <returns>Kolekce účtů</returns>
+      <param name="userName">Uživatelské jméno.</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.GetOAuthClientData(System.String)">
+      <summary>Vrátí klientská data ověřování protokolem OAuth se zadaným zprostředkovatelem.</summary>
+      <returns>Klientská data ověření OAuth.</returns>
+      <param name="providerName">Název zprostředkovatele</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.GetUserName(System.String,System.String)">
+      <summary>Vrátí uživatelské ID pro zadaného zprostředkovatele účtu OAuth nebo OpenID a uživatelské ID zprostředkovatele.</summary>
+      <returns>Uživatelské ID nebo hodnota null, pokud neexistuje žádné uživatelské ID přiřazené uživatelskému ID zprostředkovatele účtu OAuth nebo Open ID.</returns>
+      <param name="providerName">Název zprostředkovatele</param>
+      <param name="providerUserId">Uživatelské ID pro zadaného zprostředkovatele</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.HasLocalAccount(System.Int32)">
+      <summary>Označuje, zda má uživatel místní účet.</summary>
+      <returns>Hodnota true, pokud uživatel má místní účet, jinak hodnotafalse.</returns>
+      <param name="userId">ID uživatele.</param>
+    </member>
+    <member name="P:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.IsAuthenticatedWithOAuth">
+      <summary>Získá hodnotu udávající, zda byl uživatel ověřen pomocí metody OAuth.</summary>
+      <returns>Má hodnotu true, pokud byl uživatel ověřen pomocí metody OAuth; jinak má hodnotu false.</returns>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.Login(System.String,System.String,System.Boolean)">
+      <summary>Přihlásí uživatele.</summary>
+      <returns>Má hodnotu true, pokud bylo přihlášení úspěšné, jinak má hodnotu false.</returns>
+      <param name="providerName">Název zprostředkovatele</param>
+      <param name="providerUserId">Uživatelské ID pro zadaného zprostředkovatele</param>
+      <param name="createPersistentCookie">Má hodnotu true pro vytvoření trvalého souboru cookie, takže přihlašovací informace jsou uloženy pro všechny relace prohlížeče; jinak má hodnotu false.</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterClient(DotNetOpenAuth.AspNet.IAuthenticationClient)">
+      <summary>Registruje klienta ověření OAuth.</summary>
+      <param name="client">Jeden z podporovaných klientů OAuth</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterClient(DotNetOpenAuth.AspNet.IAuthenticationClient,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+      <summary>Registruje klienta ověření OAuth.</summary>
+      <param name="client">Jeden z podporovaných klientů OAuth</param>
+      <param name="displayName">Zobrazovaný název</param>
+      <param name="extraData">Doplňující data.</param>
+    </member>
+    <member name="P:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisteredClientData">
+      <summary>Získá kolekci registrovaných klientských dat.</summary>
+      <returns>Kolekce registrovaných klientských dat.</returns>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterFacebookClient(System.String,System.String)">
+      <summary>Zaregistruje klienta sítě Facebook se zadaným identifikátorem.</summary>
+      <param name="appId">ID aplikace.</param>
+      <param name="appSecret">Tajný klíč aplikace.</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterFacebookClient(System.String,System.String,System.String)">
+      <summary>Zaregistruje klienta sítě Facebook se zadaným identifikátorem.</summary>
+      <param name="appId">Identifikátor aplikace.</param>
+      <param name="appSecret">Tajný klíč aplikace.</param>
+      <param name="displayName">Zobrazovaný název</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterFacebookClient(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+      <summary>Zaregistruje klienta sítě Facebook se zadaným identifikátorem.</summary>
+      <param name="appId">Identifikátor aplikace.</param>
+      <param name="appSecret">Tajný klíč aplikace.</param>
+      <param name="displayName">Zobrazovaný název</param>
+      <param name="extraData">Doplňující data.</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterGoogleClient">
+      <summary>Zaregistruje klienta Google.</summary>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterGoogleClient(System.String)">
+      <summary>Zaregistruje klienta Google.</summary>
+      <param name="displayName">Zobrazovaný název</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterGoogleClient(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+      <summary>Zaregistruje klienta Google.</summary>
+      <param name="displayName">Zobrazovaný název</param>
+      <param name="extraData">Doplňující data.</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterLinkedInClient(System.String,System.String)">
+      <summary>Zaregistruje klienta sítě LinkedIn se zadaným uživatelským klíčem.</summary>
+      <param name="consumerKey">Uživatelský klíč.</param>
+      <param name="consumerSecret">Uživatelský tajný klíč.</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterLinkedInClient(System.String,System.String,System.String)">
+      <summary>Zaregistruje klienta sítě LinkedIn se zadaným uživatelským klíčem.</summary>
+      <param name="consumerKey">Uživatelský klíč.</param>
+      <param name="consumerSecret">Uživatelský tajný klíč.</param>
+      <param name="displayName">Zobrazovaný název</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterLinkedInClient(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+      <summary>Zaregistruje klienta sítě LinkedIn se zadaným uživatelským klíčem.</summary>
+      <param name="consumerKey">Uživatelský klíč.</param>
+      <param name="consumerSecret">Uživatelský tajný klíč.</param>
+      <param name="displayName">Zobrazovaný název</param>
+      <param name="extraData">Doplňující data.</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterMicrosoftClient(System.String,System.String)">
+      <summary>Zaregistruje klienta Microsoft se zadaným identifikátorem.</summary>
+      <param name="clientId">ID klienta.</param>
+      <param name="clientSecret">Tajný klíč klienta.</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterMicrosoftClient(System.String,System.String,System.String)">
+      <summary>Zaregistruje klienta Microsoft se zadaným identifikátorem.</summary>
+      <param name="clientId">ID klienta.</param>
+      <param name="clientSecret">Tajný klíč klienta.</param>
+      <param name="displayName">Zobrazovaný název</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterMicrosoftClient(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+      <summary>Zaregistruje klienta Microsoft se zadaným identifikátorem.</summary>
+      <param name="clientId">ID klienta.</param>
+      <param name="clientSecret">Tajný klíč klienta.</param>
+      <param name="displayName">Zobrazovaný název</param>
+      <param name="extraData">Doplňující data.</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterTwitterClient(System.String,System.String)">
+      <summary>Zaregistruje klienta sítě Twitter se zadaným uživatelským klíčem.</summary>
+      <param name="consumerKey">Uživatelský klíč</param>
+      <param name="consumerSecret">Uživatelské utajení</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterTwitterClient(System.String,System.String,System.String)">
+      <summary>Zaregistruje klienta sítě Twitter se zadaným uživatelským klíčem.</summary>
+      <param name="consumerKey">Uživatelský klíč</param>
+      <param name="consumerSecret">Uživatelské utajení</param>
+      <param name="displayName">Zobrazovaný název</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterTwitterClient(System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+      <summary>Zaregistruje klienta sítě Twitter se zadaným uživatelským klíčem.</summary>
+      <param name="consumerKey">Uživatelský klíč</param>
+      <param name="consumerSecret">Uživatelské utajení</param>
+      <param name="displayName">Zobrazovaný název</param>
+      <param name="extraData">Doplňující data.</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterYahooClient">
+      <summary>Zaregistruje klienta Yahoo.</summary>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterYahooClient(System.String)">
+      <summary>Zaregistruje klienta Yahoo.</summary>
+      <param name="displayName">Zobrazovaný název</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RegisterYahooClient(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+      <summary>Zaregistruje klienta Yahoo.</summary>
+      <param name="displayName">Zobrazovaný název</param>
+      <param name="extraData">Doplňující data.</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RequestAuthentication(System.String)">
+      <summary>Žádá stanoveného zprostředkovatele, aby spustil ověřování přesměrováním uživatelů na externí webovou stránku.</summary>
+      <param name="provider">Zprostředkovatel OAuth</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.RequestAuthentication(System.String,System.String)">
+      <summary>Žádá stanoveného zprostředkovatele, aby spustil ověřování přesměrováním uživatelů na externí webovou stránku, a nařídí zprostředkovateli přesměrovat uživatele na stanovenou URL, když je ověření úspěšné.</summary>
+      <param name="provider">Zprostředkovatel OAuth</param>
+      <param name="returnUrl">URL pro návrat, když je ověření úspěšné</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.SerializeProviderUserId(System.String,System.String)">
+      <summary>Serializuje uživatelské ID zprostředkovatele.</summary>
+      <returns>Serializované uživatelské ID zprostředkovatele.</returns>
+      <param name="providerName">Název zprostředkovatele</param>
+      <param name="providerUserId">Uživatelské ID zprostředkovatele.</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.TryDeserializeProviderUserId(System.String,System.String@,System.String@)">
+      <summary>Označuje, zda došlo k deserializaci uživatelského ID zprostředkovatele.</summary>
+      <returns>Hodnota true, pokud došlo k deserializaci uživatelského ID zprostředkovatele, jinak hodnota false.</returns>
+      <param name="data">Data</param>
+      <param name="providerName">Název zprostředkovatele</param>
+      <param name="providerUserId">Uživatelské ID zprostředkovatele</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.TryGetOAuthClientData(System.String,Microsoft.Web.WebPages.OAuth.AuthenticationClientData@)">
+      <summary>Označuje, zda zprostředkovatel získá klientská data OAuth.</summary>
+      <returns>Má hodnotu true, pokud zprostředkovatel získá klientská data OAuth, jinak má hodnotu false.</returns>
+      <param name="providerName">Název zprostředkovatele</param>
+      <param name="clientData">Klientská data.</param>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.VerifyAuthentication">
+      <summary>Vrátí hodnotu udávající, zda byl uživatelský účet potvrzen zprostředkovatelem.</summary>
+      <returns>Instance <see cref="T:DotNetOpenAuth.AspNet.AuthenticationResult" />, na kterou můžete vznést dotaz pro stanovení toho, zda bylo ověření úspěšné.</returns>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.VerifyAuthentication(System.String)">
+      <summary>Vrátí hodnotu udávající, zda byl uživatelský účet potvrzen zprostředkovatelem.</summary>
+      <returns>Instance <see cref="T:DotNetOpenAuth.AspNet.AuthenticationResult" />, na kterou můžete vznést dotaz pro stanovení toho, zda bylo ověření úspěšné.</returns>
+      <param name="returnUrl">Adresa URL pro návrat.</param>
+    </member>
+    <member name="T:Microsoft.Web.WebPages.OAuth.PreApplicationStartCode">
+      <summary>Poskytuje registrační bod pro kód pro spuštění před aplikací pro zabezpečení na základě OAuth.</summary>
+    </member>
+    <member name="M:Microsoft.Web.WebPages.OAuth.PreApplicationStartCode.Start">
+      <summary>Registruje kód pro spuštění před aplikací pro OAuth.</summary>
+    </member>
+  </members>
+</doc>

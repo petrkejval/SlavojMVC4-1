@@ -1,0 +1,248 @@
+﻿@*@model IEnumerable<SlavojMVC4_1.Models.Clen>*@
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@*<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Jmeno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prijmeni)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TitulPred)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TitulZa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JeClen)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jmeno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prijmeni)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TitulPred)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TitulZa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JeClen)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ClenId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ClenId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ClenId })
+        </td>
+    </tr>
+}
+
+</table>*@
+@*@Html.Partial("_Cleni", Model)*@
+@{
+    Html.Telerik()
+                .Grid<EditableClen>()
+                .Localizable("cs-CZ")
+                .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
+                .DataBinding(dataBinding => dataBinding.Ajax()
+                    .Select("_SelectAjaxEditing", "CleniGrid")
+                    .Insert("_InsertAjaxEditing", "CleniGrid")
+                    .Update("_SaveAjaxEditing", "CleniGrid")
+                    .Delete("_DeleteAjaxEditing", "CleniGrid"))
+                .Scrollable(sc => sc.Height("*"))
+                .Sortable()
+                .Pageable()
+        //.Pageable(paging => paging.PageSize(20).Style(GridPagerStyles.NextPreviousAndNumeric).Position(GridPagerPosition.Bottom))
+                .Filterable()
+                .Name("Grid")
+                .DataKeys(keys => keys.Add(c => c.ClenId))
+                .Reorderable(reorder => reorder.Columns(true))
+                .Resizable(resize => resize.Columns(true))
+                .Columns(columns =>
+                        {
+                            columns.Command(commands =>
+                            {
+                                commands.Edit().ButtonType(GridButtonType.BareImage);
+                                commands.Delete().ButtonType(GridButtonType.BareImage);
+                            }).Width(80);//.Title("Commands");
+
+                            columns.Bound(o => o.ClenId).Width(100);//.ReadOnly();
+                            columns.Bound(o => o.TitulPred).Width(100);
+                            columns.Bound(o => o.Jmeno).Width(100);
+                            columns.Bound(o => o.Prijmeni).Width(100);
+                            columns.Bound(o => o.TitulZa).Width(100);
+                            columns.Bound(o => o.JeClen).Width(100)
+                                .ClientTemplate("<input type='checkbox' disabled='disabled' name='cbJeClen' <#=JeClen? checked='checked' : '' #> />");
+                            columns.Bound(o => o.RodneCislo).Width(130);
+                            columns.Bound(o => o.DatumNarozeni).Width(130).Format("{0:d.M.yyyy}");
+                            columns.Bound(o => o.PohlaviId).Width(130);
+                            columns.Bound(o => o.Vek).Width(130);
+
+                            
+                            columns.Bound(o => o.AdresaUlice).Width(100);
+                            columns.Bound(o => o.AdresaCisloPopisne).Width(100);
+                            columns.Bound(o => o.AdresaObec).Width(100);
+                            columns.Bound(o => o.AdresaPsc).Width(100);
+                            
+                            columns.Bound(o => o.KontaktTelefon).Width(100);
+                            columns.Bound(o => o.KontaktMail).Width(200);
+                            columns.Bound(o => o.KontaktWWW).Width(100);
+
+                            //columns.Command(commands =>
+                            //{
+                            //    commands
+                            //        .Custom("_RegistraceDelete")
+                            //        .Text("Smaž registraci")
+                            //        .DataRouteValues(route => route.Add(o => o.ClenId))
+                            //        .Ajax(true)
+                            //        .Action("_RegistraceDelete", "CleniGrid")
+                            //        .ButtonType(GridButtonType.BareImage)
+                            //        .ImageHtmlAttributes(new { @class = "t-icon t-delete" })
+                            //        .HtmlAttributes(new { @class = "t-delete-registrace" })
+                            //        //.HtmlAttributes(new { @onclick = "return confirm('Opravdu chceš vymazat registrační údaje?')" })
+                            //        //.HtmlAttributes(new { @onclick = "return RegistraceDeleteConfirm()" })
+                            //        //.SendState(false)
+                            //        ;
+                            //})
+                            //.Width(47);
+
+                            columns.Bound(o => o.RegistraceCisloRegistrace).Width(100);
+                            columns.Bound(o => o.RegistracePlatnaDo).Width(130).Format("{0:d}");
+
+                            columns.Bound(o => o.RozhodciCisloRegistrace).Width(100);
+                            columns.Bound(o => o.RozhodciTrida).Width(80);
+                            columns.Bound(o => o.RozhodciPlatnaDo).Width(130).Format("{0:d}");
+                            
+                            columns.Bound(o => o.TrenerCisloRegistrace).Width(100);
+                            columns.Bound(o => o.TrenerTrida).Width(80);
+                            columns.Bound(o => o.TrenerPlatnaDo).Width(130).Format("{0:d}");
+                        }
+                            )
+                .Editable(editing => editing.Mode(GridEditMode.InForm).TemplateName("EditableClen"))
+                //.ClientRowTemplate(grid =>
+                //    "<ul>" +
+                //       "<li>CustomerID: <#= TitulPred #></li>" +
+                //       "<li>Contact Name: <#= Jmeno #></li>" +
+                //       "<li>Country: <#= Prijmeni #></li>" +
+                //    "</ul>" + 
+                //    grid.EditButton(null) +
+                //    grid.DeleteButton(null))
+        .ClientEvents(events => events
+            .OnError("onError"))
+
+        .Render()
+        ;
+    Html.Telerik().ScriptRegistrar().Globalization(true);
+       
+}
+@Scripts.Render("~/bundles/globalize")
+
+@section scripts
+{
+<script type="text/javascript">
+    $(function () {
+        $.validator.methods.date = function (value, element) {
+            Globalize.culture("cs-CZ");
+            // you can alternatively pass the culture to parseDate instead of
+            // setting the culture above, like so:
+            // parseDate(value, null, "cs-CZ")
+            return this.optional(element) || Globalize.parseDate(value) !== null;
+        }
+    });
+
+    function textFromHTMLString(html, target) {
+        if (!html || !target) {
+            return false;
+        }
+        else {
+            var fragment = document.createDocumentFragment(),
+                container = document.createElement('div');
+            container.innerHTML = html;
+            fragment.appendChild(container);
+            var targets = fragment.firstChild.getElementsByTagName(target),
+                result = [];
+
+            for (var i = 0, len = targets.length; i < len; i++) {
+                result.push(targets[i].textContent || targets[i].innerText);
+            }
+            return result;
+        }
+    }
+
+    function onError(e) {
+        if (e.textStatus == 'error') {
+            if (e.XMLHttpRequest.status == "500")
+            {
+                var titletext = textFromHTMLString(e.XMLHttpRequest.responseText, "title");
+                if (titletext != null)
+                {
+                    if (titletext[0] != null) {
+                        alert(titletext[0].replace(/<br>/g, ""));
+                        e.preventDefault();
+                    }
+                }
+            }
+        }
+    }
+
+    //function RegistraceDeleteConfirm() 
+    //{
+    //    if (confirm("Opravdu chceš vymazat registrační údaje?")) {
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    };
+
+    //}
+    //function onComplete(e) {
+    //    if (e.name == "_RegistraceDelete") {
+    //        alert("after" + e.name);
+    //        var grid = $('#Grid').data('tGrid');
+    //        grid.rebind();
+    //    }
+    //}
+
+
+</script>
+}
+
+<style type="text/css">
+@*    .t-grid .field-validation-error
+    {
+        //position: absolute;
+        //display: block;
+        color: blue;
+
+
+    }*@
+    
+    .field-validation-error span
+    {
+        position: absolute;
+        padding: 0 0 0 0;
+        color: blue;
+    }
+
+    
+</style>
+

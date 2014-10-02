@@ -1,0 +1,104 @@
+﻿@(Html.Telerik().Menu()
+    .Name("menu")
+    .Items(menu =>
+    {
+        menu.Add()
+            .Text("Domů")
+            .Action("Index", "Home");
+
+        menu.Add()
+            .Text("Družstva")
+            .Items
+                (item =>
+                    {
+                        item.Add()
+                            .Text("Dospělí A")
+                            .Action("DospeliA", "Druzstva");
+
+                        item.Add()
+                            .Text("Dospělí B")
+                            .Action("DospeliB", "Druzstva");
+
+                        item.Add()
+                            .Text("Dospělí C")
+                            .Action("DospeliC", "Druzstva");
+
+                        item.Add()
+                            .Text("Dospělí D")
+                            .Action("DospeliD", "Druzstva");
+
+                        item.Add()
+                            .Text("Dorost A")
+                            .Action("DorostA", "Druzstva");
+
+                        item.Add()
+                            .Text("Dorost B")
+                            .Action("DorostB", "Druzstva");
+
+                        item.Add()
+                            .Text("Žáci A")
+                            .Action("ZaciA", "Druzstva");
+
+                        item.Add()
+                            .Text("Žáci B")
+                            .Action("ZaciB", "Druzstva");
+                        
+                        item.Add()
+                            .Text("Rozhodčí a trenéři")
+                            .Action("RozhodciaTreneri", "Druzstva");
+                    }
+                );
+                //.Action("Index", "Druzstva");
+
+        menu.Add()
+            .Text("Výsledky")
+            .Action("Index", "Vysledky");
+
+        menu.Add()
+            .Text("Turnaje")
+            .Items
+                (item =>
+                    {
+                        item.Add()
+                            .Text("O perleťovou plaketu")
+                            .Action("OPerletovouPlaketu", "Turnaje");
+
+                        item.Add()
+                            .Text("Liga neregistrovaných")
+                            .Action("LigaNeregistrovanych", "Turnaje");
+
+                        item.Add()
+                            .Text("Velikonoční koulení")
+                            .Action("VelikonocniKouleni", "Turnaje");
+
+                    }
+                 );
+        
+        menu.Add()
+            .Text("Program na kuželně")
+            .Action("Index", "ProgramNaKuzelne");
+            
+
+        menu.Add()
+            .Text("Ke stažení")
+            .Action("Index", "KeStazeni");
+                            
+        menu.Add()
+            .Text("O nás")
+            .Action("Index", "Onas");
+                            
+        menu.Add()
+            .Text("Kuželna")
+            .Action("Index", "Kuzelna");
+                            
+        menu.Add()
+            .Text("Kontakty")
+            .Action("Index", "Kontakty");
+
+        menu.Add()
+            .Text("Členi")
+            .Action("Index", "Cleni")
+            .Visible(User.IsInRole("admin"));
+        
+        
+    }))

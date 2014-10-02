@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Má aplikace ASP.NET MVC</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @*@(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.office2010blue.css").Combined(true).Compress(true)))*@
+        @*@(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.office2007.css").Combined(true).Compress(true)))*@
+        @(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("pk.SlavojZirovnice.css").Combined(true).Compress(true)))
+
+<script type="text/javascript">
+    /*** Temporary text filler function. Remove when deploying template. ***/
+    var gibberish = ["This is just some filler text", "Welcome to Dynamic Drive CSS Library", "Demo content nothing to read here"]
+    function filltext(words) {
+        for (var i = 0; i < words; i++)
+            document.write(gibberish[Math.floor(Math.random() * 3)] + " ")
+    }
+</script>
+    </head>
+
+    <body>
+        <header>
+           <div class="content-wrapper">
+                <div class="float-left site-title">
+                    <a href="@Url.Action("Index", "Home")">
+                        <img class="znak"; src="~/Content/images/Znak.KK.Slavoj.Zirovnice.150.jpg" alt="Znak" />
+                    </a>
+                </div>
+                <div class="float-left site-title">
+                    @Html.ActionLink("Kuželkářský klub Slavoj Žirovnice", "Index", "Home")
+                </div>
+                <div class="float-lýeft site-title">
+                    <a href="@Url.Action("Index", "Home")">
+                            <img class="znak"; src="~/Content/images/Pruh1.gif"; alt="Znak1"; width="801"/>
+                    </a>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>                
+                </div>
+                <div class="site-menu" >
+                    @Html.Partial("_MenuPartial")
+                    
+                </div>
+            </div>
+
+        </header>
+
+@*        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>*@
+
+        <div id="body">
+            <section class="content-wrapper main-content clear-fix">
+                <div id="contentwrapper">
+                    <div id="contentcolumn">
+                        <div class="innertube">
+@*                            <b>Content Column: 
+                            <em>Fluid
+                            </em></b> 
+                            <script type="text/javascript">filltext(45)</script>*@
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+                <div id="rightcolumn">
+                    <div class="innertube">
+                        <b>Right Column: 
+                        <em>200px
+                        </em></b> 
+                        <script type="text/javascript">filltext(14)</script>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - Má aplikace ASP.NET MVC</p>
+
+                </div>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/otf")
+
+        @RenderSection("scripts", required: false)
+        @(Html.Telerik()
+                  .ScriptRegistrar()
+                  .Globalization(true)
+                          .DefaultGroup(group => group
+                              .Combined(true)
+                              .Compress(true)
+                              )
+        )
+
+    </body>
+
+</html>

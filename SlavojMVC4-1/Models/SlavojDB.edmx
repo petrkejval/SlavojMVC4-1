@@ -1,0 +1,1318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SlavojDB.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="SlavojDBStoreContainer">
+          <EntitySet Name="Adresy" EntityType="SlavojDB.Store.Adresy" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Clanky" EntityType="SlavojDB.Store.Clanky" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Cleni" EntityType="SlavojDB.Store.Cleni" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CleniInRoles" EntityType="SlavojDB.Store.CleniInRoles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CleniRoles" EntityType="SlavojDB.Store.CleniRoles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Druzstva" EntityType="SlavojDB.Store.Druzstva" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DruzstvaCleni" EntityType="SlavojDB.Store.DruzstvaCleni" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Kategorie" EntityType="SlavojDB.Store.Kategorie" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="KategorieSoutezi" EntityType="SlavojDB.Store.KategorieSoutezi" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Kontakty" EntityType="SlavojDB.Store.Kontakty" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Kuzelna" EntityType="SlavojDB.Store.Kuzelna" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Pohlavi" EntityType="SlavojDB.Store.Pohlavi" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Registrace" EntityType="SlavojDB.Store.Registrace" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Rozhodci" EntityType="SlavojDB.Store.Rozhodci" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Souteze" EntityType="SlavojDB.Store.Souteze" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Treneri" EntityType="SlavojDB.Store.Treneri" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserClen" EntityType="SlavojDB.Store.UserClen" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProfile" EntityType="SlavojDB.Store.UserProfile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_Membership" EntityType="SlavojDB.Store.webpages_Membership" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="SlavojDB.Store.webpages_OAuthMembership" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_Roles" EntityType="SlavojDB.Store.webpages_Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="SlavojDB.Store.webpages_UsersInRoles" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Adresy_Cleni" Association="SlavojDB.Store.FK_Adresy_Cleni">
+            <End Role="Cleni" EntitySet="Cleni" />
+            <End Role="Adresy" EntitySet="Adresy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clanky_Kategorie" Association="SlavojDB.Store.FK_Clanky_Kategorie">
+            <End Role="Kategorie" EntitySet="Kategorie" />
+            <End Role="Clanky" EntitySet="Clanky" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clanky_UserProfile" Association="SlavojDB.Store.FK_Clanky_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Clanky" EntitySet="Clanky" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cleni_Treneri" Association="SlavojDB.Store.FK_Cleni_Treneri">
+            <End Role="Treneri" EntitySet="Treneri" />
+            <End Role="Cleni" EntitySet="Cleni" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CleniInRoles_Cleni" Association="SlavojDB.Store.FK_CleniInRoles_Cleni">
+            <End Role="Cleni" EntitySet="Cleni" />
+            <End Role="CleniInRoles" EntitySet="CleniInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CleniInRoles_CleniRoles" Association="SlavojDB.Store.FK_CleniInRoles_CleniRoles">
+            <End Role="CleniRoles" EntitySet="CleniRoles" />
+            <End Role="CleniInRoles" EntitySet="CleniInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Druzstva_Souteze" Association="SlavojDB.Store.FK_Druzstva_Souteze">
+            <End Role="Souteze" EntitySet="Souteze" />
+            <End Role="Druzstva" EntitySet="Druzstva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DruzstvaCleniClenId_CleniClenId" Association="SlavojDB.Store.FK_DruzstvaCleniClenId_CleniClenId">
+            <End Role="Cleni" EntitySet="Cleni" />
+            <End Role="DruzstvaCleni" EntitySet="DruzstvaCleni" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DruzstvaCleniDruzstvoId_DruzstvaDruzstvoId" Association="SlavojDB.Store.FK_DruzstvaCleniDruzstvoId_DruzstvaDruzstvoId">
+            <End Role="Druzstva" EntitySet="Druzstva" />
+            <End Role="DruzstvaCleni" EntitySet="DruzstvaCleni" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DruzstvaTrenerId_TreneriClenId" Association="SlavojDB.Store.FK_DruzstvaTrenerId_TreneriClenId">
+            <End Role="Treneri" EntitySet="Treneri" />
+            <End Role="Druzstva" EntitySet="Druzstva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DruzstvaVedouciId_CleniClenId" Association="SlavojDB.Store.FK_DruzstvaVedouciId_CleniClenId">
+            <End Role="Cleni" EntitySet="Cleni" />
+            <End Role="Druzstva" EntitySet="Druzstva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kontakty_Cleni" Association="SlavojDB.Store.FK_Kontakty_Cleni">
+            <End Role="Cleni" EntitySet="Cleni" />
+            <End Role="Kontakty" EntitySet="Kontakty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registrace_Cleni" Association="SlavojDB.Store.FK_Registrace_Cleni">
+            <End Role="Cleni" EntitySet="Cleni" />
+            <End Role="Registrace" EntitySet="Registrace" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rozhodci_Cleni" Association="SlavojDB.Store.FK_Rozhodci_Cleni">
+            <End Role="Cleni" EntitySet="Cleni" />
+            <End Role="Rozhodci" EntitySet="Rozhodci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Souteze_KategorieSoutezi1" Association="SlavojDB.Store.FK_Souteze_KategorieSoutezi1">
+            <End Role="KategorieSoutezi" EntitySet="KategorieSoutezi" />
+            <End Role="Souteze" EntitySet="Souteze" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClen_Cleni" Association="SlavojDB.Store.FK_UserClen_Cleni">
+            <End Role="Cleni" EntitySet="Cleni" />
+            <End Role="UserClen" EntitySet="UserClen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClen_UserProfile" Association="SlavojDB.Store.FK_UserClen_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="UserClen" EntitySet="UserClen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_webpages_Membership_UserProfile" Association="SlavojDB.Store.FK_webpages_Membership_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="webpages_Membership" EntitySet="webpages_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK_webpages_UsersInRoles_UserProfile" Association="SlavojDB.Store.FK_webpages_UsersInRoles_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_webpages_UsersInRoles_webpages_Roles" Association="SlavojDB.Store.FK_webpages_UsersInRoles_webpages_Roles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Adresy">
+          <Key>
+            <PropertyRef Name="ClenId" />
+          </Key>
+          <Property Name="ClenId" Type="int" Nullable="false" />
+          <Property Name="Ulice" Type="nvarchar" MaxLength="50" />
+          <Property Name="CisloPopisne" Type="int" Nullable="false" />
+          <Property Name="Obec" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Psc" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clanky">
+          <Key>
+            <PropertyRef Name="ClanekId" />
+          </Key>
+          <Property Name="ClanekId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Predmet" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="DatumVytvoreni" Type="datetime2" Nullable="false" />
+          <Property Name="DatumZmeny" Type="datetime2" Nullable="false" />
+          <Property Name="KategorieId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cleni">
+          <Key>
+            <PropertyRef Name="ClenId" />
+          </Key>
+          <Property Name="ClenId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Jmeno" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Prijmeni" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="TitulPred" Type="nvarchar" MaxLength="15" />
+          <Property Name="TitulZa" Type="nvarchar" MaxLength="15" />
+          <Property Name="JeClen" Type="bit" Nullable="false" />
+          <Property Name="RodneCislo" Type="varchar" MaxLength="11" />
+          <Property Name="DatumNarozeni" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="PohlaviId" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="Vek" Type="int" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="CleniInRoles">
+          <Key>
+            <PropertyRef Name="ClenId" />
+            <PropertyRef Name="ClenRoleId" />
+          </Key>
+          <Property Name="ClenId" Type="int" Nullable="false" />
+          <Property Name="ClenRoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CleniRoles">
+          <Key>
+            <PropertyRef Name="ClenRoleId" />
+          </Key>
+          <Property Name="ClenRoleId" Type="int" Nullable="false" />
+          <Property Name="ClenRoleName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Druzstva">
+          <Key>
+            <PropertyRef Name="DruzstvoId" />
+          </Key>
+          <Property Name="DruzstvoId" Type="int" Nullable="false" />
+          <Property Name="Nazev" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Pismeno" Type="varchar" MaxLength="1" />
+          <Property Name="SoutezId" Type="int" />
+          <Property Name="Existuje" Type="bit" Nullable="false" />
+          <Property Name="VedouciId" Type="int" />
+          <Property Name="TrenerId" Type="int" />
+          <Property Name="Popis" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DruzstvaCleni">
+          <Key>
+            <PropertyRef Name="DruzstvoId" />
+            <PropertyRef Name="ClenId" />
+          </Key>
+          <Property Name="DruzstvoId" Type="int" Nullable="false" />
+          <Property Name="ClenId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategorie">
+          <Key>
+            <PropertyRef Name="KategorieId" />
+          </Key>
+          <Property Name="KategorieId" Type="int" Nullable="false" />
+          <Property Name="Nazev" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="KategorieSoutezi">
+          <Key>
+            <PropertyRef Name="KategorieSoutezeId" />
+          </Key>
+          <Property Name="KategorieSoutezeId" Type="int" Nullable="false" />
+          <Property Name="Nazev" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Kontakty">
+          <Key>
+            <PropertyRef Name="ClenId" />
+          </Key>
+          <Property Name="ClenId" Type="int" Nullable="false" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="15" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="30" />
+          <Property Name="WWW" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Kuzelna">
+          <Key>
+            <PropertyRef Name="KuzelnaId" />
+          </Key>
+          <Property Name="KuzelnaId" Type="int" Nullable="false" />
+          <Property Name="Ulice" Type="nvarchar" MaxLength="50" />
+          <Property Name="CisloPopisne" Type="int" Nullable="false" />
+          <Property Name="Obec" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Psc" Type="int" Nullable="false" />
+          <Property Name="Popis" Type="nvarchar(max)" />
+          <Property Name="GPS" Type="nvarchar" MaxLength="50" />
+          <Property Name="KoladacePlatnaDo" Type="datetime2" />
+        </EntityType>
+        <EntityType Name="Pohlavi">
+          <Key>
+            <PropertyRef Name="PohlaviId" />
+          </Key>
+          <Property Name="PohlaviId" Type="int" Nullable="false" />
+          <Property Name="Nazev" Type="varchar" Nullable="false" MaxLength="8" />
+        </EntityType>
+        <EntityType Name="Registrace">
+          <Key>
+            <PropertyRef Name="ClenId" />
+          </Key>
+          <Property Name="ClenId" Type="int" Nullable="false" />
+          <Property Name="CisloRegistrace" Type="int" Nullable="false" />
+          <Property Name="PlatnaDo" Type="datetime2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rozhodci">
+          <Key>
+            <PropertyRef Name="ClenId" />
+          </Key>
+          <Property Name="ClenId" Type="int" Nullable="false" />
+          <Property Name="CisloRegistrace" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Trida" Type="nvarchar" MaxLength="50" />
+          <Property Name="PlatnaDo" Type="datetime2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Souteze">
+          <Key>
+            <PropertyRef Name="SoutezId" />
+          </Key>
+          <Property Name="SoutezId" Type="int" Nullable="false" />
+          <Property Name="Nazev" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="KategorieSoutezeId" Type="int" Nullable="false" />
+          <Property Name="PocetNutnychDrah" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Treneri">
+          <Key>
+            <PropertyRef Name="ClenId" />
+          </Key>
+          <Property Name="ClenId" Type="int" Nullable="false" />
+          <Property Name="CisloRegistrace" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Trida" Type="nvarchar" MaxLength="50" />
+          <Property Name="PlatnaDo" Type="datetime2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserClen">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ClebId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ClebId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="56" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="ProviderUserId" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Adresy_Cleni">
+          <End Role="Cleni" Type="SlavojDB.Store.Cleni" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Adresy" Type="SlavojDB.Store.Adresy" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cleni">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Adresy">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clanky_Kategorie">
+          <End Role="Kategorie" Type="SlavojDB.Store.Kategorie" Multiplicity="1" />
+          <End Role="Clanky" Type="SlavojDB.Store.Clanky" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorie">
+              <PropertyRef Name="KategorieId" />
+            </Principal>
+            <Dependent Role="Clanky">
+              <PropertyRef Name="KategorieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clanky_UserProfile">
+          <End Role="UserProfile" Type="SlavojDB.Store.UserProfile" Multiplicity="1" />
+          <End Role="Clanky" Type="SlavojDB.Store.Clanky" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Clanky">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cleni_Treneri">
+          <End Role="Treneri" Type="SlavojDB.Store.Treneri" Multiplicity="1" />
+          <End Role="Cleni" Type="SlavojDB.Store.Cleni" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Treneri">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Cleni">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CleniInRoles_Cleni">
+          <End Role="Cleni" Type="SlavojDB.Store.Cleni" Multiplicity="1" />
+          <End Role="CleniInRoles" Type="SlavojDB.Store.CleniInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cleni">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="CleniInRoles">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CleniInRoles_CleniRoles">
+          <End Role="CleniRoles" Type="SlavojDB.Store.CleniRoles" Multiplicity="1" />
+          <End Role="CleniInRoles" Type="SlavojDB.Store.CleniInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CleniRoles">
+              <PropertyRef Name="ClenRoleId" />
+            </Principal>
+            <Dependent Role="CleniInRoles">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Druzstva_Souteze">
+          <End Role="Souteze" Type="SlavojDB.Store.Souteze" Multiplicity="0..1" />
+          <End Role="Druzstva" Type="SlavojDB.Store.Druzstva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Souteze">
+              <PropertyRef Name="SoutezId" />
+            </Principal>
+            <Dependent Role="Druzstva">
+              <PropertyRef Name="SoutezId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DruzstvaCleniClenId_CleniClenId">
+          <End Role="Cleni" Type="SlavojDB.Store.Cleni" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DruzstvaCleni" Type="SlavojDB.Store.DruzstvaCleni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cleni">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="DruzstvaCleni">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DruzstvaCleniDruzstvoId_DruzstvaDruzstvoId">
+          <End Role="Druzstva" Type="SlavojDB.Store.Druzstva" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DruzstvaCleni" Type="SlavojDB.Store.DruzstvaCleni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Druzstva">
+              <PropertyRef Name="DruzstvoId" />
+            </Principal>
+            <Dependent Role="DruzstvaCleni">
+              <PropertyRef Name="DruzstvoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DruzstvaTrenerId_TreneriClenId">
+          <End Role="Treneri" Type="SlavojDB.Store.Treneri" Multiplicity="0..1" />
+          <End Role="Druzstva" Type="SlavojDB.Store.Druzstva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Treneri">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Druzstva">
+              <PropertyRef Name="TrenerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DruzstvaVedouciId_CleniClenId">
+          <End Role="Cleni" Type="SlavojDB.Store.Cleni" Multiplicity="0..1" />
+          <End Role="Druzstva" Type="SlavojDB.Store.Druzstva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cleni">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Druzstva">
+              <PropertyRef Name="VedouciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kontakty_Cleni">
+          <End Role="Cleni" Type="SlavojDB.Store.Cleni" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Kontakty" Type="SlavojDB.Store.Kontakty" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cleni">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Kontakty">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registrace_Cleni">
+          <End Role="Cleni" Type="SlavojDB.Store.Cleni" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Registrace" Type="SlavojDB.Store.Registrace" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cleni">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Registrace">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rozhodci_Cleni">
+          <End Role="Cleni" Type="SlavojDB.Store.Cleni" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Rozhodci" Type="SlavojDB.Store.Rozhodci" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cleni">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Rozhodci">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Souteze_KategorieSoutezi1">
+          <End Role="KategorieSoutezi" Type="SlavojDB.Store.KategorieSoutezi" Multiplicity="1" />
+          <End Role="Souteze" Type="SlavojDB.Store.Souteze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KategorieSoutezi">
+              <PropertyRef Name="KategorieSoutezeId" />
+            </Principal>
+            <Dependent Role="Souteze">
+              <PropertyRef Name="KategorieSoutezeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClen_Cleni">
+          <End Role="Cleni" Type="SlavojDB.Store.Cleni" Multiplicity="1" />
+          <End Role="UserClen" Type="SlavojDB.Store.UserClen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cleni">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="UserClen">
+              <PropertyRef Name="ClebId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClen_UserProfile">
+          <End Role="UserProfile" Type="SlavojDB.Store.UserProfile" Multiplicity="1" />
+          <End Role="UserClen" Type="SlavojDB.Store.UserClen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserClen">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_webpages_Membership_UserProfile">
+          <End Role="UserProfile" Type="SlavojDB.Store.UserProfile" Multiplicity="1" />
+          <End Role="webpages_Membership" Type="SlavojDB.Store.webpages_Membership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="webpages_Membership">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_webpages_UsersInRoles_UserProfile">
+          <End Role="UserProfile" Type="SlavojDB.Store.UserProfile" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="SlavojDB.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_webpages_UsersInRoles_webpages_Roles">
+          <End Role="webpages_Roles" Type="SlavojDB.Store.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="SlavojDB.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="SlavojDB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="SlavojDBContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserProfiles" EntityType="SlavojDB.UserProfile" />
+          <EntitySet Name="webpages_Membership" EntityType="SlavojDB.webpages_Membership" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="SlavojDB.webpages_OAuthMembership" />
+          <EntitySet Name="webpages_Roles" EntityType="SlavojDB.webpages_Roles" />
+          <AssociationSet Name="webpages_UsersInRoles" Association="SlavojDB.webpages_UsersInRoles">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+          </AssociationSet>
+          <EntitySet Name="Kategories" EntityType="SlavojDB.Kategorie" />
+          <AssociationSet Name="FK_webpages_Membership_UserProfile" Association="SlavojDB.FK_webpages_Membership_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="webpages_Membership" EntitySet="webpages_Membership" />
+          </AssociationSet>
+          <EntitySet Name="Clanky" EntityType="SlavojDB.Clanek" />
+          <AssociationSet Name="FK_Clanky_Kategorie" Association="SlavojDB.FK_Clanky_Kategorie">
+            <End Role="Kategorie" EntitySet="Kategories" />
+            <End Role="Clanky" EntitySet="Clanky" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clanky_UserProfile" Association="SlavojDB.FK_Clanky_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="Clanky" EntitySet="Clanky" />
+          </AssociationSet>
+          <EntitySet Name="Cleni" EntityType="SlavojDB.Clen" />
+          <AssociationSet Name="UserClen" Association="SlavojDB.UserClen">
+            <End Role="Clen" EntitySet="Cleni" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+          </AssociationSet>
+          <EntitySet Name="Adresy" EntityType="SlavojDB.Adresa" />
+          <EntitySet Name="CleniInRoles" EntityType="SlavojDB.CleniInRole" />
+          <EntitySet Name="CleniRoles" EntityType="SlavojDB.CleniRole" />
+          <EntitySet Name="Kontakty" EntityType="SlavojDB.Kontakt" />
+          <EntitySet Name="Kuzelnas" EntityType="SlavojDB.Kuzelna" />
+          <EntitySet Name="Registraces" EntityType="SlavojDB.Registrace" />
+          <EntitySet Name="Rozhodcis" EntityType="SlavojDB.Rozhodci" />
+          <AssociationSet Name="FK_Adresy_Cleni" Association="SlavojDB.FK_Adresy_Cleni">
+            <End Role="Clen" EntitySet="Cleni" />
+            <End Role="Adresy" EntitySet="Adresy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CleniInRoles_Cleni" Association="SlavojDB.FK_CleniInRoles_Cleni">
+            <End Role="Clen" EntitySet="Cleni" />
+            <End Role="CleniInRole" EntitySet="CleniInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kontakty_Cleni" Association="SlavojDB.FK_Kontakty_Cleni">
+            <End Role="Clen" EntitySet="Cleni" />
+            <End Role="Kontakty" EntitySet="Kontakty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registrace_Cleni" Association="SlavojDB.FK_Registrace_Cleni">
+            <End Role="Clen" EntitySet="Cleni" />
+            <End Role="Registrace" EntitySet="Registraces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rozhodci_Cleni" Association="SlavojDB.FK_Rozhodci_Cleni">
+            <End Role="Clen" EntitySet="Cleni" />
+            <End Role="Rozhodci" EntitySet="Rozhodcis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CleniInRoles_CleniRoles" Association="SlavojDB.FK_CleniInRoles_CleniRoles">
+            <End Role="CleniRole" EntitySet="CleniRoles" />
+            <End Role="CleniInRole" EntitySet="CleniInRoles" />
+          </AssociationSet>
+          <EntitySet Name="Treneri" EntityType="SlavojDB.Trener" />
+          <AssociationSet Name="FK_Cleni_Treneri" Association="SlavojDB.FK_Cleni_Treneri">
+            <End Role="Treneri" EntitySet="Treneri" />
+            <End Role="Clen" EntitySet="Cleni" />
+          </AssociationSet>
+          <EntitySet Name="Pohlavis" EntityType="SlavojDB.Pohlavi" />
+          <EntitySet Name="Druzstva" EntityType="SlavojDB.Druzstvo" />
+          <EntitySet Name="KategorieSoutezi" EntityType="SlavojDB.KategorieSouteze" />
+          <EntitySet Name="Souteze" EntityType="SlavojDB.Soutez" />
+          <AssociationSet Name="FK_DruzstvaVedouciId_CleniClenId" Association="SlavojDB.FK_DruzstvaVedouciId_CleniClenId">
+            <End Role="Clen" EntitySet="Cleni" />
+            <End Role="Druzstva" EntitySet="Druzstva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Druzstva_Souteze" Association="SlavojDB.FK_Druzstva_Souteze">
+            <End Role="Souteze" EntitySet="Souteze" />
+            <End Role="Druzstva" EntitySet="Druzstva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DruzstvaTrenerId_TreneriClenId" Association="SlavojDB.FK_DruzstvaTrenerId_TreneriClenId">
+            <End Role="Trener" EntitySet="Treneri" />
+            <End Role="Druzstva" EntitySet="Druzstva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Souteze_KategorieSoutezi1" Association="SlavojDB.FK_Souteze_KategorieSoutezi1">
+            <End Role="KategorieSoutezi" EntitySet="KategorieSoutezi" />
+            <End Role="Souteze" EntitySet="Souteze" />
+          </AssociationSet>
+          <AssociationSet Name="DruzstvaCleni" Association="SlavojDB.DruzstvaCleni">
+            <End Role="Clen" EntitySet="Cleni" />
+            <End Role="Druzstva" EntitySet="Druzstva" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="webpages_Roles" Relationship="SlavojDB.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
+          <NavigationProperty Name="webpages_Membership" Relationship="SlavojDB.FK_webpages_Membership_UserProfile" FromRole="UserProfile" ToRole="webpages_Membership" />
+          <NavigationProperty Name="Clanky" Relationship="SlavojDB.FK_Clanky_UserProfile" FromRole="UserProfile" ToRole="Clanky" />
+          <NavigationProperty Name="Cleni" Relationship="SlavojDB.UserClen" FromRole="UserProfile" ToRole="Clen" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Precision="3" />
+          <Property Type="String" Name="ConfirmationToken" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsConfirmed" />
+          <Property Type="DateTime" Name="LastPasswordFailureDate" Precision="3" />
+          <Property Type="Int32" Name="PasswordFailuresSinceLastSuccess" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="PasswordChangedDate" Precision="3" />
+          <Property Type="String" Name="PasswordSalt" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PasswordVerificationToken" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="PasswordVerificationTokenExpirationDate" Precision="3" />
+          <NavigationProperty Name="UserProfile" Relationship="SlavojDB.FK_webpages_Membership_UserProfile" FromRole="webpages_Membership" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Type="String" Name="Provider" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ProviderUserId" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Type="Int32" Name="RoleId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserProfiles" Relationship="SlavojDB.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
+        </EntityType>
+        <Association Name="webpages_UsersInRoles">
+          <End Type="SlavojDB.UserProfile" Role="UserProfile" Multiplicity="*" />
+          <End Type="SlavojDB.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Kategorie">
+          <Key>
+            <PropertyRef Name="KategorieId" />
+          </Key>
+          <Property Type="Int32" Name="KategorieId" Nullable="false" />
+          <Property Type="String" Name="Nazev" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Clanky" Relationship="SlavojDB.FK_Clanky_Kategorie" FromRole="Kategorie" ToRole="Clanky" />
+        </EntityType>
+        <Association Name="FK_webpages_Membership_UserProfile">
+          <End Type="SlavojDB.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="SlavojDB.webpages_Membership" Role="webpages_Membership" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="webpages_Membership">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Clanek">
+          <Key>
+            <PropertyRef Name="ClanekId" />
+          </Key>
+          <Property Type="Int32" Name="ClanekId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Predmet" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="DateTime" Name="DatumVytvoreni" Nullable="false" Precision="7" />
+          <Property Type="DateTime" Name="DatumZmeny" Nullable="false" Precision="7" />
+          <Property Type="Int32" Name="KategorieId" Nullable="false" />
+          <NavigationProperty Name="Kategorie" Relationship="SlavojDB.FK_Clanky_Kategorie" FromRole="Clanky" ToRole="Kategorie" />
+          <NavigationProperty Name="UserProfile" Relationship="SlavojDB.FK_Clanky_UserProfile" FromRole="Clanky" ToRole="UserProfile" />
+        </EntityType>
+        <Association Name="FK_Clanky_Kategorie">
+          <End Type="SlavojDB.Kategorie" Role="Kategorie" Multiplicity="1" />
+          <End Type="SlavojDB.Clanek" Role="Clanky" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorie">
+              <PropertyRef Name="KategorieId" />
+            </Principal>
+            <Dependent Role="Clanky">
+              <PropertyRef Name="KategorieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clanky_UserProfile">
+          <End Type="SlavojDB.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="SlavojDB.Clanek" Role="Clanky" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Clanky">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Clen">
+          <Key>
+            <PropertyRef Name="ClenId" />
+          </Key>
+          <Property Type="Int32" Name="ClenId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Jmeno" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Prijmeni" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TitulPred" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TitulZa" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="JeClen" Nullable="false" />
+          <NavigationProperty Name="UserProfiles" Relationship="SlavojDB.UserClen" FromRole="Clen" ToRole="UserProfile" />
+          <NavigationProperty Name="Adresa" Relationship="SlavojDB.FK_Adresy_Cleni" FromRole="Clen" ToRole="Adresy" />
+          <NavigationProperty Name="CleniInRoles" Relationship="SlavojDB.FK_CleniInRoles_Cleni" FromRole="Clen" ToRole="CleniInRole" />
+          <NavigationProperty Name="Kontakt" Relationship="SlavojDB.FK_Kontakty_Cleni" FromRole="Clen" ToRole="Kontakty" />
+          <NavigationProperty Name="Registrace" Relationship="SlavojDB.FK_Registrace_Cleni" FromRole="Clen" ToRole="Registrace" />
+          <NavigationProperty Name="Rozhodci" Relationship="SlavojDB.FK_Rozhodci_Cleni" FromRole="Clen" ToRole="Rozhodci" />
+          <NavigationProperty Name="Trener" Relationship="SlavojDB.FK_Cleni_Treneri" FromRole="Clen" ToRole="Treneri" />
+          <Property Type="String" Name="RodneCislo" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DatumNarozeni" annotation:StoreGeneratedPattern="Computed" Precision="3" />
+          <Property Type="Int32" Name="PohlaviId" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="Int32" Name="Vek" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Druzstva" Relationship="SlavojDB.FK_DruzstvaVedouciId_CleniClenId" FromRole="Clen" ToRole="Druzstva" />
+          <NavigationProperty Name="Druzstva1" Relationship="SlavojDB.DruzstvaCleni" FromRole="Clen" ToRole="Druzstva" />
+          </EntityType>
+        <Association Name="UserClen">
+          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="*" />
+          <End Type="SlavojDB.UserProfile" Role="UserProfile" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Adresa">
+          <Key>
+            <PropertyRef Name="ClenId" />
+          </Key>
+          <Property Type="Int32" Name="ClenId" Nullable="false" />
+          <Property Type="String" Name="Ulice" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CisloPopisne" Nullable="false" />
+          <Property Type="String" Name="Obec" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Psc" Nullable="false" />
+          <NavigationProperty Name="Cleni" Relationship="SlavojDB.FK_Adresy_Cleni" FromRole="Adresy" ToRole="Clen" />
+        </EntityType>
+        <EntityType Name="CleniInRole">
+          <Key>
+            <PropertyRef Name="ClenId" />
+            <PropertyRef Name="ClenRoleId" />
+          </Key>
+          <Property Type="Int32" Name="ClenId" Nullable="false" />
+          <Property Type="Int32" Name="ClenRoleId" Nullable="false" />
+          <NavigationProperty Name="Cleni" Relationship="SlavojDB.FK_CleniInRoles_Cleni" FromRole="CleniInRole" ToRole="Clen" />
+          <NavigationProperty Name="CleniRole" Relationship="SlavojDB.FK_CleniInRoles_CleniRoles" FromRole="CleniInRole" ToRole="CleniRole" />
+        </EntityType>
+        <EntityType Name="CleniRole">
+          <Key>
+            <PropertyRef Name="ClenRoleId" />
+          </Key>
+          <Property Type="Int32" Name="ClenRoleId" Nullable="false" />
+          <Property Type="String" Name="ClenRoleName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CleniInRoles" Relationship="SlavojDB.FK_CleniInRoles_CleniRoles" FromRole="CleniRole" ToRole="CleniInRole" />
+        </EntityType>
+        <EntityType Name="Kontakt">
+          <Key>
+            <PropertyRef Name="ClenId" />
+          </Key>
+          <Property Type="Int32" Name="ClenId" Nullable="false" />
+          <Property Type="String" Name="Telefon" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Mail" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="WWW" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cleni" Relationship="SlavojDB.FK_Kontakty_Cleni" FromRole="Kontakty" ToRole="Clen" />
+        </EntityType>
+        <EntityType Name="Kuzelna">
+          <Key>
+            <PropertyRef Name="KuzelnaId" />
+          </Key>
+          <Property Type="Int32" Name="KuzelnaId" Nullable="false" />
+          <Property Type="String" Name="Ulice" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CisloPopisne" Nullable="false" />
+          <Property Type="String" Name="Obec" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Psc" Nullable="false" />
+          <Property Type="String" Name="Popis" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="GPS" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="KoladacePlatnaDo" Precision="7" />
+        </EntityType>
+        <EntityType Name="Registrace">
+          <Key>
+            <PropertyRef Name="ClenId" />
+          </Key>
+          <Property Type="Int32" Name="ClenId" Nullable="false" />
+          <Property Type="Int32" Name="CisloRegistrace" Nullable="false" />
+          <Property Type="DateTime" Name="PlatnaDo" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Cleni" Relationship="SlavojDB.FK_Registrace_Cleni" FromRole="Registrace" ToRole="Clen" />
+        </EntityType>
+        <EntityType Name="Rozhodci">
+          <Key>
+            <PropertyRef Name="ClenId" />
+          </Key>
+          <Property Type="Int32" Name="ClenId" Nullable="false" />
+          <Property Type="String" Name="CisloRegistrace" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Type="String" Name="Trida" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cleni" Relationship="SlavojDB.FK_Rozhodci_Cleni" FromRole="Rozhodci" ToRole="Clen" />
+          <Property Type="DateTime" Name="PlatnaDo" Nullable="false" Precision="7" />
+        </EntityType>
+        <Association Name="FK_Adresy_Cleni">
+          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SlavojDB.Adresa" Role="Adresy" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Clen">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Adresy">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CleniInRoles_Cleni">
+          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="1" />
+          <End Type="SlavojDB.CleniInRole" Role="CleniInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clen">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="CleniInRole">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kontakty_Cleni">
+          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SlavojDB.Kontakt" Role="Kontakty" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Clen">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Kontakty">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registrace_Cleni">
+          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SlavojDB.Registrace" Role="Registrace" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Clen">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Registrace">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rozhodci_Cleni">
+          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SlavojDB.Rozhodci" Role="Rozhodci" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Clen">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Rozhodci">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CleniInRoles_CleniRoles">
+          <End Type="SlavojDB.CleniRole" Role="CleniRole" Multiplicity="1" />
+          <End Type="SlavojDB.CleniInRole" Role="CleniInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CleniRole">
+              <PropertyRef Name="ClenRoleId" />
+            </Principal>
+            <Dependent Role="CleniInRole">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Trener">
+          <Key>
+            <PropertyRef Name="ClenId" />
+          </Key>
+          <Property Type="Int32" Name="ClenId" Nullable="false" />
+          <Property Type="String" Name="CisloRegistrace" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Trida" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cleni" Relationship="SlavojDB.FK_Cleni_Treneri" FromRole="Treneri" ToRole="Clen" />
+          <Property Type="DateTime" Name="PlatnaDo" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Druzstva" Relationship="SlavojDB.FK_DruzstvaTrenerId_TreneriClenId" FromRole="Trener" ToRole="Druzstva" />
+        </EntityType>
+        <Association Name="FK_Cleni_Treneri">
+          <End Type="SlavojDB.Trener" Role="Treneri" Multiplicity="1" />
+          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Treneri">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Clen">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Pohlavi">
+          <Key>
+            <PropertyRef Name="PohlaviId" />
+          </Key>
+          <Property Type="Int32" Name="PohlaviId" Nullable="false" />
+          <Property Type="String" Name="Nazev" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Druzstvo">
+          <Key>
+            <PropertyRef Name="DruzstvoId" />
+          </Key>
+          <Property Type="Int32" Name="DruzstvoId" Nullable="false" />
+          <Property Type="String" Name="Nazev" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Pismeno" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="SoutezId" />
+          <Property Type="Boolean" Name="Existuje" Nullable="false" />
+          <Property Type="Int32" Name="VedouciId" />
+          <Property Type="Int32" Name="TrenerId" />
+          <Property Type="String" Name="Popis" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clen" Relationship="SlavojDB.FK_DruzstvaVedouciId_CleniClenId" FromRole="Druzstva" ToRole="Clen" />
+          <NavigationProperty Name="Soutez" Relationship="SlavojDB.FK_Druzstva_Souteze" FromRole="Druzstva" ToRole="Souteze" />
+          <NavigationProperty Name="Trener" Relationship="SlavojDB.FK_DruzstvaTrenerId_TreneriClenId" FromRole="Druzstva" ToRole="Trener" />
+          <NavigationProperty Name="DruzstvoCleni" Relationship="SlavojDB.DruzstvaCleni" FromRole="Druzstva" ToRole="Clen" />
+        </EntityType>
+        <EntityType Name="KategorieSouteze">
+          <Key>
+            <PropertyRef Name="KategorieSoutezeId" />
+          </Key>
+          <Property Type="Int32" Name="KategorieSoutezeId" Nullable="false" />
+          <Property Type="String" Name="Nazev" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Souteze" Relationship="SlavojDB.FK_Souteze_KategorieSoutezi1" FromRole="KategorieSoutezi" ToRole="Souteze" />
+        </EntityType>
+        <EntityType Name="Soutez">
+          <Key>
+            <PropertyRef Name="SoutezId" />
+          </Key>
+          <Property Type="Int32" Name="SoutezId" Nullable="false" />
+          <Property Type="String" Name="Nazev" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="KategorieSoutezeId" Nullable="false" />
+          <Property Type="Int32" Name="PocetNutnychDrah" Nullable="false" />
+          <NavigationProperty Name="Druzstva" Relationship="SlavojDB.FK_Druzstva_Souteze" FromRole="Souteze" ToRole="Druzstva" />
+          <NavigationProperty Name="KategorieSouteze" Relationship="SlavojDB.FK_Souteze_KategorieSoutezi1" FromRole="Souteze" ToRole="KategorieSoutezi" />
+        </EntityType>
+        <Association Name="FK_DruzstvaVedouciId_CleniClenId">
+          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="0..1" />
+          <End Type="SlavojDB.Druzstvo" Role="Druzstva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clen">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Druzstva">
+              <PropertyRef Name="VedouciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Druzstva_Souteze">
+          <End Type="SlavojDB.Soutez" Role="Souteze" Multiplicity="0..1" />
+          <End Type="SlavojDB.Druzstvo" Role="Druzstva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Souteze">
+              <PropertyRef Name="SoutezId" />
+            </Principal>
+            <Dependent Role="Druzstva">
+              <PropertyRef Name="SoutezId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DruzstvaTrenerId_TreneriClenId">
+          <End Type="SlavojDB.Trener" Role="Trener" Multiplicity="0..1" />
+          <End Type="SlavojDB.Druzstvo" Role="Druzstva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trener">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Druzstva">
+              <PropertyRef Name="TrenerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Souteze_KategorieSoutezi1">
+          <End Type="SlavojDB.KategorieSouteze" Role="KategorieSoutezi" Multiplicity="1" />
+          <End Type="SlavojDB.Soutez" Role="Souteze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KategorieSoutezi">
+              <PropertyRef Name="KategorieSoutezeId" />
+            </Principal>
+            <Dependent Role="Souteze">
+              <PropertyRef Name="KategorieSoutezeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DruzstvaCleni">
+          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="*" />
+          <End Type="SlavojDB.Druzstvo" Role="Druzstva" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SlavojDBStoreContainer" CdmEntityContainer="SlavojDBContainer">
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="SlavojDB.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Membership">
+            <EntityTypeMapping TypeName="SlavojDB.webpages_Membership">
+              <MappingFragment StoreEntitySet="webpages_Membership">
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_OAuthMembership">
+            <EntityTypeMapping TypeName="SlavojDB.webpages_OAuthMembership">
+              <MappingFragment StoreEntitySet="webpages_OAuthMembership">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="SlavojDB.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="SlavojDB.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Kategories">
+            <EntityTypeMapping TypeName="SlavojDB.Kategorie">
+              <MappingFragment StoreEntitySet="Kategorie">
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="KategorieId" ColumnName="KategorieId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clanky">
+            <EntityTypeMapping TypeName="SlavojDB.Clanek">
+              <MappingFragment StoreEntitySet="Clanky">
+                <ScalarProperty Name="KategorieId" ColumnName="KategorieId" />
+                <ScalarProperty Name="DatumZmeny" ColumnName="DatumZmeny" />
+                <ScalarProperty Name="DatumVytvoreni" ColumnName="DatumVytvoreni" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Predmet" ColumnName="Predmet" />
+                <ScalarProperty Name="ClanekId" ColumnName="ClanekId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cleni">
+            <EntityTypeMapping TypeName="SlavojDB.Clen">
+              <MappingFragment StoreEntitySet="Cleni">
+                <ScalarProperty Name="Vek" ColumnName="Vek" />
+                <ScalarProperty Name="PohlaviId" ColumnName="PohlaviId" />
+                <ScalarProperty Name="DatumNarozeni" ColumnName="DatumNarozeni" />
+                <ScalarProperty Name="RodneCislo" ColumnName="RodneCislo" />
+                <ScalarProperty Name="JeClen" ColumnName="JeClen" />
+                <ScalarProperty Name="TitulZa" ColumnName="TitulZa" />
+                <ScalarProperty Name="TitulPred" ColumnName="TitulPred" />
+                <ScalarProperty Name="Prijmeni" ColumnName="Prijmeni" />
+                <ScalarProperty Name="Jmeno" ColumnName="Jmeno" />
+                <ScalarProperty Name="ClenId" ColumnName="ClenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserClen" TypeName="SlavojDB.UserClen" StoreEntitySet="UserClen">
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Clen">
+              <ScalarProperty Name="ClenId" ColumnName="ClebId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Adresy">
+            <EntityTypeMapping TypeName="SlavojDB.Adresa">
+              <MappingFragment StoreEntitySet="Adresy">
+                <ScalarProperty Name="Psc" ColumnName="Psc" />
+                <ScalarProperty Name="Obec" ColumnName="Obec" />
+                <ScalarProperty Name="CisloPopisne" ColumnName="CisloPopisne" />
+                <ScalarProperty Name="Ulice" ColumnName="Ulice" />
+                <ScalarProperty Name="ClenId" ColumnName="ClenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CleniInRoles">
+            <EntityTypeMapping TypeName="SlavojDB.CleniInRole">
+              <MappingFragment StoreEntitySet="CleniInRoles">
+                <ScalarProperty Name="ClenRoleId" ColumnName="ClenRoleId" />
+                <ScalarProperty Name="ClenId" ColumnName="ClenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CleniRoles">
+            <EntityTypeMapping TypeName="SlavojDB.CleniRole">
+              <MappingFragment StoreEntitySet="CleniRoles">
+                <ScalarProperty Name="ClenRoleName" ColumnName="ClenRoleName" />
+                <ScalarProperty Name="ClenRoleId" ColumnName="ClenRoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kontakty">
+            <EntityTypeMapping TypeName="SlavojDB.Kontakt">
+              <MappingFragment StoreEntitySet="Kontakty">
+                <ScalarProperty Name="WWW" ColumnName="WWW" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="ClenId" ColumnName="ClenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kuzelnas">
+            <EntityTypeMapping TypeName="SlavojDB.Kuzelna">
+              <MappingFragment StoreEntitySet="Kuzelna">
+                <ScalarProperty Name="KoladacePlatnaDo" ColumnName="KoladacePlatnaDo" />
+                <ScalarProperty Name="GPS" ColumnName="GPS" />
+                <ScalarProperty Name="Popis" ColumnName="Popis" />
+                <ScalarProperty Name="Psc" ColumnName="Psc" />
+                <ScalarProperty Name="Obec" ColumnName="Obec" />
+                <ScalarProperty Name="CisloPopisne" ColumnName="CisloPopisne" />
+                <ScalarProperty Name="Ulice" ColumnName="Ulice" />
+                <ScalarProperty Name="KuzelnaId" ColumnName="KuzelnaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registraces">
+            <EntityTypeMapping TypeName="SlavojDB.Registrace">
+              <MappingFragment StoreEntitySet="Registrace">
+                <ScalarProperty Name="PlatnaDo" ColumnName="PlatnaDo" />
+                <ScalarProperty Name="CisloRegistrace" ColumnName="CisloRegistrace" />
+                <ScalarProperty Name="ClenId" ColumnName="ClenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rozhodcis">
+            <EntityTypeMapping TypeName="SlavojDB.Rozhodci">
+              <MappingFragment StoreEntitySet="Rozhodci">
+                <ScalarProperty Name="PlatnaDo" ColumnName="PlatnaDo" />
+                <ScalarProperty Name="Trida" ColumnName="Trida" />
+                <ScalarProperty Name="CisloRegistrace" ColumnName="CisloRegistrace" />
+                <ScalarProperty Name="ClenId" ColumnName="ClenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Treneri">
+            <EntityTypeMapping TypeName="SlavojDB.Trener">
+              <MappingFragment StoreEntitySet="Treneri">
+                <ScalarProperty Name="PlatnaDo" ColumnName="PlatnaDo" />
+                <ScalarProperty Name="Trida" ColumnName="Trida" />
+                <ScalarProperty Name="CisloRegistrace" ColumnName="CisloRegistrace" />
+                <ScalarProperty Name="ClenId" ColumnName="ClenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pohlavis">
+            <EntityTypeMapping TypeName="SlavojDB.Pohlavi">
+              <MappingFragment StoreEntitySet="Pohlavi">
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="PohlaviId" ColumnName="PohlaviId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Druzstva">
+            <EntityTypeMapping TypeName="SlavojDB.Druzstvo">
+              <MappingFragment StoreEntitySet="Druzstva">
+                <ScalarProperty Name="Popis" ColumnName="Popis" />
+                <ScalarProperty Name="TrenerId" ColumnName="TrenerId" />
+                <ScalarProperty Name="VedouciId" ColumnName="VedouciId" />
+                <ScalarProperty Name="Existuje" ColumnName="Existuje" />
+                <ScalarProperty Name="SoutezId" ColumnName="SoutezId" />
+                <ScalarProperty Name="Pismeno" ColumnName="Pismeno" />
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="DruzstvoId" ColumnName="DruzstvoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KategorieSoutezi">
+            <EntityTypeMapping TypeName="SlavojDB.KategorieSouteze">
+              <MappingFragment StoreEntitySet="KategorieSoutezi">
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="KategorieSoutezeId" ColumnName="KategorieSoutezeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Souteze">
+            <EntityTypeMapping TypeName="SlavojDB.Soutez">
+              <MappingFragment StoreEntitySet="Souteze">
+                <ScalarProperty Name="PocetNutnychDrah" ColumnName="PocetNutnychDrah" />
+                <ScalarProperty Name="KategorieSoutezeId" ColumnName="KategorieSoutezeId" />
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="SoutezId" ColumnName="SoutezId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="DruzstvaCleni" TypeName="SlavojDB.DruzstvaCleni" StoreEntitySet="DruzstvaCleni">
+            <EndProperty Name="Druzstva">
+              <ScalarProperty Name="DruzstvoId" ColumnName="DruzstvoId" />
+            </EndProperty>
+            <EndProperty Name="Clen">
+              <ScalarProperty Name="ClenId" ColumnName="ClenId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

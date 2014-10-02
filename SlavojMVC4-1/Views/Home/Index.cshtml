@@ -1,0 +1,39 @@
+﻿@*@model IEnumerable<SlavojMVC4_1.Models.Clanek>*@
+@model IPagedList<Clanek>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<form name="searchForm" method="get" action="@Url.Action("Index", "Home")" 
+      data-otf-ajax="true" 
+      data-otf-target="#listClanky"
+    >
+
+    @*<input 
+        type="search" 
+        name="searchTerm" 
+        data-otf-autocomplete="@Url.Action("Autocomplete", "Home")
+     />*@
+    <div class="t-state-default">
+        @(Html.Telerik().AutoComplete()
+                    .Name("searchTerm")
+                    .DataBinding(binding => binding.Ajax().Select("_AutoCompleteAjaxLoading", "Home"))
+                    .HighlightFirstMatch(false)
+                    .Filterable(filtering => 
+                    {
+                        filtering.FilterMode(AutoCompleteFilterMode.Contains);
+                        //filtering.MinimumChars(2);
+                    })
+                    .AutoFill(false)
+                    
+                    //.DropDownHtmlAttributes(new { style = string.Format("margin-top:{0}px", 20) })
+                    //.HtmlAttributes(new {style = "t-dropdown.height:20px" })
+         )
+        <button type="submit" class="t-button t-state-default">Najdi</button>
+    </div>
+
+    @*<input type="submit" value="Najdi" />*@
+
+</form>
+
+@Html.Partial("_Clanky", Model)

@@ -1,0 +1,9 @@
+Poøadí:
+1. webpages_Roles
+2. UserProfile
+3. webpages_UsersInRoles
+4. webpages_Membership
+5. Kategorie
+6. Clanky
+7. Cleni
+8. UserClen

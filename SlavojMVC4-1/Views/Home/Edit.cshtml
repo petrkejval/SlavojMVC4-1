@@ -1,0 +1,80 @@
+﻿@model SlavojMVC4_1.Models.Clanek
+
+@{
+    ViewBag.Title = "Upravit";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Clanek</legend>
+
+        @Html.HiddenFor(model => model.ClanekId)
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.DatumVytvoreni)
+        @Html.HiddenFor(model => model.DatumZmeny)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Predmet)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Predmet)
+            @Html.ValidationMessageFor(model => model.Predmet)
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Kategorie.Nazev)
+        </div>
+        <div class="editor-field">
+            @{Html.Telerik().DropDownListFor(model => model.KategorieId)
+                //.Name("KategoriesDropDownListFor")  nesmí se použít jinak DropDownListFor nezapisuje do model.KategorieId
+                .BindTo(ViewBag.KategoriesListItem)
+                .Render()
+                ;}
+            @Html.ValidationMessageFor(model => model.KategorieId)
+        </div>
+
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Text)
+        </div>
+        <div class="editor-field">
+            @{ Html.Telerik().EditorFor(model => model.Text)
+                   .Localizable("cs-CZ")
+                   .Encode(false)
+                   .Render();
+             }
+            @Html.ValidationMessageFor(model => model.Text)
+        </div>
+
+        <p>
+            <input type="submit" class="t-button t-state-default" value="Uložit" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Zpět na seznam článků", "Index")
+</div>
+
+@*<script type="text/javascript">
+    function rebind() {
+        var ddl= $('#CustomerID').data('tDropDownList');
+        //ddl.dataBind(e); I did not databind the ddl, because my goal is to show that the ddl is the correct DropDownList object.
+        ddl.select(0);
+    }
+</script>*@
+
+@if (ViewData.ContainsKey("value")) { 
+        <h3>Editor Value</h3>
+        <pre class="prettyprint editor-output">@Html.Raw((string)ViewData["value"]) </pre>
+     } 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

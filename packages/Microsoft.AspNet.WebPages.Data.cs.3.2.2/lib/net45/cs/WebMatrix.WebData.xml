@@ -1,0 +1,834 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>WebMatrix.WebData</name>
+  </assembly>
+  <members>
+    <member name="T:WebMatrix.WebData.ExtendedMembershipProvider">
+      <summary>Představuje abstraktní třídu, která slouží k prodloužení systému členství poskytovaného třídou <see cref="T:System.Web.Security.MembershipProvider" />.</summary>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.#ctor">
+      <summary>Pokud dojde k přepsání v odvozené třídě, vytvoří novou instanci třídy <see cref="T:WebMatrix.WebData.ExtendedMembershipProvider" />.</summary>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.ConfirmAccount(System.String)">
+      <summary>Aktivuje členský účet čekající na schválení.</summary>
+      <returns>Hodnota true, pokud je účet potvrzený, jinak hodnota false.</returns>
+      <param name="accountConfirmationToken">Potvrzovací token k předání zprostředkovateli ověření.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.ConfirmAccount(System.String,System.String)">
+      <summary>Aktivuje členský účet čekající na vyřízení pro zadaného uživatele.</summary>
+      <returns>Hodnota true, pokud je účet potvrzený, jinak hodnota false.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="accountConfirmationToken">Potvrzovací token k předání zprostředkovateli ověření.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.CreateAccount(System.String,System.String)">
+      <summary>Vytvoří nový uživatelský účet pomocí zadaného uživatelského jména a hesla.</summary>
+      <returns>Token, který lze poslat uživateli pro potvrzení účtu.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="password">Heslo.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.CreateAccount(System.String,System.String,System.Boolean)">
+      <summary>Při přepsání v odvozené třídě vytvoří nový uživatelský účet pomocí zadaného uživatelského jména a hesla, volitelně vyžadující, že nový účet musí být před zpřístupněním k použití potvrzen.</summary>
+      <returns>Token, který lze poslat uživateli pro potvrzení účtu.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="password">Heslo.</param>
+      <param name="requireConfirmationToken">(Volitelné) Hodnota true udávající, že účet musí být potvrzen, jinak hodnota false.Výchozí hodnotou je hodnota false.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.CreateOrUpdateOAuthAccount(System.String,System.String,System.String)">
+      <summary>Při přepsání v odvozené třídě vytvoří nový členský účet OAuth nebo aktualizuje existující členský účet OAuth.</summary>
+      <param name="provider">Zprostředkovatel účtu OAuth nebo OpenID.</param>
+      <param name="providerUserId">ID uživatele zprostředkovatele účtu OAuth nebo OpenIDToto není ID uživatele uživatelského účtu, ale ID uživatele zprostředkovatele účtu OAuth nebo Open ID.</param>
+      <param name="userName">Uživatelské jméno.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.CreateUserAndAccount(System.String,System.String)">
+      <summary>Vytvoří nový uživatelský profil a nový členský účet.</summary>
+      <returns>Token, který lze poslat uživateli pro potvrzení uživatelského účtu.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="password">Heslo.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.CreateUserAndAccount(System.String,System.String,System.Boolean)">
+      <summary>Vytvoří nový uživatelský profil a nový členský účet.</summary>
+      <returns>Token, který lze poslat uživateli pro potvrzení uživatelského účtu.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="password">Heslo.</param>
+      <param name="requireConfirmation">(Volitelné) Hodnota true udávající, že uživatelský účet musí být potvrzen, jinak hodnota false.Výchozí hodnotou je hodnota false.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.CreateUserAndAccount(System.String,System.String,System.Boolean,System.Collections.Generic.IDictionary{System.String,System.Object})">
+      <summary>Při přepsání v odvozené třídě vytvoří nový uživatelský profil a nový členský účet.</summary>
+      <returns>Token, který lze poslat uživateli pro potvrzení uživatelského účtu.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="password">Heslo.</param>
+      <param name="requireConfirmation">(Volitelné) Hodnota true udávající, že uživatelský účet musí být potvrzen, jinak hodnota false.Výchozí hodnotou je hodnota false.</param>
+      <param name="values">(Volitelné) Slovník, který obsahuje dodatečné uživatelské atributy pro uložení v uživatelském profilu.Výchozí hodnota je null.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.CreateUserAndAccount(System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+      <summary>Při přepsání v odvozené třídě vytvoří nový uživatelský profil a nový členský účet.</summary>
+      <returns>Token, který lze poslat uživateli pro potvrzení uživatelského účtu.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="password">Heslo.</param>
+      <param name="values">(Volitelné) Slovník, který obsahuje dodatečné uživatelské atributy pro uložení v uživatelském profilu.Výchozí hodnota je null.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.DeleteAccount(System.String)">
+      <summary>Při přepsání v odvozené třídě odstraní zadaný členský účet.</summary>
+      <returns>Hodnota true, pokud byl účet odstraněn, jinak hodnotafalse.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.DeleteOAuthAccount(System.String,System.String)">
+      <summary>Při přepsání v odvozené třídě odstraní účet OAuth nebo OpenID se zadaným názvem zprostředkovatele a uživatelským ID zprostředkovatele.</summary>
+      <param name="provider">Název zprostředkovatele účtu OAuth nebo OpenID.</param>
+      <param name="providerUserId">ID uživatele zprostředkovatele účtu OAuth nebo OpenIDToto není ID uživatele uživatelského účtu, ale ID uživatele zprostředkovatele účtu OAuth nebo Open ID.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.DeleteOAuthToken(System.String)">
+      <summary>Odstraní zadaný token OAuth.</summary>
+      <param name="token">Token k odstranění</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.GeneratePasswordResetToken(System.String)">
+      <summary>Vygeneruje token pro reset hesla, který lze uživateli poslat e-mailem.</summary>
+      <returns>Token odeslaný uživateli.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.GeneratePasswordResetToken(System.String,System.Int32)">
+      <summary>Při přepsání v odvozené třídě vytvoří token pro resetování hesla, který lze poslat uživateli e-mailem.</summary>
+      <returns>Token odeslaný uživateli.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="tokenExpirationInMinutesFromNow">(Volitelné) Čas v minutách, dokud nevyprší platnost tokenu pro reset hesla.Výchozí hodnota je 1440 (24 hodin).</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.GetAccountsForUser(System.String)">
+      <summary>Při přepsání v odvozené třídě vrátí všechny členské účty OAuth přidružené k zadanému uživatelskému jménu.</summary>
+      <returns>Seznam všech členských účtů OAuth, které jsou přidružené k zadanému uživatelskému jménu.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.GetCreateDate(System.String)">
+      <summary>Při přepsání v odvozené třídě vrátí datum a čas, kdy byl zadaný uživatelský účet vytvořen.</summary>
+      <returns>Datum a čas vytvoření účtu nebo <see cref="F:System.DateTime.MinValue" /> pokud není datum vytvoření účtu k dispozici.</returns>
+      <param name="userName">Uživatelské jméno účtu.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.GetLastPasswordFailureDate(System.String)">
+      <summary>Při přepsání v odvozené třídě vrátí datum a čas, kdy bylo pro určený uživatelský účet naposledy zadáno nesprávné heslo.</summary>
+      <returns>Datum a čas, kdy bylo pro tento uživatelský účet naposledy zadáno nesprávné heslo, nebo <see cref="F:System.DateTime.MinValue" />, pokud pro tento uživatelský účet nebylo zadáno nesprávné heslo.</returns>
+      <param name="userName">Uživatelské jméno účtu.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.GetOAuthTokenSecret(System.String)">
+      <summary>Získá tajný klíč tokenu OAuth.</summary>
+      <returns>Token OAuth</returns>
+      <param name="token">Token OAuth</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.GetPasswordChangedDate(System.String)">
+      <summary>Při přepsání v odvozené třídě vrátí datum a čas, kdy bylo pro zadaný členský účet naposledy změněno heslo.</summary>
+      <returns>Datum a čas, kdy bylo pro členský účet naposledy změněno heslo, nebo <see cref="F:System.DateTime.MinValue" />, pokud heslo pro tento členský účet nebylo nikdy změněno.</returns>
+      <param name="userName">Uživatelské jméno účtu.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.GetPasswordFailuresSinceLastSuccess(System.String)">
+      <summary>Při přepsání v odvozené třídě vrátí počet pokusů o nesprávné zadání hesla pro zadaný uživatelský účet od posledního úspěšného přihlášení nebo od vytvoření uživatelského účtu.</summary>
+      <returns>Počet nezdařených pokusů o zadání hesla pro zadaný uživatelský účet.</returns>
+      <param name="userName">Uživatelské jméno účtu.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.GetUserIdFromOAuth(System.String,System.String)">
+      <summary>Při přepsání v odvozené třídě vrátí uživatelské ID pro zadaného zprostředkovatele účtu OAuth nebo OpenID a uživatelské ID zprostředkovatele.</summary>
+      <param name="provider">Název zprostředkovatele účtu OAuth nebo OpenID.</param>
+      <param name="providerUserId">ID uživatele zprostředkovatele účtu OAuth nebo OpenIDToto není ID uživatele uživatelského účtu, ale ID uživatele zprostředkovatele účtu OAuth nebo Open ID.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.GetUserIdFromPasswordResetToken(System.String)">
+      <summary>Při přepsání v odvozené třídě vrátí ID pro uživatele na základě tokenu pro resetování hesla.</summary>
+      <returns>ID uživatele.</returns>
+      <param name="token">Token pro resetování hesla.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.GetUserNameFromId(System.Int32)">
+      <summary>Vrátí uživatelské jméno, které je přidruženo k zadanému uživatelskému ID.</summary>
+      <returns>Uživatelské jméno.</returns>
+      <param name="userId">Uživatelské ID, pro které má být získáno jméno.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.HasLocalAccount(System.Int32)">
+      <summary>Označuje, zda uživatel má místní účet.</summary>
+      <returns>Hodnota true, pokud členství má místní účet, jinak hodnotafalse</returns>
+      <param name="userId">ID uživatele.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.IsConfirmed(System.String)">
+      <summary>Při přepsání v odvozené třídě vrátí hodnotu udávající, zda byl uživatelský účet potvrzen zprostředkovatelem.</summary>
+      <returns>Hodnota true, pokud je uživatel potvrzen, jinak hodnota false.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.ReplaceOAuthRequestTokenWithAccessToken(System.String,System.String,System.String)">
+      <summary>Nahrazuje token požadavku OAuth tokenem přístupu.</summary>
+      <param name="requestToken">Token požadavku</param>
+      <param name="accessToken">Přístupový token.</param>
+      <param name="accessTokenSecret">Tajný klíč tokenu přístupu</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.ResetPasswordWithToken(System.String,System.String)">
+      <summary>Při přepsání v odvozené třídě resetuje heslo po ověření, že je zadaný token pro resetování hesla platný.</summary>
+      <returns>Hodnota true, pokud bylo heslo změněno, jinak hodnota false.</returns>
+      <param name="token">Token pro resetování hesla.</param>
+      <param name="newPassword">Nové heslo.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.ExtendedMembershipProvider.StoreOAuthRequestToken(System.String,System.String)">
+      <summary>Ukládá token požadavku OAuth.</summary>
+      <param name="requestToken">Token požadavku</param>
+      <param name="requestTokenSecret">Tajný klíč tokenu požadavku</param>
+    </member>
+    <member name="T:WebMatrix.WebData.FormsAuthenticationSettings">
+      <summary>Definuje názvy klíčů, které potlačí výchozí nastavení v oddílu &lt;appSettings&gt; souboru Web.config.</summary>
+    </member>
+    <member name="F:WebMatrix.WebData.FormsAuthenticationSettings.DefaultLoginUrl">
+      <summary>Klíč pro přístup k výchozí adrese URL pro přihlášení.</summary>
+    </member>
+    <member name="F:WebMatrix.WebData.FormsAuthenticationSettings.LoginUrlKey">
+      <summary>Klíč pro přístup ke klíči adresy URL pro přihlášení.</summary>
+    </member>
+    <member name="F:WebMatrix.WebData.FormsAuthenticationSettings.PreserveLoginUrlKey">
+      <summary>Klíč pro přístup k nastavení, které chrání výraz „login“ namísto jeho přepsání výrazem „logon“.</summary>
+    </member>
+    <member name="T:WebMatrix.WebData.OAuthAccountData">
+      <summary>Představuje účet OAuth nebo OpenID.</summary>
+    </member>
+    <member name="M:WebMatrix.WebData.OAuthAccountData.#ctor(System.String,System.String)">
+      <summary>Inicializuje novou instanci třídy <see cref="T:WebMatrix.WebData.OAuthAccountData" /> pomocí zadaného zprostředkovatele účtu OAuth nebo Open ID a uživatelského ID zprostředkovatele.</summary>
+      <param name="provider">Zprostředkovatel</param>
+      <param name="providerUserId">Uživatelské ID zprostředkovatele.</param>
+    </member>
+    <member name="P:WebMatrix.WebData.OAuthAccountData.Provider">
+      <summary>Získá název zprostředkovatele účtu OAuth nebo Open ID.</summary>
+      <returns>Název zprostředkovatele</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.OAuthAccountData.ProviderUserId">
+      <summary>Získá uživatelské ID zprostředkovatele účtu OAuth nebo Open ID.</summary>
+      <returns>Uživatelské ID zprostředkovatele</returns>
+    </member>
+    <member name="T:WebMatrix.WebData.PreApplicationStartCode">
+      <summary>Zajišťuje registrační bod pro spouštěcí kód před aplikací.</summary>
+    </member>
+    <member name="M:WebMatrix.WebData.PreApplicationStartCode.Start">
+      <summary>Registruje spouštěcí kód před aplikací pro jednoduché členství.</summary>
+    </member>
+    <member name="T:WebMatrix.WebData.SimpleMembershipProvider">
+      <summary>Zajišťuje podporu pro úlohy správy členství webové stránky, jako je vytváření účtů, odstraňování účtů a správa hesel.</summary>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.#ctor">
+      <summary>Inicializuje novou instanci třídy <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" />.</summary>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.#ctor(System.Web.Security.MembershipProvider)">
+      <summary>Inicializuje novou instanci třídy <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> pomocí zadaného zprostředkovatele členství.</summary>
+      <param name="previousProvider">Zprostředkovatel členství k použití.</param>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleMembershipProvider.ApplicationName">
+      <summary>Získá nebo nastaví název aplikace.</summary>
+      <returns>Název aplikace</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleMembershipProvider.CasingBehavior">
+      <summary>Získá nebo nastaví třídu <see cref="T:WebMatrix.WebData.SimpleMembershipProviderCasingBehavior" /> pro tohoto zprostředkovatele.</summary>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.ChangePassword(System.String,System.String,System.String)">
+      <summary>Změní heslo pro zadaný členský účet.</summary>
+      <returns>Hodnota true, pokud je heslo úspěšně změněno, jinak hodnota false.</returns>
+      <param name="username">Uživatelské jméno.</param>
+      <param name="oldPassword">Původní heslo.</param>
+      <param name="newPassword">Nové heslo.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.ChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)">
+      <summary>Změní otázku a odpověď hesla pro zadaný účet.</summary>
+      <returns>Hodnota true, pokud je otázka a odpověď hesla úspěšně změněna, jinak hodnota false.</returns>
+      <param name="username">Uživatelské jméno.</param>
+      <param name="password">Nové heslo.</param>
+      <param name="newPasswordQuestion">Bezpečnostní otázka, na kterou musí uživatel odpovědět, aby mohl změnit heslo.</param>
+      <param name="newPasswordAnswer">Odpověď na bezpečnostní otázku.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.ConfirmAccount(System.String)">
+      <summary>Aktivuje členský účet čekající na schválení.</summary>
+      <returns>Hodnota true, pokud je uživatelský účet potvrzený, jinak hodnota false.</returns>
+      <param name="accountConfirmationToken">Potvrzovací token k předání zprostředkovateli ověření.</param>
+      <exception cref="T:System.InvalidOperationException">Třída <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> byla inicializována pomocí volání do metody <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.ConfirmAccount(System.String,System.String)">
+      <summary>Určuje, zda účet uživatele je potvrzen.</summary>
+      <returns>Hodnota true, pokud je uživatelský účet potvrzený, jinak hodnota false.</returns>
+      <param name="userName">Uživatelské jméno</param>
+      <param name="accountConfirmationToken">Potvrzení účtu</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.CreateAccount(System.String,System.String,System.Boolean)">
+      <summary>Vytvoří nový uživatelský účet pomocí zadaného uživatelského jména a hesla.</summary>
+      <returns>Token, který lze poslat uživateli pro potvrzení uživatelského účtu.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="password">Heslo.</param>
+      <param name="requireConfirmationToken">(Volitelné) Hodnota true udávající, že uživatelský účet musí být potvrzen, jinak hodnota false.Výchozí hodnotou je hodnota false.</param>
+      <exception cref="T:System.Web.Security.MembershipCreateUserException">Parametr <paramref name="username" /> je prázdný.– nebo –Parametr <paramref name="username" /> již má uživatelský účet.– nebo –Parametr <paramref name="password" /> je prázdný.– nebo –Parametr <paramref name="password" /> je delší než 128 znaků.– nebo –Záznam uživatele, který koresponduje s parametrem <paramref name="username" /> neexistuje v tabulce <see cref="P:WebMatrix.WebData.SimpleMembershipProvider.UserTableName" /> (tabulka uživatelských profilů).– nebo –Databázová operace se nezdařila.</exception>
+      <exception cref="T:System.InvalidOperationException">Třída <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> byla inicializována pomocí volání do metody <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.CreateOrUpdateOAuthAccount(System.String,System.String,System.String)">
+      <summary>Vytvoří nový členský účet OAuth nebo aktualizuje existující členský účet OAuth.</summary>
+      <param name="provider">Zprostředkovatel účtu OAuth nebo OpenID.</param>
+      <param name="providerUserId">ID uživatele zprostředkovatele účtu OAuth nebo OpenIDToto není ID uživatele uživatelského účtu, ale ID uživatele zprostředkovatele účtu OAuth nebo Open ID.</param>
+      <param name="userName">Uživatelské jméno.</param>
+      <exception cref="T:System.InvalidOperationException">Třída <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> byla inicializována pomocí volání do metody <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.</exception>
+      <exception cref="T:System.Web.Security.MembershipCreateUserException">Parametr <paramref name="username" /> je prázdný.– nebo –Záznam uživatele, který koresponduje s parametrem <paramref name="username" /> neexistuje v tabulce <see cref="P:WebMatrix.WebData.SimpleMembershipProvider.UserTableName" /> (tabulka uživatelských profilů).– nebo –Databázová operace se nezdařila.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.CreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)">
+      <summary>Přidá zadaného uživatele do databáze členství.</summary>
+      <returns>Objekt <see cref="T:System.Web.Security.MembershipUser" />, který je naplněn informacemi pro nově vytvořený uživatelský účet.</returns>
+      <param name="username">Uživatelské jméno pro nový uživatelský účet.</param>
+      <param name="password">Heslo pro nový uživatelský účet.</param>
+      <param name="email">E-mailová adresa pro nový uživatelský účet.</param>
+      <param name="passwordQuestion">Bezpečnostní otázka pro nový uživatelský účet.</param>
+      <param name="passwordAnswer">Odpověď na bezpečnostní otázku pro nový uživatelský účet.</param>
+      <param name="isApproved">Hodnota true udávající, že uživatelský účet je schválen k ověření, jinak hodnota false.</param>
+      <param name="providerUserKey">Jedinečný identifikátor ze zdroje dat členství pro uživatelský účet.</param>
+      <param name="status">Když tato metoda vrací výsledek, obsahuje výčtovou hodnotu <see cref="T:System.Web.Security.MembershipCreateStatus" /> udávající, zda byl uživatelský účet úspěšně vytvořen.Tento parametr je předáván neinicializovaný.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.CreateUserAndAccount(System.String,System.String,System.Boolean,System.Collections.Generic.IDictionary{System.String,System.Object})">
+      <summary>Vytvoří nový uživatelský profil a nový členský účet.</summary>
+      <returns>Token, který lze poslat uživateli pro potvrzení uživatelského účtu.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="password">Heslo.</param>
+      <param name="requireConfirmation">(Volitelné) Hodnota true udávající, že uživatelský účet musí být potvrzen pomocí metody <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.ConfirmAccount(System.String)" />, jinak hodnota false.Výchozí hodnotou je hodnota false.</param>
+      <param name="values">(Volitelné) Slovník obsahující další pár atributů klíč/hodnota, který můžete přidat do úložiště dat jako výchozí hodnoty pro nový uživatelský profil.Klíč pro jednotlivé záznamy ve sloupci databáze a hodnota jednotlivých záznamů je hodnota pro sloupec.Výchozí hodnota je null.</param>
+      <exception cref="T:System.InvalidOperationException">Třída <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> byla inicializována pomocí volání do metody <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.</exception>
+      <exception cref="T:System.Web.Security.MembershipCreateUserException">Účet členství pro toto uživatelské jméno již v databázi členství existuje.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.DeleteAccount(System.String)">
+      <summary>Odstraní zadaný členský účet.</summary>
+      <returns>Hodnota true, pokud byl účet odstraněn, jinak hodnotafalse.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <exception cref="T:System.ArgumentException">Parametr <paramref name="username" /> má hodnotu null nebo je prázdný.</exception>
+      <exception cref="T:System.InvalidOperationException">Třída <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> byla inicializována pomocí volání do metody <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.DeleteOAuthAccount(System.String,System.String)">
+      <summary>Odstraní účet OAuth nebo OpenID se zadaným názvem zprostředkovatele a uživatelským ID zprostředkovatele.</summary>
+      <param name="provider">Název zprostředkovatele účtu OAuth nebo OpenID.</param>
+      <param name="providerUserId">ID uživatele zprostředkovatele účtu OAuth nebo OpenIDToto není ID uživatele uživatelského účtu, ale ID uživatele zprostředkovatele účtu OAuth nebo Open ID.</param>
+      <exception cref="T:System.InvalidOperationException">Třída <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> byla inicializována pomocí volání do metody <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.</exception>
+      <exception cref="T:System.Web.Security.MembershipCreateUserException">Parametr <paramref name="username" /> je prázdný.– nebo –Záznam uživatele, který koresponduje s parametrem <paramref name="username" /> neexistuje v tabulce <see cref="P:WebMatrix.WebData.SimpleMembershipProvider.UserTableName" /> (tabulka uživatelských profilů).– nebo –Databázová operace se nezdařila.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.DeleteOAuthToken(System.String)">
+      <summary>Odstraní zadaný token OAuth.</summary>
+      <param name="token">Token k odstranění</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.DeleteUser(System.String,System.Boolean)">
+      <summary>Odstraní zadaný uživatelský účet a volitelně odstraní veškerá data profilu, která souvisí s daným uživatelským účtem.</summary>
+      <returns>Hodnota true, pokud byl účet odstraněn, jinak hodnotafalse.</returns>
+      <param name="username">Uživatelské jméno.</param>
+      <param name="deleteAllRelatedData">Hodnota true pro odstranění dat profilu, která souvisí s uživatelem, nebo hodnota false pro zachování dat, která souvisí s uživatelem.</param>
+      <exception cref="T:System.ArgumentException">Parametr <paramref name="username" /> má hodnotu null nebo je prázdný.</exception>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleMembershipProvider.EnablePasswordReset">
+      <summary>Získá hodnotu udávající, zda zprostředkovatel členství uživatelům umožňuje resetovat jejich hesla.</summary>
+      <returns>Hodnota true, pokud zprostředkovatel členství podporuje reset hesla, jinak hodnota false.Výchozí hodnotou je hodnota true.</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleMembershipProvider.EnablePasswordRetrieval">
+      <summary>Získá hodnotu udávající, zda zprostředkovatel členství uživatelům umožňuje načíst jejich hesla.</summary>
+      <returns>Hodnota true, pokud zprostředkovatel členství podporuje získání hesla, jinak hodnota false.Výchozí hodnotou je hodnota false.</returns>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.FindUsersByEmail(System.String,System.Int32,System.Int32,System.Int32@)">
+      <summary>Vrátí všechny uživatelské účty, jejichž e-mailová adresa odpovídá zadané e-mailové adrese.</summary>
+      <returns>Kolekce obsahující stránku s <paramref name="pageSize" /> uživatelskými účty počínaje stránkou určenou parametrem <paramref name="pageIndex" />.</returns>
+      <param name="emailToMatch">E-mailová adresa k vyhledání.</param>
+      <param name="pageIndex">Index stránky s vrácenými výsledky (počítáno od nuly).</param>
+      <param name="pageSize">Velikost stránky s vrácenými výsledky.</param>
+      <param name="totalRecords">Když tato metoda vrací výsledek, obsahuje celkový počet nalezených uživatelských účtů.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.FindUsersByName(System.String,System.Int32,System.Int32,System.Int32@)">
+      <summary>Vrátí všechny uživatelské účty, jejichž název odpovídá zadanému uživatelskému jménu.</summary>
+      <returns>Kolekce obsahující stránku s <paramref name="pageSize" /> uživatelskými účty počínaje stránkou určenou parametrem <paramref name="pageIndex" />.</returns>
+      <param name="usernameToMatch">Uživatelské jméno, které má být hledáno.</param>
+      <param name="pageIndex">Index stránky s vrácenými výsledky (počítáno od nuly).</param>
+      <param name="pageSize">Velikost stránky s vrácenými výsledky.</param>
+      <param name="totalRecords">Když tato metoda vrací výsledek, obsahuje celkový počet nalezených uživatelů.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GeneratePasswordResetToken(System.String,System.Int32)">
+      <summary>Vygeneruje token pro reset hesla, který lze uživateli poslat e-mailem.</summary>
+      <returns>Token odeslaný uživateli.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="tokenExpirationInMinutesFromNow">(Volitelné) Čas v minutách, dokud nevyprší platnost tokenu pro reset hesla.Výchozí hodnota je 1440 (24 hodin).</param>
+      <exception cref="T:System.ArgumentException">Parametr <paramref name="username" /> je prázdný.</exception>
+      <exception cref="T:System.Configuration.Provider.ProviderException">Databázová operace se nezdařila.</exception>
+      <exception cref="T:System.InvalidOperationException">Třída <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> byla inicializována pomocí volání do metody <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetAccountsForUser(System.String)">
+      <summary>Vrátí všechny členské účty OAuth, které jsou přidružené k zadanému uživatelskému jménu.</summary>
+      <returns>Seznam všech členských účtů OAuth, které jsou přidružené k zadanému uživatelskému jménu.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <exception cref="T:System.InvalidOperationException">Třída <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> byla inicializována pomocí volání do metody <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetAllUsers(System.Int32,System.Int32,System.Int32@)">
+      <summary>Vrátí všechny uživatelské účty ve zdroji dat.</summary>
+      <returns>Kolekce obsahující stránku s <paramref name="pageSize" /> uživatelskými účty počínaje stránkou určenou parametrem <paramref name="pageIndex" />.</returns>
+      <param name="pageIndex">Index stránky s vrácenými výsledky (počítáno od nuly).</param>
+      <param name="pageSize">Velikost stránky s vrácenými výsledky.</param>
+      <param name="totalRecords">Když tato metoda vrací výsledek, obsahuje celkový počet nalezených uživatelských účtů.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetCreateDate(System.String)">
+      <summary>Vrátí datum a čas vytvoření zadaného uživatelského účtu.</summary>
+      <returns>Datum a čas vytvoření uživatelského účtu nebo <see cref="F:System.DateTime.MinValue" /> pokud není datum vytvoření uživatelského účtu k dispozici.</returns>
+      <param name="userName">Uživatelské jméno účtu.</param>
+      <exception cref="T:System.InvalidOperationException">Uživatel určený parametrem <paramref name="userName" /> nemá uživatelský účet.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetLastPasswordFailureDate(System.String)">
+      <summary>Vrátí datum a čas, kdy bylo pro určený uživatelský účet naposledy zadáno nesprávné heslo.</summary>
+      <returns>Datum a čas, kdy bylo pro tento uživatelský účet naposledy zadáno nesprávné heslo, nebo <see cref="F:System.DateTime.MinValue" />, pokud pro tento uživatelský účet nebylo zadáno nesprávné heslo.</returns>
+      <param name="userName">Uživatelské jméno účtu.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetNumberOfUsersOnline">
+      <summary>Vrátí počet uživatelů, kteří právě používají aplikaci.</summary>
+      <returns>Počet uživatelů, kteří právě používají aplikaci.</returns>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetOAuthTokenSecret(System.String)">
+      <summary>Vrací tajný klíč tokenu OAuth.</summary>
+      <returns>Token OAuth</returns>
+      <param name="token">Token</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetPassword(System.String,System.String)">
+      <summary>Vrátí heslo pro zadaný uživatelský účet ze zdroje dat.</summary>
+      <returns>Heslo pro zadaný uživatelský účet.</returns>
+      <param name="username">Uživatel, pro kterého má být načteno heslo.</param>
+      <param name="answer">Odpověď na bezpečnostní otázku k heslu.</param>
+      <exception cref="T:System.NotSupportedException">Parametr <see cref="P:WebMatrix.WebData.SimpleMembershipProvider.EnablePasswordRetrieval" /> má hodnotu false.</exception>
+      <exception cref="T:System.Web.Security.MembershipPasswordException">Parametr <paramref name="answer" /> neodpovídá bezpečnostní otázce pro uživatelský účet a hodnota <see cref="P:WebMatrix.WebData.SimpleMembershipProvider.RequiresQuestionAndAnswer" /> je true.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetPasswordChangedDate(System.String)">
+      <summary>Vrátí datum a čas, kdy bylo pro zadaný členský účet naposledy změněno heslo.</summary>
+      <returns>Datum a čas, kdy bylo pro tento účet naposledy změněno heslo, nebo <see cref="F:System.DateTime.MinValue" />, pokud heslo pro tento členský účet nebylo nikdy změněno.</returns>
+      <param name="userName">Uživatelské jméno účtu.</param>
+      <exception cref="T:System.InvalidOperationException">Uživatel určený parametrem <paramref name="userName" /> nemá členský účet.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetPasswordFailuresSinceLastSuccess(System.String)">
+      <summary>Vrátí počet pokusů o nesprávné zadání hesla pro zadaný uživatelský účet od posledního úspěšného přihlášení nebo od vytvoření uživatelského účtu.</summary>
+      <returns>Počet nezdařených pokusů o zadání hesla pro zadaný uživatelský účet nebo -1, pokud uživatel určený parametrem <paramref name="userName" /> nemá uživatelský účet.</returns>
+      <param name="userName">Uživatelské jméno účtu.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetUser(System.Object,System.Boolean)">
+      <summary>Vrátí informaci o uživatelském účtu pomocí zadaného ID uživatele a volitelně aktualizuje časové razítko poslední aktivity pro uživatelský účet.</summary>
+      <returns>Objekt, který je vyplněný informacemi o uživatelském účtu, nebo hodnota null pokud není nalezen parametr <paramref name="providerUserKey" />.</returns>
+      <param name="providerUserKey">ID pro uživatelský účet, pro který mají být získány informace.ID je hodnota <see cref="T:System.Int32" />, která je uložena jako instance třídy <see cref="T:System.Object" />.</param>
+      <param name="userIsOnline">Hodnota true pro aktualizaci časového razítka poslední aktivity pro uživatelský účet, nebo hodnota false pro vrácení informací o uživatelském účtu bez aktualizace časového razítka.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetUser(System.String,System.Boolean)">
+      <summary>Vrátí informaci o uživatelském účtu pomocí zadaného uživatelského jména a volitelně aktualizuje časové razítko poslední aktivity pro uživatelský účet.</summary>
+      <returns>Objekt, který je vyplněný informacemi o uživatelském účtu, nebo hodnota null pokud není nalezen parametr <paramref name="username" />.</returns>
+      <param name="username">Jméno uživatele, pro kterého mají být získány informace.</param>
+      <param name="userIsOnline">Hodnota true pro aktualizaci časového razítka poslední aktivity pro uživatelský účet, nebo hodnota false pro vrácení informací o uživatelském účtu bez aktualizace časového razítka.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetUserId(System.String)">
+      <summary>Vrátí ID uživatele na základě zadaného uživatelského jména.</summary>
+      <returns>ID uživatele.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <exception cref="T:System.InvalidOperationException">Třída <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> byla inicializována pomocí volání do metody <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetUserIdFromOAuth(System.String,System.String)">
+      <summary>Vrátí uživatelské ID pro zadaného zprostředkovatele účtu OAuth nebo OpenID a uživatelské ID zprostředkovatele.</summary>
+      <returns>Uživatelské ID nebo -1, pokud neexistuje žádné uživatelské ID přiřazené uživatelskému ID zprostředkovatele účtu OAuth nebo Open ID.</returns>
+      <param name="provider">Název zprostředkovatele účtu OAuth nebo OpenID.</param>
+      <param name="providerUserId">ID uživatele zprostředkovatele účtu OAuth nebo OpenIDToto není ID uživatele uživatelského účtu, ale ID uživatele zprostředkovatele účtu OAuth nebo Open ID.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetUserIdFromPasswordResetToken(System.String)">
+      <summary>Vrátí ID pro uživatele na základě tokenu pro resetování hesla.</summary>
+      <returns>ID uživatele nebo -1, pokud není k zadanému tokenu pro resetování hesla přidruženo žádné ID uživatele.</returns>
+      <param name="token">Token pro resetování hesla.</param>
+      <exception cref="T:System.InvalidOperationException">Třída <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> byla inicializována pomocí volání do metody <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetUserNameByEmail(System.String)">
+      <summary>Vrátí uživatelské jméno, které je přidruženo k zadané e-mailové adrese.</summary>
+      <returns>Uživatelské jméno, které je přidruženo k zadané e-mailové adrese, nebo hodnota null, pokud není nalezena žádná shoda.</returns>
+      <param name="email">E-mailová adresa k vyhledání.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.GetUserNameFromId(System.Int32)">
+      <summary>Vrátí uživatelské jméno, které je přidruženo k zadanému uživatelskému ID.</summary>
+      <returns>Uživatelské jméno.</returns>
+      <param name="userId">Uživatelské ID, pro které má být získáno jméno.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.HasLocalAccount(System.Int32)">
+      <summary>Označuje, zda má uživatel místní účet.</summary>
+      <returns>Hodnota true, pokud uživatel má místní účet, jinak hodnotafalse.</returns>
+      <param name="userId">ID uživatele.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+      <summary>Inicializuje zprostředkovatele.</summary>
+      <param name="name">Popisný název zprostředkovatele.</param>
+      <param name="config">Kolekce párů jméno/hodnoty představující atributy specifické pro zprostředkovatele.</param>
+      <exception cref="T:System.ArgumentNullException">Parametr <paramref name="config" /> má hodnotu null.</exception>
+      <exception cref="T:System.Configuration.Provider.ProviderException">Parametr <paramref name="config" /> obsahuje nerozpoznaný atribut.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.IsConfirmed(System.String)">
+      <summary>Vrátí hodnotu udávající, zda byl uživatelský účet potvrzen zprostředkovatelem.</summary>
+      <returns>Hodnota true, pokud je uživatelský účet potvrzený, jinak hodnota false.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <exception cref="T:System.ArgumentException">Parametr <paramref name="userName" /> má hodnotu null nebo je prázdný.</exception>
+      <exception cref="T:System.InvalidOperationException">Třída <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> byla inicializována pomocí volání do metody <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.</exception>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleMembershipProvider.MaxInvalidPasswordAttempts">
+      <summary>Získá počet neplatných pokusů o zadání hesla nebo odpovědi k heslu, které jsou povoleny před zablokováním uživatele členství.</summary>
+      <returns>Počet neplatných pokusů o zadání hesla nebo odpovědi k heslu, které jsou povoleny před zablokováním uživatele členství.</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleMembershipProvider.MinRequiredNonAlphanumericCharacters">
+      <summary>Získá minimální počet speciálních (jiných než alfanumerických) znaků, které musí obsahovat heslo.</summary>
+      <returns>Minimální počet speciálních znaků, které musí obsahovat heslo.</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleMembershipProvider.MinRequiredPasswordLength">
+      <summary>Získá minimální délku, která je požadována pro heslo.</summary>
+      <returns>Minimální délka, která je požadována pro heslo.</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleMembershipProvider.PasswordAttemptWindow">
+      <summary>Získá počet minut, během kterých je povolen maximální počet neplatných pokusů o zadání hesla nebo zodpovězení bezpečnostní otázky před zablokováním uživatelského účtu.</summary>
+      <returns>Počet minut.</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleMembershipProvider.PasswordFormat">
+      <summary>Získá hodnotu, která udává formát pro ukládání hesel.</summary>
+      <returns>Jedna z hodnot výčtu, která udává formát.</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleMembershipProvider.PasswordStrengthRegularExpression">
+      <summary>Získá regulární výraz, který slouží k vyhodnocení složitosti hesla.</summary>
+      <returns>Regulární výraz, který slouží k vyhodnocení složitosti hesla.</returns>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.ReplaceOAuthRequestTokenWithAccessToken(System.String,System.String,System.String)">
+      <summary>Nahrazuje token požadavku OAuth tokenem přístupu.</summary>
+      <param name="requestToken">Token požadavku</param>
+      <param name="accessToken">Přístupový token.</param>
+      <param name="accessTokenSecret">Tajný klíč tokenu přístupu</param>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleMembershipProvider.RequiresQuestionAndAnswer">
+      <summary>Získá hodnotu udávající, zda zprostředkovatel členství vyžaduje, aby za účelem resetu a načtení hesla zodpověděl bezpečnostní otázku.</summary>
+      <returns>Hodnota true, pokud je odpověď na bezpečnostní otázku povinná, jinak hodnota false.Výchozí hodnotou je hodnota true.</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleMembershipProvider.RequiresUniqueEmail">
+      <summary>Získá hodnotu udávající, zda zprostředkovatel členství pro každé uživatelské jméno vyžaduje jedinečnou e-mailovou adresu.</summary>
+      <returns>Hodnota true, pokud zprostředkovatel členství vyžaduje jedinečnou e-mailovou adresu, jinak hodnota false.Výchozí hodnotou je hodnota true.</returns>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.ResetPassword(System.String,System.String)">
+      <summary>Resetuje heslo pro uživatele na nové, automaticky vytvořené heslo.</summary>
+      <returns>Nové heslo pro zadaný uživatelský účet.</returns>
+      <param name="username">Uživatelský účet, pro kterého má být resetováno heslo.</param>
+      <param name="answer">Odpověď na bezpečnostní otázku pro nového uživatele.</param>
+      <exception cref="T:System.NotSupportedException">Parametr <see cref="P:WebMatrix.WebData.SimpleMembershipProvider.EnablePasswordReset" /> má hodnotu false.</exception>
+      <exception cref="T:System.Web.Security.MembershipPasswordException">Parametr <paramref name="answer" /> neodpovídá bezpečnostní otázce pro uživatelský účet v tabulce členství a vlastnost <see cref="P:WebMatrix.WebData.SimpleMembershipProvider.RequiresQuestionAndAnswer" /> má hodnotu true.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.ResetPasswordWithToken(System.String,System.String)">
+      <summary>Resetuje heslo po ověření, že je zadaný token pro resetování hesla platný.</summary>
+      <returns>Hodnota true, pokud bylo heslo změněno, jinak hodnota false.</returns>
+      <param name="token">Token pro resetování hesla.</param>
+      <param name="newPassword">Nové heslo.</param>
+      <exception cref="T:System.ArgumentException">Parametr <paramref name="newPassword" /> má hodnotu null nebo je prázdný.</exception>
+      <exception cref="T:System.InvalidOperationException">Třída <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> byla inicializována pomocí volání do metody <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.StoreOAuthRequestToken(System.String,System.String)">
+      <summary>Ukládá token požadavku OAuth.</summary>
+      <param name="requestToken">Token požadavku</param>
+      <param name="requestTokenSecret">Tajný klíč tokenu požadavku</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.UnlockUser(System.String)">
+      <summary>Odemkne uživatelský účet, aby bylo možné ověřit uživatele členství.</summary>
+      <returns>Hodnota true, pokud byl účet odemknut, jinak hodnotafalse.</returns>
+      <param name="userName">Uživatel, jehož uživatelský účet chcete odemknout.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.UpdateUser(System.Web.Security.MembershipUser)">
+      <summary>Aktualizuje uživatelské informace.</summary>
+      <param name="user">Objekt, který představuje uživatelský účet k aktualizaci a informace k aktualizaci pro tento uživatelský účet.</param>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleMembershipProvider.UserIdColumn">
+      <summary>Získá nebo nastaví název sloupce databáze obsahujícího ID uživatelů.</summary>
+      <returns>Název sloupce databáze obsahujícího ID uživatelů.</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleMembershipProvider.UserNameColumn">
+      <summary>Získá nebo nastaví název sloupce databáze obsahujícího uživatelská jména.</summary>
+      <returns>Název sloupce databáze obsahujícího uživatelská jména.</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleMembershipProvider.UserTableName">
+      <summary>Získá nebo nastaví název tabulky databáze obsahující uživatelské informace.</summary>
+      <returns>Název tabulky databáze obsahující uživatelské informace.</returns>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleMembershipProvider.ValidateUser(System.String,System.String)">
+      <summary>Ověří, zda zadaný uživatelský účet a heslo existuje.</summary>
+      <returns>Hodnota true, pokud zadané uživatelské jméno a heslo existují a pokud byl účet ověřen, jinak hodnota false.</returns>
+      <param name="username">Název uživatelského účtu k ověření.</param>
+      <param name="password">Heslo pro zadaného uživatele.</param>
+      <exception cref="T:System.ArgumentException">Parametry <paramref name="username" /> nebo <paramref name="password" /> mají hodnotu null nebo jsou prázdné.</exception>
+    </member>
+    <member name="T:WebMatrix.WebData.SimpleMembershipProviderCasingBehavior">
+      <summary>Nakonfiguruje chování položky SimpleMembershipProvider vzhledem k malým a velkým písmenům v dotazech na uživatelské jméno.</summary>
+    </member>
+    <member name="F:WebMatrix.WebData.SimpleMembershipProviderCasingBehavior.NormalizeCasing">
+      <summary>Pomocí funkce SQL Upper normalizuje malá a velká písmena v uživatelských jménech pro účely porovnání, které malá a velká písmena nebere v úvahu.Toto je výchozí hodnota.</summary>
+    </member>
+    <member name="F:WebMatrix.WebData.SimpleMembershipProviderCasingBehavior.RelyOnDatabaseCollation">
+      <summary>Při normalizaci velkých a malých písmen pro účely porovnávání uživatelských jmen spoléhá na kolaci nastavenou v databázi.Uživatelská jména se do databáze předávají ve tvaru zadaném uživatelem.</summary>
+    </member>
+    <member name="T:WebMatrix.WebData.SimpleRoleProvider">
+      <summary>Zajišťuje základní funkčnost správy rolí.</summary>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleRoleProvider.#ctor">
+      <summary>Inicializuje novou instanci třídy <see cref="T:WebMatrix.WebData.SimpleRoleProvider" />.</summary>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleRoleProvider.#ctor(System.Web.Security.RoleProvider)">
+      <summary>Inicializuje novou instanci třídy <see cref="T:WebMatrix.WebData.SimpleRoleProvider" /> pomocí zadaného zprostředkovatele rolí.</summary>
+      <param name="previousProvider">Předchozí zprostředkovatel rolí.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleRoleProvider.AddUsersToRoles(System.String[],System.String[])">
+      <summary>Přidá zadaná uživatelská jména do zadaných rolí.</summary>
+      <param name="usernames">Uživatelská jména k přidání.</param>
+      <param name="roleNames">Role, do kterých mají být přidána jména.</param>
+      <exception cref="T:System.InvalidOperationException">Jeden nebo více zadaných uživatelů již existuje v jedné nebo více zadaných rolí.</exception>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleRoleProvider.ApplicationName">
+      <summary>Načte nebo nastaví název aplikace pro uložení a načítání informací o rolích.</summary>
+      <returns>Název aplikace pro uložení a načtení informací o rolích.</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleRoleProvider.CasingBehavior">
+      <summary>Získá nebo nastaví třídu <see cref="T:WebMatrix.WebData.SimpleMembershipProviderCasingBehavior" /> pro tohoto zprostředkovatele.</summary>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleRoleProvider.CreateRole(System.String)">
+      <summary>Přidá novou roli.</summary>
+      <param name="roleName">Název role, kterou chcete vytvořit.</param>
+      <exception cref="T:System.InvalidOperationException">Role již existuje.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleRoleProvider.DeleteRole(System.String,System.Boolean)">
+      <summary>Odstraní zadanou roli.</summary>
+      <returns>Hodnota true, pokud byla role odstraněna, jinak hodnotafalse.</returns>
+      <param name="roleName">Název role, kterou chcete odstranit.</param>
+      <param name="throwOnPopulatedRole">Hodnota true pro vyvolání výjimky, když se v roli <paramref name="roleName" /> nachází jeden nebo více uživatelů.V takovém případě není role odstraněna.</param>
+      <exception cref="T:System.InvalidOperationException">Parametr <paramref name="roleName" /> má jednoho nebo více členů a jeho hodnota <paramref name="throwOnPopulatedRole" /> je true.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleRoleProvider.FindUsersInRole(System.String,System.String)">
+      <summary>Vrací všechny ze zadaných uživatelů, kteří jsou v zadané roli.</summary>
+      <returns>Jména všech uživatelů, kde uživatelské jméno odpovídá parametru <paramref name="usernameToMatch" /> a kde se uživatel nachází v zadané roli.</returns>
+      <param name="roleName">Role, ve které má být prováděno hledání.</param>
+      <param name="usernameToMatch">Uživatelské jméno, které má být hledáno.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleRoleProvider.GetAllRoles">
+      <summary>Vrátí seznam všech rolí.</summary>
+      <returns>Názvy všech rolí.</returns>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleRoleProvider.GetRolesForUser(System.String)">
+      <summary>Vrátí seznam rolí, ve kterých se vyskytuje zadaný uživatel.</summary>
+      <returns>Názvy všech rolí, ve kterých je zadaný uživatel členem.</returns>
+      <param name="username">Uživatel, pro kterého se má vrátit seznam rolí.</param>
+      <exception cref="T:System.InvalidOperationException">Zadaný uživatel nemá členský účet.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleRoleProvider.GetUsersInRole(System.String)">
+      <summary>Vrátí uživatelská jména, která jsou v zadané roli.</summary>
+      <returns>Uživatelská jména, která jsou v zadané roli.</returns>
+      <param name="roleName">Název role.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleRoleProvider.IsUserInRole(System.String,System.String)">
+      <summary>Vrátí hodnotu určující, zda se zadaný uživatel nachází v zadané roli.</summary>
+      <returns>Hodnota true, pokud se uživatel nachází v zadané roli, jinak hodnota false. </returns>
+      <param name="username">Uživatelské jméno.</param>
+      <param name="roleName">Název role.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleRoleProvider.RemoveUsersFromRoles(System.String[],System.String[])">
+      <summary>Odebere uživatelská jména ze zadaných rolí.</summary>
+      <param name="usernames">Uživatelská jména k odebrání ze zadaných rolí.</param>
+      <param name="roleNames">Názvy rolí, které mají být odebrány ze zadaných uživatelských jmen.</param>
+      <exception cref="T:System.InvalidOperationException">Jedna nebo více zadaných rolí neexistuje.– nebo –Jeden nebo více uživatelů se nenachází ve všech zadaných rolích.</exception>
+      <exception cref="T:System.Configuration.Provider.ProviderException">Databázová operace se nezdařila.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.SimpleRoleProvider.RoleExists(System.String)">
+      <summary>Vrátí hodnotu určující, zda zadaná role existuje.</summary>
+      <returns>Hodnota true, pokud role existuje, jinak hodnota false.</returns>
+      <param name="roleName">Název role.</param>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleRoleProvider.UserIdColumn">
+      <summary>Získá název sloupce databáze obsahujícího ID uživatelů.</summary>
+      <returns>Název sloupce databáze v tabulce <see cref="P:WebMatrix.WebData.SimpleRoleProvider.UserTableName" /> obsahující ID uživatelů.</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleRoleProvider.UserNameColumn">
+      <summary>Získá název sloupce databáze obsahujícího uživatelská jména.</summary>
+      <returns>Název sloupce databáze v tabulce <see cref="P:WebMatrix.WebData.SimpleRoleProvider.UserTableName" /> obsahující uživatelská jména.</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.SimpleRoleProvider.UserTableName">
+      <summary>Získá název tabulky databáze obsahující uživatelské informace.</summary>
+      <returns>Název tabulky databáze v tabulce <see cref="P:WebMatrix.WebData.SimpleRoleProvider.UserTableName" /> obsahující uživatelské informace.</returns>
+    </member>
+    <member name="T:WebMatrix.WebData.WebSecurity">
+      <summary>Zajišťuje bezpečnostní a ověřovací funkce pro aplikace rozhraní ASP.NET Web Pages, včetně schopnosti vytváření uživatelských účtů, přihlašování a odhlašování uživatelů, resetování nebo změny hesel a provádění souvisejících úloh.</summary>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.ChangePassword(System.String,System.String,System.String)">
+      <summary>Změní heslo pro zadaného uživatele.</summary>
+      <returns>Hodnota true, pokud je heslo úspěšně změněno, jinak hodnota false.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="currentPassword">Aktuální heslo pro uživatele.</param>
+      <param name="newPassword">Nové heslo.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.ConfirmAccount(System.String)">
+      <summary>Potvrdí, že je účet platný a aktivuje jej.</summary>
+      <returns>Hodnota true, pokud je účet potvrzený, jinak hodnota false.</returns>
+      <param name="accountConfirmationToken">Potvrzovací token k předání zprostředkovateli ověření.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.ConfirmAccount(System.String,System.String)">
+      <summary>Potvrdí, že účet pro zadané uživatelské jméno je platný a aktivuje účet.</summary>
+      <returns>Hodnota true, pokud je účet potvrzený, jinak hodnota false.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="accountConfirmationToken">Potvrzovací token k předání zprostředkovateli ověření.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.CreateAccount(System.String,System.String,System.Boolean)">
+      <summary>Vytvoří nový členský účet pomocí zadaného uživatelského jména a hesla a volitelně umožní zadat, že uživatel musí účet explicitně potvrdit.</summary>
+      <returns>Token, který lze poslat uživateli pro potvrzení účtu.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="password">Heslo.</param>
+      <param name="requireConfirmationToken">(Volitelné) Hodnota true udávající, že uživatelský účet musí být potvrzen pomocí hodnoty vrácené tokenem, jinak hodnota false.Výchozí hodnotou je hodnota false.</param>
+      <exception cref="T:System.Web.Security.MembershipCreateUserException">Parametr <paramref name="username" /> je prázdný.– nebo –Parametr <paramref name="username" /> již má členský účet.– nebo –Parametr <paramref name="password" /> je prázdný.– nebo –Parametr <paramref name="password" /> je příliš dlouhý.– nebo –Databázová operace se nezdařila.</exception>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.CreateUserAndAccount(System.String,System.String,System.Object,System.Boolean)">
+      <summary>Vytvoří nový záznam uživatelského profilu a nový členský účet.</summary>
+      <returns>Token, který lze poslat uživateli pro potvrzení uživatelského účtu.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="password">Heslo pro uživatele.</param>
+      <param name="propertyValues">(Volitelné) Slovník obsahující další atributy uživatele.Výchozí hodnota je null.</param>
+      <param name="requireConfirmationToken">(Volitelné) Hodnota true udávající, že uživatelský účet musí být potvrzen, jinak hodnota false.Výchozí hodnotou je hodnota false.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="P:WebMatrix.WebData.WebSecurity.CurrentUserId">
+      <summary>Získá ID pro aktuálního uživatele.</summary>
+      <returns>ID pro aktuálního uživatele.</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.WebSecurity.CurrentUserName">
+      <summary>Získá uživatelské jméno pro aktuálního uživatele.</summary>
+      <returns>Jméno aktuálního uživatele.</returns>
+    </member>
+    <member name="F:WebMatrix.WebData.WebSecurity.EnableSimpleMembershipKey">
+      <summary>Představuje klíč k hodnotě enableSimpleMembership ve vlastnosti <see cref="P:System.Configuration.ConfigurationManager.AppSettings" />.</summary>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.GeneratePasswordResetToken(System.String,System.Int32)">
+      <summary>Vygeneruje token pro reset hesla, který lze uživateli poslat e-mailem.</summary>
+      <returns>Token odeslaný uživateli.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="tokenExpirationInMinutesFromNow">(Volitelné) Čas v minutách, dokud nevyprší platnost tokenu pro reset hesla.Výchozí hodnota je 1440 (24 hodin).</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.GetCreateDate(System.String)">
+      <summary>Vrátí datum a čas vytvoření zadaného členského účtu.</summary>
+      <returns>Datum a čas vytvoření členského účtu nebo <see cref="F:System.DateTime.MinValue" /> pokud není datum vytvoření k dispozici.</returns>
+      <param name="userName">Uživatelské jméno pro členský účet.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.GetLastPasswordFailureDate(System.String)">
+      <summary>Vrátí datum a čas, kdy bylo pro určený účet naposledy zadáno nesprávné heslo.</summary>
+      <returns>Datum a čas, kdy bylo pro tento účet naposledy zadáno nesprávné heslo, nebo <see cref="F:System.DateTime.MinValue" />, pokud pro tento účet nebylo zadáno nesprávné heslo.</returns>
+      <param name="userName">Uživatelské jméno účtu členského účtu.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.GetPasswordChangedDate(System.String)">
+      <summary>Vrátí datum a čas, kdy bylo pro zadaný členský účet naposledy změněno heslo.</summary>
+      <returns>Datum a čas poslední změny hesla nebo <see cref="F:System.DateTime.MinValue" />, pokud heslo pro tento účet nebylo změněno.</returns>
+      <param name="userName">Uživatelské jméno účtu.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.GetPasswordFailuresSinceLastSuccess(System.String)">
+      <summary>Vrátí počet pokusů o nesprávné zadání hesla pro zadaný účet od posledního úspěšného přihlášení nebo od vytvoření členského účtu.</summary>
+      <returns>Počet nezdařených pokusů o zadání hesla pro zadaný účet.</returns>
+      <param name="userName">Uživatelské jméno účtu.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.GetUserId(System.String)">
+      <summary>Vrátí ID uživatele na základě zadaného uživatelského jména.</summary>
+      <returns>ID uživatele.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.GetUserIdFromPasswordResetToken(System.String)">
+      <summary>Vrátí ID uživatele z tokenu pro resetování hesla.</summary>
+      <returns>ID uživatele.</returns>
+      <param name="token">Token pro resetování hesla.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="P:WebMatrix.WebData.WebSecurity.HasUserId">
+      <summary>Získá hodnotu udávající, zda má aktuální uživatel uživatelské ID.</summary>
+      <returns>Hodnota true, pokud má uživatel uživatelské ID, jinak hodnota false.</returns>
+    </member>
+    <member name="P:WebMatrix.WebData.WebSecurity.Initialized">
+      <summary>Získá hodnotu udávající, zda byla volána metoda <see cref="M:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection(System.String,System.String,System.String,System.String,System.Boolean)" />.</summary>
+      <returns>Hodnota true, pokud byla inicializační metoda volána, jinak hodnota false.</returns>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection(System.String,System.String,System.String,System.String,System.Boolean)">
+      <summary>Inicializuje systém členství připojením k databázi, která obsahuje uživatelské informace a volitelně vytváří tabulky členství, pokud dosud neexistují.</summary>
+      <param name="connectionStringName">Název připojovacího řetězce pro databázi obsahující uživatelské informace.Pokud používáte systém SQL Server Compact, může se jednat o název souboru databáze (soubor SDF) bez přípony názvu souboru „.sdf“.</param>
+      <param name="userTableName">Název tabulky databáze obsahující informace o uživatelském profilu.</param>
+      <param name="userIdColumn">Název sloupce databáze obsahujícího ID uživatelů.Tento sloupec musí být zadán jako celé číslo (int).</param>
+      <param name="userNameColumn">Název sloupce databáze obsahujícího uživatelská jména.Tento sloupec slouží k přiřazování dat uživatelského profilu k datům členského účtu.</param>
+      <param name="autoCreateTables">Hodnota true udávající, že pokud neexistují tabulky uživatelských profilů a členství, měly by být vytvořeny, hodnota false udávající, že tabulky by neměly být vytvářeny automaticky.Ačkoliv lze tabulky členství vytvářet automaticky, samotná databáze již musí existovat.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection(System.String,System.String,System.String,System.String,System.Boolean,WebMatrix.WebData.SimpleMembershipProviderCasingBehavior)"></member>
+    <member name="M:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+      <summary>Inicializuje systém členství připojením k databázi, která obsahuje uživatelské informace, pomocí zadaného zprostředkovatele členství nebo rolí, a volitelně vytváří tabulky členství, pokud dosud neexistují.</summary>
+      <param name="connectionString">Název připojovacího řetězce pro databázi obsahující uživatelské informace.Pokud používáte systém SQL Server Compact, může se jednat o název souboru databáze (soubor SDF) bez přípony názvu souboru „.sdf“.</param>
+      <param name="providerName">Název zprostředkovatele dat ADO.NET.Chcete-li použít systém Microsoft SQL Server, je doporučováno přetížení <see cref="M:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection(System.String,System.String,System.String,System.String,System.Boolean)" />.</param>
+      <param name="userTableName">Název tabulky databáze obsahující informace o uživatelském profilu.</param>
+      <param name="userIdColumn">Název sloupce databáze obsahujícího ID uživatelů.Tento sloupec musí být zadán jako celé číslo (int).</param>
+      <param name="userNameColumn">Název sloupce databáze obsahujícího uživatelská jména.Tento sloupec slouží k přiřazování dat uživatelského profilu k datům členského účtu.</param>
+      <param name="autoCreateTables">Hodnota true udávající, že tabulky uživatelských profilů a členství, by měly být vytvářeny automaticky, hodnota false udávající, že tabulky by neměly být vytvářeny automaticky.Ačkoliv lze tabulky členství vytvářet automaticky, samotná databáze již musí existovat.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection(System.String,System.String,System.String,System.String,System.String,System.Boolean,WebMatrix.WebData.SimpleMembershipProviderCasingBehavior)"></member>
+    <member name="M:WebMatrix.WebData.WebSecurity.IsAccountLockedOut(System.String,System.Int32,System.Int32)">
+      <summary>Vrátí hodnotu udávající, zda je zadaný členský účet dočasně zablokován z důvodu velkého počtu nezdařených pokusů o zadání hesla v zadaném počtu sekund.</summary>
+      <returns>Hodnota true, pokud je členský účet zablokovaný, jinak hodnota false.</returns>
+      <param name="userName">Uživatelské jméno účtu členského účtu.</param>
+      <param name="allowedPasswordAttempts">Počet povolených pokusů uživatele o zadání hesla před zablokováním účtu členství.</param>
+      <param name="intervalInSeconds">Počet sekund pro zablokování uživatelského účtu poté, co počet pokusů o zadání hesla překročí hodnotu v parametru <paramref name="allowedPasswordAttempts" />.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.IsAccountLockedOut(System.String,System.Int32,System.TimeSpan)">
+      <summary>Vrátí hodnotu udávající, zda je zadaný členský účet dočasně zablokován z důvodu velkého počtu nezdařených pokusů o zadání hesla v zadaném časovém rozmezí.</summary>
+      <returns>Hodnota true, pokud je členský účet zablokovaný, jinak hodnota false.</returns>
+      <param name="userName">Uživatelské jméno účtu členského účtu.</param>
+      <param name="allowedPasswordAttempts">Počet povolených pokusů uživatele o zadání hesla před zablokováním účtu členství.</param>
+      <param name="interval">Počet sekund pro zablokování uživatelského účtu poté, co počet pokusů o zadání hesla překročí hodnotu v parametru <paramref name="allowedPasswordAttempts" />.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="P:WebMatrix.WebData.WebSecurity.IsAuthenticated">
+      <summary>Získá stav ověření aktuálního uživatele.</summary>
+      <returns>Hodnota true, pokud je aktuální uživatel ověřený, jinak hodnota false.Výchozí hodnotou je hodnota false.</returns>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.IsConfirmed(System.String)">
+      <summary>Vrátí hodnotu udávající, zda byl uživatel potvrzen.</summary>
+      <returns>Hodnota true, pokud je uživatel potvrzen, jinak hodnota false.</returns>
+      <param name="userName">Uživatelské jméno.</param>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.IsCurrentUser(System.String)">
+      <summary>Vrátí hodnotu udávající, zda uživatelské jméno nebo přihlášený uživatel odpovídá zadanému uživatelskému jménu.</summary>
+      <returns>Hodnota true, pokud jméno přihlášeného uživatele odpovídá parametru <paramref name="userName" />, jinak hodnota false.</returns>
+      <param name="userName">Uživatelské jméno k porovnání se jménem přihlášeného uživatele.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.Login(System.String,System.String,System.Boolean)">
+      <summary>Přihlásí uživatele.</summary>
+      <returns>Hodnota true, pokud byl uživatel přihlášen, jinak hodnotafalse. </returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <param name="password">Heslo.</param>
+      <param name="persistCookie">(Volitelné) Hodnota true udávající, že ověřovací token v souboru cookie by měl být zachován mimo rámec této relace, jinak hodnota false.Výchozí hodnotou je hodnota false.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.Logout">
+      <summary>Odhlásí uživatele.</summary>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.RequireAuthenticatedUser">
+      <summary>Pokud není uživatel ověřen, nastaví stav protokolu HTTP na 401 (neautorizováno).</summary>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.RequireRoles(System.String[])">
+      <summary>Pokud není aktuální uživatel ve všech zadaných rolích, nastaví stavový kód protokolu HTTP na 401 (neautorizováno).</summary>
+      <param name="roles">Role ke kontrole.Aktuální uživatel musí být ve všech rolích předaných v tomto parametru.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.RequireUser(System.Int32)">
+      <summary>Pokud není zadaný uživatel přihlášen, nastaví stav protokolu HTTP na 401 (neautorizováno).</summary>
+      <param name="userId">ID uživatele k porovnání.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.RequireUser(System.String)">
+      <summary>Pokud aktuální uživatel neodpovídá zadanému uživatelskému jménu, nastaví stav protokolu HTTP na 401 (neautorizováno).</summary>
+      <param name="userName">Jméno uživatele k porovnání.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.ResetPassword(System.String,System.String)">
+      <summary>Resetuje heslo pomocí tokenu pro resetování hesla.</summary>
+      <returns>Hodnota true, pokud bylo heslo změněno, jinak hodnota false.</returns>
+      <param name="passwordResetToken">Token pro resetování hesla.</param>
+      <param name="newPassword">Nové heslo.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+    <member name="M:WebMatrix.WebData.WebSecurity.UserExists(System.String)">
+      <summary>Vrátí hodnotu určující, zda zadaný uživatel existuje v databázi členství.</summary>
+      <returns>Hodnota true, pokud <paramref name="username" /> existuje v tabulce uživatelských profilů, jinak hodnota false. </returns>
+      <param name="userName">Uživatelské jméno.</param>
+      <exception cref="T:System.InvalidOperationException">Nebyla volána metoda <see cref="M:WebMatrix.WebData.SimpleMembershipProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />.– nebo –Nebyla volána metoda <see cref="Overload:WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection" />.– nebo –Zprostředkovatel členství <see cref="T:WebMatrix.WebData.SimpleMembershipProvider" /> není registrován v konfiguraci vašeho webu.Další informace vám poskytne správce systému vašeho webu.</exception>
+    </member>
+  </members>
+</doc>

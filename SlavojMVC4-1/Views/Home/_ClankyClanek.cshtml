@@ -1,0 +1,44 @@
+﻿@model Clanek
+
+<div class ="clanek">
+    <div class ="predmet">
+        @Model.Predmet
+    </div>
+    <div class ="ulozil">
+        @*@Model.DatumVytvoreni*@
+        @Html.ActionLink(Model.DatumVytvoreni.ToString(), "Index", new {datumvVytvoreni=Model.DatumVytvoreni})
+        @{
+            string jmeno = "";
+            if (Model.UserProfile.Cleni.Count == 0)
+            {
+                jmeno = Model.UserProfile.UserName;
+            }
+            else
+            {
+                jmeno = SlavojMVC4_1.Infrastructure.Tools.GetFullName(
+                    Model.UserProfile.Cleni.First().TitulPred,
+                    Model.UserProfile.Cleni.First().Jmeno,
+                    Model.UserProfile.Cleni.First().Prijmeni,
+                    Model.UserProfile.Cleni.First().TitulZa);
+            }
+            int userId = Model.UserId;
+            @Html.ActionLink(jmeno, "Index", new { userId = Model.UserId });
+        }
+        @Html.ActionLink(Model.Kategorie.Nazev, "Index", new {kategorieId=Model.KategorieId})
+    </div>
+    <div class ="text">
+        @Html.Raw(@Model.Text)
+    </div>
+    <div class="pata">
+        @if (WebSecurity.HasUserId)
+        {
+            //if ((WebSecurity.CurrentUserId == item.UserId) || (SlavojMVC4_1.Infrastructure.Role.IsRole(WebSecurity.CurrentUserId, "admin")))
+            if ((WebSecurity.CurrentUserId == Model.UserId) || (User.IsInRole("admin")))
+            {
+                @Html.ActionLink("Upravit",  "Edit", new { id=Model.ClanekId })
+                @Html.ActionLink("Detail" ,  "Details", new { id=Model.ClanekId })
+                @Html.ActionLink("Smazat" ,  "Delete", new { id=Model.ClanekId })
+            }
+        }
+    </div>
+</div> 

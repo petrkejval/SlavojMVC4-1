@@ -1,0 +1,25 @@
+﻿@model ICollection<AuthenticationClientData>
+
+@if (Model.Count == 0)
+{
+    <div class="message-info">
+        <p>Nejsou konfigurovány žádné externí služby ověřování. Podrobnosti o nastavení této aplikace ASP.NET,
+        aby podporovala přihlašování pomocí externích služeb, najdete v <a href="http://go.microsoft.com/fwlink/?LinkId=252166">tomto článku</a>.</p>
+    </div>
+}
+else
+{
+    using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+    @Html.AntiForgeryToken()
+    <fieldset id="socialLoginList">
+        <legend>Přihlásit se pomocí jiné služby</legend>
+        <p>
+        @foreach (AuthenticationClientData p in Model)
+        {
+            <button type="submit" name="provider" value="@p.AuthenticationClient.ProviderName" title="Přihlásit se pomocí vlastního účtu @p.DisplayName">@p.DisplayName</button>
+        }
+        </p>
+    </fieldset>
+    }
+}

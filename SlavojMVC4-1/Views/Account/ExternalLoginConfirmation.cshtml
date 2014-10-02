@@ -1,0 +1,36 @@
+﻿@model SlavojMVC4_1.Models.RegisterExternalLoginModel
+@{
+    ViewBag.Title = "Zaregistrujte se";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Přidružte svůj účet @ViewBag.ProviderDisplayName.</h2>
+</hgroup>
+
+@using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Formulář přidružení</legend>
+        <p>
+            Byli jste úspěšně ověřeni zprostředkovatelem <strong>@ViewBag.ProviderDisplayName</strong>.
+                Zadejte uživatelské jméno pro tento web a dokončete přihlášení
+                kliknutím na tlačítko Potvrdit.
+        </p>
+        <ol>
+            <li class="name">
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+            </li>
+        </ol>
+        @Html.HiddenFor(m => m.ExternalLoginData)
+        <input type="submit" value="Zaregistrujte se" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="be4df5110cd84194ad32a39b4336e3d0" Name="Diagram1" ZoomLevel="103" >
+        <EntityTypeShape EntityType="SlavojDB.UserProfile" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="SlavojDB.webpages_Membership" Width="2.25" PointX="5.875" PointY="0.5" />
+        <EntityTypeShape EntityType="SlavojDB.webpages_OAuthMembership" Width="1.5" PointX="8.375" PointY="0.625" />
+        <EntityTypeShape EntityType="SlavojDB.webpages_Roles" Width="2.875" PointX="2.5" PointY="0.5" />
+        <AssociationConnector Association="SlavojDB.webpages_UsersInRoles" />
+        <EntityTypeShape EntityType="SlavojDB.Kategorie" Width="1.5" PointX="2.375" PointY="3.875" />
+        <AssociationConnector Association="SlavojDB.FK_webpages_Membership_UserProfile" ManuallyRouted="false" >
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SlavojDB.Clanek" Width="1.5" PointX="0.5" PointY="3.875" />
+        <AssociationConnector Association="SlavojDB.FK_Clanky_Kategorie" />
+        <AssociationConnector Association="SlavojDB.FK_Clanky_UserProfile" />
+        <EntityTypeShape EntityType="SlavojDB.Entity1" Width="1.5" PointX="5.375" PointY="3.75" />
+        <AssociationConnector Association="SlavojDB.ClanekClen" />
+        <EntityTypeShape EntityType="SlavojDB.Clen" Width="1.5" PointX="4.25" PointY="3.875" />
+        <AssociationConnector Association="SlavojDB.UserClen" />
+        <EntityTypeShape EntityType="SlavojDB.Adresa" Width="1.5" PointX="0.5" PointY="6.875" />
+        <EntityTypeShape EntityType="SlavojDB.CleniInRole" Width="1.5" PointX="7.125" PointY="8.25" />
+        <EntityTypeShape EntityType="SlavojDB.CleniRole" Width="1.5" PointX="7" PointY="6.375" />
+        <EntityTypeShape EntityType="SlavojDB.Kontakt" Width="1.5" PointX="6.375" PointY="3.875" />
+        <EntityTypeShape EntityType="SlavojDB.Kuzelna" Width="1.5" PointX="9.5" PointY="7.375" />
+        <EntityTypeShape EntityType="SlavojDB.Registrace" Width="1.5" PointX="8.125" PointY="3.875" />
+        <EntityTypeShape EntityType="SlavojDB.Rozhodci" Width="1.5" PointX="10" PointY="3.875" />
+        <AssociationConnector Association="SlavojDB.FK_Adresy_Cleni" />
+        <AssociationConnector Association="SlavojDB.FK_CleniInRoles_Cleni" />
+        <AssociationConnector Association="SlavojDB.FK_Kontakty_Cleni" />
+        <AssociationConnector Association="SlavojDB.FK_Registrace_Cleni" />
+        <AssociationConnector Association="SlavojDB.FK_Rozhodci_Cleni" />
+        <AssociationConnector Association="SlavojDB.FK_CleniInRoles_CleniRoles" />
+        <EntityTypeShape EntityType="SlavojDB.Trener" Width="1.5" PointX="11.625" PointY="3.875" />
+        <AssociationConnector Association="SlavojDB.FK_Cleni_Treneri" />
+        <EntityTypeShape EntityType="SlavojDB.Pohlavi" Width="1.5" PointX="8.375" PointY="11" />
+        <EntityTypeShape EntityType="SlavojDB.Druzstvo" Width="1.5" PointX="0.75" PointY="9.5" />
+        <EntityTypeShape EntityType="SlavojDB.KategorieSouteze" Width="1.5" PointX="5.625" PointY="10.375" />
+        <EntityTypeShape EntityType="SlavojDB.Soutez" Width="1.5" PointX="3.125" PointY="9.625" />
+        <AssociationConnector Association="SlavojDB.FK_DruzstvaVedouciId_CleniClenId" />
+        <AssociationConnector Association="SlavojDB.FK_Druzstva_Souteze" />
+        <AssociationConnector Association="SlavojDB.FK_DruzstvaTrenerId_TreneriClenId" />
+        <AssociationConnector Association="SlavojDB.FK_Souteze_KategorieSoutezi1" />
+        <AssociationConnector Association="SlavojDB.DruzstvaCleni" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

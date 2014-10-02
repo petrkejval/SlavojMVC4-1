@@ -1,0 +1,21 @@
+﻿@*@model IEnumerable<SlavojMVC4_1.Models.Clanek>*@
+@model IPagedList<Clanek>
+
+<div id="listClanky">
+
+    @Html.Partial("_ClankyPagedList", Model)
+
+    @if (WebSecurity.HasUserId)
+    {
+        <div class="novyclanek">
+            @Html.ActionLink("Nový článek", "Create")
+        </div>
+    }
+    @foreach (var item in Model)
+    {
+        @Html.Partial("_ClankyClanek", item)   
+    }
+
+    @Html.Partial("_ClankyPagedList", Model)
+
+</div>

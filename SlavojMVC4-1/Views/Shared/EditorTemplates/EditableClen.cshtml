@@ -1,0 +1,124 @@
+﻿@model SlavojMVC4_1.Models.EditableClen
+
+@{
+    ViewBag.Title = "EditableClen";
+}
+<fieldset class="clen_fields">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="clen_osoba"> 
+        <div class="clen_nadpis editor-label">
+            Osoba
+        </div>
+        @Html.HiddenFor(model => model.ClenId)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TitulPred)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TitulPred)
+            @Html.ValidationMessageFor(model => model.TitulPred)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Jmeno)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Jmeno)
+            @Html.ValidationMessageFor(model => model.Jmeno)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Prijmeni)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Prijmeni)
+            @Html.ValidationMessageFor(model => model.Prijmeni)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TitulZa)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TitulZa)
+            @Html.ValidationMessageFor(model => model.TitulZa)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.JeClen)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JeClen)
+            @Html.ValidationMessageFor(model => model.JeClen)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RodneCislo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RodneCislo)
+            @Html.ValidationMessageFor(model => model.RodneCislo)
+        </div>
+
+    </div>
+
+    <div class="clen_adresa"> 
+        <div class="clen_nadpis editor-label">
+            Adresa
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AdresaUlice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AdresaUlice)
+            @Html.ValidationMessageFor(model => model.AdresaUlice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AdresaCisloPopisne)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AdresaCisloPopisne)
+            @Html.ValidationMessageFor(model => model.AdresaCisloPopisne)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AdresaObec)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AdresaObec)
+            @Html.ValidationMessageFor(model => model.AdresaObec)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AdresaPsc)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AdresaPsc)
+            @Html.ValidationMessageFor(model => model.AdresaPsc)
+        </div>
+    </div>
+    <div class="clen_registrace"> 
+        <div class="clen_nadpis editor-label">
+            Registrace
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RegistraceCisloRegistrace, "Číslo")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RegistraceCisloRegistrace)
+            @Html.ValidationMessageFor(model => model.RegistraceCisloRegistrace)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RegistracePlatnaDo, "Platná do")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RegistracePlatnaDo)
+            @Html.ValidationMessageFor(model => model.RegistracePlatnaDo)
+        </div>
+    </div>
+
+
+</fieldset>
+
