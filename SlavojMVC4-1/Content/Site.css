@@ -865,11 +865,6 @@ tr.pager td {
 {
     padding-bottom:2px;
 }
-/*  editor-field
-.......................................................................*/
-.editor-field
-{
-}
 /*grid
 ****************************************************************************/
  .employee-details
@@ -937,7 +932,7 @@ tr.pager td {
     * html .field-validation-error { position: relative; }
     *+html .field-validation-error { position: relative; }
     
-    .field-validation-error span
+    /*.field-validation-error span
     {
         position: absolute;
         white-space: nowrap;
@@ -945,7 +940,7 @@ tr.pager td {
         padding: 17px 5px 3px;
         background: transparent url('<%= Url.Content("~/Content/Common/validation-error-message.png") %>')
             no-repeat 0 0;
-    }
+    }*/
     
     /* in-form editing */
     .t-edit-form-container
@@ -976,47 +971,42 @@ tr.pager td {
 /*grid - konec
  ****************************************************************************/
 /*grid clen edit form*/
-.clen_fields
+.clen-fields
 {
-    width:600px;
+   width:600px;
 }
-.clen_osoba
+.clen-osoba, .clen-adresa, .clen-registrace, .clen-rozhodci, .clen-trener
 {
-    background-color: white;
-    margin-bottom: 10px;
-    padding: 15px 20px 20px 20px;
-    
-    border-width: 1px;
+    background-color: #87B9D6;
+    overflow: auto;
+   
+
+    padding-top: 15px;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
     border-color:silver;
     border-style:solid solid solid solid;
     border-radius: 10px 10px 10px 10px;
-    height:250px;
+
 }
-.clen_adresa
+.clen-adresa
 {
-    background-color: white;
-    margin-bottom: 10px;
-    padding: 15px 20px 20px 20px;
-    
-    border-width: 1px;
-    border-color:silver;
-    border-style:solid solid solid solid;
-    border-radius: 10px 10px 10px 10px;
-    height:175px;
+     background-color: #E5EFF5;
 }
-.clen_registrace
+.clen-registrace
 {
-    background-color: white;
-    margin-bottom: 10px;
-    padding: 15px 20px 20px 20px;
-    
-    border-width: 1px;
-    border-color:silver;
-    border-style:solid solid solid solid;
-    border-radius: 10px 10px 10px 10px;
-    height:100px;
+     background-color: #F0F3F4;
 }
-.clen_nadpis
+.clen-rozhodci
+{
+     background-color: white;
+}
+.clen-trener
+{
+     background-color: white;
+}
+
+.clen-nadpis
 {
   color: #1877AF;
   font-size: 1.2em;

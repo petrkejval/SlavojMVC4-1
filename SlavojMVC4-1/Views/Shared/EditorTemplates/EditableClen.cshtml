@@ -3,12 +3,12 @@
 @{
     ViewBag.Title = "EditableClen";
 }
-<fieldset class="clen_fields">
+<fieldset class="clen-fields">
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <div class="clen_osoba"> 
-        <div class="clen_nadpis editor-label">
+    <div class="clen-osoba">
+        <div class="clen-nadpis editor-label">
             Osoba
         </div>
         @Html.HiddenFor(model => model.ClenId)
@@ -62,8 +62,8 @@
 
     </div>
 
-    <div class="clen_adresa"> 
-        <div class="clen_nadpis editor-label">
+    <div class="clen-adresa">
+        <div class="clen-nadpis editor-label">
             Adresa
         </div>
         <div class="editor-label">
@@ -98,8 +98,8 @@
             @Html.ValidationMessageFor(model => model.AdresaPsc)
         </div>
     </div>
-    <div class="clen_registrace"> 
-        <div class="clen_nadpis editor-label">
+    <div class="clen-registrace">
+        <div class="clen-nadpis editor-label">
             Registrace
         </div>
         <div class="editor-label">
@@ -116,6 +116,60 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.RegistracePlatnaDo)
             @Html.ValidationMessageFor(model => model.RegistracePlatnaDo)
+        </div>
+    </div>
+    <div class="clen-rozhodci">
+        <div class="clen-nadpis editor-label">
+            Rozhodčí
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RozhodciCisloRegistrace, "Číslo")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RozhodciCisloRegistrace)
+            @Html.ValidationMessageFor(model => model.RozhodciCisloRegistrace)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RozhodciTrida, "Třída")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RozhodciTrida)
+            @Html.ValidationMessageFor(model => model.RozhodciTrida)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RozhodciPlatnaDo, "Platná do")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RozhodciPlatnaDo)
+            @Html.ValidationMessageFor(model => model.RozhodciPlatnaDo)
+        </div>
+    </div>
+    <div class="clen-trener">
+        <div class="clen-nadpis editor-label">
+            Rozhodčí
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TrenerCisloRegistrace, "Číslo")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TrenerCisloRegistrace)
+            @Html.ValidationMessageFor(model => model.TrenerCisloRegistrace)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TrenerTrida, "Třída")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TrenerTrida)
+            @Html.ValidationMessageFor(model => model.TrenerTrida)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TrenerPlatnaDo, "Platná do")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TrenerPlatnaDo)
+            @Html.ValidationMessageFor(model => model.TrenerPlatnaDo)
         </div>
     </div>
 

@@ -56,41 +56,6 @@ namespace SlavojMVC4_1.Controllers
             }
             TryUpdateModel(clen, form ); 
             //.........................................................................................................................................................
-            var isAdresa = clen.IsAdresa(clen);
-            //if (isAdresa)
-            //{
-            //    //Adresa existuje musím validovat adresu
-            //    AdresaValidace(clen);
-            //}
-            //.........................................................................................................................................................
-            var isKontakt = IsKontakt(clen);
-            if (isKontakt)
-            {
-                KontaktValidace(clen);
-            }
-            //.........................................................................................................................................................
-            var isRegistrace = IsRegistrace(clen);
-            if (isRegistrace)
-            {
-                //Registrace existuje musím validovat registraci
-                RegistraceValidace(clen);
-            }
-            //.........................................................................................................................................................
-            var isRozhodci = IsRozhodci(clen);
-            if (isRozhodci)
-            {
-                //Rozhodci existuje musím validovat registraci
-                RegistraceValidace(clen);
-            }
-            //.........................................................................................................................................................
-            var isTrener = IsTrener(clen);
-            if (isTrener)
-            {
-                //Trener existuje musím validovat registraci
-                TrenerValidace(clen);
-            }
-
-            //.........................................................................................................................................................
             if (ModelState.IsValid)
             {
                 using (var db = new SlavojDBContainer())
@@ -126,25 +91,29 @@ namespace SlavojMVC4_1.Controllers
                     //db.Cleni.Attach(entity);
                     //db.Entry(entity).State = EntityState.Modified;
                     //.............................................................................................................
-                    if (isAdresa)
+                    if (clen.IsAdresa())
                         {
                         if (entity.Adresa == null)
                         {
                             entity.Adresa = new Adresa();
                             entity.Adresa.ClenId = entity.ClenId;
                             entity.Adresa.Ulice = clen.AdresaUlice;
-                            entity.Adresa.CisloPopisne = clen.AdresaCisloPopisne ?? default(int);
+                            if (clen.AdresaCisloPopisne != null)
+                                entity.Adresa.CisloPopisne = clen.AdresaCisloPopisne ?? default(int);
                             entity.Adresa.Obec = clen.AdresaObec;
-                            entity.Adresa.Psc = clen.AdresaPsc ?? default(int);
+                            if (clen.AdresaPsc != null)
+                                entity.Adresa.Psc = clen.AdresaPsc ?? default(int);
 
                             db.Adresy.Add(entity.Adresa);
                         }
                         else
                         {
                             entity.Adresa.Ulice = clen.AdresaUlice;
-                            entity.Adresa.CisloPopisne = clen.AdresaCisloPopisne ?? default(int);
+                            if (clen.AdresaCisloPopisne != null)
+                                entity.Adresa.CisloPopisne = clen.AdresaCisloPopisne ?? default(int);
                             entity.Adresa.Obec = clen.AdresaObec;
-                            entity.Adresa.Psc = clen.AdresaPsc ?? default(int);
+                            if (clen.AdresaPsc != null)
+                                entity.Adresa.Psc = clen.AdresaPsc ?? default(int);
 
                             //Nastaví všechna modifikovaná pole jako modifikovaná
                             SetModifyFields(db, entity.Adresa);
@@ -166,7 +135,7 @@ namespace SlavojMVC4_1.Controllers
                         }
                     }
                     //.............................................................................................................
-                    if (isKontakt)
+                    if (clen.IsKontakt())
                     {
                         if (entity.Kontakt == null)
                         {
@@ -201,21 +170,25 @@ namespace SlavojMVC4_1.Controllers
                         }
                     }
                     //.............................................................................................................
-                    if (isRegistrace)
+                    if (clen.IsRegistrace())
                     {
                         if (entity.Registrace == null)
                         {
                             entity.Registrace = new Registrace();
                             entity.Registrace.ClenId = entity.ClenId;
-                            entity.Registrace.CisloRegistrace = clen.RegistraceCisloRegistrace ?? default(int);
-                            entity.Registrace.PlatnaDo = clen.RegistracePlatnaDo ?? default(DateTime);
+                            if (clen.RegistraceCisloRegistrace != null)
+                                entity.Registrace.CisloRegistrace = clen.RegistraceCisloRegistrace ?? default(int);
+                            if (clen.RegistracePlatnaDo != null) 
+                                entity.Registrace.PlatnaDo = clen.RegistracePlatnaDo ?? default(DateTime);
 
                             db.Registraces.Add(entity.Registrace);
                         }
                         else
                         {
-                            entity.Registrace.CisloRegistrace = clen.RegistraceCisloRegistrace ?? default(int);
-                            entity.Registrace.PlatnaDo = clen.RegistracePlatnaDo ?? default(DateTime);
+                            if (clen.RegistraceCisloRegistrace != null)
+                                entity.Registrace.CisloRegistrace = clen.RegistraceCisloRegistrace ?? default(int);
+                            if (clen.RegistracePlatnaDo != null)
+                                entity.Registrace.PlatnaDo = clen.RegistracePlatnaDo ?? default(DateTime);
 
                             //Nastaví všechna modifikovaná pole jako modifikovaná
                             SetModifyFields(db, entity.Registrace);
@@ -234,7 +207,7 @@ namespace SlavojMVC4_1.Controllers
                         }
                     }
                     //.............................................................................................................
-                    if (isRozhodci)
+                    if (clen.IsRozhodci())
                     {
                         if (entity.Rozhodci == null)
                         {
@@ -242,7 +215,8 @@ namespace SlavojMVC4_1.Controllers
                             entity.Rozhodci.ClenId = entity.ClenId;
                             entity.Rozhodci.CisloRegistrace = clen.RozhodciCisloRegistrace;
                             entity.Rozhodci.Trida = clen.RozhodciTrida;
-                            entity.Rozhodci.PlatnaDo = clen.RozhodciPlatnaDo ?? default(DateTime);
+                            if (clen.RozhodciPlatnaDo != null)
+                                entity.Rozhodci.PlatnaDo = clen.RozhodciPlatnaDo ?? default(DateTime);
 
                             db.Rozhodcis.Add(entity.Rozhodci);
                         }
@@ -250,7 +224,8 @@ namespace SlavojMVC4_1.Controllers
                         {
                             entity.Rozhodci.CisloRegistrace = clen.RozhodciCisloRegistrace;
                             entity.Rozhodci.Trida = clen.RozhodciTrida;
-                            entity.Rozhodci.PlatnaDo = clen.RozhodciPlatnaDo ?? default(DateTime);
+                            if (clen.RozhodciPlatnaDo != null)
+                                entity.Rozhodci.PlatnaDo = clen.RozhodciPlatnaDo ?? default(DateTime);
 
                             //Nastaví všechna modifikovaná pole jako modifikovaná
                             SetModifyFields(db, entity.Rozhodci);
@@ -269,7 +244,7 @@ namespace SlavojMVC4_1.Controllers
                         }
                     }
                     //.............................................................................................................
-                    if (isTrener)
+                    if (clen.IsTrener())
                     {
                         if (entity.Trener == null)
                         {
@@ -277,7 +252,8 @@ namespace SlavojMVC4_1.Controllers
                             entity.Trener.ClenId = entity.ClenId;
                             entity.Trener.CisloRegistrace = clen.TrenerCisloRegistrace;
                             entity.Trener.Trida = clen.TrenerTrida;
-                            entity.Trener.PlatnaDo = clen.TrenerPlatnaDo ?? default(DateTime);
+                            if (clen.TrenerPlatnaDo != null)
+                                entity.Trener.PlatnaDo = clen.TrenerPlatnaDo ?? default(DateTime);
 
                             db.Treneri.Add(entity.Trener);
                         }
@@ -285,7 +261,8 @@ namespace SlavojMVC4_1.Controllers
                         {
                             entity.Trener.CisloRegistrace = clen.TrenerCisloRegistrace;
                             entity.Trener.Trida = clen.TrenerTrida;
-                            entity.Trener.PlatnaDo = clen.TrenerPlatnaDo ?? default(DateTime);
+                            if (clen.TrenerPlatnaDo != null)
+                                entity.Trener.PlatnaDo = clen.TrenerPlatnaDo ?? default(DateTime);
 
                             //Nastaví všechna modifikovaná pole jako modifikovaná
                             SetModifyFields(db, entity.Trener);
@@ -323,7 +300,12 @@ namespace SlavojMVC4_1.Controllers
                     {
                         var error = ex.EntityValidationErrors.First().ValidationErrors.First();
                         string propertyName = error.PropertyName;
-                        if (propertyName == "Obec") { propertyName = "Adresa" + error.PropertyName; }
+                        if (propertyName == "Ulice" || propertyName == "CisloPopisne" || propertyName == "Obec" || propertyName == "Psc") { propertyName = "Adresa" + error.PropertyName; }
+                        else if (propertyName == "Telefon" || propertyName == "Mail" || propertyName == "WWW") { propertyName = "Kontakt" + error.PropertyName; }
+                        else if (propertyName == "CisloRegistrace" || propertyName == "PlatnaDo") { propertyName = "Registrace" + error.PropertyName; }
+                        else if (propertyName == "CisloRegistrace" || propertyName == "Trida" || propertyName == "PlatnaDo") { propertyName = "Rozhodci" + error.PropertyName; }
+                        else if (propertyName == "CisloRegistrace" || propertyName == "Trida" || propertyName == "PlatnaDo") { propertyName = "Trener" + error.PropertyName; }
+
                         this.ModelState.AddModelError(propertyName, error.ErrorMessage);
                     }
 
@@ -345,50 +327,6 @@ namespace SlavojMVC4_1.Controllers
             //Perform model binding (fill the product properties and validate it).
             if (TryUpdateModel(clen))
             {
-                //.........................................................................................................................................................
-                var isClen = IsClen(clen);
-                if (isClen)
-                {
-                    //Je zaškrtnut člen a proto validuji
-                    ClenValidace(clen);
-                }
-                //.........................................................................................................................................................
-                var isAdresa = IsAdresa(clen);
-                if (isAdresa)
-                {
-                    //Adresa existuje musím validovat adresu
-                    AdresaValidace(clen);
-                }
-                //.........................................................................................................................................................
-                var isKontakt = IsKontakt(clen);
-                if (isKontakt)
-                {
-                    KontaktValidace(clen);
-                }
-                //.........................................................................................................................................................
-                var isRegistrace = IsRegistrace(clen);
-                if (isRegistrace)
-                {
-                    //Registrace existuje musím validovat registraci
-                    RegistraceValidace(clen);
-                }
-                //.........................................................................................................................................................
-                var isRozhodci = IsRozhodci(clen);
-                if (isRozhodci)
-                {
-                    //Rozhodci existuje musím validovat registraci
-                    RozhodciValidace(clen);
-                }
-                //.........................................................................................................................................................
-                var isTrener = IsTrener(clen);
-                if (isTrener)
-                {
-                    //Trener existuje musím validovat registraci
-                    TrenerValidace(clen);
-                }
-                
-                //.........................................................................................................................................................
-
                 if (ModelState.IsValid)
                 {
 
@@ -406,21 +344,23 @@ namespace SlavojMVC4_1.Controllers
                         // Add the entity
                         db.Cleni.Add(entity);
                         //.................................................................................................
-                        if (isAdresa)
+                        if (clen.IsAdresa())
                         {
                             if (entity.Adresa == null)
                             {
                                 entity.Adresa = new Adresa();
                             }
                             entity.Adresa.Ulice = clen.AdresaUlice;
-                            entity.Adresa.CisloPopisne = clen.AdresaCisloPopisne ?? default(int);
+                            if (clen.AdresaCisloPopisne != null)
+                                entity.Adresa.CisloPopisne = clen.AdresaCisloPopisne ?? default(int);
                             entity.Adresa.Obec = clen.AdresaObec;
-                            entity.Adresa.Psc = clen.AdresaPsc ?? default(int);
+                            if (clen.AdresaPsc != null)
+                                entity.Adresa.Psc = clen.AdresaPsc ?? default(int);
                             db.Adresy.Add(entity.Adresa);
 
                         }
                         //.................................................................................................
-                        if (isKontakt)
+                        if (clen.IsKontakt())
                         {
                             if (entity.Kontakt == null)
                             {
@@ -433,18 +373,21 @@ namespace SlavojMVC4_1.Controllers
 
                         }
                         //.................................................................................................
-                        if (isRegistrace)
+                        if (clen.IsRegistrace())
                         {
                             if (entity.Registrace == null)
                             {
                                 entity.Registrace = new Registrace();
                             }
-                            entity.Registrace.CisloRegistrace = clen.RegistraceCisloRegistrace ?? default(int);
-                            entity.Registrace.PlatnaDo = clen.RegistracePlatnaDo ?? default(DateTime);
+                            if (clen.RegistraceCisloRegistrace != null)
+                                entity.Registrace.CisloRegistrace = clen.RegistraceCisloRegistrace ?? default(int);
+                            if (clen.RegistracePlatnaDo != null)
+                                entity.Registrace.PlatnaDo = clen.RegistracePlatnaDo ?? default(DateTime);
+
                             db.Registraces.Add(entity.Registrace);
                         }
                         //.................................................................................................
-                        if (isRozhodci)
+                        if (clen.IsRozhodci())
                         {
                             if (entity.Rozhodci == null)
                             {
@@ -452,11 +395,12 @@ namespace SlavojMVC4_1.Controllers
                             }
                             entity.Rozhodci.CisloRegistrace = clen.RozhodciCisloRegistrace;
                             entity.Rozhodci.Trida = clen.RozhodciTrida;
-                            entity.Rozhodci.PlatnaDo = clen.RozhodciPlatnaDo ?? default(DateTime);
+                            if (clen.RozhodciPlatnaDo != null)
+                                entity.Rozhodci.PlatnaDo = clen.RozhodciPlatnaDo ?? default(DateTime);
                             db.Rozhodcis.Add(entity.Rozhodci);
                         }
                         //.................................................................................................
-                        if (isTrener)
+                        if (clen.IsTrener())
                         {
                             if (entity.Trener == null)
                             {
@@ -464,7 +408,8 @@ namespace SlavojMVC4_1.Controllers
                             }
                             entity.Trener.CisloRegistrace = clen.TrenerCisloRegistrace;
                             entity.Trener.Trida = clen.TrenerTrida;
-                            entity.Trener.PlatnaDo = clen.TrenerPlatnaDo ?? default(DateTime);
+                            if (clen.TrenerPlatnaDo != null)
+                                entity.Trener.PlatnaDo = clen.TrenerPlatnaDo ?? default(DateTime);
                             db.Treneri.Add(entity.Trener);
                         }
                         //.................................................................................................
@@ -493,113 +438,7 @@ namespace SlavojMVC4_1.Controllers
             return View(new GridModel(SessionCleniRepository.All()));
         }
 
-        private bool IsClen(EditableClen clen)
-        {
-            return ((clen.JeClen) || (clen.RodneCislo != null));
 
-        }
-
-        private void ClenValidace(EditableClen clen)
-        {
-            if (clen.RodneCislo == null)
-            {
-                ModelState.AddModelError("RodneCislo", "Pokud je člen, Rodné číslo musí být vyplněno.");
-            }
-        }
-
-
-
-        private bool IsAdresa(EditableClen clen)
-        {
-            return ((clen.JeClen) || (clen.AdresaUlice != null) || (clen.AdresaCisloPopisne != null) || (clen.AdresaObec != null) || (clen.AdresaPsc != null));
-
-        }
-
-        private void AdresaValidace(EditableClen clen)
-        {
-            if (clen.AdresaUlice == null)
-            {
-                ModelState.AddModelError("AdresaUlice", "Ulice musí být vyplněna.");
-            }
-            if (clen.AdresaCisloPopisne == null)
-            {
-                ModelState.AddModelError("AdresaCisloPopisne", "Číslo popisné musí být vyplněno.");
-            }
-            if (clen.AdresaObec == null)
-            {
-                ModelState.AddModelError("AdresaObec", "Obec musí být vyplněna.");
-            }
-            if (clen.AdresaPsc == null)
-            {
-                ModelState.AddModelError("AdresaPsc", "Psč musí být vyplněno.");
-            }
-        }
-
-        private bool IsKontakt(EditableClen clen)
-        {
-            return ((clen.KontaktMail != null) || (clen.KontaktTelefon != null) || (clen.KontaktWWW != null));
-
-        }
-
-        private void KontaktValidace(EditableClen clen)
-        {
-            //nevaliduji
-        }
-
-        private bool IsRegistrace(EditableClen clen)
-        {
-            return ((clen.RegistraceCisloRegistrace != null) || (clen.RegistracePlatnaDo != null));
-
-        }
-
-        private void RegistraceValidace(EditableClen clen)
-        {
-            if (clen.RegistraceCisloRegistrace == null)
-            {
-                ModelState.AddModelError("RegistraceCisloRegistrace", "Číslo registracve musí být vyplněno.");
-            }
-            if (clen.RegistracePlatnaDo == null)
-            {
-                ModelState.AddModelError("RegistracePlatnaDo", "Datum platnosti registrace musí být vyplněno.");
-            }
-        }
-
-
-        private bool IsRozhodci(EditableClen clen)
-        {
-            return ((clen.RozhodciCisloRegistrace != null) || (clen.RozhodciPlatnaDo != null));
-
-        }
-
-        private void RozhodciValidace(EditableClen clen)
-        {
-            if (clen.RozhodciCisloRegistrace == null)
-            {
-                ModelState.AddModelError("RozhodciCisloRegistrace", "Číslo registracve musí být vyplněno.");
-            }
-            if (clen.RozhodciPlatnaDo == null)
-            {
-                ModelState.AddModelError("RozhodciPlatnaDo", "Datum platnosti registrace musí být vyplněno.");
-            }
-        }
-
-        private bool IsTrener(EditableClen clen)
-        {
-            return ((clen.TrenerCisloRegistrace != null) || (clen.TrenerPlatnaDo != null));
-
-        }
-
-        private void TrenerValidace(EditableClen clen)
-        {
-            if (clen.TrenerCisloRegistrace == null)
-            {
-                ModelState.AddModelError("TrenerCisloRegistrace", "Číslo registracve musí být vyplněno.");
-            }
-            if (clen.TrenerPlatnaDo == null)
-            {
-                ModelState.AddModelError("TrenerPlatnaDo", "Datum platnosti registrace musí být vyplněno.");
-            }
-        }
 
 
         private void SetModifyFields(SlavojDBContainer db, object entity)
