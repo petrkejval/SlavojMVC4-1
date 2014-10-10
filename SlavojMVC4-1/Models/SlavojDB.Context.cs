@@ -39,10 +39,10 @@ namespace SlavojMVC4_1.Models
         public DbSet<Kuzelna> Kuzelnas { get; set; }
         public DbSet<Registrace> Registraces { get; set; }
         public DbSet<Rozhodci> Rozhodcis { get; set; }
-        public DbSet<Trener> Treneri { get; set; }
         public DbSet<Pohlavi> Pohlavis { get; set; }
         public DbSet<Druzstvo> Druzstva { get; set; }
         public DbSet<KategorieSouteze> KategorieSoutezi { get; set; }
         public DbSet<Soutez> Souteze { get; set; }
+        public DbSet<Trener> Treneri { get; set; }
     }
 }

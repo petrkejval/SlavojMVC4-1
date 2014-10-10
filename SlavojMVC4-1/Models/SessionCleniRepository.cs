@@ -51,7 +51,7 @@
                             RozhodciTrida = (clen.Rozhodci != null) ? clen.Rozhodci.Trida : null,
                             RozhodciPlatnaDo = (clen.Rozhodci != null) ? clen.Rozhodci.PlatnaDo : MyNullableDate,
 
-                            TrenerCisloRegistrace = (clen.Trener != null) ? clen.Trener.CisloRegistrace : null,
+                            TrenerCisloRegistrace = (clen. Trener != null) ? clen.Trener.CisloRegistrace : null,
                             TrenerTrida = (clen.Trener != null) ? clen.Trener.Trida : null,
                             TrenerPlatnaDo = (clen.Trener != null) ? clen.Trener.PlatnaDo : MyNullableDate
 

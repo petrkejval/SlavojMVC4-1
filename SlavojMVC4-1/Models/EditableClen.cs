@@ -35,7 +35,9 @@ namespace SlavojMVC4_1.Models
         public bool JeClen { get; set; }
 
         [Display(Name = "Rodné číslo")]
+        [RegularExpression(@"\d{6}/[0-9]{3,4}", ErrorMessage = "Rodné číslo musí být ve tvaru rrmmdd/nnn(n)")]
         [RequiredIf("JeClen", true, ErrorMessage = "Pokud Je člen zaškrtnuto, Rodné číslo musí být vyplněno.")]
+        [Key]
         public string RodneCislo { get; set; }
 
         [Display(Name = "Datum narození")]
@@ -94,6 +96,7 @@ namespace SlavojMVC4_1.Models
         //Registrace
         [Display(Name = "Registrace: Číslo registrace")]
         [RequiredIfNotEmpty("RegistracePlatnaDo", ErrorMessage = "Pokud je vyplněno Platná do, Číslo registrace musí být vyplněno.")]
+        [Key]
         public int? RegistraceCisloRegistrace { get; set; }
 
         [DataType(DataType.Date)]
@@ -106,6 +109,7 @@ namespace SlavojMVC4_1.Models
         [Display(Name = "Rozhodčí: Číslo registrace")]
         [RequiredIfNotEmpty("RozhodciPlatnaDo", ErrorMessage = "Pokud je vyplněno Platná do, Číslo registrace musí být vyplněno.")]
         [RequiredIfNotEmptya("RozhodciTrida", ErrorMessage = "Pokud je vyplněna Třída, Číslo registrace musí být vyplněno.")]
+        [Key]
         public string RozhodciCisloRegistrace { get; set; }
 
         [Display(Name = "Rozhodčí: Třída")]
@@ -124,6 +128,7 @@ namespace SlavojMVC4_1.Models
         [Display(Name = "Trenér: Číslo registrace")]
         [RequiredIfNotEmpty("TrenerPlatnaDo", ErrorMessage = "Pokud je vyplněno Platná do, Číslo registrace musí být vyplněno.")]
         [RequiredIfNotEmptya("TrenerTrida", ErrorMessage = "Pokud je vyplněna Třída, Číslo registrace musí být vyplněno.")]
+        [Key]
         public string TrenerCisloRegistrace { get; set; }
 
         [Display(Name = "Trenér: Třída")]

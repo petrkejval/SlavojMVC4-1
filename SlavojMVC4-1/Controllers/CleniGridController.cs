@@ -21,9 +21,10 @@ namespace SlavojMVC4_1.Controllers
     {
 
 
-        [SourceCodeFile("EditableProduct (model)", "~/Models/EditableProduct.cs")]
-        [SourceCodeFile("SessionProductRepository", "~/Models/SessionProductRepository.cs")]
-        [SourceCodeFile("Date.ascx (editor)", "~/Views/Shared/EditorTemplates/Date.ascx")]
+        [SourceCodeFile("EditableClen (model)", "~/Models/EditableClen.cs")]
+        [SourceCodeFile("SessionClenRepository", "~/Models/SessionClenRepository.cs")]
+        [SourceCodeFile("EditableClen.cshtml", "~/Views/Shared/EditorTemplates/EditableClen.cshtml")]
+        [SourceCodeFile("Date.cshtml (editor)", "~/Views/Shared/EditorTemplates/Date.cshtml")]
         public ActionResult EditingAjax()
         {
             return View();
@@ -50,21 +51,12 @@ namespace SlavojMVC4_1.Controllers
             if (form.AllKeys.FirstOrDefault(p => p.ToString() == "RegistracePlatnaDo") == null) form.Add("RegistracePlatnaDo", String.Empty);
             if (form.AllKeys.FirstOrDefault(p => p.ToString() == "RozhodciPlatnaDo") == null) form.Add("RozhodciPlatnaDo", String.Empty);
             if (form.AllKeys.FirstOrDefault(p => p.ToString() == "TrenerPlatnaDo") == null) form.Add("TrenerPlatnaDo", String.Empty);
-            foreach (var modelValue in ModelState.Values)
-            {
-                modelValue.Errors.Clear();
-            }
             TryUpdateModel(clen, form ); 
             //.........................................................................................................................................................
             if (ModelState.IsValid)
             {
                 using (var db = new SlavojDBContainer())
                 {
-
-                    //var entity = new SlavojMVC4_1.Models.Clen();
-                    //int asresyCount = db.Adresy.Count(p => p.ClenId == clen.ClenId);
-                    //int kontaktCount = db.Kontakty.Count(p => p.ClenId == clen.ClenId);
-                    //int registraceCount = db.Registraces.Count(p => p.ClenId == clen.ClenId);
 
                     var entity = db.Cleni.Find(clen.ClenId);
                     if (entity == null)
@@ -281,10 +273,10 @@ namespace SlavojMVC4_1.Controllers
                         }
                     }
                     //.................................................................................................................................
-                    try
+                    this.ModelState.Clear();
+                    EfStatus status = db.SaveChangesWithValidation();
+                    if (status.IsValid)
                     {
-                        db.SaveChanges();
-
                         //Nástin jak refreshovat záznam nebo důležitá pole hodnotami z databáze
                         //using (var dbnew = new SlavojDBContainer())
                         //{
@@ -296,17 +288,9 @@ namespace SlavojMVC4_1.Controllers
                         //}
                         SessionCleniRepository.Update(clen);
                     }
-                    catch (DbEntityValidationException ex)
+                    else
                     {
-                        var error = ex.EntityValidationErrors.First().ValidationErrors.First();
-                        string propertyName = error.PropertyName;
-                        if (propertyName == "Ulice" || propertyName == "CisloPopisne" || propertyName == "Obec" || propertyName == "Psc") { propertyName = "Adresa" + error.PropertyName; }
-                        else if (propertyName == "Telefon" || propertyName == "Mail" || propertyName == "WWW") { propertyName = "Kontakt" + error.PropertyName; }
-                        else if (propertyName == "CisloRegistrace" || propertyName == "PlatnaDo") { propertyName = "Registrace" + error.PropertyName; }
-                        else if (propertyName == "CisloRegistrace" || propertyName == "Trida" || propertyName == "PlatnaDo") { propertyName = "Rozhodci" + error.PropertyName; }
-                        else if (propertyName == "CisloRegistrace" || propertyName == "Trida" || propertyName == "PlatnaDo") { propertyName = "Trener" + error.PropertyName; }
-
-                        this.ModelState.AddModelError(propertyName, error.ErrorMessage);
+                        AddModelStateError(status);
                     }
 
                 }
@@ -314,6 +298,7 @@ namespace SlavojMVC4_1.Controllers
             }
             return View(new GridModel(SessionCleniRepository.All()));
         }
+
 
         [AcceptVerbs(HttpVerbs.Post)]
         [CultureAwareAction]
@@ -413,22 +398,18 @@ namespace SlavojMVC4_1.Controllers
                             db.Treneri.Add(entity.Trener);
                         }
                         //.................................................................................................
-
-                        try
+                        this.ModelState.Clear();
+                        EfStatus status = db.SaveChangesWithValidation();
+                        if (status.IsValid)
                         {
-                            // Insert the entity in the database
-                            db.SaveChanges();
-
-                            // Get the ProductID generated by the database
                             clen.ClenId = entity.ClenId;
-
                             SessionCleniRepository.Insert(clen);
                         }
-                        catch (DbEntityValidationException ex)
+                        else
                         {
-                            var error = ex.EntityValidationErrors.First().ValidationErrors.First();
-                            this.ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                            AddModelStateError(status);
                         }
+
                     }
 
                 }
@@ -436,22 +417,6 @@ namespace SlavojMVC4_1.Controllers
 
             //Rebind the grid
             return View(new GridModel(SessionCleniRepository.All()));
-        }
-
-
-
-
-        private void SetModifyFields(SlavojDBContainer db, object entity)
-        {
-
-            foreach (string n in db.Entry(entity).CurrentValues.PropertyNames)
-            {
-                if (!Equals(db.Entry(entity).OriginalValues[n], db.Entry(entity).CurrentValues[n]))
-                {
-                    //Nastaví, že je položka modifikována
-                    ((IObjectContextAdapter)db).ObjectContext.ObjectStateManager.GetObjectStateEntry(entity).SetModifiedProperty(n);
-                }
-            }
         }
 
 
@@ -474,10 +439,17 @@ namespace SlavojMVC4_1.Controllers
                         if (entity != null)
                         {
                             db.Cleni.Remove(entity);
-                            db.SaveChanges();
+                            this.ModelState.Clear();
+                            EfStatus status = db.SaveChangesWithValidation();
+                            if (!status.IsValid)
+                            {
+                                AddModelStateError(status);
+                            }
+                            else
+                            {
+                                SessionCleniRepository.Delete(clen);
+                            }
                         }
-                        //smažu v Listu
-                        SessionCleniRepository.Delete(clen);
                     }
                 }
             }
@@ -486,108 +458,64 @@ namespace SlavojMVC4_1.Controllers
             return View(new GridModel(SessionCleniRepository.All()));
         }
 
-        //[AcceptVerbs(HttpVerbs.Post)]
-        //[CultureAwareAction]
-        //[GridAction]
-        //public ActionResult _RegistraceDelete(int id)
-        //{
-        //    EditableClen clen = SessionCleniRepository.One(p => p.ClenId == id);
+        private void SetModifyFields(SlavojDBContainer db, object entity)
+        {
 
-        //    if (clen != null)
-        //    {
-        //        if (TryValidateModel(clen))
-        //        {
+            foreach (string n in db.Entry(entity).CurrentValues.PropertyNames)
+            {
+                if (!Equals(db.Entry(entity).OriginalValues[n], db.Entry(entity).CurrentValues[n]))
+                {
+                    //Nastaví, že je položka modifikována
+                    ((IObjectContextAdapter)db).ObjectContext.ObjectStateManager.GetObjectStateEntry(entity).SetModifiedProperty(n);
+                }
+            }
+        }
 
-        //            using (var db = new SlavojDBContainer())
-        //            {
+        private void AddModelStateError(EfStatus status)
+        {
+            //Naplnit chyb z db.Cleni do this.ModelState
+            for (int i = 0; i < status.EfErrors.Count; i++)
+            {
+                var error = status.EfErrors[i];
+                string propertyName = status.EfErrors[i].MemberNames.FirstOrDefault();
+                if (
+                    (status.EfErrors[i].MemberNames.Count() > 0)
+                    && (status.EfErrors[i].MemberNames.Contains("CisloRegistrace"))
+                    && (status.EfErrors[i].MemberNames.Contains("Registrace"))
+                    )
+                {
+                    propertyName = "RegistraceCisloRegistrace";
+                }
+                else if (
+                    (status.EfErrors[i].MemberNames.Count() > 0)
+                    && (status.EfErrors[i].MemberNames.Contains("CisloRegistrace"))
+                    && (status.EfErrors[i].MemberNames.Contains("Rozhodci"))
+                    )
+                {
+                    propertyName = "RozhodciCisloRegistrace";
+                }
+                else if (
+                    (status.EfErrors[i].MemberNames.Count() > 0)
+                    && (status.EfErrors[i].MemberNames.Contains("CisloRegistrace"))
+                    && (status.EfErrors[i].MemberNames.Contains("Trener"))
+                    )
+                {
+                    propertyName = "TrenerCisloRegistrace";
+                }
 
-        //                try
-        //                {
-        //                    Registrace registrace = db.Registraces.Find(clen.ClenId);
-        //                    if (registrace != null)
-        //                    {
-        //                        db.Registraces.Remove(registrace);
-        //                        db.SaveChanges();
-        //                        clen.RegistraceCisloRegistrace = MyNullableInt;
-        //                        clen.RegistraceDatumNarozeni = MyNullableDate;
-        //                        clen.RegistracePlatnaDo = MyNullableDate;
+                else if (propertyName == "Ulice" || propertyName == "CisloPopisne" || propertyName == "Obec" || propertyName == "Psc") { propertyName = "Adresa" + propertyName; }
+                else if (propertyName == "Telefon" || propertyName == "Mail" || propertyName == "WWW") { propertyName = "Kontakt" + propertyName; }
+                else if (propertyName == "CisloRegistrace" || propertyName == "PlatnaDo") { propertyName = "Registrace" + propertyName; }
+                else if (propertyName == "CisloRegistrace" || propertyName == "Trida" || propertyName == "PlatnaDo") { propertyName = "Rozhodci" + propertyName; }
+                else if (propertyName == "CisloRegistrace" || propertyName == "Trida" || propertyName == "PlatnaDo") { propertyName = "Trener" + propertyName; }
 
-        //                    }
-        //                    SessionCleniRepository.Update(clen);
-        //                }
-        //                catch (DbEntityValidationException ex)
-        //                {
-        //                    var error = ex.EntityValidationErrors.First().ValidationErrors.First();
-        //                    this.ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
-        //                }
-        //            }
-        //        }
+                propertyName = propertyName != null ? propertyName : string.Empty;
+                this.ModelState.AddModelError(propertyName, error.ErrorMessage);
 
-        //    }
-        //    //Rebind the grid
-        //    return View(new GridModel(SessionCleniRepository.All()));
-        //}
+            }
+
+        }
+
     }
 
-//    public static class GridControllerExtensions
-//    {
-//        public static RouteValueDictionary GridRouteValues(this ControllerBase controller)
-//        {
-//            var routeValues = new RouteValueDictionary();
-
-//            var values = GetParams(controller.ControllerContext.HttpContext.Request);
-
-//            foreach (string key in values.Keys)
-//            {
-//                if (key.EndsWith(GridUrlParameters.CurrentPage, StringComparison.OrdinalIgnoreCase) ||
-//                    key.EndsWith(GridUrlParameters.Filter, StringComparison.OrdinalIgnoreCase) ||
-//                    key.EndsWith(GridUrlParameters.OrderBy, StringComparison.OrdinalIgnoreCase) ||
-//                    key.EndsWith(GridUrlParameters.GroupBy, StringComparison.OrdinalIgnoreCase) ||
-//                    key.EndsWith(GridUrlParameters.PageSize, StringComparison.OrdinalIgnoreCase))
-//                {
-//                    routeValues[key] = values[key];
-//                }
-//            }
-
-//            return routeValues;
-//        }
-
-//#if MVC3
-//        private static IDictionary<string, object> GetParams(HttpRequestBase request)
-//        {
-//            var result = new Dictionary<string, object>();
-//            var unvalidated = request.Unvalidated();
-//            unvalidated.Form.CopyTo(result);
-//            unvalidated.QueryString.CopyTo(result);
-//            return result;
-//        }
-//#else
-//        private static IDictionary<string, object> GetParams(HttpRequestBase request)
-//        {
-//            var result = new Dictionary<string, object>();
-//            request.Params.CopyTo(result);
-//            return result;
-//        }
-//#endif
-//        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
-//        public static T ValueOf<T>(this ControllerBase controller, string key)
-//        {
-//            ValueProviderResult result;
-//            bool found = true;
-//#if MVC1
-//            found = controller.ValueProvider.TryGetValue(key, out result);
-////#endif
-////#if MVC2 || MVC3 || MVC4 || MVC5
-//#else
-//            result = controller.ValueProvider.GetValue(key);
-//            found = result != null;
-//#endif
-//            if (found)
-//            {
-//                return (T)result.ConvertTo(typeof(T), CultureInfo.CurrentCulture);
-//            }
-
-//            return default(T);
-//        }
-//    }
 }

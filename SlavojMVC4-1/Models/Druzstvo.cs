@@ -30,7 +30,7 @@ namespace SlavojMVC4_1.Models
     
         public virtual Clen Clen { get; set; }
         public virtual Soutez Soutez { get; set; }
-        public virtual Trener Trener { get; set; }
         public virtual ICollection<Clen> DruzstvoCleni { get; set; }
+        public virtual Trener Treneri { get; set; }
     }
 }

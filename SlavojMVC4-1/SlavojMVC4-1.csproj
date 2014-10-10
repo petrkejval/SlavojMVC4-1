@@ -486,6 +486,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SlavojDB.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SlavojDB.Context.partial.cs" />
     <Compile Include="Models\SlavojDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

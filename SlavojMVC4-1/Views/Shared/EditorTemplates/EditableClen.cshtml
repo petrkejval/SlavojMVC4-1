@@ -5,7 +5,7 @@
 }
 <fieldset class="clen-fields">
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    @*@Html.ValidationSummary(true)*@
 
     <div class="clen-osoba">
         <div class="clen-nadpis editor-label">
@@ -147,7 +147,7 @@
     </div>
     <div class="clen-trener">
         <div class="clen-nadpis editor-label">
-            Rozhodčí
+            Trenér
         </div>
         <div class="editor-label">
             @Html.LabelFor(model => model.TrenerCisloRegistrace, "Číslo")
@@ -172,7 +172,33 @@
             @Html.ValidationMessageFor(model => model.TrenerPlatnaDo)
         </div>
     </div>
+    <div>
+        @Html.ValidationMessage(String.Empty)
+
+    </div>
 
 
 </fieldset>
+<style type="text/css">
+    .t-grid .input-validation-error {
+        border-style: solid;
+    }
+
+    .t-input {
+        border-color: #e2e2e2;
+    }
+
+    .t-calendar {
+        color: black;
+    }
+
+    .t-content, .t-editable-area {
+        background-color: #87B9D6;
+    }
+
+    .t-footer {
+        background-color: #87B9D6;
+    }
+</style>
+
 
