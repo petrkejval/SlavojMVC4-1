@@ -16,7 +16,7 @@ namespace SlavojMVC4_1.Models
     {
         public Trener()
         {
-            this.Druzstva = new HashSet<Druzstvo>();
+            this.Druzstvas = new HashSet<Druzstvo>();
         }
     
         public int ClenId { get; set; }
@@ -25,6 +25,6 @@ namespace SlavojMVC4_1.Models
         public System.DateTime PlatnaDo { get; set; }
     
         public virtual Clen Cleni { get; set; }
-        public virtual ICollection<Druzstvo> Druzstva { get; set; }
+        public virtual ICollection<Druzstvo> Druzstvas { get; set; }
     }
 }

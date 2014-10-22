@@ -190,5 +190,17 @@ namespace SlavojMVC4_1.Extensions
         {
             return NameExpression.Replace(value, " $1").Trim();
         }
+
+#if MVC1 || MVC2
+        public static string Raw(this string value)
+        {
+            return value;
+        }
+#else
+        public static System.Web.IHtmlString Raw(this string value)
+        {
+            return new System.Web.HtmlString(value);
+        }
+#endif
     }
 }

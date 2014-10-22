@@ -32,6 +32,7 @@
                             RodneCislo = clen.RodneCislo,
                             DatumNarozeni = (clen.DatumNarozeni != null) ? clen.DatumNarozeni : MyNullableDate,
                             PohlaviId = (clen.PohlaviId != null) ? clen.PohlaviId : MyNullableInt,
+                            PohlaviNazev = (clen.PohlavyNazev != null) ? clen.PohlavyNazev : null,
                             Vek = (clen.Vek != null) ? clen.Vek : MyNullableInt,
                             
 
@@ -56,7 +57,9 @@
                             TrenerPlatnaDo = (clen.Trener != null) ? clen.Trener.PlatnaDo : MyNullableDate
 
                         }
-                    ).ToList();
+                    )
+                    .Where(w => w.ClenId != 0)
+                    .ToList();
 
             }
 
@@ -89,6 +92,7 @@
                 target.RodneCislo = clen.RodneCislo;
                 target.DatumNarozeni = clen.DatumNarozeni;
                 target.PohlaviId = clen.PohlaviId;
+                target.PohlaviNazev = clen.PohlaviNazev;
                 target.Vek = clen.Vek;
 
                 target.AdresaUlice = clen.AdresaUlice;

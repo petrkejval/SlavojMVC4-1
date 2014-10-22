@@ -212,6 +212,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Nastaveni\DruzstvaGridController.cs" />
+    <Compile Include="Controllers\Nastaveni\KategorieSouteziGridController.cs" />
+    <Compile Include="Controllers\Nastaveni\NastaveniController.cs" />
+    <Compile Include="Controllers\Nastaveni\SoutezeGridController.cs" />
+    <Compile Include="Extensions\HtmlHelpersExtensions.cs" />
     <Compile Include="Filters\ConditionalValidationAttribute.cs" />
     <Compile Include="ModelBinders\DateTimeModelBinder.cs" />
     <Compile Include="ModelBinders\DecimalModelBinder.cs" />
@@ -416,8 +421,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CleniController.cs" />
-    <Compile Include="Controllers\CleniGridController.cs" />
+    <Compile Include="Controllers\Nastaveni\CleniGridController.cs" />
     <Compile Include="Controllers\ComboBoxController.cs" />
     <Compile Include="Controllers\DruzstvaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -454,10 +458,18 @@
     <Compile Include="Models\CleniRole.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DruzstvaClenEditable.cs" />
+    <Compile Include="Models\DruzstvaCleni.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DruzstvaClenSessionRepository.cs" />
     <Compile Include="Models\Druzstvo.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EditableClen.cs" />
+    <Compile Include="Models\DruzstvoEditable.cs" />
+    <Compile Include="Models\EditableKategorieSouteze.cs" />
+    <Compile Include="Models\EditableSoutez.cs" />
     <Compile Include="Models\Kategorie.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
@@ -467,20 +479,19 @@
     <Compile Include="Models\Kontakt.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Pohlavi.cs">
-      <DependentUpon>SlavojDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Registrace.partial.cs" />
     <Compile Include="Models\Kuzelna.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Registrace.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Registrace.partial.cs" />
     <Compile Include="Models\Rozhodci.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SessionCleniRepository.cs" />
+    <Compile Include="Models\SessionKategorieSoutezeRepository.cs" />
+    <Compile Include="Models\SessionSoutezeRepository.cs" />
     <Compile Include="Models\SlavojDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -497,6 +508,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SlavojDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DruzstvaSessionRepository.cs" />
     <Compile Include="Models\Soutez.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
@@ -1313,14 +1325,13 @@
     <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
-    <Content Include="Views\Cleni\Index.cshtml" />
-    <Content Include="Views\Cleni\Details.cshtml" />
-    <Content Include="Views\Cleni\Create.cshtml" />
-    <Content Include="Views\Cleni\Edit.cshtml" />
-    <Content Include="Views\Cleni\Delete.cshtml" />
+    <Content Include="Views\Nastaveni\Cleni.cshtml" />
     <Content Include="Views\Druzstva\DorostB.cshtml" />
     <Content Include="Views\Druzstva\ZaciB.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EditableClen.cshtml" />
+    <Content Include="Views\Nastaveni\KategorieSoutezi.cshtml" />
+    <Content Include="Views\Nastaveni\Souteze.cshtml" />
+    <Content Include="Views\Nastaveni\Druzstva.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -1331,6 +1342,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\themes\base\minified\" />
+    <Folder Include="Views\DruzstvaGrid\" />
+    <Folder Include="Views\KategorieSouteziGrid\" />
+    <Folder Include="Views\Souteze\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.zh-CN.resx">

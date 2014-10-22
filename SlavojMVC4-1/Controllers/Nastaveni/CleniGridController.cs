@@ -23,8 +23,8 @@ namespace SlavojMVC4_1.Controllers
 
         [SourceCodeFile("EditableClen (model)", "~/Models/EditableClen.cs")]
         [SourceCodeFile("SessionClenRepository", "~/Models/SessionClenRepository.cs")]
-        [SourceCodeFile("EditableClen.cshtml", "~/Views/Shared/EditorTemplates/EditableClen.cshtml")]
         [SourceCodeFile("Date.cshtml (editor)", "~/Views/Shared/EditorTemplates/Date.cshtml")]
+        [SourceCodeFile("EditableClen.cshtml", "~/Views/Shared/EditorTemplates/EditableClen.cshtml")]
         public ActionResult EditingAjax()
         {
             return View();
@@ -74,7 +74,7 @@ namespace SlavojMVC4_1.Controllers
 
 
                     //Nastaví všechna modifikovaná pole jako modifikovaná
-                    SetModifyFields(db, entity);
+                    db.SetModifyFields(entity);
 
                     //Ukázka jak lze také nastavit, že je pole modifikované
                     //db.Entry(entity).Property(p => p.Prijmeni).IsModified = true;
@@ -108,7 +108,7 @@ namespace SlavojMVC4_1.Controllers
                                 entity.Adresa.Psc = clen.AdresaPsc ?? default(int);
 
                             //Nastaví všechna modifikovaná pole jako modifikovaná
-                            SetModifyFields(db, entity.Adresa);
+                            db.SetModifyFields(entity.Adresa);
 
                             //Nepoužiju Attach protože pracuji s objektem v databázi a Attach nastavu všem položkám v objektu entity.Adresa State na Unchanged
                             //db.Adresy.Attach(entity.Adresa);
@@ -146,7 +146,7 @@ namespace SlavojMVC4_1.Controllers
                             entity.Kontakt.WWW = clen.KontaktWWW;
 
                             //Nastaví všechna modifikovaná pole jako modifikovaná
-                            SetModifyFields(db, entity.Kontakt);
+                            db.SetModifyFields(entity.Kontakt);
 
                             //Nepoužiju Attach protože pracuji s objektem v databázi a Attach nastavu všem položkám v objektu entity.Kontakt State na Unchanged
                             //db.Kontakty.Attach(entity.Kontakt);
@@ -183,7 +183,7 @@ namespace SlavojMVC4_1.Controllers
                                 entity.Registrace.PlatnaDo = clen.RegistracePlatnaDo ?? default(DateTime);
 
                             //Nastaví všechna modifikovaná pole jako modifikovaná
-                            SetModifyFields(db, entity.Registrace);
+                            db.SetModifyFields(entity.Registrace);
 
                             //Nepoužiju Attach protože pracuji s objektem v databázi a Attach nastavu všem položkám v objektu entity.Registrace State na Unchanged
                             //db.Registraces.Attach(entity.Registrace);
@@ -220,7 +220,7 @@ namespace SlavojMVC4_1.Controllers
                                 entity.Rozhodci.PlatnaDo = clen.RozhodciPlatnaDo ?? default(DateTime);
 
                             //Nastaví všechna modifikovaná pole jako modifikovaná
-                            SetModifyFields(db, entity.Rozhodci);
+                            db.SetModifyFields(entity.Rozhodci);
 
                             //Nepoužiju Attach protože pracuji s objektem v databázi a Attach nastavu všem položkám v objektu entity.Rozhodci State na Unchanged
                             //db.Rozhodcis.Attach(entity.Rozhodci);
@@ -257,7 +257,7 @@ namespace SlavojMVC4_1.Controllers
                                 entity.Trener.PlatnaDo = clen.TrenerPlatnaDo ?? default(DateTime);
 
                             //Nastaví všechna modifikovaná pole jako modifikovaná
-                            SetModifyFields(db, entity.Trener);
+                            db.SetModifyFields(entity.Trener);
 
                             //Nepoužiju Attach protože pracuji s objektem v databázi a Attach nastavu všem položkám v objektu entity.Trener State na Unchanged
                             //db.Treners.Attach(entity.Trener);
@@ -277,15 +277,10 @@ namespace SlavojMVC4_1.Controllers
                     EfStatus status = db.SaveChangesWithValidation();
                     if (status.IsValid)
                     {
-                        //Nástin jak refreshovat záznam nebo důležitá pole hodnotami z databáze
-                        //using (var dbnew = new SlavojDBContainer())
-                        //{
-                        //    var clenDb = dbnew.Cleni.Find(clen.ClenId);
-                        //    if (clenDb != null)
-                        //    {
-                        //        clen.TitulZa = clenDb.TitulZa;
-                        //    }
-                        //}
+                        clen.PohlaviId = entity.PohlaviId;
+                        clen.PohlaviNazev = entity.PohlavyNazev;
+                        clen.Vek = entity.Vek;
+                        clen.DatumNarozeni = entity.DatumNarozeni;
                         SessionCleniRepository.Update(clen);
                     }
                     else
@@ -403,6 +398,10 @@ namespace SlavojMVC4_1.Controllers
                         if (status.IsValid)
                         {
                             clen.ClenId = entity.ClenId;
+                            clen.PohlaviId = entity.PohlaviId;
+                            clen.PohlaviNazev = entity.PohlavyNazev;
+                            clen.Vek = entity.Vek;
+                            clen.DatumNarozeni = entity.DatumNarozeni;
                             SessionCleniRepository.Insert(clen);
                         }
                         else
@@ -458,18 +457,18 @@ namespace SlavojMVC4_1.Controllers
             return View(new GridModel(SessionCleniRepository.All()));
         }
 
-        private void SetModifyFields(SlavojDBContainer db, object entity)
-        {
+        //private void SetModifyFields(SlavojDBContainer db, object entity)
+        //{
 
-            foreach (string n in db.Entry(entity).CurrentValues.PropertyNames)
-            {
-                if (!Equals(db.Entry(entity).OriginalValues[n], db.Entry(entity).CurrentValues[n]))
-                {
-                    //Nastaví, že je položka modifikována
-                    ((IObjectContextAdapter)db).ObjectContext.ObjectStateManager.GetObjectStateEntry(entity).SetModifiedProperty(n);
-                }
-            }
-        }
+        //    foreach (string n in db.Entry(entity).CurrentValues.PropertyNames)
+        //    {
+        //        if (!Equals(db.Entry(entity).OriginalValues[n], db.Entry(entity).CurrentValues[n]))
+        //        {
+        //            //Nastaví, že je položka modifikována
+        //            ((IObjectContextAdapter)db).ObjectContext.ObjectStateManager.GetObjectStateEntry(entity).SetModifiedProperty(n);
+        //        }
+        //    }
+        //}
 
         private void AddModelStateError(EfStatus status)
         {

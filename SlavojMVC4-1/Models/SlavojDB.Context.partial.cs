@@ -68,6 +68,12 @@
                         result.Add(new ValidationResult("Číslo registrace už existuje.", propertyName));
                         break;
                     }
+                    else if (errorMessage.IndexOf("IX_DruzstvaCleniDruzstvoIdClenId") > -1)
+                    {
+                        propertyName[0] = "ClenId";
+                        result.Add(new ValidationResult("Zadaný člen už existuje.", propertyName));
+                        break;
+                    }
                     else
                     {
                         result.Add(new ValidationResult(errorMessage));
@@ -123,6 +129,18 @@
             return status;
         }
 
+        public void SetModifyFields(object entity)
+        {
+
+            foreach (string n in this.Entry(entity).CurrentValues.PropertyNames)
+            {
+                if (!Equals(this.Entry(entity).OriginalValues[n], this.Entry(entity).CurrentValues[n]))
+                {
+                    //Nastaví, že je položka modifikována
+                    ((IObjectContextAdapter)this).ObjectContext.ObjectStateManager.GetObjectStateEntry(entity).SetModifiedProperty(n);
+                }
+            }
+        }
 
     }
 

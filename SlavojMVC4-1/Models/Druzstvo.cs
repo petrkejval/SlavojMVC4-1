@@ -16,21 +16,21 @@ namespace SlavojMVC4_1.Models
     {
         public Druzstvo()
         {
-            this.DruzstvoCleni = new HashSet<Clen>();
+            this.DruzstvoCleni = new HashSet<DruzstvaCleni>();
         }
     
         public int DruzstvoId { get; set; }
         public string Nazev { get; set; }
         public string Pismeno { get; set; }
-        public Nullable<int> SoutezId { get; set; }
+        public int SoutezId { get; set; }
         public bool Existuje { get; set; }
-        public Nullable<int> VedouciId { get; set; }
-        public Nullable<int> TrenerId { get; set; }
+        public int VedouciId { get; set; }
+        public int TrenerId { get; set; }
         public string Popis { get; set; }
     
-        public virtual Clen Clen { get; set; }
+        public virtual Clen Vedouci { get; set; }
         public virtual Soutez Soutez { get; set; }
-        public virtual ICollection<Clen> DruzstvoCleni { get; set; }
-        public virtual Trener Treneri { get; set; }
+        public virtual Trener Trener { get; set; }
+        public virtual ICollection<DruzstvaCleni> DruzstvoCleni { get; set; }
     }
 }

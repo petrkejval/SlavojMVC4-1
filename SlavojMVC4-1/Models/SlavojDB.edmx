@@ -40,6 +40,7 @@
           <Property Name="RodneCislo" Type="varchar" MaxLength="11" />
           <Property Name="DatumNarozeni" Type="datetime" StoreGeneratedPattern="Computed" />
           <Property Name="PohlaviId" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="PohlavyNazev" Type="varchar" MaxLength="4" StoreGeneratedPattern="Computed" />
           <Property Name="Vek" Type="int" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="CleniInRoles">
@@ -61,20 +62,20 @@
           <Key>
             <PropertyRef Name="DruzstvoId" />
           </Key>
-          <Property Name="DruzstvoId" Type="int" Nullable="false" />
+          <Property Name="DruzstvoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nazev" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Pismeno" Type="varchar" MaxLength="1" />
-          <Property Name="SoutezId" Type="int" />
+          <Property Name="SoutezId" Type="int" Nullable="false" />
           <Property Name="Existuje" Type="bit" Nullable="false" />
-          <Property Name="VedouciId" Type="int" />
-          <Property Name="TrenerId" Type="int" />
+          <Property Name="VedouciId" Type="int" Nullable="false" />
+          <Property Name="TrenerId" Type="int" Nullable="false" />
           <Property Name="Popis" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="DruzstvaCleni">
           <Key>
-            <PropertyRef Name="DruzstvoId" />
-            <PropertyRef Name="ClenId" />
+            <PropertyRef Name="DruzstvoClenId" />
           </Key>
+          <Property Name="DruzstvoClenId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DruzstvoId" Type="int" Nullable="false" />
           <Property Name="ClenId" Type="int" Nullable="false" />
         </EntityType>
@@ -89,7 +90,7 @@
           <Key>
             <PropertyRef Name="KategorieSoutezeId" />
           </Key>
-          <Property Name="KategorieSoutezeId" Type="int" Nullable="false" />
+          <Property Name="KategorieSoutezeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nazev" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Kontakty">
@@ -114,13 +115,6 @@
           <Property Name="GPS" Type="nvarchar" MaxLength="50" />
           <Property Name="KoladacePlatnaDo" Type="datetime2" Precision="7" />
         </EntityType>
-        <EntityType Name="Pohlavi">
-          <Key>
-            <PropertyRef Name="PohlaviId" />
-          </Key>
-          <Property Name="PohlaviId" Type="int" Nullable="false" />
-          <Property Name="Nazev" Type="varchar" MaxLength="8" Nullable="false" />
-        </EntityType>
         <EntityType Name="Registrace">
           <Key>
             <PropertyRef Name="ClenId" />
@@ -142,9 +136,10 @@
           <Key>
             <PropertyRef Name="SoutezId" />
           </Key>
-          <Property Name="SoutezId" Type="int" Nullable="false" />
+          <Property Name="SoutezId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nazev" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="KategorieSoutezeId" Type="int" Nullable="false" />
+          <Property Name="MinPocetHracu" Type="int" Nullable="false" />
           <Property Name="PocetNutnychDrah" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Treneri">
@@ -274,7 +269,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Druzstva_Souteze">
-          <End Role="Souteze" Type="Self.Souteze" Multiplicity="0..1" />
+          <End Role="Souteze" Type="Self.Souteze" Multiplicity="1" />
           <End Role="Druzstva" Type="Self.Druzstva" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Souteze">
@@ -286,7 +281,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Druzstva_Treneri">
-          <End Role="Treneri" Type="Self.Treneri" Multiplicity="0..1" />
+          <End Role="Treneri" Type="Self.Treneri" Multiplicity="1" />
           <End Role="Druzstva" Type="Self.Druzstva" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Treneri">
@@ -297,10 +292,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DruzstvaCleniClenId_CleniClenId">
-          <End Role="Cleni" Type="Self.Cleni" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="FK_DruzstvaCleni_Cleni">
+          <End Role="Cleni" Type="Self.Cleni" Multiplicity="1" />
           <End Role="DruzstvaCleni" Type="Self.DruzstvaCleni" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cleni">
@@ -311,7 +304,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DruzstvaCleniDruzstvoId_DruzstvaDruzstvoId">
+        <Association Name="FK_DruzstvaCleni_Druzstva">
           <End Role="Druzstva" Type="Self.Druzstva" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -326,7 +319,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DruzstvaVedouciId_CleniClenId">
-          <End Role="Cleni" Type="Self.Cleni" Multiplicity="0..1" />
+          <End Role="Cleni" Type="Self.Cleni" Multiplicity="1" />
           <End Role="Druzstva" Type="Self.Druzstva" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cleni">
@@ -477,7 +470,6 @@
           <EntitySet Name="KategorieSoutezi" EntityType="Self.KategorieSoutezi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kontakty" EntityType="Self.Kontakty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kuzelna" EntityType="Self.Kuzelna" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Pohlavi" EntityType="Self.Pohlavi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Registrace" EntityType="Self.Registrace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rozhodci" EntityType="Self.Rozhodci" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Souteze" EntityType="Self.Souteze" Schema="dbo" store:Type="Tables" />
@@ -516,11 +508,11 @@
             <End Role="Treneri" EntitySet="Treneri" />
             <End Role="Druzstva" EntitySet="Druzstva" />
           </AssociationSet>
-          <AssociationSet Name="FK_DruzstvaCleniClenId_CleniClenId" Association="Self.FK_DruzstvaCleniClenId_CleniClenId">
+          <AssociationSet Name="FK_DruzstvaCleni_Cleni" Association="Self.FK_DruzstvaCleni_Cleni">
             <End Role="Cleni" EntitySet="Cleni" />
             <End Role="DruzstvaCleni" EntitySet="DruzstvaCleni" />
           </AssociationSet>
-          <AssociationSet Name="FK_DruzstvaCleniDruzstvoId_DruzstvaDruzstvoId" Association="Self.FK_DruzstvaCleniDruzstvoId_DruzstvaDruzstvoId">
+          <AssociationSet Name="FK_DruzstvaCleni_Druzstva" Association="Self.FK_DruzstvaCleni_Druzstva">
             <End Role="Druzstva" EntitySet="Druzstva" />
             <End Role="DruzstvaCleni" EntitySet="DruzstvaCleni" />
           </AssociationSet>
@@ -632,34 +624,38 @@
             <End Role="CleniRole" EntitySet="CleniRoles" />
             <End Role="CleniInRole" EntitySet="CleniInRoles" />
           </AssociationSet>
-          <EntitySet Name="Pohlavis" EntityType="SlavojDB.Pohlavi" />
-          <EntitySet Name="Druzstva" EntityType="SlavojDB.Druzstvo" />
           <EntitySet Name="KategorieSoutezi" EntityType="SlavojDB.KategorieSouteze" />
           <EntitySet Name="Souteze" EntityType="SlavojDB.Soutez" />
-          <AssociationSet Name="FK_DruzstvaVedouciId_CleniClenId" Association="SlavojDB.FK_DruzstvaVedouciId_CleniClenId">
-            <End Role="Clen" EntitySet="Cleni" />
-            <End Role="Druzstva" EntitySet="Druzstva" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Druzstva_Souteze" Association="SlavojDB.FK_Druzstva_Souteze">
-            <End Role="Souteze" EntitySet="Souteze" />
-            <End Role="Druzstva" EntitySet="Druzstva" />
-          </AssociationSet>
           <AssociationSet Name="FK_Souteze_KategorieSoutezi1" Association="SlavojDB.FK_Souteze_KategorieSoutezi1">
             <End Role="KategorieSoutezi" EntitySet="KategorieSoutezi" />
             <End Role="Souteze" EntitySet="Souteze" />
-          </AssociationSet>
-          <AssociationSet Name="DruzstvaCleni" Association="SlavojDB.DruzstvaCleni">
-            <End Role="Clen" EntitySet="Cleni" />
-            <End Role="Druzstva" EntitySet="Druzstva" />
           </AssociationSet>
           <EntitySet Name="Treneri" EntityType="SlavojDB.Trener" />
           <AssociationSet Name="FK_Treneri_Cleni" Association="SlavojDB.FK_Treneri_Cleni">
             <End Role="Clen" EntitySet="Cleni" />
             <End Role="Treneri" EntitySet="Treneri" />
           </AssociationSet>
+          <EntitySet Name="Druzstva" EntityType="SlavojDB.Druzstvo" />
+          <EntitySet Name="DruzstvoClen" EntityType="SlavojDB.DruzstvaCleni" />
+          <AssociationSet Name="FK_DruzstvaCleni_Cleni" Association="SlavojDB.FK_DruzstvaCleni_Cleni">
+            <End Role="Clen" EntitySet="Cleni" />
+            <End Role="DruzstvaCleni" EntitySet="DruzstvoClen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DruzstvaVedouciId_CleniClenId" Association="SlavojDB.FK_DruzstvaVedouciId_CleniClenId">
+            <End Role="Clen" EntitySet="Cleni" />
+            <End Role="Druzstva" EntitySet="Druzstva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Druzstva_Souteze" Association="SlavojDB.FK_Druzstva_Souteze">
+            <End Role="Soutez" EntitySet="Souteze" />
+            <End Role="Druzstva" EntitySet="Druzstva" />
+          </AssociationSet>
           <AssociationSet Name="FK_Druzstva_Treneri" Association="SlavojDB.FK_Druzstva_Treneri">
-            <End Role="Treneri" EntitySet="Treneri" />
-            <End Role="Druzstvo" EntitySet="Druzstva" />
+            <End Role="Trener" EntitySet="Treneri" />
+            <End Role="Druzstva" EntitySet="Druzstva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DruzstvaCleni_Druzstva" Association="SlavojDB.FK_DruzstvaCleni_Druzstva">
+            <End Role="Druzstva" EntitySet="Druzstva" />
+            <End Role="DruzstvaCleni" EntitySet="DruzstvoClen" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="UserProfile">
@@ -789,9 +785,10 @@
           <Property Type="DateTime" Name="DatumNarozeni" annotation:StoreGeneratedPattern="Computed" Precision="3" />
           <Property Type="Int32" Name="PohlaviId" annotation:StoreGeneratedPattern="Computed" />
           <Property Type="Int32" Name="Vek" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="Druzstva" Relationship="SlavojDB.FK_DruzstvaVedouciId_CleniClenId" FromRole="Clen" ToRole="Druzstva" />
-          <NavigationProperty Name="Druzstva1" Relationship="SlavojDB.DruzstvaCleni" FromRole="Clen" ToRole="Druzstva" />
           <NavigationProperty Name="Trener" Relationship="SlavojDB.FK_Treneri_Cleni" FromRole="Clen" ToRole="Treneri" />
+          <NavigationProperty Name="DruzstvaCleni" Relationship="SlavojDB.FK_DruzstvaCleni_Cleni" FromRole="Clen" ToRole="DruzstvaCleni" />
+          <NavigationProperty Name="Druzstva" Relationship="SlavojDB.FK_DruzstvaVedouciId_CleniClenId" FromRole="Clen" ToRole="Druzstva" />
+          <Property Name="PohlavyNazev" Type="String" MaxLength="4" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
           </EntityType>
         <Association Name="UserClen">
           <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="*" />
@@ -948,35 +945,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Pohlavi">
-          <Key>
-            <PropertyRef Name="PohlaviId" />
-          </Key>
-          <Property Type="Int32" Name="PohlaviId" Nullable="false" />
-          <Property Type="String" Name="Nazev" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Druzstvo">
-          <Key>
-            <PropertyRef Name="DruzstvoId" />
-          </Key>
-          <Property Type="Int32" Name="DruzstvoId" Nullable="false" />
-          <Property Type="String" Name="Nazev" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Pismeno" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="SoutezId" />
-          <Property Type="Boolean" Name="Existuje" Nullable="false" />
-          <Property Type="Int32" Name="VedouciId" />
-          <Property Type="Int32" Name="TrenerId" />
-          <Property Type="String" Name="Popis" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Clen" Relationship="SlavojDB.FK_DruzstvaVedouciId_CleniClenId" FromRole="Druzstva" ToRole="Clen" />
-          <NavigationProperty Name="Soutez" Relationship="SlavojDB.FK_Druzstva_Souteze" FromRole="Druzstva" ToRole="Souteze" />
-          <NavigationProperty Name="DruzstvoCleni" Relationship="SlavojDB.DruzstvaCleni" FromRole="Druzstva" ToRole="Clen" />
-          <NavigationProperty Name="Treneri" Relationship="SlavojDB.FK_Druzstva_Treneri" FromRole="Druzstvo" ToRole="Treneri" />
-        </EntityType>
         <EntityType Name="KategorieSouteze">
           <Key>
             <PropertyRef Name="KategorieSoutezeId" />
           </Key>
-          <Property Type="Int32" Name="KategorieSoutezeId" Nullable="false" />
+          <Property Type="Int32" Name="KategorieSoutezeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Nazev" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Souteze" Relationship="SlavojDB.FK_Souteze_KategorieSoutezi1" FromRole="KategorieSoutezi" ToRole="Souteze" />
         </EntityType>
@@ -984,37 +957,14 @@
           <Key>
             <PropertyRef Name="SoutezId" />
           </Key>
-          <Property Type="Int32" Name="SoutezId" Nullable="false" />
+          <Property Type="Int32" Name="SoutezId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Nazev" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="KategorieSoutezeId" Nullable="false" />
           <Property Type="Int32" Name="PocetNutnychDrah" Nullable="false" />
-          <NavigationProperty Name="Druzstva" Relationship="SlavojDB.FK_Druzstva_Souteze" FromRole="Souteze" ToRole="Druzstva" />
           <NavigationProperty Name="KategorieSouteze" Relationship="SlavojDB.FK_Souteze_KategorieSoutezi1" FromRole="Souteze" ToRole="KategorieSoutezi" />
+          <NavigationProperty Name="Druzstvas" Relationship="SlavojDB.FK_Druzstva_Souteze" FromRole="Soutez" ToRole="Druzstva" />
+          <Property Name="MinPocetHracu" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="FK_DruzstvaVedouciId_CleniClenId">
-          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="0..1" />
-          <End Type="SlavojDB.Druzstvo" Role="Druzstva" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clen">
-              <PropertyRef Name="ClenId" />
-            </Principal>
-            <Dependent Role="Druzstva">
-              <PropertyRef Name="VedouciId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Druzstva_Souteze">
-          <End Type="SlavojDB.Soutez" Role="Souteze" Multiplicity="0..1" />
-          <End Type="SlavojDB.Druzstvo" Role="Druzstva" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Souteze">
-              <PropertyRef Name="SoutezId" />
-            </Principal>
-            <Dependent Role="Druzstva">
-              <PropertyRef Name="SoutezId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Souteze_KategorieSoutezi1">
           <End Type="SlavojDB.KategorieSouteze" Role="KategorieSoutezi" Multiplicity="1" />
           <End Type="SlavojDB.Soutez" Role="Souteze" Multiplicity="*" />
@@ -1027,10 +977,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="DruzstvaCleni">
-          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="*" />
-          <End Type="SlavojDB.Druzstvo" Role="Druzstva" Multiplicity="*" />
-        </Association>
         <EntityType Name="Trener">
           <Key>
             <PropertyRef Name="ClenId" />
@@ -1040,7 +986,7 @@
           <Property Name="Trida" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PlatnaDo" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="Cleni" Relationship="SlavojDB.FK_Treneri_Cleni" FromRole="Treneri" ToRole="Clen" />
-          <NavigationProperty Name="Druzstva" Relationship="SlavojDB.FK_Druzstva_Treneri" FromRole="Treneri" ToRole="Druzstvo" />
+          <NavigationProperty Name="Druzstvas" Relationship="SlavojDB.FK_Druzstva_Treneri" FromRole="Trener" ToRole="Druzstva" />
         </EntityType>
         <Association Name="FK_Treneri_Cleni">
           <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="1">
@@ -1056,15 +1002,92 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Druzstva_Treneri">
-          <End Type="SlavojDB.Trener" Role="Treneri" Multiplicity="0..1" />
-          <End Type="SlavojDB.Druzstvo" Role="Druzstvo" Multiplicity="*" />
+        <EntityType Name="Druzstvo">
+          <Key>
+            <PropertyRef Name="DruzstvoId" />
+          </Key>
+          <Property Name="DruzstvoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazev" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pismeno" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="SoutezId" Type="Int32" Nullable="false" />
+          <Property Name="Existuje" Type="Boolean" Nullable="false" />
+          <Property Name="VedouciId" Type="Int32" Nullable="false" />
+          <Property Name="TrenerId" Type="Int32" Nullable="false" />
+          <Property Name="Popis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vedouci" Relationship="SlavojDB.FK_DruzstvaVedouciId_CleniClenId" FromRole="Druzstva" ToRole="Clen" />
+          <NavigationProperty Name="Soutez" Relationship="SlavojDB.FK_Druzstva_Souteze" FromRole="Druzstva" ToRole="Soutez" />
+          <NavigationProperty Name="Trener" Relationship="SlavojDB.FK_Druzstva_Treneri" FromRole="Druzstva" ToRole="Trener" />
+          <NavigationProperty Name="DruzstvoCleni" Relationship="SlavojDB.FK_DruzstvaCleni_Druzstva" FromRole="Druzstva" ToRole="DruzstvaCleni" />
+        </EntityType>
+        <EntityType Name="DruzstvaCleni">
+          <Key>
+            <PropertyRef Name="DruzstvoClenId" />
+          </Key>
+          <Property Name="DruzstvoClenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DruzstvoId" Type="Int32" Nullable="false" />
+          <Property Name="ClenId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clen" Relationship="SlavojDB.FK_DruzstvaCleni_Cleni" FromRole="DruzstvaCleni" ToRole="Clen" />
+          <NavigationProperty Name="Druzstvo" Relationship="SlavojDB.FK_DruzstvaCleni_Druzstva" FromRole="DruzstvaCleni" ToRole="Druzstva" />
+        </EntityType>
+        <Association Name="FK_DruzstvaCleni_Cleni">
+          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="1" />
+          <End Type="SlavojDB.DruzstvaCleni" Role="DruzstvaCleni" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Treneri">
+            <Principal Role="Clen">
               <PropertyRef Name="ClenId" />
             </Principal>
-            <Dependent Role="Druzstvo">
+            <Dependent Role="DruzstvaCleni">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DruzstvaVedouciId_CleniClenId">
+          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="1" />
+          <End Type="SlavojDB.Druzstvo" Role="Druzstva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clen">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Druzstva">
+              <PropertyRef Name="VedouciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Druzstva_Souteze">
+          <End Type="SlavojDB.Soutez" Role="Soutez" Multiplicity="1" />
+          <End Type="SlavojDB.Druzstvo" Role="Druzstva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Soutez">
+              <PropertyRef Name="SoutezId" />
+            </Principal>
+            <Dependent Role="Druzstva">
+              <PropertyRef Name="SoutezId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Druzstva_Treneri">
+          <End Type="SlavojDB.Trener" Role="Trener" Multiplicity="1" />
+          <End Type="SlavojDB.Druzstvo" Role="Druzstva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trener">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Druzstva">
               <PropertyRef Name="TrenerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DruzstvaCleni_Druzstva">
+          <End Type="SlavojDB.Druzstvo" Role="Druzstva" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SlavojDB.DruzstvaCleni" Role="DruzstvaCleni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Druzstva">
+              <PropertyRef Name="DruzstvoId" />
+            </Principal>
+            <Dependent Role="DruzstvaCleni">
+              <PropertyRef Name="DruzstvoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1148,6 +1171,7 @@
           <EntitySetMapping Name="Cleni">
             <EntityTypeMapping TypeName="SlavojDB.Clen">
               <MappingFragment StoreEntitySet="Cleni">
+                <ScalarProperty Name="PohlavyNazev" ColumnName="PohlavyNazev" />
                 <ScalarProperty Name="Vek" ColumnName="Vek" />
                 <ScalarProperty Name="PohlaviId" ColumnName="PohlaviId" />
                 <ScalarProperty Name="DatumNarozeni" ColumnName="DatumNarozeni" />
@@ -1239,11 +1263,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Pohlavis">
-            <EntityTypeMapping TypeName="SlavojDB.Pohlavi">
-              <MappingFragment StoreEntitySet="Pohlavi">
+          <EntitySetMapping Name="KategorieSoutezi">
+            <EntityTypeMapping TypeName="SlavojDB.KategorieSouteze">
+              <MappingFragment StoreEntitySet="KategorieSoutezi">
                 <ScalarProperty Name="Nazev" ColumnName="Nazev" />
-                <ScalarProperty Name="PohlaviId" ColumnName="PohlaviId" />
+                <ScalarProperty Name="KategorieSoutezeId" ColumnName="KategorieSoutezeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Souteze">
+            <EntityTypeMapping TypeName="SlavojDB.Soutez">
+              <MappingFragment StoreEntitySet="Souteze">
+                <ScalarProperty Name="MinPocetHracu" ColumnName="MinPocetHracu" />
+                <ScalarProperty Name="PocetNutnychDrah" ColumnName="PocetNutnychDrah" />
+                <ScalarProperty Name="KategorieSoutezeId" ColumnName="KategorieSoutezeId" />
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="SoutezId" ColumnName="SoutezId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Treneri">
+            <EntityTypeMapping TypeName="SlavojDB.Trener">
+              <MappingFragment StoreEntitySet="Treneri">
+                <ScalarProperty Name="PlatnaDo" ColumnName="PlatnaDo" />
+                <ScalarProperty Name="Trida" ColumnName="Trida" />
+                <ScalarProperty Name="CisloRegistrace" ColumnName="CisloRegistrace" />
+                <ScalarProperty Name="ClenId" ColumnName="ClenId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1261,39 +1306,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="KategorieSoutezi">
-            <EntityTypeMapping TypeName="SlavojDB.KategorieSouteze">
-              <MappingFragment StoreEntitySet="KategorieSoutezi">
-                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
-                <ScalarProperty Name="KategorieSoutezeId" ColumnName="KategorieSoutezeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Souteze">
-            <EntityTypeMapping TypeName="SlavojDB.Soutez">
-              <MappingFragment StoreEntitySet="Souteze">
-                <ScalarProperty Name="PocetNutnychDrah" ColumnName="PocetNutnychDrah" />
-                <ScalarProperty Name="KategorieSoutezeId" ColumnName="KategorieSoutezeId" />
-                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
-                <ScalarProperty Name="SoutezId" ColumnName="SoutezId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="DruzstvaCleni" TypeName="SlavojDB.DruzstvaCleni" StoreEntitySet="DruzstvaCleni">
-            <EndProperty Name="Druzstva">
-              <ScalarProperty Name="DruzstvoId" ColumnName="DruzstvoId" />
-            </EndProperty>
-            <EndProperty Name="Clen">
-              <ScalarProperty Name="ClenId" ColumnName="ClenId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="Treneri">
-            <EntityTypeMapping TypeName="SlavojDB.Trener">
-              <MappingFragment StoreEntitySet="Treneri">
-                <ScalarProperty Name="PlatnaDo" ColumnName="PlatnaDo" />
-                <ScalarProperty Name="Trida" ColumnName="Trida" />
-                <ScalarProperty Name="CisloRegistrace" ColumnName="CisloRegistrace" />
+          <EntitySetMapping Name="DruzstvoClen">
+            <EntityTypeMapping TypeName="SlavojDB.DruzstvaCleni">
+              <MappingFragment StoreEntitySet="DruzstvaCleni">
                 <ScalarProperty Name="ClenId" ColumnName="ClenId" />
+                <ScalarProperty Name="DruzstvoId" ColumnName="DruzstvoId" />
+                <ScalarProperty Name="DruzstvoClenId" ColumnName="DruzstvoClenId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

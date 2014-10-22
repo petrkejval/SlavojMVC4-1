@@ -12,9 +12,13 @@ namespace SlavojMVC4_1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Pohlavi
+    public partial class DruzstvaCleni
     {
-        public int PohlaviId { get; set; }
-        public string Nazev { get; set; }
+        public int DruzstvoClenId { get; set; }
+        public int DruzstvoId { get; set; }
+        public int ClenId { get; set; }
+    
+        public virtual Clen Clen { get; set; }
+        public virtual Druzstvo Druzstvo { get; set; }
     }
 }

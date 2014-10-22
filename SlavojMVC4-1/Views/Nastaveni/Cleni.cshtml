@@ -1,7 +1,7 @@
 ﻿@*@model IEnumerable<SlavojMVC4_1.Models.Clen>*@
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Cleni";
 }
 
 
@@ -93,7 +93,7 @@
                                 .ClientTemplate("<input type='checkbox' disabled='disabled' name='cbJeClen' <#=JeClen? checked='checked' : '' #> />");
                             columns.Bound(o => o.RodneCislo).Width(130);
                             columns.Bound(o => o.DatumNarozeni).Width(130).Format("{0:d.M.yyyy}");
-                            columns.Bound(o => o.PohlaviId).Width(130);
+                            columns.Bound(o => o.PohlaviNazev).Width(130);
                             columns.Bound(o => o.Vek).Width(130);
 
                             

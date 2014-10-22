@@ -94,11 +94,33 @@
         menu.Add()
             .Text("Kontakty")
             .Action("Index", "Kontakty");
-
-        menu.Add()
-            .Text("Členi")
-            .Action("Index", "Cleni")
-            .Visible(User.IsInRole("admin"));
         
+        menu.Add()
+            .Text("Nastavení")
+            .Visible(User.IsInRole("admin"))
+            .Items
+                (item =>
+                    {
+                        item.Add()
+                            .Text("Členi")
+                            .Action("Cleni", "Nastaveni")
+                            .Visible(User.IsInRole("admin"));
+
+                        item.Add()
+                            .Text("Družstva")
+                            .Action("Druzstva", "Nastaveni")
+                            .Visible(User.IsInRole("admin"));
+
+                        item.Add()
+                            .Text("Soutěže")
+                            .Action("Souteze", "Nastaveni")
+                            .Visible(User.IsInRole("admin"));
+
+                        item.Add()
+                            .Text("Kategorie soutěží")
+                            .Action("KategorieSoutezi", "Nastaveni")
+                            .Visible(User.IsInRole("admin"));
+                    }
+                );
         
     }))

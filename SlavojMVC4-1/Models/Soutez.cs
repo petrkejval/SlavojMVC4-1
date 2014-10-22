@@ -16,15 +16,16 @@ namespace SlavojMVC4_1.Models
     {
         public Soutez()
         {
-            this.Druzstva = new HashSet<Druzstvo>();
+            this.Druzstvas = new HashSet<Druzstvo>();
         }
     
         public int SoutezId { get; set; }
         public string Nazev { get; set; }
         public int KategorieSoutezeId { get; set; }
         public int PocetNutnychDrah { get; set; }
+        public int MinPocetHracu { get; set; }
     
-        public virtual ICollection<Druzstvo> Druzstva { get; set; }
         public virtual KategorieSouteze KategorieSouteze { get; set; }
+        public virtual ICollection<Druzstvo> Druzstvas { get; set; }
     }
 }

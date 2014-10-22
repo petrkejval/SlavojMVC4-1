@@ -44,7 +44,10 @@ namespace SlavojMVC4_1.Models
         [DisplayFormat(DataFormatString = "{0:d.M.yyyy}")]
         public Nullable<System.DateTime> DatumNarozeni { get; set; }
 
+        [ScaffoldColumn(false)]//nebude nikde zobrazen
         public Nullable<int> PohlaviId { get; set; }
+
+        public string PohlaviNazev { get; set; }
         
         public Nullable<int> Vek { get; set; }
 
