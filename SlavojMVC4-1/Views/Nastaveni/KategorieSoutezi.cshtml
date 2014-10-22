@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "KategorieSoutezi";
+}
+@{
+    Html.Telerik()
+        .Grid<SlavojMVC4_1.Models.KategorieSouteze>()
+        .Name("KategorieSouteze")
+        .DataKeys(keys => keys.Add(c => c.KategorieSoutezeId))
+        .DataBinding(dataBinding => dataBinding.Ajax()
+            .Select("_SelectAjaxEditing", "KategorieSouteziGrid")
+            .Insert("_InsertAjaxEditing", "KategorieSouteziGrid")
+            .Update("_SaveAjaxEditing", "KategorieSouteziGrid")
+            .Delete("_DeleteAjaxEditing", "KategorieSouteziGrid")
+            )
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
+        .Editable(editing => editing.Mode(GridEditMode.InLine))
+        .Columns(columns =>
+                {
+                    columns.Command(commands =>
+                    {
+                        commands.Edit().ButtonType(GridButtonType.BareImage);
+                        commands.Delete().ButtonType(GridButtonType.BareImage);
+                    }).Width(80);//.Title("Commands");
+                    
+                    columns.Bound(o => o.KategorieSoutezeId).Width(100).ReadOnly();
+                    columns.Bound(o => o.Nazev).Width(100);
+                }
+            )
+        .Localizable("cs-CZ")
+
+        .Reorderable(reorder => reorder.Columns(true))
+        .Resizable(resize => resize.Columns(true))
+        .Scrollable(sc => sc.Height("*"))
+        .Filterable()
+        .Sortable()
+        .Pageable()
+        .Render()
+        ;
+}
+<style type="text/css">
+    #contentcolumn {
+        margin-right: 0;
+    }
+
+    #rightcolumn {
+        display: none;
+    }
+</style>

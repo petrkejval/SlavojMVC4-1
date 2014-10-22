@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Soutěže";
+}
+
+@{
+    Html.Telerik()
+        .Grid<EditableSoutez>()
+        .Name("Souteze")
+        .DataKeys(keys => keys.Add(c => c.SoutezId))
+        .DataBinding(dataBinding => dataBinding.Ajax()
+            .Select("_SelectAjaxEditing", "SoutezeGrid")
+            .Insert("_InsertAjaxEditing", "SoutezeGrid")
+            .Update("_SaveAjaxEditing", "SoutezeGrid")
+            .Delete("_DeleteAjaxEditing", "SoutezeGrid")
+            )
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
+        //.Editable(editing => editing.Mode(GridEditMode.InLine))
+        .Editable(editing => editing.Mode(GridEditMode.InLine))
+        .Columns(columns =>
+                {
+                    columns.Command(commands =>
+                    {
+                        commands.Edit().ButtonType(GridButtonType.BareImage);
+                        commands.Delete().ButtonType(GridButtonType.BareImage);
+                    }).Width(80);//.Title("Commands");
+
+                    columns.ForeignKey(o => o.KategorieSoutezeId, (System.Collections.IEnumerable)ViewBag.KategorieSouteziListItem, "Id", "Name").Width("*");
+                    columns.Bound(o => o.Nazev).Width("*");
+                    columns.Bound(o => o.MinPocetHracu).Width(180);
+                    columns.Bound(o => o.PocetNutnychDrah).Width(180);
+                }
+            )
+        .Localizable("cs-CZ")
+        .Reorderable(reorder => reorder.Columns(true))
+        .Resizable(resize => resize.Columns(true))
+        .Scrollable(sc => sc.Height("*"))
+        .Filterable()
+        .Sortable()
+        .Pageable()
+        .Render()
+        ;
+}
+<style type="text/css">
+    #contentcolumn {
+        margin-right: 0;
+    }
+
+    #rightcolumn {
+        display: none;
+    }
+</style>
