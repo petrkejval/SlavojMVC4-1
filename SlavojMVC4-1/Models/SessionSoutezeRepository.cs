@@ -41,6 +41,7 @@
         {
 
             All(refreshDb).Insert(0, soutez);
+            MainMenuSessionRepository.DruzstvaMenuRead(true);
         }
 
         public static void Update(EditableSoutez soutez, bool refreshDb = false)
@@ -55,6 +56,7 @@
                 target.MinPocetHracu = soutez.MinPocetHracu;
                 target.PocetNutnychDrah = soutez.PocetNutnychDrah;
             }
+            MainMenuSessionRepository.DruzstvaMenuRead(true);
             
         }
 
@@ -65,6 +67,7 @@
             {
                 All(refreshDb).Remove(target);
             }
+            MainMenuSessionRepository.DruzstvaMenuRead(true);
         }
     }
 }

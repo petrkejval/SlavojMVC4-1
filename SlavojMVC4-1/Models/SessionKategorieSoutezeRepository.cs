@@ -13,7 +13,7 @@
         {
             IList<EditableKategorieSouteze> result = (IList<EditableKategorieSouteze>)HttpContext.Current.Session["KategorieSoutezi"];
             if (refreshDb) result = null;
-            if (result == null)
+            if (result == null) 
             {
                 HttpContext.Current.Session["KategorieSoutezi"] = result =
                     (from kategorieSouteze in new SlavojDBContainer().KategorieSoutezi
@@ -36,8 +36,8 @@
 
         public static void Insert(EditableKategorieSouteze kategorieSouteze, bool refreshDb = false)
         {
-
             All(refreshDb).Insert(0, kategorieSouteze);
+            MainMenuSessionRepository.DruzstvaMenuRead(true);
         }
 
         public static void Update(EditableKategorieSouteze kategorieSouteze, bool refreshDb = false)
@@ -49,6 +49,7 @@
                 target.KategorieSoutezeId = kategorieSouteze.KategorieSoutezeId;
                 target.Nazev = kategorieSouteze.Nazev;
             }
+            MainMenuSessionRepository.DruzstvaMenuRead(true);
             
         }
 
@@ -59,6 +60,7 @@
             {
                 All(refreshDb).Remove(target);
             }
+            MainMenuSessionRepository.DruzstvaMenuRead(true);
         }
     }
 }

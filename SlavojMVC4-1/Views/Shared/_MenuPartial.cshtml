@@ -1,126 +1,186 @@
-﻿@(Html.Telerik().Menu()
+﻿@*@(Html.Telerik().Menu()
     .Name("menu")
-    .Items(menu =>
-    {
-        menu.Add()
-            .Text("Domů")
-            .Action("Index", "Home");
+        .Items(menu =>
+        {
+            menu.Add()
+                .Text("Domů")
+                .Action("Index", "Home");
 
-        menu.Add()
-            .Text("Družstva")
-            .Items
-                (item =>
-                    {
-                        item.Add()
-                            .Text("Dospělí A")
-                            .Action("DospeliA", "Druzstva");
+            menu.Add()
+                .Text("Družstva")
+                //.Items
+                //    (item =>
+                //        {
+                //            item.Add()
+                //                .Text("Dospělí A")
+                //                .Action("DospeliA", "Druzstva");
 
-                        item.Add()
-                            .Text("Dospělí B")
-                            .Action("DospeliB", "Druzstva");
+                //            item.Add()
+                //                .Text("Dospělí B")
+                //                .Action("DospeliB", "Druzstva");
 
-                        item.Add()
-                            .Text("Dospělí C")
-                            .Action("DospeliC", "Druzstva");
+                //            item.Add()
+                //                .Text("Dospělí C")
+                //                .Action("DospeliC", "Druzstva");
 
-                        item.Add()
-                            .Text("Dospělí D")
-                            .Action("DospeliD", "Druzstva");
+                //            item.Add()
+                //                .Text("Dospělí D")
+                //                .Action("DospeliD", "Druzstva");
 
-                        item.Add()
-                            .Text("Dorost A")
-                            .Action("DorostA", "Druzstva");
+                //            item.Add()
+                //                .Text("Dorost A")
+                //                .Action("DorostA", "Druzstva");
 
-                        item.Add()
-                            .Text("Dorost B")
-                            .Action("DorostB", "Druzstva");
+                //            item.Add()
+                //                .Text("Dorost B")
+                //                .Action("DorostB", "Druzstva");
 
-                        item.Add()
-                            .Text("Žáci A")
-                            .Action("ZaciA", "Druzstva");
+                //            item.Add()
+                //                .Text("Žáci A")
+                //                .Action("ZaciA", "Druzstva");
 
-                        item.Add()
-                            .Text("Žáci B")
-                            .Action("ZaciB", "Druzstva");
-                        
-                        item.Add()
-                            .Text("Rozhodčí a trenéři")
-                            .Action("RozhodciaTreneri", "Druzstva");
-                    }
-                );
-                //.Action("Index", "Druzstva");
+                //            item.Add()
+                //                .Text("Žáci B")
+                //                .Action("ZaciB", "Druzstva");
 
-        menu.Add()
-            .Text("Výsledky")
-            .Action("Index", "Vysledky");
+                //            item.Add()
+                //                .Text("Rozhodčí a trenéři")
+                //                .Action("RozhodciaTreneri", "Druzstva");
+                //        }
+                //    );
+            .Action("Index", "Druzstva");
 
-        menu.Add()
-            .Text("Turnaje")
-            .Items
-                (item =>
-                    {
-                        item.Add()
-                            .Text("O perleťovou plaketu")
-                            .Action("OPerletovouPlaketu", "Turnaje");
+            menu.Add()
+                .Text("Výsledky")
+                .Action("Index", "Vysledky");
 
-                        item.Add()
-                            .Text("Liga neregistrovaných")
-                            .Action("LigaNeregistrovanych", "Turnaje");
+            menu.Add()
+                .Text("Turnaje")
+                .Items
+                    (item =>
+                        {
+                            item.Add()
+                                .Text("O perleťovou plaketu")
+                                .Action("OPerletovouPlaketu", "Turnaje");
 
-                        item.Add()
-                            .Text("Velikonoční koulení")
-                            .Action("VelikonocniKouleni", "Turnaje");
+                            item.Add()
+                                .Text("Liga neregistrovaných")
+                                .Action("LigaNeregistrovanych", "Turnaje");
 
-                    }
-                 );
-        
-        menu.Add()
-            .Text("Program na kuželně")
-            .Action("Index", "ProgramNaKuzelne");
-            
+                            item.Add()
+                                .Text("Velikonoční koulení")
+                                .Action("VelikonocniKouleni", "Turnaje");
 
-        menu.Add()
-            .Text("Ke stažení")
-            .Action("Index", "KeStazeni");
-                            
-        menu.Add()
-            .Text("O nás")
-            .Action("Index", "Onas");
-                            
-        menu.Add()
-            .Text("Kuželna")
-            .Action("Index", "Kuzelna");
-                            
-        menu.Add()
-            .Text("Kontakty")
-            .Action("Index", "Kontakty");
-        
-        menu.Add()
-            .Text("Nastavení")
-            .Visible(User.IsInRole("admin"))
-            .Items
-                (item =>
-                    {
-                        item.Add()
-                            .Text("Členi")
-                            .Action("Cleni", "Nastaveni")
-                            .Visible(User.IsInRole("admin"));
+                        }
+                     );
 
-                        item.Add()
-                            .Text("Družstva")
-                            .Action("Druzstva", "Nastaveni")
-                            .Visible(User.IsInRole("admin"));
+            menu.Add()
+                .Text("Program na kuželně")
+                .Action("Index", "ProgramNaKuzelne");
 
-                        item.Add()
-                            .Text("Soutěže")
-                            .Action("Souteze", "Nastaveni")
-                            .Visible(User.IsInRole("admin"));
 
-                        item.Add()
-                            .Text("Kategorie soutěží")
-                            .Action("KategorieSoutezi", "Nastaveni")
-                            .Visible(User.IsInRole("admin"));
-                    }
-                );
-        
-    }))
+            menu.Add()
+                .Text("Ke stažení")
+                .Action("Index", "KeStazeni");
+
+            menu.Add()
+                .Text("O nás")
+                .Action("Index", "Onas");
+
+            menu.Add()
+                .Text("Kuželna")
+                .Action("Index", "Kuzelna");
+
+            menu.Add()
+                .Text("Kontakty")
+                .Action("Index", "Kontakty");
+
+            menu.Add()
+                .Text("Nastavení")
+                .Visible(User.IsInRole("admin"))
+                .Items
+                    (item =>
+                        {
+                            item.Add()
+                                .Text("Členi")
+                                .Action("Cleni", "Nastaveni")
+                                .Visible(User.IsInRole("admin"));
+
+                            item.Add()
+                                .Text("Družstva")
+                                .Action("Druzstva", "Nastaveni")
+                                .Visible(User.IsInRole("admin"));
+
+                            item.Add()
+                                .Text("Soutěže")
+                                .Action("Souteze", "Nastaveni")
+                                .Visible(User.IsInRole("admin"));
+
+                            item.Add()
+                                .Text("Kategorie soutěží")
+                                .Action("KategorieSoutezi", "Nastaveni")
+                                .Visible(User.IsInRole("admin"));
+                        }
+                    );
+
+        }
+        )
+    )*@
+@(Html.Telerik().Menu()
+            .Name("menu")
+            .Items(item =>
+                        {
+                            foreach (var menu in (HttpContext.Current.Session["MainMenu"] as IList<MainMenu>).Where(m => m.MenuLevelId == 0).ToList()) 
+                            {
+                                if (menu.MenuLevelId == 0)
+                                {
+                                    var mitem = item.Add();
+                                        mitem.Text(menu.Text);
+                                    
+                                    if (!menu.ActionName.IsEmpty())
+                                    {
+                                        mitem.Action(menu.ActionName, menu.ControllerName);
+                                    }
+                                    //Nastavení
+                                    if (menu.MainMenuId == 10)
+                                    {
+                                        mitem.Visible(User.IsInRole("admin"));
+                                    }
+                                    mitem.Items(children =>
+                                        {
+                                            //Druzstva
+                                            if (menu.MainMenuId == 2)
+                                            {
+                                                foreach (var childmenu in (HttpContext.Current.Session["DruzstvaMenu"] as IList<Druzstvo>).ToList())
+                                                {
+                                                    var mchildren = children.Add();
+                                                    mchildren.Text(childmenu.Nazev + " " + childmenu.Pismeno + ", " + childmenu.Soutez.Nazev + ", " + "(" + childmenu.Soutez.KategorieSouteze.Nazev + ")");
+                                                    mchildren.Action("Index", "Druzstva", new { id = childmenu.DruzstvoId });
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                foreach (var childmenu in (HttpContext.Current.Session["MainMenu"] as IList<MainMenu>).Where(m => m.MenuLevelId == menu.MainMenuId).ToList())
+                                                {
+                                                    var mchildren = children.Add();
+                                                    mchildren.Text(childmenu.Text);
+                                                    if (!childmenu.ActionName.IsEmpty())
+                                                    {
+                                                        mchildren.Action(childmenu.ActionName, childmenu.ControllerName);
+                                                    }
+                                                    if (childmenu.MenuLevelId == 10)
+                                                    {
+                                                        mchildren.Visible(User.IsInRole("admin"));
+                                                    }
+                                                }
+                                            }
+
+                                        }
+                                    );
+                                       
+                                } 
+                            }
+                        }
+                )
+)

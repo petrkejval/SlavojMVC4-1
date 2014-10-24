@@ -218,6 +218,7 @@
     <Compile Include="Controllers\Nastaveni\SoutezeGridController.cs" />
     <Compile Include="Extensions\HtmlHelpersExtensions.cs" />
     <Compile Include="Filters\ConditionalValidationAttribute.cs" />
+    <Compile Include="Models\MainMenuSessionRepository.cs" />
     <Compile Include="ModelBinders\DateTimeModelBinder.cs" />
     <Compile Include="ModelBinders\DecimalModelBinder.cs" />
     <Compile Include="App_GlobalResources\EditorLocalization.bg-BG.designer.cs">
@@ -480,6 +481,9 @@
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Kuzelna.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MainMenu.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Registrace.cs">
@@ -1305,13 +1309,6 @@
     <Content Include="Views\KeStazeni\Index.cshtml" />
     <Content Include="Views\Vysledky\Index.cshtml" />
     <Content Include="Views\Druzstva\Index.cshtml" />
-    <Content Include="Views\Druzstva\DospeliA.cshtml" />
-    <Content Include="Views\Druzstva\DospeliB.cshtml" />
-    <Content Include="Views\Druzstva\DospeliC.cshtml" />
-    <Content Include="Views\Druzstva\DospeliD.cshtml" />
-    <Content Include="Views\Druzstva\DorostA.cshtml" />
-    <Content Include="Views\Druzstva\ZaciA.cshtml" />
-    <Content Include="Views\Druzstva\RozhodciaTreneri.cshtml" />
     <Content Include="Views\Turnaje\Index.cshtml" />
     <Content Include="Views\Turnaje\OPerletovouPlaketu.cshtml" />
     <Content Include="Views\Turnaje\LigaNeregistrovanych.cshtml" />
@@ -1326,8 +1323,6 @@
     <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Nastaveni\Cleni.cshtml" />
-    <Content Include="Views\Druzstva\DorostB.cshtml" />
-    <Content Include="Views\Druzstva\ZaciB.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EditableClen.cshtml" />
     <Content Include="Views\Nastaveni\KategorieSoutezi.cshtml" />
     <Content Include="Views\Nastaveni\Souteze.cshtml" />
@@ -1344,6 +1339,7 @@
     <Folder Include="Content\themes\base\minified\" />
     <Folder Include="Views\DruzstvaGrid\" />
     <Folder Include="Views\KategorieSouteziGrid\" />
+    <Folder Include="Views\MainMenu\" />
     <Folder Include="Views\Souteze\" />
   </ItemGroup>
   <ItemGroup>

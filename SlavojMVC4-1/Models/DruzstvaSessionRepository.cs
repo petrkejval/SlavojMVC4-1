@@ -44,6 +44,7 @@
         {
 
             All(refreshDb).Insert(0, soutez);
+            MainMenuSessionRepository.DruzstvaMenuRead(true);
         }
 
         public static void Update(DruzstvoEditable item, bool refreshDb = false)
@@ -61,6 +62,7 @@
                 target.TrenerId = item.TrenerId;
                 target.Popis = item.Popis;
             }
+            MainMenuSessionRepository.DruzstvaMenuRead(true);
             
         }
 
@@ -71,6 +73,7 @@
             {
                 All(refreshDb).Remove(target);
             }
+            MainMenuSessionRepository.DruzstvaMenuRead(true);
         }
     }
 }

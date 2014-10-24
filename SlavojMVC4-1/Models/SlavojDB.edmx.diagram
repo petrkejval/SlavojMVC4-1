@@ -45,6 +45,7 @@
         <AssociationConnector Association="SlavojDB.FK_Druzstva_Souteze" />
         <AssociationConnector Association="SlavojDB.FK_Druzstva_Treneri" />
         <AssociationConnector Association="SlavojDB.FK_DruzstvaCleni_Druzstva" />
+        <EntityTypeShape EntityType="SlavojDB.MainMenu" Width="1.5" PointX="10.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

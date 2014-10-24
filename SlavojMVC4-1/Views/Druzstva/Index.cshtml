@@ -1,8 +1,6 @@
-﻿@{
-    ViewBag.Title = "Družstva";
-}
+﻿@model Druzstvo
 
 <hgroup class="title">
-    <h1>@ViewBag.Title</h1>
-    <h2>@ViewBag.Message</h2>
+    <h1>@Model.Nazev @Model.Pismeno @Model.Soutez.Nazev, (@Model.Soutez.KategorieSouteze.Nazev)</h1>
+
 </hgroup>

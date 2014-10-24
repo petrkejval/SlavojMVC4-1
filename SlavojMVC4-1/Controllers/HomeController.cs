@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using SlavojMVC4_1.Models;
@@ -13,6 +13,7 @@ using System.Threading;
 using SlavojMVC4_1.Extensions;
 using System.Data.Entity;
 using Telerik.Web.Mvc.UI;
+using SlavojMVC4_1.Models;
 
 namespace SlavojMVC4_1.Controllers
 {

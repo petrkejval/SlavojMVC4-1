@@ -115,6 +115,17 @@
           <Property Name="GPS" Type="nvarchar" MaxLength="50" />
           <Property Name="KoladacePlatnaDo" Type="datetime2" Precision="7" />
         </EntityType>
+        <EntityType Name="MainMenu">
+          <Key>
+            <PropertyRef Name="MainMenuId" />
+          </Key>
+          <Property Name="MainMenuId" Type="int" Nullable="false" />
+          <Property Name="Text" Type="varchar" MaxLength="50" />
+          <Property Name="ActionName" Type="varchar" MaxLength="50" />
+          <Property Name="ControllerName" Type="varchar" MaxLength="50" />
+          <Property Name="MenuLevelId" Type="int" />
+          <Property Name="OrderId" Type="int" />
+        </EntityType>
         <EntityType Name="Registrace">
           <Key>
             <PropertyRef Name="ClenId" />
@@ -470,6 +481,7 @@
           <EntitySet Name="KategorieSoutezi" EntityType="Self.KategorieSoutezi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kontakty" EntityType="Self.Kontakty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kuzelna" EntityType="Self.Kuzelna" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MainMenu" EntityType="Self.MainMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Registrace" EntityType="Self.Registrace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rozhodci" EntityType="Self.Rozhodci" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Souteze" EntityType="Self.Souteze" Schema="dbo" store:Type="Tables" />
@@ -657,6 +669,7 @@
             <End Role="Druzstva" EntitySet="Druzstva" />
             <End Role="DruzstvaCleni" EntitySet="DruzstvoClen" />
           </AssociationSet>
+          <EntitySet Name="MainMenus" EntityType="SlavojDB.MainMenu" />
           </EntityContainer>
         <EntityType Name="UserProfile">
           <Key>
@@ -1091,6 +1104,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="MainMenu">
+          <Key>
+            <PropertyRef Name="MainMenuId" />
+          </Key>
+          <Property Name="MainMenuId" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ControllerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenuLevelId" Type="Int32" />
+          <Property Name="OrderId" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1312,6 +1336,18 @@
                 <ScalarProperty Name="ClenId" ColumnName="ClenId" />
                 <ScalarProperty Name="DruzstvoId" ColumnName="DruzstvoId" />
                 <ScalarProperty Name="DruzstvoClenId" ColumnName="DruzstvoClenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MainMenus">
+            <EntityTypeMapping TypeName="SlavojDB.MainMenu">
+              <MappingFragment StoreEntitySet="MainMenu">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="MenuLevelId" ColumnName="MenuLevelId" />
+                <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="MainMenuId" ColumnName="MainMenuId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

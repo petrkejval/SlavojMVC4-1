@@ -3,61 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SlavojMVC4_1.Models;
 
 namespace SlavojMVC4_1.Controllers
 {
     public partial class DruzstvaController : Controller
     {
+        private SlavojDBContainer db;
+        public DruzstvaController()
+        {
+            db = new SlavojDBContainer();
+        }
+
         //
         // GET: /Druzstva/
-
-        public virtual ActionResult Index()
+        public virtual ActionResult Index(int id = 1)
         {
-            return View();
+            var model = db.Druzstva.Find(id);
+            return View(model);
         }
 
-        public virtual ActionResult DospeliA()
-        {
-            return View();
-        }
-
-        public virtual ActionResult DospeliB()
-        {
-            return View();
-        }
-
-        public virtual ActionResult DospeliC()
-        {
-            return View();
-        }
-
-        public virtual ActionResult DospeliD()
-        {
-            return View();
-        }
-
-        public virtual ActionResult DorostA()
-        {
-            return View();
-        }
-        public virtual ActionResult DorostB()
-        {
-            return View();
-        }
-
-        public virtual ActionResult ZaciA()
-        {
-            return View();
-        }
-
-        public virtual ActionResult ZaciB()
-        {
-            return View();
-        }
-
-        public virtual ActionResult RozhodciaTreneri()
-        {
-            return View();
-        }
     }
 }

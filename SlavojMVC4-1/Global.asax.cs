@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using WebMatrix.WebData;
 using SlavojMVC4_1.ModelBinders;
+using System.Web.Mvc;
 
 namespace SlavojMVC4_1
 {
@@ -22,6 +23,9 @@ namespace SlavojMVC4_1
             WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
             AreaRegistration.RegisterAllAreas();
 
+            GlobalFilters.Filters.Add(new SlavojMVC4_1.Models.MainMenuSessionRepository());
+
+
             WebApiConfig.Register(System.Web.Http.GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -30,6 +34,9 @@ namespace SlavojMVC4_1
 
             System.Web.Mvc.ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
             System.Web.Mvc.ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
+
+
+
 
         }
     }
