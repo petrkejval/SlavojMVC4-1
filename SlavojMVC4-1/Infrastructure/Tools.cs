@@ -43,5 +43,20 @@ namespace SlavojMVC4_1.Infrastructure
 
             return result;
         }
+        public static string GetHtmlPlatnoDo(DateTime platnoDo, int upozorneniPocDnu, string classNameUpozorneni, string classNameChyba)
+        {
+            string s = platnoDo.ToString("d");
+            var dnes = DateTime.Now;
+            var zaUpozorneniPocetDnu = dnes.AddDays(upozorneniPocDnu);
+            if (dnes.CompareTo(platnoDo) == 0 && dnes.CompareTo(platnoDo) > 0)
+            {
+                s = String.Format("<div class=\"{0}\">{1}</div>", classNameChyba, platnoDo.ToString("d"));
+            }
+            else if (zaUpozorneniPocetDnu.CompareTo(platnoDo) > 0)
+            {
+                s = String.Format("<div class=\"{0}\">{1}</div>", classNameUpozorneni, platnoDo.ToString("d"));
+            }
+            return s;
+        }
     }
 }

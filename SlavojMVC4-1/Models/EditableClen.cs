@@ -51,6 +51,8 @@ namespace SlavojMVC4_1.Models
         
         public Nullable<int> Vek { get; set; }
 
+        [Display(Name = "Fotografie")]
+        public string Fotka { get; set; }
         //..............................................................................................
         //Adresa
         [Display(Name = "Ulice")]

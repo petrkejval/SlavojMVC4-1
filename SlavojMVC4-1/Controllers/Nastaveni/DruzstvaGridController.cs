@@ -62,7 +62,8 @@ namespace SlavojMVC4_1.Controllers
                     entity.Existuje = item.Existuje;
                     entity.VedouciId = item.VedouciId;
                     entity.TrenerId = item.TrenerId;
-                    entity.Popis = item.Popis;
+                    entity.Image = item.Image;
+                    entity.WebPageId = item.WebPageId;
 
                     //Nastaví všechna modifikovaná pole jako modifikovaná
                     db.SetModifyFields(entity);
@@ -108,7 +109,8 @@ namespace SlavojMVC4_1.Controllers
                         entity.Existuje = item.Existuje;
                         entity.VedouciId = item.VedouciId;
                         entity.TrenerId = item.TrenerId;
-                        entity.Popis = item.Popis;
+                        entity.Image = item.Image;
+                        entity.WebPageId = item.WebPageId;
 
                         // Add the entity
                         db.Druzstva.Add(entity);

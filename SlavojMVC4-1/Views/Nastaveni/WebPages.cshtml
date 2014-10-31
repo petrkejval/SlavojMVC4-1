@@ -1,0 +1,45 @@
+﻿@{
+    Html.Telerik()
+        .Grid<WebPageEditable>()
+        .Name("WebPagesGrid")
+        .DataKeys(keys => keys.Add(c => c.WebPageId))
+        .DataBinding(dataBinding => dataBinding.Ajax()
+            .Select("WebPagesSelect", "WebPagesGrid")
+            .Insert("WebPagesInsert", "WebPagesGrid")
+            .Update("WebPagesUpdate", "WebPagesGrid")
+            .Delete("WebPagesDelete", "WebPagesGrid")
+            )
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
+        .Editable(editing => editing.Mode(GridEditMode.InForm).TemplateName("WebPageEditable"))
+        .Columns(columns =>
+                {
+                    columns.Command(commands =>
+                    {
+                        commands.Edit().ButtonType(GridButtonType.BareImage);
+                        commands.Delete().ButtonType(GridButtonType.BareImage);
+                    }).Width(80);//.Title("Commands");
+
+                    columns.Bound(o => o.Nazev).Width(150);
+                    columns.Bound(o => o.HtmlText).Width(80).Visible(false);
+                }
+            )
+
+        .Localizable("cs-CZ")
+        .Reorderable(reorder => reorder.Columns(true))
+        .Resizable(resize => resize.Columns(true))
+        .Scrollable(sc => sc.Height("*"))
+        .Filterable()
+        .Sortable()
+        .Pageable()
+        .Render()
+        ;
+}
+<style type="text/css">
+    #contentcolumn {
+        margin-right: 0;
+    }
+
+    #rightcolumn {
+        display: none;
+    }
+</style>

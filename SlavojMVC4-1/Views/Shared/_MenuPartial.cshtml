@@ -139,7 +139,15 @@
                                     
                                     if (!menu.ActionName.IsEmpty())
                                     {
-                                        mitem.Action(menu.ActionName, menu.ControllerName);
+                                        if (menu.WebPageId > 0)
+                                        {
+                                            mitem.Action(menu.ActionName, menu.ControllerName, new { id = menu.WebPageId });
+
+                                        }
+                                        else
+                                        {
+                                            mitem.Action(menu.ActionName, menu.ControllerName);
+                                        }
                                     }
                                     //Nastavení
                                     if (menu.MainMenuId == 10)
@@ -156,6 +164,16 @@
                                                     var mchildren = children.Add();
                                                     mchildren.Text(childmenu.Nazev + " " + childmenu.Pismeno + ", " + childmenu.Soutez.Nazev + ", " + "(" + childmenu.Soutez.KategorieSouteze.Nazev + ")");
                                                     mchildren.Action("Index", "Druzstva", new { id = childmenu.DruzstvoId });
+                                                }
+
+                                            }
+                                            else if (menu.MainMenuId == 4)
+                                            {
+                                                foreach (var childmenu in (HttpContext.Current.Session["TurnajeMenu"] as IList<Turnaj>).ToList())
+                                                {
+                                                    var mchildren = children.Add();
+                                                    mchildren.Text(childmenu.Nazev);
+                                                    mchildren.Action("Index", "Turnaje", new { id = childmenu.TurnajId });
                                                 }
 
                                             }

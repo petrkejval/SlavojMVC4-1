@@ -71,6 +71,7 @@ namespace SlavojMVC4_1.Controllers
                     entity.TitulZa = clen.TitulZa;
                     entity.JeClen = clen.JeClen;
                     entity.RodneCislo = clen.RodneCislo;
+                    entity.Fotka = clen.Fotka;
 
 
                     //Nastaví všechna modifikovaná pole jako modifikovaná
@@ -319,7 +320,8 @@ namespace SlavojMVC4_1.Controllers
                         entity.Prijmeni = clen.Prijmeni;
                         entity.TitulZa = clen.TitulZa;
                         entity.JeClen = clen.JeClen;
-                        entity.RodneCislo = clen.RodneCislo; 
+                        entity.RodneCislo = clen.RodneCislo;
+                        entity.Fotka = clen.Fotka;
 
                         // Add the entity
                         db.Cleni.Add(entity);

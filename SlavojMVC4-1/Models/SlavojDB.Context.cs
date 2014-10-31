@@ -45,5 +45,7 @@ namespace SlavojMVC4_1.Models
         public DbSet<Druzstvo> Druzstva { get; set; }
         public DbSet<DruzstvaCleni> DruzstvoClen { get; set; }
         public DbSet<MainMenu> MainMenus { get; set; }
+        public DbSet<Turnaj> Turnaje { get; set; }
+        public DbSet<WebPage> WebPages { get; set; }
     }
 }

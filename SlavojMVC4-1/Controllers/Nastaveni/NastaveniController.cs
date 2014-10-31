@@ -39,6 +39,9 @@ namespace SlavojMVC4_1.Controllers.Nastaveni
                                                  .Select(e => new { Id = e.ClenId, Name = e.Prijmeni + " " + e.Jmeno })
                                                  .OrderBy(e => e.Name);
 
+            ViewBag.WebPagesListItem = new SlavojDBContainer().WebPages
+                                                 .Select(e => new { Id = e.WebPageId, Name = e.Nazev })
+                                                 .OrderBy(e => e.Name);
             return View();
         }
 
@@ -51,6 +54,25 @@ namespace SlavojMVC4_1.Controllers.Nastaveni
         }
 
         public ActionResult KategorieSoutezi()
+        {
+            return View();
+        }
+
+        public ActionResult Turnaje()
+        {
+            ViewBag.RediteleTurnajuListItem = new SlavojDBContainer().Cleni
+                                                 .Where(w => (w.JeClen) || (w.ClenId == 0))
+                                                 .Select(e => new { Id = e.ClenId, Name = e.Prijmeni + " " + e.Jmeno })
+                                                 .OrderBy(e => e.Name);
+            
+            ViewBag.WebPagesListItem = new SlavojDBContainer().WebPages
+                                                 .Select(e => new { Id = e.WebPageId, Name = e.Nazev })
+                                                 .OrderBy(e => e.Name);
+
+            return View();
+        }
+
+        public ActionResult WebPages()
         {
             return View();
         }

@@ -60,6 +60,13 @@
             @Html.ValidationMessageFor(model => model.RodneCislo)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Fotka)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Fotka)
+            @Html.ValidationMessageFor(model => model.Fotka)
+        </div>
     </div>
 
     <div class="clen-adresa">

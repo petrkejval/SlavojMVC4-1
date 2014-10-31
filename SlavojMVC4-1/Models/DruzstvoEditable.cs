@@ -35,10 +35,16 @@
         [UIHint("GridForeignKey")]
         public int TrenerId { get; set; }
 
-        public string Popis { get; set; }
+        [Display(Name = "Fotografie družstva")]
+        public string Image { get; set; }
+
+        [Display(Name = "Webová stránka družstva")]
+        [UIHint("GridForeignKey")]
+        public int WebPageId { get; set; }
 
         [Required]
         [Display(Name = "Družstvo existuje")]
         public bool Existuje { get; set; }
+
     }
 }

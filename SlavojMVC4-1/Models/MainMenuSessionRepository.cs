@@ -15,6 +15,7 @@ namespace SlavojMVC4_1.Models
 
             MainMenuRead(false);
             DruzstvaMenuRead(false);
+            TurnajeMenuRead(false);
 
         }
 
@@ -34,6 +35,16 @@ namespace SlavojMVC4_1.Models
             if (sessionDruzstvaMenu == null || refresh)
             {
                 System.Web.HttpContext.Current.Session["DruzstvaMenu"] = new SlavojDBContainer().Druzstva.Where(w => (w.DruzstvoId > 0) && (w.Existuje)).ToList();
+            }
+
+        }
+
+        public static void TurnajeMenuRead(bool refresh)
+        {
+            IList<Turnaj> sessionTurnajeMenu = (IList<Turnaj>)System.Web.HttpContext.Current.Session["TurnajeMenu"];
+            if (sessionTurnajeMenu == null || refresh)
+            {
+                System.Web.HttpContext.Current.Session["TurnajeMenu"] = new SlavojDBContainer().Turnaje.Where(w => (w.TurnajId > 0) && (w.Existuje)).ToList();
             }
 
         }

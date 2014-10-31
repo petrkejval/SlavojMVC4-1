@@ -26,11 +26,13 @@ namespace SlavojMVC4_1.Models
         public bool Existuje { get; set; }
         public int VedouciId { get; set; }
         public int TrenerId { get; set; }
-        public string Popis { get; set; }
+        public string Image { get; set; }
+        public int WebPageId { get; set; }
     
         public virtual Clen Vedouci { get; set; }
         public virtual Soutez Soutez { get; set; }
         public virtual Trener Trener { get; set; }
         public virtual ICollection<DruzstvaCleni> DruzstvoCleni { get; set; }
+        public virtual WebPage WebPage { get; set; }
     }
 }

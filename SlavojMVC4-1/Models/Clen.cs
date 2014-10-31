@@ -20,6 +20,7 @@ namespace SlavojMVC4_1.Models
             this.CleniInRoles = new HashSet<CleniInRole>();
             this.DruzstvaCleni = new HashSet<DruzstvaCleni>();
             this.Druzstva = new HashSet<Druzstvo>();
+            this.Turnajes = new HashSet<Turnaj>();
         }
     
         public int ClenId { get; set; }
@@ -33,6 +34,7 @@ namespace SlavojMVC4_1.Models
         public Nullable<int> PohlaviId { get; set; }
         public Nullable<int> Vek { get; set; }
         public string PohlavyNazev { get; set; }
+        public string Fotka { get; set; }
     
         public virtual ICollection<UserProfile> UserProfiles { get; set; }
         public virtual Adresa Adresa { get; set; }
@@ -43,5 +45,6 @@ namespace SlavojMVC4_1.Models
         public virtual Trener Trener { get; set; }
         public virtual ICollection<DruzstvaCleni> DruzstvaCleni { get; set; }
         public virtual ICollection<Druzstvo> Druzstva { get; set; }
+        public virtual ICollection<Turnaj> Turnajes { get; set; }
     }
 }

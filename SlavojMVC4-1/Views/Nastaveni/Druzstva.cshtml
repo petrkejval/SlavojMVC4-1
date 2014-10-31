@@ -36,8 +36,9 @@
                     columns.ForeignKey(o => o.VedouciId, (System.Collections.IEnumerable)ViewBag.DruzstvaCleniListItem, "Id", "Name").Width("*");
                     //columns.Bound(o => o.TrenerId).Width(100);
                     columns.ForeignKey(o => o.TrenerId, (System.Collections.IEnumerable)ViewBag.TreneriListItem, "Id", "Name").Width("*");
+                    columns.Bound(o => o.Image).Width(100);
+                    columns.ForeignKey(o => o.WebPageId, (System.Collections.IEnumerable)ViewBag.WebPagesListItem, "Id", "Name").Width("*");
                     columns.Bound(o => o.Existuje).Width(100).ClientTemplate("<input type='checkbox' disabled='disabled' name='cbExistuje' <#=Existuje? checked='checked' : '' #> />");
-                    columns.Bound(o => o.Popis).Width(100);
                 }
             )
         .ClientEvents(events => events.OnRowDataBound("druzstva_onDataBound"))

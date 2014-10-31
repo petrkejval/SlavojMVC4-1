@@ -1,0 +1,10 @@
+http://www.mssqltips.com/sqlservertip/2810/how-to-migrate-a-sql-server-database-to-a-lower-version/
+1. Generate script
+2. Script entire database and all database object
+3. Advanced
+
+4. Script DROP and Create - Script CREATE nebo Script DROP and CREATE, podle potøeby
+5. Script for Server Version - vyberu podle toho na kterou verzi SQL Serveru migruji
+6. Types of data to script - vyberu Schema and data
+
+7. Script Triggers - True

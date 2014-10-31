@@ -843,6 +843,20 @@ tr.pager td {
     
     
 }
+.clanek-soupisky
+{
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 15px 20px 20px 20px;
+    
+    border-width: 1px;
+    border-color:silver;
+    border-style:solid solid solid solid;
+    border-radius: 10px 10px 10px 10px;
+    
+    
+}
+
     .predmet
     {
         font-size:2em;
@@ -1012,4 +1026,47 @@ tr.pager td {
   color: #1877AF;
   font-size: 1.2em;
   font-weight:bold;
+}
+/*grid turnaj edit form*/
+.turnaj-fields
+{
+   width:730px;
+}
+#HtmlText
+{
+    height:600px;
+}
+
+.text-label
+{
+    float:left;
+    padding-right: 5px;
+    color: #1877AF;
+}
+
+.text-odstavec
+{
+    padding-top:10px;
+    padding-bottom:10px;
+    overflow:auto;
+}
+.text-field
+{
+
+}
+.text-image
+{
+    float:right;
+}
+.platnodo-upozorneni
+{
+    color:orange;
+}
+.platnodo-chyba
+{
+    color:red;
+}
+.htmltext-field
+{
+    clear:both;
 }

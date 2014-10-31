@@ -1,0 +1,8 @@
+﻿@model SlavojMVC4_1.Models.WebPage
+
+<div class="clanek">
+    @if (Model != null)
+    {
+        @Html.Raw(Model.HtmlText)
+    }
+</div>

@@ -1,8 +1,58 @@
-﻿@{
-    ViewBag.Title = "Turnaje";
-}
+﻿@model Turnaj
 
-<hgroup class="title">
-    <h1>@ViewBag.Title</h1>
-    <h2>@ViewBag.Message</h2>
-</hgroup>
+@*<hgroup class="title">
+    <h1>@Model.Nazev</h1>
+</hgroup>*@
+<div class="clanek">
+    <fieldset>
+        <div class="predmet">
+            @Model.Nazev
+        </div>
+        <div class="text-odstavec">
+            <div class="text-label">
+                Ředitel turnaje:
+            </div>
+            <div class="text-image">
+                <img class="obrazek_turnaje" src="@Model.Obrazek" />
+            </div>
+            <div class="text-field">
+                @SlavojMVC4_1.Infrastructure.Tools.GetFullName(
+                    @Model.ReditelTurnaje.TitulPred,
+                    @Model.ReditelTurnaje.Jmeno,
+                    @Model.ReditelTurnaje.Prijmeni,
+                    @Model.ReditelTurnaje.TitulZa)
+            </div>
+            @if (@Model.ReditelTurnaje.Kontakt != null)
+            { 
+                if (!Model.ReditelTurnaje.Kontakt.Telefon.IsEmpty())
+                {
+                    <div class="text-label">
+                        Telefon:
+                    </div>
+                    <div class="text-field">
+                        @Model.ReditelTurnaje.Kontakt.Telefon
+                    </div>
+                }
+                if (!Model.ReditelTurnaje.Kontakt.Mail.IsEmpty())
+                {
+                    <div class="text-label">
+                        E-mail:
+                    </div>
+                    <div class="text-field">
+                        @Model.ReditelTurnaje.Kontakt.Mail
+                    </div>
+                }
+            }
+            <div class="text-label">
+                Termín turnaje:
+            </div>
+            <div class="text-field">
+                @Model.DatumOd.Date.ToString("d") - @Model.DatumDo.Date.ToString("d")
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="text">
+        @Html.Raw(@Model.WebPage.HtmlText)
+    </div>
+</div>

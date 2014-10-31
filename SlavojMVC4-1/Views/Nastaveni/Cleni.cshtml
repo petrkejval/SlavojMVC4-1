@@ -69,7 +69,7 @@
                     .Delete("_DeleteAjaxEditing", "CleniGrid"))
                 .Scrollable(sc => sc.Height("*"))
                 .Sortable()
-                .Pageable()
+                .Pageable(p => p.PageSize(20))
         //.Pageable(paging => paging.PageSize(20).Style(GridPagerStyles.NextPreviousAndNumeric).Position(GridPagerPosition.Bottom))
                 .Filterable()
                 .Name("Grid")
@@ -95,6 +95,7 @@
                             columns.Bound(o => o.DatumNarozeni).Width(130).Format("{0:d.M.yyyy}");
                             columns.Bound(o => o.PohlaviNazev).Width(130);
                             columns.Bound(o => o.Vek).Width(130);
+                            columns.Bound(o => o.Fotka).Visible(false);
 
                             
                             columns.Bound(o => o.AdresaUlice).Width(100);

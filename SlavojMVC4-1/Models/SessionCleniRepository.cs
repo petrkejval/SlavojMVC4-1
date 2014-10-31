@@ -34,6 +34,7 @@
                             PohlaviId = (clen.PohlaviId != null) ? clen.PohlaviId : MyNullableInt,
                             PohlaviNazev = (clen.PohlavyNazev != null) ? clen.PohlavyNazev : null,
                             Vek = (clen.Vek != null) ? clen.Vek : MyNullableInt,
+                            Fotka = clen.Fotka,
                             
 
                             AdresaUlice = (clen.Adresa != null) ? clen.Adresa.Ulice : null,
@@ -59,6 +60,8 @@
                         }
                     )
                     .Where(w => w.ClenId != 0)
+                    .OrderBy(o => o.Prijmeni)
+                    .ThenBy(o => o.Jmeno)
                     .ToList();
 
             }
@@ -94,6 +97,7 @@
                 target.PohlaviId = clen.PohlaviId;
                 target.PohlaviNazev = clen.PohlaviNazev;
                 target.Vek = clen.Vek;
+                target.Fotka = clen.Fotka;
 
                 target.AdresaUlice = clen.AdresaUlice;
                 target.AdresaCisloPopisne = clen.AdresaCisloPopisne;

@@ -1,0 +1,14 @@
+﻿@model string
+@(Html.Telerik().Editor()
+            .Name(ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty))
+            .Value(Model)
+            .Localizable("cs-CZ")
+            //.Encode(false)
+            //.Tools(tools => tools
+            //    .Clear()
+            //    .Bold().Italic().Underline()
+            //    .Separator()
+            //    .CreateLink().Unlink()
+                
+            //)
+) 

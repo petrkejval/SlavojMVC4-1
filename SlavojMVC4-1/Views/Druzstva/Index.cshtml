@@ -1,6 +1,237 @@
 ﻿@model Druzstvo
 
-<hgroup class="title">
+@*<hgroup class="title">
     <h1>@Model.Nazev @Model.Pismeno @Model.Soutez.Nazev, (@Model.Soutez.KategorieSouteze.Nazev)</h1>
 
-</hgroup>
+</hgroup>*@
+
+<div class="clanek">
+    <div class="text-odstavec clanek-soupisky">
+        <div class="text-image">
+            <img class="obrazek_turnaje" src="@Model.Image" />
+        </div>
+        <div class="predmet">
+            @Model.Nazev @Model.Pismeno
+        </div>
+        <div class="text-label">
+            Soutěž:
+        </div>
+        <div class="text-field">
+            @Model.Soutez.Nazev
+        </div>
+        <div class="text-label">
+            Hrají:
+        </div>
+        <div class="text-field">
+            @Model.Soutez.KategorieSouteze.Nazev
+        </div>
+        <div class="text-label">
+            Počet hrajících hráčů za družstvo:
+        </div>
+        <div class="text-field">
+            @Model.Soutez.MinPocetHracu
+        </div>
+        <div class="text-label">
+            Minimální počet drah:
+        </div>
+        <div class="text-field">
+            @Model.Soutez.PocetNutnychDrah
+        </div>
+        <div class="htmltext-field">
+            @Html.Raw(Model.WebPage.HtmlText)
+        </div>
+    </div>
+    <div class="clanek-soupisky">
+        <div class="text-odstavec clanek-soupisky">
+            <div class="text-label">
+                Vedoucí družstva:
+            </div>
+            <div class="text-image">
+                @if (Model.Vedouci.Fotka.IsEmpty())
+                {
+                    <img class="obrazek_turnaje" src="/Content/images/Nikdo100x20.png" />
+
+                }
+                else
+                {
+                    <img class="obrazek_turnaje" src="@Model.Vedouci.Fotka" />
+
+                }
+
+            </div>
+            <div class="text-field">
+                @SlavojMVC4_1.Infrastructure.Tools.GetFullName(
+                     @Model.Vedouci.TitulPred,
+                     @Model.Vedouci.Jmeno,
+                     @Model.Vedouci.Prijmeni,
+                     @Model.Vedouci.TitulZa)
+            </div>
+            @if (@Model.Vedouci.Kontakt != null)
+            {
+                if (!Model.Vedouci.Kontakt.Telefon.IsEmpty())
+                {
+                    <div class="text-label">
+                        Telefon:
+                    </div>
+                    <div class="text-field">
+                        @Model.Vedouci.Kontakt.Telefon
+                    </div>
+                }
+                if (!Model.Vedouci.Kontakt.Mail.IsEmpty())
+                {
+                    <div class="text-label">
+                        E-mail:
+                    </div>
+                    <div class="text-field">
+                        @Model.Vedouci.Kontakt.Mail
+                    </div>
+                }
+            }
+            <div class="text-label">
+                Číslo registrace:
+            </div>
+            <div class="text-field">
+                @Model.Vedouci.Registrace.CisloRegistrace
+            </div>
+            <div class="text-label">
+                Registrace platí do:
+            </div>
+            <div class="text-field">
+                @Html.Raw(@SlavojMVC4_1.Infrastructure.Tools.GetHtmlPlatnoDo(Model.Vedouci.Registrace.PlatnaDo, 100, "platnodo-upozorneni", "platnodo-chyba"))
+            </div>
+        </div>
+
+        @if (Model.TrenerId != 0)
+        {
+            <div class="text-odstavec clanek-soupisky">
+                <div class="text-label">
+                    Trenér družstva:
+                </div>
+                <div class="text-image">
+                    @if (Model.Trener.Cleni.Fotka.IsEmpty())
+                    {
+                        <img class="obrazek_turnaje" src="/Content/images/Nikdo100x20.png" />
+
+                    }
+                    else
+                    {
+                        <img class="obrazek_turnaje" src="@Model.Trener.Cleni.Fotka" />
+
+                    }
+
+                </div>
+                <div class="text-field">
+                    @SlavojMVC4_1.Infrastructure.Tools.GetFullName(
+                        Model.Trener.Cleni.TitulPred,
+                        Model.Trener.Cleni.Jmeno,
+                        Model.Trener.Cleni.Prijmeni,
+                        Model.Trener.Cleni.TitulZa)
+                </div>
+                @if (!Model.Trener.Cleni.Kontakt.Telefon.IsEmpty())
+                {
+                    <div class="text-label">
+                        Telefon:
+                    </div>
+                    <div class="text-field">
+                        @Model.Trener.Cleni.Kontakt.Telefon
+                    </div>
+                }
+                @if (!Model.Trener.Cleni.Kontakt.Mail.IsEmpty())
+                {
+                    <div class="text-label">
+                        E-mail:
+                    </div>
+                    <div class="text-field">
+                        @Model.Trener.Cleni.Kontakt.Mail
+                    </div>
+                }
+                <div class="text-label">
+                    Číslo registrace:
+                </div>
+                <div class="text-field">
+                    @Model.Trener.CisloRegistrace
+                </div>
+                <div class="text-label">
+                    Registrace platí do:
+                </div>
+                <div class="text-field">
+                    @Html.Raw(@SlavojMVC4_1.Infrastructure.Tools.GetHtmlPlatnoDo(Model.Trener.PlatnaDo, 100, "platnodo-upozorneni", "platnodo-chyba"))
+                </div>
+            </div>
+        }
+    </div>    
+    <div class="clanek-soupisky">
+        @for (var i = 0; i < Model.DruzstvoCleni.Count(); i++)
+        {
+            var item = Model.DruzstvoCleni.OrderBy(o => o.Clen.Prijmeni).ThenBy(o => o.Clen.Jmeno).ElementAt(i);
+            var poradi = i + 1;
+            <div class="text-odstavec clanek-soupisky">
+                <div class="text-label">
+                    @poradi. člen družstva:
+                </div>
+                <div class="text-image">
+                    @if (item.Clen.Fotka.IsEmpty())
+                    {
+                        <img class="obrazek_turnaje" src="/Content/images/Nikdo100x20.png" />
+
+                    }
+                    else
+                    {
+                        <img class="obrazek_turnaje" src="item.Clen.Fotka" />
+
+                    }
+
+                </div>
+                <div class="text-field">
+                    @SlavojMVC4_1.Infrastructure.Tools.GetFullName(
+                    item.Clen.TitulPred,
+                    item.Clen.Jmeno,
+                    item.Clen.Prijmeni,
+                    item.Clen.TitulZa)
+                </div>
+                @if (item.Clen.Kontakt != null)
+                {
+                    if (!item.Clen.Kontakt.Telefon.IsEmpty())
+                    {
+                        <div class="text-label">
+                            Telefon:
+                        </div>
+                        <div class="text-field">
+                            @item.Clen.Kontakt.Telefon
+                        </div>
+                    }
+                    if (!item.Clen.Kontakt.Mail.IsEmpty())
+                    {
+                        <div class="text-label">
+                            E-mail:
+                        </div>
+                        <div class="text-field">
+                            @item.Clen.Kontakt.Mail
+                        </div>
+                    }
+                }
+                <div class="text-label">
+                    Číslo registrace:
+                </div>
+                <div class="text-field">
+                    @item.Clen.Registrace.CisloRegistrace
+                </div>
+                <div class="text-label">
+                    Registrace platí do:
+                </div>
+                <div class="text-field">
+                    @Html.Raw(@SlavojMVC4_1.Infrastructure.Tools.GetHtmlPlatnoDo(item.Clen.Registrace.PlatnaDo, 100, "platnodo-upozorneni", "platnodo-chyba"))
+                </div>
+                <div class="text-label">
+                    Věk:
+                </div>
+                <div class="text-field">
+                    @item.Clen.Vek
+                </div>
+            </div>
+        }
+    </div> 
+        @*<div class="text">
+                @Html.Raw(@Model.HtmlClanek)
+            </div>*@
+    </div>

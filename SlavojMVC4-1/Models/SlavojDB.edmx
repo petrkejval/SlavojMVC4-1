@@ -42,6 +42,7 @@
           <Property Name="PohlaviId" Type="int" StoreGeneratedPattern="Computed" />
           <Property Name="PohlavyNazev" Type="varchar" MaxLength="4" StoreGeneratedPattern="Computed" />
           <Property Name="Vek" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="Fotka" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="CleniInRoles">
           <Key>
@@ -69,7 +70,8 @@
           <Property Name="Existuje" Type="bit" Nullable="false" />
           <Property Name="VedouciId" Type="int" Nullable="false" />
           <Property Name="TrenerId" Type="int" Nullable="false" />
-          <Property Name="Popis" Type="nvarchar(max)" />
+          <Property Name="Image" Type="varchar" MaxLength="200" />
+          <Property Name="WebPageId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DruzstvaCleni">
           <Key>
@@ -123,8 +125,9 @@
           <Property Name="Text" Type="varchar" MaxLength="50" />
           <Property Name="ActionName" Type="varchar" MaxLength="50" />
           <Property Name="ControllerName" Type="varchar" MaxLength="50" />
-          <Property Name="MenuLevelId" Type="int" />
-          <Property Name="OrderId" Type="int" />
+          <Property Name="MenuLevelId" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="WebPageId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Registrace">
           <Key>
@@ -162,6 +165,19 @@
           <Property Name="Trida" Type="nvarchar" MaxLength="50" />
           <Property Name="PlatnaDo" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
+        <EntityType Name="Turnaje">
+          <Key>
+            <PropertyRef Name="TurnajId" />
+          </Key>
+          <Property Name="TurnajId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazev" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReditelTurnajeId" Type="int" Nullable="false" />
+          <Property Name="DatumOd" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DatumDo" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Obrazek" Type="varchar" MaxLength="200" />
+          <Property Name="Existuje" Type="bit" Nullable="false" />
+          <Property Name="WebPageId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="UserClen">
           <Key>
             <PropertyRef Name="UserId" />
@@ -176,6 +192,14 @@
           </Key>
           <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="56" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WebPages">
+          <Key>
+            <PropertyRef Name="WebPageId" />
+          </Key>
+          <Property Name="WebPageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HtmlText" Type="nvarchar(max)" />
+          <Property Name="Nazev" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -303,6 +327,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Druzstva_WebPages">
+          <End Role="WebPages" Type="Self.WebPages" Multiplicity="1" />
+          <End Role="Druzstva" Type="Self.Druzstva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebPages">
+              <PropertyRef Name="WebPageId" />
+            </Principal>
+            <Dependent Role="Druzstva">
+              <PropertyRef Name="WebPageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DruzstvaCleni_Cleni">
           <End Role="Cleni" Type="Self.Cleni" Multiplicity="1" />
           <End Role="DruzstvaCleni" Type="Self.DruzstvaCleni" Multiplicity="*" />
@@ -352,6 +388,18 @@
             </Principal>
             <Dependent Role="Kontakty">
               <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MainMenu_WebPages">
+          <End Role="WebPages" Type="Self.WebPages" Multiplicity="1" />
+          <End Role="MainMenu" Type="Self.MainMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebPages">
+              <PropertyRef Name="WebPageId" />
+            </Principal>
+            <Dependent Role="MainMenu">
+              <PropertyRef Name="WebPageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -406,6 +454,30 @@
             </Principal>
             <Dependent Role="Treneri">
               <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turnaje_Cleni">
+          <End Role="Cleni" Type="Self.Cleni" Multiplicity="1" />
+          <End Role="Turnaje" Type="Self.Turnaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cleni">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Turnaje">
+              <PropertyRef Name="ReditelTurnajeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turnaje_WebPages">
+          <End Role="WebPages" Type="Self.WebPages" Multiplicity="1" />
+          <End Role="Turnaje" Type="Self.Turnaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebPages">
+              <PropertyRef Name="WebPageId" />
+            </Principal>
+            <Dependent Role="Turnaje">
+              <PropertyRef Name="WebPageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -486,8 +558,10 @@
           <EntitySet Name="Rozhodci" EntityType="Self.Rozhodci" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Souteze" EntityType="Self.Souteze" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Treneri" EntityType="Self.Treneri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Turnaje" EntityType="Self.Turnaje" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserClen" EntityType="Self.UserClen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebPages" EntityType="Self.WebPages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
@@ -520,6 +594,10 @@
             <End Role="Treneri" EntitySet="Treneri" />
             <End Role="Druzstva" EntitySet="Druzstva" />
           </AssociationSet>
+          <AssociationSet Name="FK_Druzstva_WebPages" Association="Self.FK_Druzstva_WebPages">
+            <End Role="WebPages" EntitySet="WebPages" />
+            <End Role="Druzstva" EntitySet="Druzstva" />
+          </AssociationSet>
           <AssociationSet Name="FK_DruzstvaCleni_Cleni" Association="Self.FK_DruzstvaCleni_Cleni">
             <End Role="Cleni" EntitySet="Cleni" />
             <End Role="DruzstvaCleni" EntitySet="DruzstvaCleni" />
@@ -536,6 +614,10 @@
             <End Role="Cleni" EntitySet="Cleni" />
             <End Role="Kontakty" EntitySet="Kontakty" />
           </AssociationSet>
+          <AssociationSet Name="FK_MainMenu_WebPages" Association="Self.FK_MainMenu_WebPages">
+            <End Role="WebPages" EntitySet="WebPages" />
+            <End Role="MainMenu" EntitySet="MainMenu" />
+          </AssociationSet>
           <AssociationSet Name="FK_Registrace_Cleni" Association="Self.FK_Registrace_Cleni">
             <End Role="Cleni" EntitySet="Cleni" />
             <End Role="Registrace" EntitySet="Registrace" />
@@ -551,6 +633,14 @@
           <AssociationSet Name="FK_Treneri_Cleni" Association="Self.FK_Treneri_Cleni">
             <End Role="Cleni" EntitySet="Cleni" />
             <End Role="Treneri" EntitySet="Treneri" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turnaje_Cleni" Association="Self.FK_Turnaje_Cleni">
+            <End Role="Cleni" EntitySet="Cleni" />
+            <End Role="Turnaje" EntitySet="Turnaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turnaje_WebPages" Association="Self.FK_Turnaje_WebPages">
+            <End Role="WebPages" EntitySet="WebPages" />
+            <End Role="Turnaje" EntitySet="Turnaje" />
           </AssociationSet>
           <AssociationSet Name="FK_UserClen_Cleni" Association="Self.FK_UserClen_Cleni">
             <End Role="Cleni" EntitySet="Cleni" />
@@ -670,6 +760,24 @@
             <End Role="DruzstvaCleni" EntitySet="DruzstvoClen" />
           </AssociationSet>
           <EntitySet Name="MainMenus" EntityType="SlavojDB.MainMenu" />
+          <EntitySet Name="Turnaje" EntityType="SlavojDB.Turnaj" />
+          <AssociationSet Name="FK_Turnaje_Cleni" Association="SlavojDB.FK_Turnaje_Cleni">
+            <End Role="Clen" EntitySet="Cleni" />
+            <End Role="Turnaje" EntitySet="Turnaje" />
+          </AssociationSet>
+          <EntitySet Name="WebPages" EntityType="SlavojDB.WebPage" />
+          <AssociationSet Name="FK_MainMenu_WebPages" Association="SlavojDB.FK_MainMenu_WebPages">
+            <End Role="WebPage" EntitySet="WebPages" />
+            <End Role="MainMenu" EntitySet="MainMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Druzstva_WebPages" Association="SlavojDB.FK_Druzstva_WebPages">
+            <End Role="WebPage" EntitySet="WebPages" />
+            <End Role="Druzstvo" EntitySet="Druzstva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turnaje_WebPages" Association="SlavojDB.FK_Turnaje_WebPages">
+            <End Role="WebPage" EntitySet="WebPages" />
+            <End Role="Turnaj" EntitySet="Turnaje" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="UserProfile">
           <Key>
@@ -802,6 +910,8 @@
           <NavigationProperty Name="DruzstvaCleni" Relationship="SlavojDB.FK_DruzstvaCleni_Cleni" FromRole="Clen" ToRole="DruzstvaCleni" />
           <NavigationProperty Name="Druzstva" Relationship="SlavojDB.FK_DruzstvaVedouciId_CleniClenId" FromRole="Clen" ToRole="Druzstva" />
           <Property Name="PohlavyNazev" Type="String" MaxLength="4" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Turnajes" Relationship="SlavojDB.FK_Turnaje_Cleni" FromRole="Clen" ToRole="Turnaje" />
+          <Property Name="Fotka" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           </EntityType>
         <Association Name="UserClen">
           <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="*" />
@@ -1026,11 +1136,13 @@
           <Property Name="Existuje" Type="Boolean" Nullable="false" />
           <Property Name="VedouciId" Type="Int32" Nullable="false" />
           <Property Name="TrenerId" Type="Int32" Nullable="false" />
-          <Property Name="Popis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Vedouci" Relationship="SlavojDB.FK_DruzstvaVedouciId_CleniClenId" FromRole="Druzstva" ToRole="Clen" />
           <NavigationProperty Name="Soutez" Relationship="SlavojDB.FK_Druzstva_Souteze" FromRole="Druzstva" ToRole="Soutez" />
           <NavigationProperty Name="Trener" Relationship="SlavojDB.FK_Druzstva_Treneri" FromRole="Druzstva" ToRole="Trener" />
           <NavigationProperty Name="DruzstvoCleni" Relationship="SlavojDB.FK_DruzstvaCleni_Druzstva" FromRole="Druzstva" ToRole="DruzstvaCleni" />
+          <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="WebPageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WebPage" Relationship="SlavojDB.FK_Druzstva_WebPages" FromRole="Druzstvo" ToRole="WebPage" />
         </EntityType>
         <EntityType Name="DruzstvaCleni">
           <Key>
@@ -1112,9 +1224,85 @@
           <Property Name="Text" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ActionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ControllerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MenuLevelId" Type="Int32" />
-          <Property Name="OrderId" Type="Int32" />
+          <Property Name="MenuLevelId" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="WebPageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WebPage" Relationship="SlavojDB.FK_MainMenu_WebPages" FromRole="MainMenu" ToRole="WebPage" />
         </EntityType>
+        <EntityType Name="Turnaj">
+          <Key>
+            <PropertyRef Name="TurnajId" />
+          </Key>
+          <Property Name="TurnajId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazev" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReditelTurnajeId" Type="Int32" Nullable="false" />
+          <Property Name="DatumOd" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="DatumDo" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Obrazek" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Existuje" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ReditelTurnaje" Relationship="SlavojDB.FK_Turnaje_Cleni" FromRole="Turnaje" ToRole="Clen" />
+          <Property Name="WebPageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WebPage" Relationship="SlavojDB.FK_Turnaje_WebPages" FromRole="Turnaj" ToRole="WebPage" />
+        </EntityType>
+        <Association Name="FK_Turnaje_Cleni">
+          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="1" />
+          <End Type="SlavojDB.Turnaj" Role="Turnaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clen">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Turnaje">
+              <PropertyRef Name="ReditelTurnajeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WebPage">
+          <Key>
+            <PropertyRef Name="WebPageId" />
+          </Key>
+          <Property Name="WebPageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HtmlText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nazev" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MainMenus" Relationship="SlavojDB.FK_MainMenu_WebPages" FromRole="WebPage" ToRole="MainMenu" />
+          <NavigationProperty Name="Druzstva" Relationship="SlavojDB.FK_Druzstva_WebPages" FromRole="WebPage" ToRole="Druzstvo" />
+          <NavigationProperty Name="Turnaje" Relationship="SlavojDB.FK_Turnaje_WebPages" FromRole="WebPage" ToRole="Turnaj" />
+        </EntityType>
+        <Association Name="FK_MainMenu_WebPages">
+          <End Type="SlavojDB.WebPage" Role="WebPage" Multiplicity="1" />
+          <End Type="SlavojDB.MainMenu" Role="MainMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebPage">
+              <PropertyRef Name="WebPageId" />
+            </Principal>
+            <Dependent Role="MainMenu">
+              <PropertyRef Name="WebPageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Druzstva_WebPages">
+          <End Type="SlavojDB.WebPage" Role="WebPage" Multiplicity="1" />
+          <End Type="SlavojDB.Druzstvo" Role="Druzstvo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebPage">
+              <PropertyRef Name="WebPageId" />
+            </Principal>
+            <Dependent Role="Druzstvo">
+              <PropertyRef Name="WebPageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Turnaje_WebPages">
+          <End Type="SlavojDB.WebPage" Role="WebPage" Multiplicity="1" />
+          <End Type="SlavojDB.Turnaj" Role="Turnaj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebPage">
+              <PropertyRef Name="WebPageId" />
+            </Principal>
+            <Dependent Role="Turnaj">
+              <PropertyRef Name="WebPageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1195,6 +1383,7 @@
           <EntitySetMapping Name="Cleni">
             <EntityTypeMapping TypeName="SlavojDB.Clen">
               <MappingFragment StoreEntitySet="Cleni">
+                <ScalarProperty Name="Fotka" ColumnName="Fotka" />
                 <ScalarProperty Name="PohlavyNazev" ColumnName="PohlavyNazev" />
                 <ScalarProperty Name="Vek" ColumnName="Vek" />
                 <ScalarProperty Name="PohlaviId" ColumnName="PohlaviId" />
@@ -1319,7 +1508,8 @@
           <EntitySetMapping Name="Druzstva">
             <EntityTypeMapping TypeName="SlavojDB.Druzstvo">
               <MappingFragment StoreEntitySet="Druzstva">
-                <ScalarProperty Name="Popis" ColumnName="Popis" />
+                <ScalarProperty Name="WebPageId" ColumnName="WebPageId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="TrenerId" ColumnName="TrenerId" />
                 <ScalarProperty Name="VedouciId" ColumnName="VedouciId" />
                 <ScalarProperty Name="Existuje" ColumnName="Existuje" />
@@ -1342,12 +1532,36 @@
           <EntitySetMapping Name="MainMenus">
             <EntityTypeMapping TypeName="SlavojDB.MainMenu">
               <MappingFragment StoreEntitySet="MainMenu">
+                <ScalarProperty Name="WebPageId" ColumnName="WebPageId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="MenuLevelId" ColumnName="MenuLevelId" />
                 <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
                 <ScalarProperty Name="ActionName" ColumnName="ActionName" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="MainMenuId" ColumnName="MainMenuId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Turnaje">
+            <EntityTypeMapping TypeName="SlavojDB.Turnaj">
+              <MappingFragment StoreEntitySet="Turnaje">
+                <ScalarProperty Name="WebPageId" ColumnName="WebPageId" />
+                <ScalarProperty Name="Existuje" ColumnName="Existuje" />
+                <ScalarProperty Name="Obrazek" ColumnName="Obrazek" />
+                <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+                <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+                <ScalarProperty Name="ReditelTurnajeId" ColumnName="ReditelTurnajeId" />
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="TurnajId" ColumnName="TurnajId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebPages">
+            <EntityTypeMapping TypeName="SlavojDB.WebPage">
+              <MappingFragment StoreEntitySet="WebPages">
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="HtmlText" ColumnName="HtmlText" />
+                <ScalarProperty Name="WebPageId" ColumnName="WebPageId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

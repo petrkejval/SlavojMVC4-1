@@ -104,7 +104,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NuGet.Core, Version=2.8.50506.491, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -212,12 +212,51 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\Nastaveni\DruzstvaGridController.cs" />
     <Compile Include="Controllers\Nastaveni\KategorieSouteziGridController.cs" />
     <Compile Include="Controllers\Nastaveni\NastaveniController.cs" />
     <Compile Include="Controllers\Nastaveni\SoutezeGridController.cs" />
+    <Compile Include="Controllers\Nastaveni\TurnajeGridController.cs" />
+    <Compile Include="Controllers\Nastaveni\WebPagesGridController.cs" />
     <Compile Include="Extensions\HtmlHelpersExtensions.cs" />
     <Compile Include="Filters\ConditionalValidationAttribute.cs" />
+    <Compile Include="Models\Adresa.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Clanek.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Clen.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CleniInRole.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CleniRole.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DruzstvaCleni.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Druzstvo.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Kategorie.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KategorieSouteze.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Kontakt.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Kuzelna.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MainMenu.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MainMenuSessionRepository.cs" />
     <Compile Include="ModelBinders\DateTimeModelBinder.cs" />
     <Compile Include="ModelBinders\DecimalModelBinder.cs" />
@@ -432,7 +471,6 @@
     <Compile Include="Controllers\OnasController.cs" />
     <Compile Include="Controllers\ProgramNaKuzelneController.cs" />
     <Compile Include="Controllers\TurnajeController.cs" />
-    <Compile Include="Controllers\VysledkyController.cs" />
     <Compile Include="Extensions\ControllerContextExtensions.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -443,49 +481,13 @@
     </Compile>
     <Compile Include="Infrastructure\Tools.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\Adresa.cs">
-      <DependentUpon>SlavojDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Clanek.cs">
-      <DependentUpon>SlavojDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Clanek.partial.cs" />
-    <Compile Include="Models\Clen.cs">
-      <DependentUpon>SlavojDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CleniInRole.cs">
-      <DependentUpon>SlavojDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CleniRole.cs">
-      <DependentUpon>SlavojDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DruzstvaClenEditable.cs" />
-    <Compile Include="Models\DruzstvaCleni.cs">
-      <DependentUpon>SlavojDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DruzstvaClenSessionRepository.cs" />
-    <Compile Include="Models\Druzstvo.cs">
-      <DependentUpon>SlavojDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EditableClen.cs" />
     <Compile Include="Models\DruzstvoEditable.cs" />
     <Compile Include="Models\EditableKategorieSouteze.cs" />
     <Compile Include="Models\EditableSoutez.cs" />
-    <Compile Include="Models\Kategorie.cs">
-      <DependentUpon>SlavojDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\KategorieSouteze.cs">
-      <DependentUpon>SlavojDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Kontakt.cs">
-      <DependentUpon>SlavojDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Kuzelna.cs">
-      <DependentUpon>SlavojDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MainMenu.cs">
-      <DependentUpon>SlavojDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Registrace.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
@@ -519,9 +521,19 @@
     <Compile Include="Models\Trener.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Turnaj.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TurnajEditable.cs" />
+    <Compile Include="Models\TurnajeSessionRepository.cs" />
     <Compile Include="Models\UserProfile.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\WebPage.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebPageEditable.cs" />
+    <Compile Include="Models\WebPagesSessionRepository.cs" />
     <Compile Include="Models\webpages_Membership.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
@@ -739,7 +751,11 @@
     <Content Include="Content\2013.2.611\Windows7\sprite-vertical.png" />
     <Content Include="Content\2013.2.611\Windows7\sprite.png" />
     <Content Include="Content\Common\validation-error-message.png" />
+    <Content Include="Content\Images\Kuželna Žirovnice 1.320 x 240.bmp" />
+    <Content Include="Content\Images\Nikdo100x20.png" />
+    <Content Include="Content\Images\Nikdo50x60.png" />
     <Content Include="Content\Images\Pruh1.gif" />
+    <Content Include="Content\Images\VelikonocniVajicko.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -1307,7 +1323,6 @@
     <Content Include="Views\Kuzelna\Index.cshtml" />
     <Content Include="Views\ProgramNaKuzelne\Index.cshtml" />
     <Content Include="Views\KeStazeni\Index.cshtml" />
-    <Content Include="Views\Vysledky\Index.cshtml" />
     <Content Include="Views\Druzstva\Index.cshtml" />
     <Content Include="Views\Turnaje\Index.cshtml" />
     <Content Include="Views\Turnaje\OPerletovouPlaketu.cshtml" />
@@ -1327,6 +1342,12 @@
     <Content Include="Views\Nastaveni\KategorieSoutezi.cshtml" />
     <Content Include="Views\Nastaveni\Souteze.cshtml" />
     <Content Include="Views\Nastaveni\Druzstva.cshtml" />
+    <Content Include="Views\Nastaveni\Turnaje.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Editor.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TurnajEditable.cshtml" />
+    <Content Include="Views\Nastaveni\WebPages.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\WebPageEditable.cshtml" />
+    <Content Include="Views\Menu\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -1339,8 +1360,8 @@
     <Folder Include="Content\themes\base\minified\" />
     <Folder Include="Views\DruzstvaGrid\" />
     <Folder Include="Views\KategorieSouteziGrid\" />
-    <Folder Include="Views\MainMenu\" />
     <Folder Include="Views\Souteze\" />
+    <Folder Include="Views\TurnajeGrid\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.zh-CN.resx">

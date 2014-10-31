@@ -26,7 +26,8 @@
                             Existuje = item.Existuje,
                             VedouciId = item.VedouciId,
                             TrenerId = item.TrenerId,
-                            Popis = item.Popis
+                            Image = item.Image,
+                            WebPageId = item.WebPageId
                         }
                     ).ToList();
 
@@ -60,7 +61,8 @@
                 target.Existuje = item.Existuje;
                 target.VedouciId = item.VedouciId;
                 target.TrenerId = item.TrenerId;
-                target.Popis = item.Popis;
+                target.Image = item.Image;
+                target.WebPageId = item.WebPageId;
             }
             MainMenuSessionRepository.DruzstvaMenuRead(true);
             

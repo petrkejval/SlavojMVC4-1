@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Turnaje";
+}
+
+@{
+    Html.Telerik()
+        .Grid<TurnajEditable>()
+        .Name("TurnajeGrid")
+        .DataKeys(keys => keys.Add(c => c.TurnajId))
+        .DataBinding(dataBinding => dataBinding.Ajax()
+            .Select("TurnajeSelect", "TurnajeGrid")
+            .Insert("TurnajeInsert", "TurnajeGrid")
+            .Update("TurnajeUpdate", "TurnajeGrid")
+            .Delete("TurnajeDelete", "TurnajeGrid")
+            )
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
+        //.Editable(editing => editing.Mode(GridEditMode.InLine))
+        .Editable(editing => editing.Mode(GridEditMode.InForm).TemplateName("TurnajEditable"))
+        .Columns(columns =>
+                {
+                    columns.Command(commands =>
+                    {
+                        commands.Edit().ButtonType(GridButtonType.BareImage);
+                        commands.Delete().ButtonType(GridButtonType.BareImage);
+                    }).Width(80);//.Title("Commands");
+
+                    columns.Bound(o => o.Nazev).Width(150);
+                    columns.ForeignKey(o => o.ReditelTurnajeId, (System.Collections.IEnumerable)ViewBag.RediteleTurnajuListItem, "Id", "Name").Width(150);
+                    columns.Bound(o => o.DatumOd).Width(150);
+                    columns.Bound(o => o.DatumDo).Width(150);
+                    columns.Bound(o => o.Obrazek).Width(100).Visible(false);
+                    columns.ForeignKey(o => o.WebPageId, (System.Collections.IEnumerable)ViewBag.WebPagesListItem, "Id", "Name").Width("*");
+                    columns.Bound(o => o.Existuje).Width(100).ClientTemplate("<input type='checkbox' disabled='disabled' name='cbExistuje' <#=Existuje? checked='checked' : '' #> />");
+                }
+            )
+        .Localizable("cs-CZ")
+        .Reorderable(reorder => reorder.Columns(true))
+        .Resizable(resize => resize.Columns(true))
+        .Scrollable(sc => sc.Height("*"))
+        .Filterable()
+        .Sortable()
+        .Pageable()
+        .Render()
+        ;
+}
+@Scripts.Render("~/bundles/globalize")
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $.validator.methods.date = function (value, element) {
+                Globalize.culture("cs-CZ");
+                // you can alternatively pass the culture to parseDate instead of
+                // setting the culture above, like so:
+                // parseDate(value, null, "cs-CZ")
+                return this.optional(element) || Globalize.parseDate(value) !== null;
+            }
+        });
+    </script>
+}
+<style type="text/css">
+    #contentcolumn {
+        margin-right: 0;
+    }
+
+    #rightcolumn {
+        display: none;
+    }
+</style>
