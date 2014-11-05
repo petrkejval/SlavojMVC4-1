@@ -25,7 +25,6 @@ namespace SlavojMVC4_1.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<webpages_Membership> webpages_Membership { get; set; }
         public DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
         public DbSet<webpages_Roles> webpages_Roles { get; set; }
@@ -47,5 +46,7 @@ namespace SlavojMVC4_1.Models
         public DbSet<MainMenu> MainMenus { get; set; }
         public DbSet<Turnaj> Turnaje { get; set; }
         public DbSet<WebPage> WebPages { get; set; }
+        public DbSet<UserClen> UserCleni { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
     }
 }

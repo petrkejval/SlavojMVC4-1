@@ -1032,10 +1032,10 @@ tr.pager td {
 {
    width:730px;
 }
-#HtmlText
+/*#HtmlText
 {
     height:600px;
-}
+}*/
 
 .text-label
 {
@@ -1065,8 +1065,4 @@ tr.pager td {
 .platnodo-chyba
 {
     color:red;
-}
-.htmltext-field
-{
-    clear:both;
 }

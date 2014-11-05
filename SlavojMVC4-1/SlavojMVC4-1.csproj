@@ -526,6 +526,9 @@
     </Compile>
     <Compile Include="Models\TurnajEditable.cs" />
     <Compile Include="Models\TurnajeSessionRepository.cs" />
+    <Compile Include="Models\UserClen.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserProfile.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
@@ -751,6 +754,15 @@
     <Content Include="Content\2013.2.611\Windows7\sprite-vertical.png" />
     <Content Include="Content\2013.2.611\Windows7\sprite.png" />
     <Content Include="Content\Common\validation-error-message.png" />
+    <Content Include="Content\Images\ClenFoto\1.png" />
+    <Content Include="Content\Images\ClenFoto\10.png" />
+    <Content Include="Content\Images\ClenFoto\11.png" />
+    <Content Include="Content\Images\ClenFoto\12.png" />
+    <Content Include="Content\Images\ClenFoto\13.png" />
+    <Content Include="Content\Images\ClenFoto\24.png" />
+    <Content Include="Content\Images\ClenFoto\25.png" />
+    <Content Include="Content\Images\ClenFoto\8.png" />
+    <Content Include="Content\Images\ClenFoto\9.png" />
     <Content Include="Content\Images\Kuželna Žirovnice 1.320 x 240.bmp" />
     <Content Include="Content\Images\Nikdo100x20.png" />
     <Content Include="Content\Images\Nikdo50x60.png" />
@@ -1167,7 +1179,7 @@
     <Content Include="Scripts\mvcfoolproof.unobtrusive.min.js" />
     <Content Include="Scripts\MvcFoolproofJQueryValidation.min.js" />
     <Content Include="Scripts\MvcFoolproofValidation.min.js" />
-    <Content Include="_Backup\pk.SlavojZirovnice.min.css" />
+    <Content Include="App_Data\_Backup\pk.SlavojZirovnice.min.css" />
     <EntityDeploy Include="Models\SlavojDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SlavojDB.Designer.cs</LastGenOutput>
@@ -1356,7 +1368,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\themes\base\minified\" />
     <Folder Include="Views\DruzstvaGrid\" />
     <Folder Include="Views\KategorieSouteziGrid\" />

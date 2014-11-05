@@ -16,17 +16,17 @@ namespace SlavojMVC4_1.Models
     {
         public UserProfile()
         {
-            this.webpages_Roles = new HashSet<webpages_Roles>();
             this.Clanky = new HashSet<Clanek>();
-            this.Cleni = new HashSet<Clen>();
+            this.UserCleni = new HashSet<UserClen>();
+            this.webpages_Roles = new HashSet<webpages_Roles>();
         }
     
         public int UserId { get; set; }
         public string UserName { get; set; }
     
-        public virtual ICollection<webpages_Roles> webpages_Roles { get; set; }
-        public virtual webpages_Membership webpages_Membership { get; set; }
         public virtual ICollection<Clanek> Clanky { get; set; }
-        public virtual ICollection<Clen> Cleni { get; set; }
+        public virtual ICollection<UserClen> UserCleni { get; set; }
+        public virtual webpages_Membership webpages_Membership { get; set; }
+        public virtual ICollection<webpages_Roles> webpages_Roles { get; set; }
     }
 }

@@ -36,12 +36,12 @@
                     columns.ForeignKey(o => o.VedouciId, (System.Collections.IEnumerable)ViewBag.DruzstvaCleniListItem, "Id", "Name").Width("*");
                     //columns.Bound(o => o.TrenerId).Width(100);
                     columns.ForeignKey(o => o.TrenerId, (System.Collections.IEnumerable)ViewBag.TreneriListItem, "Id", "Name").Width("*");
-                    columns.Bound(o => o.Image).Width(100);
+                    columns.Bound(o => o.Image).Width(100).Visible(false);
                     columns.ForeignKey(o => o.WebPageId, (System.Collections.IEnumerable)ViewBag.WebPagesListItem, "Id", "Name").Width("*");
                     columns.Bound(o => o.Existuje).Width(100).ClientTemplate("<input type='checkbox' disabled='disabled' name='cbExistuje' <#=Existuje? checked='checked' : '' #> />");
                 }
             )
-        .ClientEvents(events => events.OnRowDataBound("druzstva_onDataBound"))
+        //.ClientEvents(events => events.OnRowDataBound("druzstva_onDataBound"))
         .DetailView(detail => detail.ClientTemplate(
             Html.Telerik().Grid<DruzstvaClenEditable>()
                 .Name("DruzstvaClen_<#= DruzstvoId #>")
@@ -89,7 +89,7 @@
         .Render()
         ;
 }
-<script type="text/javascript">
+@*<script type="text/javascript">
 
 function expandFirstRow(grid, row) {
     if (grid.$rows().index(row) == 0) {
@@ -102,7 +102,7 @@ function druzstva_onDataBound(e) {
     expandFirstRow(grid, e.row);
 }
 
-</script> 
+</script>*@ 
 <style type="text/css">
     #contentcolumn {
         margin-right: 0;

@@ -180,17 +180,17 @@
         </EntityType>
         <EntityType Name="UserClen">
           <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="ClebId" />
+            <PropertyRef Name="UserClenId" />
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="ClebId" Type="int" Nullable="false" />
+          <Property Name="ClenId" Type="int" Nullable="false" />
+          <Property Name="UserClenId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="nvarchar" MaxLength="56" Nullable="false" />
         </EntityType>
         <EntityType Name="WebPages">
@@ -489,7 +489,7 @@
               <PropertyRef Name="ClenId" />
             </Principal>
             <Dependent Role="UserClen">
-              <PropertyRef Name="ClebId" />
+              <PropertyRef Name="ClenId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -668,33 +668,16 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="SlavojDB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="SlavojDBContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="UserProfiles" EntityType="SlavojDB.UserProfile" />
           <EntitySet Name="webpages_Membership" EntityType="SlavojDB.webpages_Membership" />
           <EntitySet Name="webpages_OAuthMembership" EntityType="SlavojDB.webpages_OAuthMembership" />
           <EntitySet Name="webpages_Roles" EntityType="SlavojDB.webpages_Roles" />
-          <AssociationSet Name="webpages_UsersInRoles" Association="SlavojDB.webpages_UsersInRoles">
-            <End Role="UserProfile" EntitySet="UserProfiles" />
-            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
-          </AssociationSet>
           <EntitySet Name="Kategories" EntityType="SlavojDB.Kategorie" />
-          <AssociationSet Name="FK_webpages_Membership_UserProfile" Association="SlavojDB.FK_webpages_Membership_UserProfile">
-            <End Role="UserProfile" EntitySet="UserProfiles" />
-            <End Role="webpages_Membership" EntitySet="webpages_Membership" />
-          </AssociationSet>
           <EntitySet Name="Clanky" EntityType="SlavojDB.Clanek" />
           <AssociationSet Name="FK_Clanky_Kategorie" Association="SlavojDB.FK_Clanky_Kategorie">
             <End Role="Kategorie" EntitySet="Kategories" />
             <End Role="Clanky" EntitySet="Clanky" />
           </AssociationSet>
-          <AssociationSet Name="FK_Clanky_UserProfile" Association="SlavojDB.FK_Clanky_UserProfile">
-            <End Role="UserProfile" EntitySet="UserProfiles" />
-            <End Role="Clanky" EntitySet="Clanky" />
-          </AssociationSet>
           <EntitySet Name="Cleni" EntityType="SlavojDB.Clen" />
-          <AssociationSet Name="UserClen" Association="SlavojDB.UserClen">
-            <End Role="Clen" EntitySet="Cleni" />
-            <End Role="UserProfile" EntitySet="UserProfiles" />
-          </AssociationSet>
           <EntitySet Name="Adresy" EntityType="SlavojDB.Adresa" />
           <EntitySet Name="CleniInRoles" EntityType="SlavojDB.CleniInRole" />
           <EntitySet Name="CleniRoles" EntityType="SlavojDB.CleniRole" />
@@ -778,18 +761,29 @@
             <End Role="WebPage" EntitySet="WebPages" />
             <End Role="Turnaj" EntitySet="Turnaje" />
           </AssociationSet>
+          <EntitySet Name="UserCleni" EntityType="SlavojDB.UserClen" />
+          <EntitySet Name="UserProfiles" EntityType="SlavojDB.UserProfile" />
+          <AssociationSet Name="FK_Clanky_UserProfile" Association="SlavojDB.FK_Clanky_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="Clanek" EntitySet="Clanky" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClen_Cleni" Association="SlavojDB.FK_UserClen_Cleni">
+            <End Role="Clen" EntitySet="Cleni" />
+            <End Role="UserClen" EntitySet="UserCleni" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserClen_UserProfile" Association="SlavojDB.FK_UserClen_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="UserClen" EntitySet="UserCleni" />
+          </AssociationSet>
+          <AssociationSet Name="FK_webpages_Membership_UserProfile" Association="SlavojDB.FK_webpages_Membership_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="webpages_Membership" EntitySet="webpages_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="SlavojDB.webpages_UsersInRoles">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="UserProfile">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="UserName" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="webpages_Roles" Relationship="SlavojDB.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
-          <NavigationProperty Name="webpages_Membership" Relationship="SlavojDB.FK_webpages_Membership_UserProfile" FromRole="UserProfile" ToRole="webpages_Membership" />
-          <NavigationProperty Name="Clanky" Relationship="SlavojDB.FK_Clanky_UserProfile" FromRole="UserProfile" ToRole="Clanky" />
-          <NavigationProperty Name="Cleni" Relationship="SlavojDB.UserClen" FromRole="UserProfile" ToRole="Clen" />
-        </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
             <PropertyRef Name="UserId" />
@@ -824,10 +818,6 @@
           <Property Type="String" Name="RoleName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="UserProfiles" Relationship="SlavojDB.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
         </EntityType>
-        <Association Name="webpages_UsersInRoles">
-          <End Type="SlavojDB.UserProfile" Role="UserProfile" Multiplicity="*" />
-          <End Type="SlavojDB.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
-        </Association>
         <EntityType Name="Kategorie">
           <Key>
             <PropertyRef Name="KategorieId" />
@@ -836,18 +826,6 @@
           <Property Type="String" Name="Nazev" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Clanky" Relationship="SlavojDB.FK_Clanky_Kategorie" FromRole="Kategorie" ToRole="Clanky" />
         </EntityType>
-        <Association Name="FK_webpages_Membership_UserProfile">
-          <End Type="SlavojDB.UserProfile" Role="UserProfile" Multiplicity="1" />
-          <End Type="SlavojDB.webpages_Membership" Role="webpages_Membership" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="UserProfile">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="webpages_Membership">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Clanek">
           <Key>
             <PropertyRef Name="ClanekId" />
@@ -860,7 +838,7 @@
           <Property Type="DateTime" Name="DatumZmeny" Nullable="false" Precision="7" />
           <Property Type="Int32" Name="KategorieId" Nullable="false" />
           <NavigationProperty Name="Kategorie" Relationship="SlavojDB.FK_Clanky_Kategorie" FromRole="Clanky" ToRole="Kategorie" />
-          <NavigationProperty Name="UserProfile" Relationship="SlavojDB.FK_Clanky_UserProfile" FromRole="Clanky" ToRole="UserProfile" />
+          <NavigationProperty Name="UserProfile" Relationship="SlavojDB.FK_Clanky_UserProfile" FromRole="Clanek" ToRole="UserProfile" />
         </EntityType>
         <Association Name="FK_Clanky_Kategorie">
           <End Type="SlavojDB.Kategorie" Role="Kategorie" Multiplicity="1" />
@@ -874,18 +852,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Clanky_UserProfile">
-          <End Type="SlavojDB.UserProfile" Role="UserProfile" Multiplicity="1" />
-          <End Type="SlavojDB.Clanek" Role="Clanky" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserProfile">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Clanky">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Clen">
           <Key>
             <PropertyRef Name="ClenId" />
@@ -896,7 +862,6 @@
           <Property Type="String" Name="TitulPred" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="TitulZa" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="JeClen" Nullable="false" />
-          <NavigationProperty Name="UserProfiles" Relationship="SlavojDB.UserClen" FromRole="Clen" ToRole="UserProfile" />
           <NavigationProperty Name="Adresa" Relationship="SlavojDB.FK_Adresy_Cleni" FromRole="Clen" ToRole="Adresy" />
           <NavigationProperty Name="CleniInRoles" Relationship="SlavojDB.FK_CleniInRoles_Cleni" FromRole="Clen" ToRole="CleniInRole" />
           <NavigationProperty Name="Kontakt" Relationship="SlavojDB.FK_Kontakty_Cleni" FromRole="Clen" ToRole="Kontakty" />
@@ -912,11 +877,8 @@
           <Property Name="PohlavyNazev" Type="String" MaxLength="4" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Turnajes" Relationship="SlavojDB.FK_Turnaje_Cleni" FromRole="Clen" ToRole="Turnaje" />
           <Property Name="Fotka" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserCleni" Relationship="SlavojDB.FK_UserClen_Cleni" FromRole="Clen" ToRole="UserClen" />
           </EntityType>
-        <Association Name="UserClen">
-          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="*" />
-          <End Type="SlavojDB.UserProfile" Role="UserProfile" Multiplicity="*" />
-        </Association>
         <EntityType Name="Adresa">
           <Key>
             <PropertyRef Name="ClenId" />
@@ -1303,20 +1265,85 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserClen">
+          <Key>
+            <PropertyRef Name="UserClenId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ClenId" Type="Int32" Nullable="false" />
+          <Property Name="UserClenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Clen" Relationship="SlavojDB.FK_UserClen_Cleni" FromRole="UserClen" ToRole="Clen" />
+          <NavigationProperty Name="UserProfile" Relationship="SlavojDB.FK_UserClen_UserProfile" FromRole="UserClen" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clanky" Relationship="SlavojDB.FK_Clanky_UserProfile" FromRole="UserProfile" ToRole="Clanek" />
+          <NavigationProperty Name="UserCleni" Relationship="SlavojDB.FK_UserClen_UserProfile" FromRole="UserProfile" ToRole="UserClen" />
+          <NavigationProperty Name="webpages_Membership" Relationship="SlavojDB.FK_webpages_Membership_UserProfile" FromRole="UserProfile" ToRole="webpages_Membership" />
+          <NavigationProperty Name="webpages_Roles" Relationship="SlavojDB.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
+        </EntityType>
+        <Association Name="FK_Clanky_UserProfile">
+          <End Type="SlavojDB.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="SlavojDB.Clanek" Role="Clanek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Clanek">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClen_Cleni">
+          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="1" />
+          <End Type="SlavojDB.UserClen" Role="UserClen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clen">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="UserClen">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserClen_UserProfile">
+          <End Type="SlavojDB.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="SlavojDB.UserClen" Role="UserClen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserClen">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_webpages_Membership_UserProfile">
+          <End Type="SlavojDB.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="SlavojDB.webpages_Membership" Role="webpages_Membership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="webpages_Membership">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="webpages_UsersInRoles">
+          <End Type="SlavojDB.UserProfile" Role="UserProfile" Multiplicity="*" />
+          <End Type="SlavojDB.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="SlavojDBStoreContainer" CdmEntityContainer="SlavojDBContainer">
-          <EntitySetMapping Name="UserProfiles">
-            <EntityTypeMapping TypeName="SlavojDB.UserProfile">
-              <MappingFragment StoreEntitySet="UserProfile">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="webpages_Membership">
             <EntityTypeMapping TypeName="SlavojDB.webpages_Membership">
               <MappingFragment StoreEntitySet="webpages_Membership">
@@ -1351,14 +1378,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="SlavojDB.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
-            <EndProperty Name="webpages_Roles">
-              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="UserProfile">
-              <ScalarProperty Name="UserId" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="Kategories">
             <EntityTypeMapping TypeName="SlavojDB.Kategorie">
               <MappingFragment StoreEntitySet="Kategorie">
@@ -1398,14 +1417,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="UserClen" TypeName="SlavojDB.UserClen" StoreEntitySet="UserClen">
-            <EndProperty Name="UserProfile">
-              <ScalarProperty Name="UserId" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="Clen">
-              <ScalarProperty Name="ClenId" ColumnName="ClebId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="Adresy">
             <EntityTypeMapping TypeName="SlavojDB.Adresa">
               <MappingFragment StoreEntitySet="Adresy">
@@ -1565,6 +1576,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserCleni">
+            <EntityTypeMapping TypeName="SlavojDB.UserClen">
+              <MappingFragment StoreEntitySet="UserClen">
+                <ScalarProperty Name="UserClenId" ColumnName="UserClenId" />
+                <ScalarProperty Name="ClenId" ColumnName="ClenId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="SlavojDB.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="SlavojDB.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
           </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

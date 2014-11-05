@@ -21,7 +21,7 @@
         <div class="editor-label">
             @Html.LabelFor(model => model.HtmlText)
         </div>
-        <div class="editor-editor">
+        <div class ="editor-htmltext">
             @Html.EditorFor(model => model.HtmlText)
             @Html.ValidationMessageFor(model => model.HtmlText)
         </div>
@@ -54,4 +54,15 @@
     .t-footer {
         background-color: #87B9D6;
     }
+    .t-editor
+    {
+        height:600px;
+    }
+.editor-htmltext
+{
+    clear:both;
+    overflow:visible;
+    display:block;
+    float:left;
+}
 </style>

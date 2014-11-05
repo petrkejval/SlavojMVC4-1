@@ -5,21 +5,20 @@
         @Model.Predmet
     </div>
     <div class ="ulozil">
-        @*@Model.DatumVytvoreni*@
         @Html.ActionLink(Model.DatumVytvoreni.ToString(), "Index", new {datumvVytvoreni=Model.DatumVytvoreni})
         @{
             string jmeno = "";
-            if (Model.UserProfile.Cleni.Count == 0)
+            if (Model.UserProfile.UserCleni.Count == 0)
             {
                 jmeno = Model.UserProfile.UserName;
             }
             else
             {
                 jmeno = SlavojMVC4_1.Infrastructure.Tools.GetFullName(
-                    Model.UserProfile.Cleni.First().TitulPred,
-                    Model.UserProfile.Cleni.First().Jmeno,
-                    Model.UserProfile.Cleni.First().Prijmeni,
-                    Model.UserProfile.Cleni.First().TitulZa);
+                    Model.UserProfile.UserCleni.First().Clen.TitulPred,
+                    Model.UserProfile.UserCleni.First().Clen.Jmeno,
+                    Model.UserProfile.UserCleni.First().Clen.Prijmeni,
+                    Model.UserProfile.UserCleni.First().Clen.TitulZa);
             }
             int userId = Model.UserId;
             @Html.ActionLink(jmeno, "Index", new { userId = Model.UserId });

@@ -8,21 +8,24 @@ using SlavojMVC4_1.Models;
 
 namespace SlavojMVC4_1.Controllers.Nastaveni
 {
-    public class ClenList
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
+    //public class ClenList
+    //{
+    //    public int Id { get; set; }
+    //    public string Name { get; set; }
 
-    }
+    //}
 
+    [Authorize(Roles = ("clen"))]
     public class NastaveniController : Controller
     {
         // GET: Cleni
+        [Authorize(Roles = ("clen"))]
         public ActionResult Cleni()
         {
             return View();
         }
 
+        [Authorize(Roles = ("superuser"))]
         public ActionResult Druzstva()
         {
             ViewBag.DruzstvaCleniListItem = new SlavojDBContainer().Cleni
@@ -45,6 +48,7 @@ namespace SlavojMVC4_1.Controllers.Nastaveni
             return View();
         }
 
+        [Authorize(Roles = ("superuser"))]
         public ActionResult Souteze()
         {
             ViewBag.KategorieSouteziListItem = new SlavojDBContainer().KategorieSoutezi
@@ -53,11 +57,13 @@ namespace SlavojMVC4_1.Controllers.Nastaveni
             return View();
         }
 
+        [Authorize(Roles = ("superuser"))]
         public ActionResult KategorieSoutezi()
         {
             return View();
         }
 
+        [Authorize(Roles = ("superuser"))]
         public ActionResult Turnaje()
         {
             ViewBag.RediteleTurnajuListItem = new SlavojDBContainer().Cleni
@@ -72,6 +78,7 @@ namespace SlavojMVC4_1.Controllers.Nastaveni
             return View();
         }
 
+        [Authorize(Roles = ("superuser"))]
         public ActionResult WebPages()
         {
             return View();

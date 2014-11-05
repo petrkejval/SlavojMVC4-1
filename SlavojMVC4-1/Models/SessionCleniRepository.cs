@@ -6,6 +6,8 @@
     using System.Linq;
     using System.Web;
     using SlavojMVC4_1.Models;
+    using WebMatrix.WebData;
+
 
     public class SessionCleniRepository
     {
@@ -18,51 +20,116 @@
             int? MyNullableInt = null;
             if (result == null)
             {
-                HttpContext.Current.Session["Cleni"] = result =
-                    (from clen in new SlavojDBContainer().Cleni
-                        select new EditableClen
-                        {
 
-                            ClenId = clen.ClenId,
-                            TitulPred = clen.TitulPred,
-                            Jmeno = clen.Jmeno,
-                            Prijmeni = clen.Prijmeni,
-                            TitulZa = clen.TitulZa,
-                            JeClen = clen.JeClen,
-                            RodneCislo = clen.RodneCislo,
-                            DatumNarozeni = (clen.DatumNarozeni != null) ? clen.DatumNarozeni : MyNullableDate,
-                            PohlaviId = (clen.PohlaviId != null) ? clen.PohlaviId : MyNullableInt,
-                            PohlaviNazev = (clen.PohlavyNazev != null) ? clen.PohlavyNazev : null,
-                            Vek = (clen.Vek != null) ? clen.Vek : MyNullableInt,
-                            Fotka = clen.Fotka,
-                            
+                using (var db = new SlavojDBContainer())
+                {
+                   int userId = WebSecurity.CurrentUserId;
+                   var userclen = db.UserCleni.Find(userId) ?? null;
+                   int clenId = -1; 
+                   if (userclen != null)
+                   {
+                      clenId = userclen.ClenId;
+                   } 
+                   var userprofiles = db.UserProfiles.Find(userId).webpages_Roles.FirstOrDefault(a => a.RoleName == "admin" || a.RoleName == "superuser");
+                   if (userprofiles == null)
+                   {
+                       HttpContext.Current.Session["Cleni"] = result =
+                           (from clen in db.Cleni
+                            select new EditableClen
+                            {
 
-                            AdresaUlice = (clen.Adresa != null) ? clen.Adresa.Ulice : null,
-                            AdresaCisloPopisne = (clen.Adresa != null) ? clen.Adresa.CisloPopisne : MyNullableInt,
-                            AdresaObec = (clen.Adresa != null) ? clen.Adresa.Obec : null,
-                            AdresaPsc = (clen.Adresa != null) ? clen.Adresa.Psc : MyNullableInt,
+                                ClenId = clen.ClenId,
+                                TitulPred = clen.TitulPred,
+                                Jmeno = clen.Jmeno,
+                                Prijmeni = clen.Prijmeni,
+                                TitulZa = clen.TitulZa,
+                                JeClen = clen.JeClen,
+                                RodneCislo = clen.RodneCislo,
+                                DatumNarozeni = (clen.DatumNarozeni != null) ? clen.DatumNarozeni : MyNullableDate,
+                                PohlaviId = (clen.PohlaviId != null) ? clen.PohlaviId : MyNullableInt,
+                                PohlaviNazev = (clen.PohlavyNazev != null) ? clen.PohlavyNazev : null,
+                                Vek = (clen.Vek != null) ? clen.Vek : MyNullableInt,
+                                Fotka = clen.Fotka,
 
-                            KontaktTelefon = (clen.Kontakt != null) ? clen.Kontakt.Telefon : null,
-                            KontaktMail = (clen.Kontakt != null) ? clen.Kontakt.Mail : null,
-                            KontaktWWW = (clen.Kontakt != null) ? clen.Kontakt.WWW : null,
 
-                            RegistraceCisloRegistrace = (clen.Registrace != null) ? clen.Registrace.CisloRegistrace : MyNullableInt,
-                            RegistracePlatnaDo = (clen.Registrace != null) ? clen.Registrace.PlatnaDo : MyNullableDate,
+                                AdresaUlice = (clen.Adresa != null) ? clen.Adresa.Ulice : null,
+                                AdresaCisloPopisne = (clen.Adresa != null) ? clen.Adresa.CisloPopisne : MyNullableInt,
+                                AdresaObec = (clen.Adresa != null) ? clen.Adresa.Obec : null,
+                                AdresaPsc = (clen.Adresa != null) ? clen.Adresa.Psc : MyNullableInt,
 
-                            RozhodciCisloRegistrace = (clen.Rozhodci != null) ? clen.Rozhodci.CisloRegistrace : null,
-                            RozhodciTrida = (clen.Rozhodci != null) ? clen.Rozhodci.Trida : null,
-                            RozhodciPlatnaDo = (clen.Rozhodci != null) ? clen.Rozhodci.PlatnaDo : MyNullableDate,
+                                KontaktTelefon = (clen.Kontakt != null) ? clen.Kontakt.Telefon : null,
+                                KontaktMail = (clen.Kontakt != null) ? clen.Kontakt.Mail : null,
+                                KontaktWWW = (clen.Kontakt != null) ? clen.Kontakt.WWW : null,
 
-                            TrenerCisloRegistrace = (clen. Trener != null) ? clen.Trener.CisloRegistrace : null,
-                            TrenerTrida = (clen.Trener != null) ? clen.Trener.Trida : null,
-                            TrenerPlatnaDo = (clen.Trener != null) ? clen.Trener.PlatnaDo : MyNullableDate
+                                RegistraceCisloRegistrace = (clen.Registrace != null) ? clen.Registrace.CisloRegistrace : MyNullableInt,
+                                RegistracePlatnaDo = (clen.Registrace != null) ? clen.Registrace.PlatnaDo : MyNullableDate,
 
-                        }
-                    )
-                    .Where(w => w.ClenId != 0)
-                    .OrderBy(o => o.Prijmeni)
-                    .ThenBy(o => o.Jmeno)
-                    .ToList();
+                                RozhodciCisloRegistrace = (clen.Rozhodci != null) ? clen.Rozhodci.CisloRegistrace : null,
+                                RozhodciTrida = (clen.Rozhodci != null) ? clen.Rozhodci.Trida : null,
+                                RozhodciPlatnaDo = (clen.Rozhodci != null) ? clen.Rozhodci.PlatnaDo : MyNullableDate,
+
+                                TrenerCisloRegistrace = (clen.Trener != null) ? clen.Trener.CisloRegistrace : null,
+                                TrenerTrida = (clen.Trener != null) ? clen.Trener.Trida : null,
+                                TrenerPlatnaDo = (clen.Trener != null) ? clen.Trener.PlatnaDo : MyNullableDate
+
+                            }
+                           )
+                           .Where(w => w.ClenId != 0 && w.ClenId == clenId)
+                           .OrderBy(o => o.Prijmeni)
+                           .ThenBy(o => o.Jmeno)
+                           .ToList();
+
+                   }
+                   else
+                   {
+                       HttpContext.Current.Session["Cleni"] = result =
+                           (from clen in new SlavojDBContainer().Cleni
+                            select new EditableClen
+                            {
+
+                                ClenId = clen.ClenId,
+                                TitulPred = clen.TitulPred,
+                                Jmeno = clen.Jmeno,
+                                Prijmeni = clen.Prijmeni,
+                                TitulZa = clen.TitulZa,
+                                JeClen = clen.JeClen,
+                                RodneCislo = clen.RodneCislo,
+                                DatumNarozeni = (clen.DatumNarozeni != null) ? clen.DatumNarozeni : MyNullableDate,
+                                PohlaviId = (clen.PohlaviId != null) ? clen.PohlaviId : MyNullableInt,
+                                PohlaviNazev = (clen.PohlavyNazev != null) ? clen.PohlavyNazev : null,
+                                Vek = (clen.Vek != null) ? clen.Vek : MyNullableInt,
+                                Fotka = clen.Fotka,
+
+
+                                AdresaUlice = (clen.Adresa != null) ? clen.Adresa.Ulice : null,
+                                AdresaCisloPopisne = (clen.Adresa != null) ? clen.Adresa.CisloPopisne : MyNullableInt,
+                                AdresaObec = (clen.Adresa != null) ? clen.Adresa.Obec : null,
+                                AdresaPsc = (clen.Adresa != null) ? clen.Adresa.Psc : MyNullableInt,
+
+                                KontaktTelefon = (clen.Kontakt != null) ? clen.Kontakt.Telefon : null,
+                                KontaktMail = (clen.Kontakt != null) ? clen.Kontakt.Mail : null,
+                                KontaktWWW = (clen.Kontakt != null) ? clen.Kontakt.WWW : null,
+
+                                RegistraceCisloRegistrace = (clen.Registrace != null) ? clen.Registrace.CisloRegistrace : MyNullableInt,
+                                RegistracePlatnaDo = (clen.Registrace != null) ? clen.Registrace.PlatnaDo : MyNullableDate,
+
+                                RozhodciCisloRegistrace = (clen.Rozhodci != null) ? clen.Rozhodci.CisloRegistrace : null,
+                                RozhodciTrida = (clen.Rozhodci != null) ? clen.Rozhodci.Trida : null,
+                                RozhodciPlatnaDo = (clen.Rozhodci != null) ? clen.Rozhodci.PlatnaDo : MyNullableDate,
+
+                                TrenerCisloRegistrace = (clen.Trener != null) ? clen.Trener.CisloRegistrace : null,
+                                TrenerTrida = (clen.Trener != null) ? clen.Trener.Trida : null,
+                                TrenerPlatnaDo = (clen.Trener != null) ? clen.Trener.PlatnaDo : MyNullableDate
+
+                            }
+                           )
+                           .Where(w => w.ClenId != 0)
+                           .OrderBy(o => o.Prijmeni)
+                           .ThenBy(o => o.Jmeno)
+                           .ToList();
+                       
+                   }
+                }
 
             }
 
