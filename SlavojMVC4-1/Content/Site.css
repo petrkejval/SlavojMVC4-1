@@ -663,7 +663,17 @@ tr.pager td {
 *   Mobile Styles   *
 ********************/
 @media only screen and (max-width: 850px) {
-
+    #rightcolumn
+    {
+        visibility:collapse;
+    }
+    #contentcolumn{
+        margin-right: 0px;
+    }
+    .pruh
+    {
+        visibility:collapse;
+    }
     /* header
     ----------------------------------------------------------*/
     header .float-left,

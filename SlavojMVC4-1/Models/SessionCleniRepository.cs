@@ -29,8 +29,8 @@
                    if (userclen != null)
                    {
                       clenId = userclen.ClenId;
-                   } 
-                   var userprofiles = db.UserProfiles.Find(userId).webpages_Roles.FirstOrDefault(a => a.RoleName == "admin" || a.RoleName == "superuser");
+                   }
+                   var userprofiles = db.UserProfiles.Find(userId).webpages_UsersInRoles.FirstOrDefault(a => a.webpages_Roles.RoleName == "admin" || a.webpages_Roles.RoleName == "superuser");
                    if (userprofiles == null)
                    {
                        HttpContext.Current.Session["Cleni"] = result =

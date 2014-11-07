@@ -18,7 +18,7 @@ namespace SlavojMVC4_1.Models
         {
             this.Clanky = new HashSet<Clanek>();
             this.UserCleni = new HashSet<UserClen>();
-            this.webpages_Roles = new HashSet<webpages_Roles>();
+            this.webpages_UsersInRoles = new HashSet<webpages_UsersInRoles>();
         }
     
         public int UserId { get; set; }
@@ -27,6 +27,6 @@ namespace SlavojMVC4_1.Models
         public virtual ICollection<Clanek> Clanky { get; set; }
         public virtual ICollection<UserClen> UserCleni { get; set; }
         public virtual webpages_Membership webpages_Membership { get; set; }
-        public virtual ICollection<webpages_Roles> webpages_Roles { get; set; }
+        public virtual ICollection<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
     }
 }

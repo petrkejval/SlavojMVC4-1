@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Home Page";
 }
-
+<div class="clanek">
 <form name="searchForm" method="get" action="@Url.Action("Index", "Home")" 
       data-otf-ajax="true" 
       data-otf-target="#listClanky"
@@ -37,3 +37,4 @@
 </form>
 
 @Html.Partial("_Clanky", Model)
+</div>

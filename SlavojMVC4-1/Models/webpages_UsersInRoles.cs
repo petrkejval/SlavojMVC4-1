@@ -12,16 +12,13 @@ namespace SlavojMVC4_1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class webpages_Roles
+    public partial class webpages_UsersInRoles
     {
-        public webpages_Roles()
-        {
-            this.webpages_UsersInRoles = new HashSet<webpages_UsersInRoles>();
-        }
-    
+        public int UserId { get; set; }
         public int RoleId { get; set; }
-        public string RoleName { get; set; }
+        public int UserInRoleId { get; set; }
     
-        public virtual ICollection<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
+        public virtual webpages_Roles webpages_Roles { get; set; }
     }
 }

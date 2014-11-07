@@ -83,5 +83,23 @@ namespace SlavojMVC4_1.Controllers.Nastaveni
         {
             return View();
         }
+
+        [Authorize(Roles = ("admin"))]
+        public ActionResult UserClen()
+        {
+            ViewBag.UserCleniUserListItem = new SlavojDBContainer().UserProfiles
+                                                 .Select(e => new { Id = e.UserId, Name = e.UserName })
+                                                 .OrderBy(e => e.Name);
+
+            ViewBag.UserCleniClenListItem = new SlavojDBContainer().Cleni
+                                                 .Select(e => new { Id = e.ClenId, Name = e.Prijmeni + " " + e.Jmeno })
+                                                 .OrderBy(e => e.Name);
+
+            ViewBag.RoleListItem = new SlavojDBContainer().webpages_Roles
+                                     .Select(e => new { Id = e.RoleId, Name = e.RoleName })
+                                     .OrderBy(e => e.Name);
+
+            return View();
+        }
     }
 }

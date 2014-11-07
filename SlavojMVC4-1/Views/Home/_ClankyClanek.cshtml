@@ -1,11 +1,11 @@
 ﻿@model Clanek
 
-<div class ="clanek">
-    <div class ="predmet">
+<div class="clanek-soupisky">
+    <div class="predmet">
         @Model.Predmet
     </div>
-    <div class ="ulozil">
-        @Html.ActionLink(Model.DatumVytvoreni.ToString(), "Index", new {datumvVytvoreni=Model.DatumVytvoreni})
+    <div class="ulozil">
+        @Html.ActionLink(Model.DatumVytvoreni.ToString(), "Index", new { datumvVytvoreni = Model.DatumVytvoreni })
         @{
             string jmeno = "";
             if (Model.UserProfile.UserCleni.Count == 0)
@@ -23,9 +23,9 @@
             int userId = Model.UserId;
             @Html.ActionLink(jmeno, "Index", new { userId = Model.UserId });
         }
-        @Html.ActionLink(Model.Kategorie.Nazev, "Index", new {kategorieId=Model.KategorieId})
+        @Html.ActionLink(Model.Kategorie.Nazev, "Index", new { kategorieId = Model.KategorieId })
     </div>
-    <div class ="text">
+    <div class="text">
         @Html.Raw(@Model.Text)
     </div>
     <div class="pata">
@@ -34,9 +34,9 @@
             //if ((WebSecurity.CurrentUserId == item.UserId) || (SlavojMVC4_1.Infrastructure.Role.IsRole(WebSecurity.CurrentUserId, "admin")))
             if ((WebSecurity.CurrentUserId == Model.UserId) || (User.IsInRole("admin")))
             {
-                @Html.ActionLink("Upravit",  "Edit", new { id=Model.ClanekId })
-                @Html.ActionLink("Detail" ,  "Details", new { id=Model.ClanekId })
-                @Html.ActionLink("Smazat" ,  "Delete", new { id=Model.ClanekId })
+                @Html.ActionLink("Upravit", "Edit", new { id = Model.ClanekId })
+                @Html.ActionLink("Detail", "Details", new { id = Model.ClanekId })
+                @Html.ActionLink("Smazat", "Delete", new { id = Model.ClanekId })
             }
         }
     </div>

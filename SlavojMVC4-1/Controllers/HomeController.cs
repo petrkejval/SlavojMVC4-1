@@ -130,7 +130,7 @@ namespace SlavojMVC4_1.Controllers
                              && (kategorieId      == -1                || r.KategorieId == kategorieId)
                              && (datumvVytvoreni1 == DateTime.MinValue || (r.DatumVytvoreni.Year == datumvVytvoreni1.Year && r.DatumVytvoreni.Month == datumvVytvoreni1.Month && r.DatumVytvoreni.Day == datumvVytvoreni1.Day))
                     )
-                    .ToPagedList(page, 3)
+                    .ToPagedList(page, 10)
                     ;
             if (Request.IsAjaxRequest())
             {

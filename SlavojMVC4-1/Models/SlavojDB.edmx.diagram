@@ -7,8 +7,7 @@
       <Diagram DiagramId="be4df5110cd84194ad32a39b4336e3d0" Name="Diagram1" ZoomLevel="95" >
         <EntityTypeShape EntityType="SlavojDB.webpages_Membership" Width="2.25" PointX="5.875" PointY="0.5" />
         <EntityTypeShape EntityType="SlavojDB.webpages_OAuthMembership" Width="1.5" PointX="8.375" PointY="0.625" />
-        <EntityTypeShape EntityType="SlavojDB.webpages_Roles" Width="2.875" PointX="2.5" PointY="0.5" />
-        <EntityTypeShape EntityType="SlavojDB.Kategorie" Width="1.5" PointX="2.375" PointY="3.875" />
+        <EntityTypeShape EntityType="SlavojDB.Kategorie" Width="1.5" PointX="2.375" PointY="6" />
         <EntityTypeShape EntityType="SlavojDB.Clanek" Width="1.5" PointX="0.5" PointY="3.875" />
         <AssociationConnector Association="SlavojDB.FK_Clanky_Kategorie" />
         <EntityTypeShape EntityType="SlavojDB.Entity1" Width="1.5" PointX="5.375" PointY="3.75" />
@@ -47,12 +46,15 @@
         <AssociationConnector Association="SlavojDB.FK_Druzstva_WebPages" />
         <AssociationConnector Association="SlavojDB.FK_Turnaje_WebPages" />
         <EntityTypeShape EntityType="SlavojDB.UserClen" Width="1.5" PointX="11" PointY="10.75" />
-        <EntityTypeShape EntityType="SlavojDB.UserProfile" Width="1.5" PointX="0.5" PointY="1.375" />
-        <AssociationConnector Association="SlavojDB.FK_Clanky_UserProfile" />
         <AssociationConnector Association="SlavojDB.FK_UserClen_Cleni" />
+        <EntityTypeShape EntityType="SlavojDB.UserProfile" Width="1.5" PointX="0.625" PointY="0.5" />
+        <EntityTypeShape EntityType="SlavojDB.webpages_Roles" Width="1.5" PointX="2.5" PointY="3.25" />
+        <EntityTypeShape EntityType="SlavojDB.webpages_UsersInRoles" Width="1.5" PointX="3.375" PointY="0.5" />
+        <AssociationConnector Association="SlavojDB.FK_Clanky_UserProfile" />
         <AssociationConnector Association="SlavojDB.FK_UserClen_UserProfile" />
         <AssociationConnector Association="SlavojDB.FK_webpages_Membership_UserProfile" />
-        <AssociationConnector Association="SlavojDB.webpages_UsersInRoles" />
+        <AssociationConnector Association="SlavojDB.FK_webpages_UsersInRoles_UserProfile" />
+        <AssociationConnector Association="SlavojDB.FK_webpages_UsersInRoles_webpages_Roles" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

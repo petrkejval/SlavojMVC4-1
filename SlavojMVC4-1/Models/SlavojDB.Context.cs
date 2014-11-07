@@ -27,7 +27,6 @@ namespace SlavojMVC4_1.Models
     
         public DbSet<webpages_Membership> webpages_Membership { get; set; }
         public DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
-        public DbSet<webpages_Roles> webpages_Roles { get; set; }
         public DbSet<Kategorie> Kategories { get; set; }
         public DbSet<Clanek> Clanky { get; set; }
         public DbSet<Clen> Cleni { get; set; }
@@ -48,5 +47,7 @@ namespace SlavojMVC4_1.Models
         public DbSet<WebPage> WebPages { get; set; }
         public DbSet<UserClen> UserCleni { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<webpages_Roles> webpages_Roles { get; set; }
+        public DbSet<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
     }
 }

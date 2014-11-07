@@ -218,6 +218,7 @@
     <Compile Include="Controllers\Nastaveni\NastaveniController.cs" />
     <Compile Include="Controllers\Nastaveni\SoutezeGridController.cs" />
     <Compile Include="Controllers\Nastaveni\TurnajeGridController.cs" />
+    <Compile Include="Controllers\Nastaveni\UserCleniGridController.cs" />
     <Compile Include="Controllers\Nastaveni\WebPagesGridController.cs" />
     <Compile Include="Extensions\HtmlHelpersExtensions.cs" />
     <Compile Include="Filters\ConditionalValidationAttribute.cs" />
@@ -529,6 +530,10 @@
     <Compile Include="Models\UserClen.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserClenEditable.cs" />
+    <Compile Include="Models\UserCleniSessionRepository.cs" />
+    <Compile Include="Models\UserClenUserInRoleEditable.cs" />
+    <Compile Include="Models\UserClenUserInRoleSessionRepository.cs" />
     <Compile Include="Models\UserProfile.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
@@ -544,6 +549,9 @@
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\webpages_Roles.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\webpages_UsersInRoles.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1193,7 +1201,6 @@
       <DependentUpon>SlavojDB.edmx</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Models\SlavojDB.edmx.sql" />
     <Content Include="Models\SlavojDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SlavojDB.edmx</DependentUpon>
@@ -1360,6 +1367,7 @@
     <Content Include="Views\Nastaveni\WebPages.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\WebPageEditable.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
+    <Content Include="Views\Nastaveni\UserClen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -1373,6 +1381,7 @@
     <Folder Include="Views\KategorieSouteziGrid\" />
     <Folder Include="Views\Souteze\" />
     <Folder Include="Views\TurnajeGrid\" />
+    <Folder Include="Views\UserCleniGrid\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.zh-CN.resx">

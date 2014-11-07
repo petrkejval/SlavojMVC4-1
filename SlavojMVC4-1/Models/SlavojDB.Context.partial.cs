@@ -74,6 +74,24 @@
                         result.Add(new ValidationResult("Zadaný člen už existuje.", propertyName));
                         break;
                     }
+                    else if (errorMessage.IndexOf("IX_UserClen_UserId") > -1)
+                    {
+                        propertyName[0] = "UserId";
+                        result.Add(new ValidationResult("Zadaný uživatel je už propojen s nějakým členem.", propertyName));
+                        break;
+                    }
+                    else if (errorMessage.IndexOf("IX_UserClen_ClenId") > -1)
+                    {
+                        propertyName[0] = "ClenId";
+                        result.Add(new ValidationResult("Zadaný člen je už propojen s nějakým uživatelem.", propertyName));
+                        break;
+                    }
+                    else if (errorMessage.IndexOf("IX_webpages_UsersInRoles_UserId_RoleId") > -1)
+                    {
+                        propertyName[0] = "RoleId";
+                        result.Add(new ValidationResult("Člen už má přidělenu tuto roli.", propertyName));
+                        break;
+                    }
                     else
                     {
                         result.Add(new ValidationResult(errorMessage));
