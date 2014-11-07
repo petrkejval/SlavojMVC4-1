@@ -5,3 +5,17 @@ https://drive.google.com/uc?id=FILE-ID
 Za FILE-ID dosadím 0B7WsVs1JytOnWFlvUm41UndtVU0
 
 https://drive.google.com/uc?id=0B7WsVs1JytOnWFlvUm41UndtVU0
+
+Nahraji si obrázek na Google disk.
+Na obrázku stisknu pravé tlaèítko myši a z kontextové nabídky vyberu Sdílet...
+V rozbalovacím seznamu vyberu volbu Mùže prohlížet.
+Stisknu tlaèítko Získat odkaz ke sdílené.
+Zobrazený odkaz pro sdílení obrázku si zkopíruji do schránky.
+Spustím nìjaký textový editor, napø. Poznámkový blok, a odkaz do nìj nakopíruji
+https://drive.google.com/file/d/0B7WsVs1JytOnWFlvUm41UndtVU0/view?usp=sharing
+Tento odkaz složí pro zobrazení obrázku v prohlížeèi obrázkù Google, a to já nechci. Já si chci obrázek zobrazit na svém webu, napø. v tomto èlánku
+Pro zobrazení obrázku z Google disku slouží odkaz https://drive.google.com/uc?id=FILE-ID , kde za FILE-ID dosadím FILE-ID mého obrázku, což je v mém pøípadì 0B7WsVs1JytOnWFlvUm41UndtVU0
+Výsledný odkaz pro sdílení pak bude vypadat takto https://drive.google.com/uc?id=0B7WsVs1JytOnWFlvUm41UndtVU0
+Obrázek do toho èlánku vložím tak, že stisknu ikonu Insert Image
+Do první øádky nakopíruji mùj odkaz na obrázek https://drive.google.com/uc?id=0B7WsVs1JytOnWFlvUm41UndtVU0 a stisknu tlaèítko Insert
+A tady je výsledek

@@ -212,6 +212,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DruzstvaController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\Nastaveni\DruzstvaGridController.cs" />
     <Compile Include="Controllers\Nastaveni\KategorieSouteziGridController.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Controllers\Nastaveni\TurnajeGridController.cs" />
     <Compile Include="Controllers\Nastaveni\UserCleniGridController.cs" />
     <Compile Include="Controllers\Nastaveni\WebPagesGridController.cs" />
+    <Compile Include="Controllers\TurnajeController.cs" />
     <Compile Include="Extensions\HtmlHelpersExtensions.cs" />
     <Compile Include="Filters\ConditionalValidationAttribute.cs" />
     <Compile Include="Models\Adresa.cs">
@@ -464,14 +466,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Nastaveni\CleniGridController.cs" />
     <Compile Include="Controllers\ComboBoxController.cs" />
-    <Compile Include="Controllers\DruzstvaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\KeStazeniController.cs" />
-    <Compile Include="Controllers\KontaktyController.cs" />
-    <Compile Include="Controllers\KuzelnaController.cs" />
-    <Compile Include="Controllers\OnasController.cs" />
-    <Compile Include="Controllers\ProgramNaKuzelneController.cs" />
-    <Compile Include="Controllers\TurnajeController.cs" />
     <Compile Include="Extensions\ControllerContextExtensions.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -1337,11 +1332,6 @@
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\Delete.cshtml" />
-    <Content Include="Views\Kontakty\Index.cshtml" />
-    <Content Include="Views\Onas\Index.cshtml" />
-    <Content Include="Views\Kuzelna\Index.cshtml" />
-    <Content Include="Views\ProgramNaKuzelne\Index.cshtml" />
-    <Content Include="Views\KeStazeni\Index.cshtml" />
     <Content Include="Views\Druzstva\Index.cshtml" />
     <Content Include="Views\Turnaje\Index.cshtml" />
     <Content Include="Views\Turnaje\OPerletovouPlaketu.cshtml" />
@@ -1377,11 +1367,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\themes\base\minified\" />
-    <Folder Include="Views\DruzstvaGrid\" />
-    <Folder Include="Views\KategorieSouteziGrid\" />
-    <Folder Include="Views\Souteze\" />
-    <Folder Include="Views\TurnajeGrid\" />
-    <Folder Include="Views\UserCleniGrid\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.zh-CN.resx">
@@ -1621,6 +1606,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
