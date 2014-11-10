@@ -1,4 +1,7 @@
 ﻿@model Druzstvo
+@{
+    ViewBag.Title = Model.Nazev + " " + Model.Pismeno + " " + Model.Soutez.Nazev + ", " + (Model.Soutez.KategorieSouteze.Nazev);
+}
 
 @*<hgroup class="title">
     <h1>@Model.Nazev @Model.Pismeno @Model.Soutez.Nazev, (@Model.Soutez.KategorieSouteze.Nazev)</h1>

@@ -1,4 +1,7 @@
 ﻿@{
+    ViewBag.Title = "Nastavení-Členi";
+}
+@{
     Html.Telerik()
                 .Grid<EditableClen>()
                 .Localizable("cs-CZ")
@@ -38,12 +41,12 @@
                             columns.Bound(o => o.Vek).Width(130);
                             columns.Bound(o => o.Fotka).Visible(false);
 
-                            
+
                             columns.Bound(o => o.AdresaUlice).Width(100);
                             columns.Bound(o => o.AdresaCisloPopisne).Width(100);
                             columns.Bound(o => o.AdresaObec).Width(100);
                             columns.Bound(o => o.AdresaPsc).Width(100);
-                            
+
                             columns.Bound(o => o.KontaktTelefon).Width(100);
                             columns.Bound(o => o.KontaktMail).Width(200);
                             columns.Bound(o => o.KontaktWWW).Width(100);
@@ -72,28 +75,28 @@
                             columns.Bound(o => o.RozhodciCisloRegistrace).Width(100);
                             columns.Bound(o => o.RozhodciTrida).Width(80);
                             columns.Bound(o => o.RozhodciPlatnaDo).Width(130).Format("{0:d}");
-                            
+
                             columns.Bound(o => o.TrenerCisloRegistrace).Width(100);
                             columns.Bound(o => o.TrenerTrida).Width(80);
                             columns.Bound(o => o.TrenerPlatnaDo).Width(130).Format("{0:d}");
                         }
                             )
                 .Editable(editing => editing.Mode(GridEditMode.InForm).TemplateName("EditableClen"))
-                //.ClientRowTemplate(grid =>
-                //    "<ul>" +
-                //       "<li>CustomerID: <#= TitulPred #></li>" +
-                //       "<li>Contact Name: <#= Jmeno #></li>" +
-                //       "<li>Country: <#= Prijmeni #></li>" +
-                //    "</ul>" + 
-                //    grid.EditButton(null) +
-                //    grid.DeleteButton(null))
+        //.ClientRowTemplate(grid =>
+        //    "<ul>" +
+        //       "<li>CustomerID: <#= TitulPred #></li>" +
+        //       "<li>Contact Name: <#= Jmeno #></li>" +
+        //       "<li>Country: <#= Prijmeni #></li>" +
+        //    "</ul>" +
+        //    grid.EditButton(null) +
+        //    grid.DeleteButton(null))
         .ClientEvents(events => events
             .OnError("onError"))
 
         .Render()
         ;
     Html.Telerik().ScriptRegistrar().Globalization(true);
-       
+
 }
 @Scripts.Render("~/bundles/globalize")
 

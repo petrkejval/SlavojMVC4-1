@@ -9,6 +9,8 @@ using System.Web.Routing;
 using WebMatrix.WebData;
 using SlavojMVC4_1.ModelBinders;
 using System.Web.Mvc;
+using System.Globalization;
+using System.Threading;
 
 namespace SlavojMVC4_1
 {
@@ -38,6 +40,14 @@ namespace SlavojMVC4_1
 
 
 
+        }
+
+        protected void Application_BeginRequest(Object sender, EventArgs e)
+        {
+            CultureInfo newCulture = (CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
+            newCulture.DateTimeFormat.ShortDatePattern = "d.M.yyyy";
+            newCulture.DateTimeFormat.DateSeparator = ".";
+            Thread.CurrentThread.CurrentCulture = newCulture;
         }
     }
 }

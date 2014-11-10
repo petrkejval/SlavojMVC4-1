@@ -1,4 +1,8 @@
 ﻿@{
+    ViewBag.Title = "Nastavení-Stránky";
+}
+
+@{
     Html.Telerik()
         .Grid<WebPageEditable>()
         .Name("WebPagesGrid")
@@ -19,8 +23,8 @@
                         commands.Delete().ButtonType(GridButtonType.BareImage);
                     }).Width(80);//.Title("Commands");
 
-                    columns.Bound(o => o.Nazev).Width(150);
-                    columns.Bound(o => o.HtmlText).Width(80).Visible(false);
+                    columns.Bound(o => o.Nazev).Width("*");
+                    columns.Bound(o => o.HtmlText).Width("*").Visible(false);
                 }
             )
         .Localizable("cs-CZ")

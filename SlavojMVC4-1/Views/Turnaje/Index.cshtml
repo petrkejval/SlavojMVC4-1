@@ -5,15 +5,15 @@
 </hgroup>*@
 <div class="clanek">
     <fieldset>
+        <div class="text-image">
+            <img class="obrazek_turnaje" src="@Model.Obrazek" />
+        </div>
         <div class="predmet">
             @Model.Nazev
         </div>
         <div class="text-odstavec">
             <div class="text-label">
                 Ředitel turnaje:
-            </div>
-            <div class="text-image">
-                <img class="obrazek_turnaje" src="@Model.Obrazek" />
             </div>
             <div class="text-field">
                 @SlavojMVC4_1.Infrastructure.Tools.GetFullName(

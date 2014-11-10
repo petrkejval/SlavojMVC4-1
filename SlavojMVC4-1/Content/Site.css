@@ -169,8 +169,8 @@ footer {
 ----------------------------------------------------------*/
 .site-title {
     color: #c8c8c8;
-    font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
-    font-size: 3.3em;
+    font-family: Arial /*Rockwell, Consolas, "Courier New", Courier, monospace*/;
+    font-size: 40px/*3.3em*/;
     margin: 0;
 
 }
@@ -666,13 +666,16 @@ tr.pager td {
     #rightcolumn
     {
         visibility:collapse;
+        display:none;
     }
     #contentcolumn{
-        margin-right: 0px;
+        margin-right: 0;
     }
     .pruh
     {
         visibility:collapse;
+        display:none;
+
     }
     /* header
     ----------------------------------------------------------*/
@@ -1067,6 +1070,7 @@ tr.pager td {
 .text-image
 {
     float:right;
+    overflow-y:auto;
 }
 .platnodo-upozorneni
 {
