@@ -216,6 +216,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\Nastaveni\DruzstvaGridController.cs" />
     <Compile Include="Controllers\Nastaveni\KategorieSouteziGridController.cs" />
+    <Compile Include="Controllers\Nastaveni\KuzelnyGridController.cs" />
     <Compile Include="Controllers\Nastaveni\NastaveniController.cs" />
     <Compile Include="Controllers\Nastaveni\SoutezeGridController.cs" />
     <Compile Include="Controllers\Nastaveni\TurnajeGridController.cs" />
@@ -257,6 +258,8 @@
     <Compile Include="Models\Kuzelna.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\KuzelnaEditable.cs" />
+    <Compile Include="Models\KuzelnySessionRepository.cs" />
     <Compile Include="Models\MainMenu.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
@@ -1358,6 +1361,11 @@
     <Content Include="Views\Shared\EditorTemplates\WebPageEditable.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
     <Content Include="Views\Nastaveni\UserClen.cshtml" />
+    <Content Include="Views\Nastaveni\ExportDat.cshtml" />
+    <Content Include="Views\Nastaveni\Kuzelny.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\KuzelnaEditable.cshtml" />
+    <Content Include="Views\Menu\Kuzelny.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EditorClanek.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -1367,6 +1375,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\themes\base\minified\" />
+    <Folder Include="Views\KezelnaGrid\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.zh-CN.resx">

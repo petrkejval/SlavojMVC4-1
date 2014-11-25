@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="SlavojDB.CleniInRole" Width="1.5" PointX="7.125" PointY="8.25" />
         <EntityTypeShape EntityType="SlavojDB.CleniRole" Width="1.5" PointX="7" PointY="6.375" />
         <EntityTypeShape EntityType="SlavojDB.Kontakt" Width="1.5" PointX="6.375" PointY="3.875" />
-        <EntityTypeShape EntityType="SlavojDB.Kuzelna" Width="1.5" PointX="9.5" PointY="7.375" />
         <EntityTypeShape EntityType="SlavojDB.Registrace" Width="1.5" PointX="8.125" PointY="3.875" />
         <EntityTypeShape EntityType="SlavojDB.Rozhodci" Width="1.5" PointX="10" PointY="3.875" />
         <AssociationConnector Association="SlavojDB.FK_Adresy_Cleni" />
@@ -55,6 +54,8 @@
         <AssociationConnector Association="SlavojDB.FK_webpages_Membership_UserProfile" />
         <AssociationConnector Association="SlavojDB.FK_webpages_UsersInRoles_UserProfile" />
         <AssociationConnector Association="SlavojDB.FK_webpages_UsersInRoles_webpages_Roles" />
+        <EntityTypeShape EntityType="SlavojDB.Kuzelna" Width="1.5" PointX="14.625" PointY="0.875" />
+        <AssociationConnector Association="SlavojDB.FK_Kuzelna_WebPages" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

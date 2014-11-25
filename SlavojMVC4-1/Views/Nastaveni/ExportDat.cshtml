@@ -1,0 +1,35 @@
+﻿@model IList<string>
+
+@{
+    ViewBag.Title = "Nastavení-Export dat";
+}
+<div>
+    <input type="button" value="Vyber vše" onclick="selectText('export-text')" class="t-button t-state-default" />
+</div>
+<div id="export-text" class="clanek">
+    @foreach (var line in Model)
+    {
+        <p>@line</p>
+
+    }
+</div>
+<script type="text/javascript">
+
+        function selectText(divid) {
+            if (document.selection) {
+                var div = document.body.createTextRange();
+
+                div.moveToElementText(document.getElementById(divid));
+                div.select();
+            }
+            else {
+                var div = document.createRange();
+                div.setStartBefore(document.getElementById(divid));
+                div.setEndAfter(document.getElementById(divid));
+
+                window.getSelection().addRange(div);
+            }
+
+        }
+
+</script>

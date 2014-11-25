@@ -4,9 +4,9 @@
     <h1>@Model.Nazev</h1>
 </hgroup>*@
 <div class="clanek">
-    <fieldset>
+    <div class="text-odstavec clanek-soupisky">
         <div class="text-image">
-            <img class="obrazek_turnaje" src="@Model.Obrazek" />
+            <img class="obrazek_turnaje" src="@Model.Obrazek" width="320" height="240"/>
         </div>
         <div class="predmet">
             @Model.Nazev
@@ -23,7 +23,7 @@
                     @Model.ReditelTurnaje.TitulZa)
             </div>
             @if (@Model.ReditelTurnaje.Kontakt != null)
-            { 
+            {
                 if (!Model.ReditelTurnaje.Kontakt.Telefon.IsEmpty())
                 {
                     <div class="text-label">
@@ -50,9 +50,11 @@
                 @Model.DatumOd.Date.ToString("d") - @Model.DatumDo.Date.ToString("d")
             </div>
         </div>
-    </fieldset>
-
-    <div class="text">
-        @Html.Raw(@Model.WebPage.HtmlText)
     </div>
+    @if (Model != null)
+    {
+        <div class="clanek-soupisky">
+            @Html.Raw(Model.WebPage.HtmlText)
+        </div>
+    }
 </div>

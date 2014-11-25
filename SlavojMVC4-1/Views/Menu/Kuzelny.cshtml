@@ -1,0 +1,75 @@
+﻿@model SlavojMVC4_1.Models.Kuzelna
+@{
+    ViewBag.Title = "Kuželna";
+}
+
+<div class="clanek">
+        <div class="text-odstavec clanek-soupisky">
+            <div class="text-image">
+                <img class="obrazek_kuzelny" src="@Model.Image" />
+            </div>
+            <div class="text-label">
+                Adresa kuželny:
+            </div>
+            <div class="text-field">
+                @Model.Ulice @Model.CisloPopisne, @Model.Psc, @Model.Obec
+
+            </div>
+            <div class="text-label">
+                Koladace platná do:
+            </div>
+            <div class="text-field">
+                @Model.KolaudacePlatnaDo.Date.ToString("d")
+            </div>
+            @if (!Model.GPS.IsEmpty())
+            {
+                <div class="text-label">
+                    GPS souřadnice:
+                </div>
+                <div class="text-field">
+                    @Model.GPS
+                </div>
+            }
+            @if (!Model.LinkKuzelkyCz.IsEmpty())
+            {
+                <div class="text-label">
+                    Parametry kuželny zapasné na www.kuzelky.cz:
+                </div>
+                <div class="text-field">
+                    <a href="@Model.LinkKuzelkyCz">KK Slavoj Žirovnice</a>
+
+                </div>
+            }
+            @if (!Model.Mapa.IsEmpty())
+            {
+                <div class="text-image-left">
+                    <div class="text-label-image">
+                        Mapa:
+                    </div>
+                    <iframe src="@Model.Mapa" width="305" height="240" frameborder="0" style="border:0"></iframe>
+                </div>
+            }
+            @if (!Model.StreeView.IsEmpty())
+            {
+                <div class="text-image-left">
+                    <div class="text-label-image">
+                        Pohled z ulice:
+                    </div>
+                    <iframe src="@Model.StreeView" width="305" height="240" frameborder="0" style="border:0"></iframe>
+                </div>
+            }
+
+        </div>
+
+    @if (Model != null)
+    {
+        <div class="clanek-soupisky">
+            @Html.Raw(Model.WebPage.HtmlText)
+        </div>
+    }
+
+</div>
+
+
+
+

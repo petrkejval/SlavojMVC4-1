@@ -1,0 +1,84 @@
+﻿@model string
+@(ViewBag.EditorName = ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty) 
+)
+@(Html.Telerik().Editor()
+            .Name(ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty))
+            .Value(Model)
+            .Localizable("cs-CZ")
+                       .Tools(tools => tools
+                                        .Custom(settings => settings.HtmlAttributes(new { @class = "t-html", onclick = "viewSource(event)" })))
+            
+            .Encode(false)
+            //.Tools(tools => tools
+            //    .Clear()
+            //    .Bold().Italic().Underline()
+            //    .Separator()
+            //    .CreateLink().Unlink()
+                
+            //)
+) 
+<script type="text/javascript">
+    var htmlSourcePopup;
+
+    function viewSource(e) {
+        e = $.Event(e);
+
+        e.stopPropagation();
+        e.preventDefault();
+        var name = '@ViewBag.EditorName';
+        var editor = $('#' + name).data('tEditor');
+        var html = editor.value();
+
+        if (!htmlSourcePopup) {
+            htmlSourcePopup =
+                $('<div class="html-view">' +
+                        '<div class="textarea t-state-default"><textarea></textarea></div>' +
+                        '<div class="t-button-wrapper">' +
+                            '<button id="htmlCancel" class="t-button">Storno</button>' +
+                            '<button id="htmlUpdate" class="t-button">Uložit</button>' +
+                        '</div>' +
+                    '</div>')
+                .css('display', 'none')
+                .tWindow({
+                    title: 'Zobrazení HTML textu',
+                    modal: true,
+                    resizable: false,
+                    draggable: true,
+
+                    width: 700,
+                    onLoad: function () {
+                        var $popup = $(this);
+                        $popup.find('textarea')
+                                .css('width', function () {
+                                    return 700 - 10;
+                                })
+                                .css('height', function () {
+                                    return 400;
+                                })
+                                .focus()
+                                .end()
+                                .find('#htmlCancel')
+                                .click(function () {
+                                    htmlSourcePopup.close();
+                                })
+                                .end()
+                                .find('#htmlUpdate')
+                                .click(function () {
+                                    var value = $popup.find('textarea').val();
+                                    editor.value(value);
+                                    htmlSourcePopup.close();
+                                });
+                    },
+                    onClose: function () {
+                        editor.focus();
+                    },
+                    effects: $.telerik.fx.toggle.defaults()
+                })
+            .data('tWindow');
+        }
+
+        $(htmlSourcePopup.element).find('textarea').text(html);
+
+        htmlSourcePopup.center().open();
+    }
+</script>

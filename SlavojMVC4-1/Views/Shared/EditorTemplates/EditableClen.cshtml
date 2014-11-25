@@ -105,6 +105,35 @@
             @Html.ValidationMessageFor(model => model.AdresaPsc)
         </div>
     </div>
+    <div class="clen-kontakt">
+        <div class="clen-nadpis editor-label">
+            Kontakty
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.KontaktTelefon, "Telefon")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.KontaktTelefon)
+            @Html.ValidationMessageFor(model => model.KontaktTelefon)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.KontaktMail, "E-mail")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.KontaktMail)
+            @Html.ValidationMessageFor(model => model.KontaktMail)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.KontaktWWW, "WWW")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.KontaktWWW)
+            @Html.ValidationMessageFor(model => model.KontaktWWW)
+        </div>
+    </div>
+
     <div class="clen-registrace">
         <div class="clen-nadpis editor-label">
             Registrace

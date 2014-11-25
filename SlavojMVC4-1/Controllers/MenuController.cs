@@ -21,5 +21,14 @@ namespace SlavojMVC4_1.Controllers
             var model = db.WebPages.Find(id);
             return View(model);
         }
+
+        // GET: Menu
+        public ActionResult Kuzelny()
+        {
+            var id = db.Kuzelny.Max(m => m.KuzelnaId);
+            var model = db.Kuzelny.Find(id);
+
+            return View(model);
+        }
     }
 }

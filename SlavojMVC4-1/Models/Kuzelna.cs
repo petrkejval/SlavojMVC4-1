@@ -19,8 +19,14 @@ namespace SlavojMVC4_1.Models
         public int CisloPopisne { get; set; }
         public string Obec { get; set; }
         public int Psc { get; set; }
-        public string Popis { get; set; }
+        public System.DateTime KolaudacePlatnaDo { get; set; }
+        public string Mapa { get; set; }
+        public string StreeView { get; set; }
         public string GPS { get; set; }
-        public Nullable<System.DateTime> KoladacePlatnaDo { get; set; }
+        public int WebPageId { get; set; }
+        public string Image { get; set; }
+        public string LinkKuzelkyCz { get; set; }
+    
+        public virtual WebPage WebPage { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace SlavojMVC4_1.Models
             this.MainMenus = new HashSet<MainMenu>();
             this.Druzstva = new HashSet<Druzstvo>();
             this.Turnaje = new HashSet<Turnaj>();
+            this.Kuzelnas = new HashSet<Kuzelna>();
         }
     
         public int WebPageId { get; set; }
@@ -28,5 +29,6 @@ namespace SlavojMVC4_1.Models
         public virtual ICollection<MainMenu> MainMenus { get; set; }
         public virtual ICollection<Druzstvo> Druzstva { get; set; }
         public virtual ICollection<Turnaj> Turnaje { get; set; }
+        public virtual ICollection<Kuzelna> Kuzelnas { get; set; }
     }
 }

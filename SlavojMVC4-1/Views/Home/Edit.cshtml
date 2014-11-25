@@ -32,7 +32,7 @@
         </div>
         <div class="editor-field">
             @{Html.Telerik().DropDownListFor(model => model.KategorieId)
-                //.Name("KategoriesDropDownListFor")  nesmí se použít jinak DropDownListFor nezapisuje do model.KategorieId
+                //.Name("Kategories")//  nesmí se použít jinak DropDownListFor nezapisuje do model.KategorieId
                 .BindTo(ViewBag.KategoriesListItem)
                 .Render()
                 ;}
@@ -45,11 +45,15 @@
             @Html.LabelFor(model => model.Text)
         </div>
         <div class="editor-field">
-            @{ Html.Telerik().EditorFor(model => model.Text)
+            @*@{ Html.Telerik().EditorFor(model => model.Text)
+                   .Name("EditorText")
+                   //.Tools(tools => tools
+                   //                 .Custom(settings => settings.HtmlAttributes(new { @class = "t-html", onclick = "viewSource(event)" })))
                    .Localizable("cs-CZ")
                    .Encode(false)
                    .Render();
-             }
+             }*@
+            @Html.EditorFor(model => model.Text)
             @Html.ValidationMessageFor(model => model.Text)
         </div>
 
@@ -70,6 +74,7 @@
         ddl.select(0);
     }
 </script>*@
+
 
 @if (ViewData.ContainsKey("value")) { 
         <h3>Editor Value</h3>

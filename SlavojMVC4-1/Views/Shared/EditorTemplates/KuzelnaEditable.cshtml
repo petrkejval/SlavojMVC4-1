@@ -1,0 +1,132 @@
+﻿@model SlavojMVC4_1.Models.KuzelnaEditable
+
+@{
+    ViewBag.Title = "Kuželna - editace";
+}
+<fieldset class="turnaj-fields">
+    @Html.AntiForgeryToken()
+    @*@Html.ValidationSummary(true)*@
+
+    <div class="clen-osoba">
+        <div class="clen-nadpis editor-label">
+            Turnaj
+        </div>
+        @Html.HiddenFor(model => model.KuzelnaId)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Ulice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Ulice)
+            @Html.ValidationMessageFor(model => model.Ulice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CisloPopisne)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CisloPopisne)
+            @Html.ValidationMessageFor(model => model.CisloPopisne)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Obec)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Obec)
+            @Html.ValidationMessageFor(model => model.Obec)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Psc)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Psc)
+            @Html.ValidationMessageFor(model => model.Psc)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.KolaudacePlatnaDo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.KolaudacePlatnaDo)
+            @Html.ValidationMessageFor(model => model.KolaudacePlatnaDo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Image)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Image)
+            @Html.ValidationMessageFor(model => model.Image)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LinkKuzelkyCz)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LinkKuzelkyCz)
+            @Html.ValidationMessageFor(model => model.LinkKuzelkyCz)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Mapa)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Mapa)
+            @Html.ValidationMessageFor(model => model.Mapa)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StreeView)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StreeView)
+            @Html.ValidationMessageFor(model => model.StreeView)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GPS)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GPS)
+            @Html.ValidationMessageFor(model => model.GPS)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WebPageId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WebPageId)
+            @Html.ValidationMessageFor(model => model.WebPageId)
+        </div>
+    </div>
+
+    <div>
+        @Html.ValidationMessage(String.Empty)
+
+    </div>
+
+
+</fieldset>
+<style type="text/css">
+    .t-grid .input-validation-error {
+        border-style: solid;
+    }
+
+    .t-input {
+        border-color: #e2e2e2;
+    }
+
+    .t-calendar {
+        color: black;
+    }
+
+    .t-content, .t-editable-area {
+        background-color: #87B9D6;
+    }
+
+    .t-footer {
+        background-color: #87B9D6;
+    }
+</style>
+
+

@@ -108,14 +108,18 @@
           <Key>
             <PropertyRef Name="KuzelnaId" />
           </Key>
-          <Property Name="KuzelnaId" Type="int" Nullable="false" />
-          <Property Name="Ulice" Type="nvarchar" MaxLength="50" />
+          <Property Name="KuzelnaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ulice" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CisloPopisne" Type="int" Nullable="false" />
           <Property Name="Obec" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Psc" Type="int" Nullable="false" />
-          <Property Name="Popis" Type="nvarchar(max)" />
+          <Property Name="KolaudacePlatnaDo" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Image" Type="varchar" MaxLength="200" />
+          <Property Name="LinkKuzelkyCz" Type="varchar" MaxLength="200" />
+          <Property Name="Mapa" Type="nvarchar" MaxLength="500" />
+          <Property Name="StreeView" Type="nvarchar" MaxLength="500" />
           <Property Name="GPS" Type="nvarchar" MaxLength="50" />
-          <Property Name="KoladacePlatnaDo" Type="datetime2" Precision="7" />
+          <Property Name="WebPageId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MainMenu">
           <Key>
@@ -391,6 +395,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Kuzelna_WebPages">
+          <End Role="WebPages" Type="Self.WebPages" Multiplicity="1" />
+          <End Role="Kuzelna" Type="Self.Kuzelna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebPages">
+              <PropertyRef Name="WebPageId" />
+            </Principal>
+            <Dependent Role="Kuzelna">
+              <PropertyRef Name="WebPageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MainMenu_WebPages">
           <End Role="WebPages" Type="Self.WebPages" Multiplicity="1" />
           <End Role="MainMenu" Type="Self.MainMenu" Multiplicity="*" />
@@ -506,7 +522,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_webpages_Membership_UserProfile">
-          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="webpages_Membership" Type="Self.webpages_Membership" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="UserProfile">
@@ -518,7 +536,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_webpages_UsersInRoles_UserProfile">
-          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserProfile">
@@ -614,6 +634,10 @@
             <End Role="Cleni" EntitySet="Cleni" />
             <End Role="Kontakty" EntitySet="Kontakty" />
           </AssociationSet>
+          <AssociationSet Name="FK_Kuzelna_WebPages" Association="Self.FK_Kuzelna_WebPages">
+            <End Role="WebPages" EntitySet="WebPages" />
+            <End Role="Kuzelna" EntitySet="Kuzelna" />
+          </AssociationSet>
           <AssociationSet Name="FK_MainMenu_WebPages" Association="Self.FK_MainMenu_WebPages">
             <End Role="WebPages" EntitySet="WebPages" />
             <End Role="MainMenu" EntitySet="MainMenu" />
@@ -681,7 +705,6 @@
           <EntitySet Name="CleniInRoles" EntityType="SlavojDB.CleniInRole" />
           <EntitySet Name="CleniRoles" EntityType="SlavojDB.CleniRole" />
           <EntitySet Name="Kontakty" EntityType="SlavojDB.Kontakt" />
-          <EntitySet Name="Kuzelnas" EntityType="SlavojDB.Kuzelna" />
           <EntitySet Name="Registraces" EntityType="SlavojDB.Registrace" />
           <EntitySet Name="Rozhodcis" EntityType="SlavojDB.Rozhodci" />
           <AssociationSet Name="FK_Adresy_Cleni" Association="SlavojDB.FK_Adresy_Cleni">
@@ -787,6 +810,11 @@
           <AssociationSet Name="FK_webpages_UsersInRoles_webpages_Roles" Association="SlavojDB.FK_webpages_UsersInRoles_webpages_Roles">
             <End Role="webpages_Roles" EntitySet="webpages_Roles" />
             <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <EntitySet Name="Kuzelny" EntityType="SlavojDB.Kuzelna" />
+          <AssociationSet Name="FK_Kuzelna_WebPages" Association="SlavojDB.FK_Kuzelna_WebPages">
+            <End Role="WebPage" EntitySet="WebPages" />
+            <End Role="Kuzelna" EntitySet="Kuzelny" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="webpages_Membership">
@@ -914,19 +942,6 @@
           <Property Type="String" Name="Mail" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="WWW" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cleni" Relationship="SlavojDB.FK_Kontakty_Cleni" FromRole="Kontakty" ToRole="Clen" />
-        </EntityType>
-        <EntityType Name="Kuzelna">
-          <Key>
-            <PropertyRef Name="KuzelnaId" />
-          </Key>
-          <Property Type="Int32" Name="KuzelnaId" Nullable="false" />
-          <Property Type="String" Name="Ulice" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="CisloPopisne" Nullable="false" />
-          <Property Type="String" Name="Obec" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="Psc" Nullable="false" />
-          <Property Type="String" Name="Popis" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="GPS" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="KoladacePlatnaDo" Precision="7" />
         </EntityType>
         <EntityType Name="Registrace">
           <Key>
@@ -1225,6 +1240,7 @@
           <NavigationProperty Name="MainMenus" Relationship="SlavojDB.FK_MainMenu_WebPages" FromRole="WebPage" ToRole="MainMenu" />
           <NavigationProperty Name="Druzstva" Relationship="SlavojDB.FK_Druzstva_WebPages" FromRole="WebPage" ToRole="Druzstvo" />
           <NavigationProperty Name="Turnaje" Relationship="SlavojDB.FK_Turnaje_WebPages" FromRole="WebPage" ToRole="Turnaj" />
+          <NavigationProperty Name="Kuzelnas" Relationship="SlavojDB.FK_Kuzelna_WebPages" FromRole="WebPage" ToRole="Kuzelna" />
         </EntityType>
         <Association Name="FK_MainMenu_WebPages">
           <End Type="SlavojDB.WebPage" Role="WebPage" Multiplicity="1" />
@@ -1373,6 +1389,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Kuzelna">
+          <Key>
+            <PropertyRef Name="KuzelnaId" />
+          </Key>
+          <Property Name="KuzelnaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ulice" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CisloPopisne" Type="Int32" Nullable="false" />
+          <Property Name="Obec" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Psc" Type="Int32" Nullable="false" />
+          <Property Name="KolaudacePlatnaDo" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Mapa" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="StreeView" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="GPS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WebPageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="WebPage" Relationship="SlavojDB.FK_Kuzelna_WebPages" FromRole="Kuzelna" ToRole="WebPage" />
+          <Property Name="Image" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LinkKuzelkyCz" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Kuzelna_WebPages">
+          <End Type="SlavojDB.WebPage" Role="WebPage" Multiplicity="1" />
+          <End Type="SlavojDB.Kuzelna" Role="Kuzelna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebPage">
+              <PropertyRef Name="WebPageId" />
+            </Principal>
+            <Dependent Role="Kuzelna">
+              <PropertyRef Name="WebPageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1478,20 +1524,6 @@
                 <ScalarProperty Name="Mail" ColumnName="Mail" />
                 <ScalarProperty Name="Telefon" ColumnName="Telefon" />
                 <ScalarProperty Name="ClenId" ColumnName="ClenId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Kuzelnas">
-            <EntityTypeMapping TypeName="SlavojDB.Kuzelna">
-              <MappingFragment StoreEntitySet="Kuzelna">
-                <ScalarProperty Name="KoladacePlatnaDo" ColumnName="KoladacePlatnaDo" />
-                <ScalarProperty Name="GPS" ColumnName="GPS" />
-                <ScalarProperty Name="Popis" ColumnName="Popis" />
-                <ScalarProperty Name="Psc" ColumnName="Psc" />
-                <ScalarProperty Name="Obec" ColumnName="Obec" />
-                <ScalarProperty Name="CisloPopisne" ColumnName="CisloPopisne" />
-                <ScalarProperty Name="Ulice" ColumnName="Ulice" />
-                <ScalarProperty Name="KuzelnaId" ColumnName="KuzelnaId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1634,6 +1666,24 @@
                 <ScalarProperty Name="UserInRoleId" ColumnName="UserInRoleId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kuzelny">
+            <EntityTypeMapping TypeName="SlavojDB.Kuzelna">
+              <MappingFragment StoreEntitySet="Kuzelna">
+                <ScalarProperty Name="LinkKuzelkyCz" ColumnName="LinkKuzelkyCz" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="WebPageId" ColumnName="WebPageId" />
+                <ScalarProperty Name="GPS" ColumnName="GPS" />
+                <ScalarProperty Name="StreeView" ColumnName="StreeView" />
+                <ScalarProperty Name="Mapa" ColumnName="Mapa" />
+                <ScalarProperty Name="KolaudacePlatnaDo" ColumnName="KolaudacePlatnaDo" />
+                <ScalarProperty Name="Psc" ColumnName="Psc" />
+                <ScalarProperty Name="Obec" ColumnName="Obec" />
+                <ScalarProperty Name="CisloPopisne" ColumnName="CisloPopisne" />
+                <ScalarProperty Name="Ulice" ColumnName="Ulice" />
+                <ScalarProperty Name="KuzelnaId" ColumnName="KuzelnaId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

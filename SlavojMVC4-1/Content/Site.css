@@ -1003,7 +1003,7 @@ tr.pager td {
 {
    width:600px;
 }
-.clen-osoba, .clen-adresa, .clen-registrace, .clen-rozhodci, .clen-trener
+.clen-osoba, .clen-adresa, .clen-kontakt, .clen-registrace, .clen-rozhodci, .clen-trener
 {
     background-color: #87B9D6;
     overflow: auto;
@@ -1021,6 +1021,11 @@ tr.pager td {
 {
      background-color: #E5EFF5;
 }
+.clen-kontakt
+{
+     background-color: #F0F3F4;
+}
+
 .clen-registrace
 {
      background-color: #F0F3F4;
@@ -1056,6 +1061,10 @@ tr.pager td {
     padding-right: 5px;
     color: #1877AF;
 }
+.text-label-image
+{
+    color: #1877AF;
+}
 
 .text-odstavec
 {
@@ -1072,6 +1081,12 @@ tr.pager td {
     float:right;
     overflow-y:auto;
 }
+.text-image-left
+{
+    float:left;
+    /*overflow-y:auto;*/
+}
+
 .platnodo-upozorneni
 {
     color:orange;
@@ -1079,4 +1094,8 @@ tr.pager td {
 .platnodo-chyba
 {
     color:red;
+}
+.iframe{
+    width:600px; 
+    height:400px; 
 }

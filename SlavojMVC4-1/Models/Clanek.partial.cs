@@ -18,6 +18,7 @@ namespace SlavojMVC4_1.Models
 
         [AllowHtml]
         [Required]
+        [UIHint("EditorClanek")]
         public string Text { get; set; }
 
     }

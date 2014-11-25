@@ -24,7 +24,8 @@
                 using (var db = new SlavojDBContainer())
                 {
                    int userId = WebSecurity.CurrentUserId;
-                   var userclen = db.UserCleni.Find(userId) ?? null;
+                   var userclen = db.UserCleni.Where(w => w.UserId == userId).FirstOrDefault() ?? null;
+                   //var userclen = db.UserCleni.Find(userId) ?? null;
                    int clenId = -1; 
                    if (userclen != null)
                    {
