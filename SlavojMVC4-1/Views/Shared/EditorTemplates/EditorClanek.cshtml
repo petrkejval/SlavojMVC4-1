@@ -1,20 +1,18 @@
 ﻿@model string
-@(ViewBag.EditorName = ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty) 
-)
 @(Html.Telerik().Editor()
-            .Name(ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty))
+                    .Name(ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty))
             .Value(Model)
             .Localizable("cs-CZ")
                        .Tools(tools => tools
                                         .Custom(settings => settings.HtmlAttributes(new { @class = "t-html", onclick = "viewSource(event)" })))
-            
+
             .Encode(false)
-            //.Tools(tools => tools
-            //    .Clear()
-            //    .Bold().Italic().Underline()
-            //    .Separator()
-            //    .CreateLink().Unlink()
-                
+        //.Tools(tools => tools
+        //    .Clear()
+        //    .Bold().Italic().Underline()
+        //    .Separator()
+        //    .CreateLink().Unlink()
+
             //)
 ) 
 <script type="text/javascript">
@@ -25,7 +23,8 @@
 
         e.stopPropagation();
         e.preventDefault();
-        var name = '@ViewBag.EditorName';
+        var name = '@ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty)'
+        alert(name);
         var editor = $('#' + name).data('tEditor');
         var html = editor.value();
 

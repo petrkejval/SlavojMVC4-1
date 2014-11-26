@@ -1,8 +1,6 @@
 ﻿@model string
-@(ViewBag.EditorName = ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty) 
-)
 @(Html.Telerik().Editor()
-            .Name(ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty))
+                    .Name(ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty))
             .Value(Model)
             .Localizable("cs-CZ")
                        .Tools(tools => tools
@@ -25,7 +23,7 @@
 
         e.stopPropagation();
         e.preventDefault();
-        var name = '@ViewBag.EditorName';
+        var name = '@ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty)';
         var editor = $('#' + name).data('tEditor');
         var html = editor.value();
 
