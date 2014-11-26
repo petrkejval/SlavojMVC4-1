@@ -299,6 +299,7 @@ namespace SlavojMVC4_1.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [CultureAwareAction]
         [GridAction]
+        [Authorize(Roles = ("admin"))]
         public ActionResult _InsertAjaxEditing()
         {
             //Create a new instance of the EditableProduct class.
@@ -423,6 +424,7 @@ namespace SlavojMVC4_1.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [GridAction]
+        [Authorize(Roles = ("admin") )]
         public ActionResult _DeleteAjaxEditing(int id)
         {
             //Find a customer with ProductID equal to the id action parameter

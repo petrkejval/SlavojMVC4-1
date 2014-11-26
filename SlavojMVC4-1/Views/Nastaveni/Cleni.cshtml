@@ -2,10 +2,20 @@
     ViewBag.Title = "Nastavení-Členi";
 }
 @{
+    var columnCommandWidth = 50;
+    if (User.IsInRole("admin"))
+    {
+        columnCommandWidth = 80;
+    }
     Html.Telerik()
                 .Grid<EditableClen>()
                 .Localizable("cs-CZ")
-                .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
+                .ToolBar(commands => {
+                    if (User.IsInRole("admin"))
+                    {
+                        commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" });
+                    }
+                })
                 .DataBinding(dataBinding => dataBinding.Ajax()
                     .Select("_SelectAjaxEditing", "CleniGrid")
                     .Insert("_InsertAjaxEditing", "CleniGrid")
@@ -25,8 +35,11 @@
                             columns.Command(commands =>
                             {
                                 commands.Edit().ButtonType(GridButtonType.BareImage);
-                                commands.Delete().ButtonType(GridButtonType.BareImage);
-                            }).Width(80);//.Title("Commands");
+                                if (User.IsInRole("admin"))
+                                {
+                                    commands.Delete().ButtonType(GridButtonType.BareImage);
+                                }
+                            }).Width(columnCommandWidth);//.Title("Commands");
 
                             columns.Bound(o => o.ClenId).Width(100);//.ReadOnly();
                             columns.Bound(o => o.TitulPred).Width(100);
