@@ -216,6 +216,7 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\Nastaveni\DruzstvaGridController.cs" />
     <Compile Include="Controllers\Nastaveni\KategorieSouteziGridController.cs" />
+    <Compile Include="Controllers\Nastaveni\KlubyGridController.cs" />
     <Compile Include="Controllers\Nastaveni\KuzelnyGridController.cs" />
     <Compile Include="Controllers\Nastaveni\NastaveniController.cs" />
     <Compile Include="Controllers\Nastaveni\SoutezeGridController.cs" />
@@ -234,6 +235,8 @@
     <Compile Include="Models\Clen.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClenCleniInRoleEditable.cs" />
+    <Compile Include="Models\ClenCleniInRoleSessionRepository.cs" />
     <Compile Include="Models\CleniInRole.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
@@ -252,6 +255,11 @@
     <Compile Include="Models\KategorieSouteze.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Klub.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KlubEditable.cs" />
+    <Compile Include="Models\KlubySessionRepository.cs" />
     <Compile Include="Models\Kontakt.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
@@ -1337,9 +1345,6 @@
     <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Views\Druzstva\Index.cshtml" />
     <Content Include="Views\Turnaje\Index.cshtml" />
-    <Content Include="Views\Turnaje\OPerletovouPlaketu.cshtml" />
-    <Content Include="Views\Turnaje\LigaNeregistrovanych.cshtml" />
-    <Content Include="Views\Turnaje\VelikonocniKouleni.cshtml" />
     <Content Include="Views\Home\_ClankyPagedList.cshtml" />
     <Content Include="Views\Home\_ClankyClanek.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
@@ -1364,8 +1369,11 @@
     <Content Include="Views\Nastaveni\ExportDat.cshtml" />
     <Content Include="Views\Nastaveni\Kuzelny.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\KuzelnaEditable.cshtml" />
-    <Content Include="Views\Menu\Kuzelny.cshtml" />
+    <Content Include="Views\Menu\Kuzelna.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EditorClanek.cshtml" />
+    <Content Include="Views\Nastaveni\Kluby.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\KlubEditable.cshtml" />
+    <Content Include="Views\Menu\Kontakty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -1376,6 +1384,7 @@
   <ItemGroup>
     <Folder Include="Content\themes\base\minified\" />
     <Folder Include="Views\KezelnaGrid\" />
+    <Folder Include="Views\Kuzelna\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.zh-CN.resx">

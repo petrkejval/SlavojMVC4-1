@@ -31,8 +31,6 @@ namespace SlavojMVC4_1.Models
         public DbSet<Clanek> Clanky { get; set; }
         public DbSet<Clen> Cleni { get; set; }
         public DbSet<Adresa> Adresy { get; set; }
-        public DbSet<CleniInRole> CleniInRoles { get; set; }
-        public DbSet<CleniRole> CleniRoles { get; set; }
         public DbSet<Kontakt> Kontakty { get; set; }
         public DbSet<Registrace> Registraces { get; set; }
         public DbSet<Rozhodci> Rozhodcis { get; set; }
@@ -49,5 +47,8 @@ namespace SlavojMVC4_1.Models
         public DbSet<webpages_Roles> webpages_Roles { get; set; }
         public DbSet<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
         public DbSet<Kuzelna> Kuzelny { get; set; }
+        public DbSet<Klub> Kluby { get; set; }
+        public DbSet<CleniInRole> CleniInRoles { get; set; }
+        public DbSet<CleniRole> CleniRoles { get; set; }
     }
 }

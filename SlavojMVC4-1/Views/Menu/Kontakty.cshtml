@@ -1,0 +1,66 @@
+﻿@model SlavojMVC4_1.Models.Klub
+@{
+    ViewBag.Title = "Kontakty";
+}
+<div class="clanek">
+    <div class="text-odstavec clanek-soupisky">
+        <div class="text-image">
+            <img class="obrazek_kuzelny" src="@Model.Image" />
+        </div>
+        <div class="predmet">
+            Kontakty na klub
+        </div>
+        <div class="text-label">
+            Název klubu:
+        </div>
+        <div class="text-field">
+            @Model.Nazev
+
+        </div>
+        <div class="text-label">
+            IČ:
+        </div>
+        <div class="text-field">
+            @Model.IC
+        </div>
+        <div class="text-label">
+            Číslo účtu:
+        </div>
+        <div class="text-field">
+            @Model.CisloUctu
+        </div>
+        <div class="text-label">
+            E-mail:
+        </div>
+        <div class="text-field">
+            @Model.Mail
+        </div>
+        <div class="text-label">
+            Webové stránky:
+        </div>
+        <div class="text-field">
+            @Model.WWW
+        </div>
+        <div class="text-label">
+            Kód klubu u ČKA:
+        </div>
+        <div class="text-field">
+            @Model.KodKlubu
+        </div>
+    </div>
+    <div class="text-odstavec clanek-soupisky">
+        <div class="predmet">
+            Kontakty na členy výboru klubu
+        </div>
+    </div>
+
+        @if (Model != null)
+        {
+            <div class="clanek-soupisky">
+                @Html.Raw(Model.WebPage.HtmlText)
+            </div>
+        }
+
+    </div>
+
+

@@ -92,6 +92,12 @@
                         result.Add(new ValidationResult("Člen už má přidělenu tuto roli.", propertyName));
                         break;
                     }
+                    else if (errorMessage.IndexOf("IX_CleniInRoles_ClenId_ClenRoleId") > -1)
+                    {
+                        propertyName[0] = "ClenRoleId";
+                        result.Add(new ValidationResult("Člen už má přidělenu tuto roli.", propertyName));
+                        break;
+                    }
                     else
                     {
                         result.Add(new ValidationResult(errorMessage));

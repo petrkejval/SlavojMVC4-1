@@ -20,6 +20,7 @@ namespace SlavojMVC4_1.Models
             this.Druzstva = new HashSet<Druzstvo>();
             this.Turnaje = new HashSet<Turnaj>();
             this.Kuzelnas = new HashSet<Kuzelna>();
+            this.Klubies = new HashSet<Klub>();
         }
     
         public int WebPageId { get; set; }
@@ -30,5 +31,6 @@ namespace SlavojMVC4_1.Models
         public virtual ICollection<Druzstvo> Druzstva { get; set; }
         public virtual ICollection<Turnaj> Turnaje { get; set; }
         public virtual ICollection<Kuzelna> Kuzelnas { get; set; }
+        public virtual ICollection<Klub> Klubies { get; set; }
     }
 }

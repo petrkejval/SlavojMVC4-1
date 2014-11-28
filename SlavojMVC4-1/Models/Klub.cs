@@ -12,13 +12,18 @@ namespace SlavojMVC4_1.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CleniInRole
+    public partial class Klub
     {
-        public int ClenInRolesId { get; set; }
-        public int ClenId { get; set; }
-        public int ClenRoleId { get; set; }
+        public int KlubId { get; set; }
+        public string Nazev { get; set; }
+        public string IC { get; set; }
+        public string CisloUctu { get; set; }
+        public string Mail { get; set; }
+        public string WWW { get; set; }
+        public int KodKlubu { get; set; }
+        public string Image { get; set; }
+        public int WebPageId { get; set; }
     
-        public virtual Clen Clen { get; set; }
-        public virtual CleniRole CleniRole { get; set; }
+        public virtual WebPage WebPage { get; set; }
     }
 }

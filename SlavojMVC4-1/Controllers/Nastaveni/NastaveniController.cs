@@ -26,6 +26,9 @@ namespace SlavojMVC4_1.Controllers.Nastaveni
         [Authorize(Roles = ("clen"))]
         public ActionResult Cleni()
         {
+            ViewBag.ClenRoleListItem = new SlavojDBContainer().CleniRoles
+                                     .Select(e => new { Id = e.ClenRoleId, Name = e.ClenRoleName })
+                                     .OrderBy(e => e.Name);
             return View();
         }
 
@@ -92,6 +95,15 @@ namespace SlavojMVC4_1.Controllers.Nastaveni
             return View();
         }
 
+        [Authorize(Roles = ("superuser"))]
+        public ActionResult Kluby()
+        {
+            ViewBag.WebPagesListItem = new SlavojDBContainer().WebPages
+                                                 .Select(e => new { Id = e.WebPageId, Name = e.Nazev })
+                                                 .OrderBy(e => e.Name);
+
+            return View();
+        }
 
         [Authorize(Roles = ("superuser"))]
         public ActionResult WebPages()

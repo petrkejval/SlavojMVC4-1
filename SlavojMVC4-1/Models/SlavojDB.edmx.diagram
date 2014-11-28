@@ -14,17 +14,13 @@
         <AssociationConnector Association="SlavojDB.ClanekClen" />
         <EntityTypeShape EntityType="SlavojDB.Clen" Width="1.5" PointX="4.25" PointY="3.875" />
         <EntityTypeShape EntityType="SlavojDB.Adresa" Width="1.5" PointX="0.5" PointY="6.875" />
-        <EntityTypeShape EntityType="SlavojDB.CleniInRole" Width="1.5" PointX="7.125" PointY="8.25" />
-        <EntityTypeShape EntityType="SlavojDB.CleniRole" Width="1.5" PointX="7" PointY="6.375" />
         <EntityTypeShape EntityType="SlavojDB.Kontakt" Width="1.5" PointX="6.375" PointY="3.875" />
         <EntityTypeShape EntityType="SlavojDB.Registrace" Width="1.5" PointX="8.125" PointY="3.875" />
         <EntityTypeShape EntityType="SlavojDB.Rozhodci" Width="1.5" PointX="10" PointY="3.875" />
         <AssociationConnector Association="SlavojDB.FK_Adresy_Cleni" />
-        <AssociationConnector Association="SlavojDB.FK_CleniInRoles_Cleni" />
         <AssociationConnector Association="SlavojDB.FK_Kontakty_Cleni" />
         <AssociationConnector Association="SlavojDB.FK_Registrace_Cleni" />
         <AssociationConnector Association="SlavojDB.FK_Rozhodci_Cleni" />
-        <AssociationConnector Association="SlavojDB.FK_CleniInRoles_CleniRoles" />
         <EntityTypeShape EntityType="SlavojDB.KategorieSouteze" Width="1.5" PointX="5.625" PointY="10.375" />
         <EntityTypeShape EntityType="SlavojDB.Soutez" Width="1.5" PointX="3.125" PointY="9.625" />
         <AssociationConnector Association="SlavojDB.FK_Souteze_KategorieSoutezi1" />
@@ -56,6 +52,12 @@
         <AssociationConnector Association="SlavojDB.FK_webpages_UsersInRoles_webpages_Roles" />
         <EntityTypeShape EntityType="SlavojDB.Kuzelna" Width="1.5" PointX="14.625" PointY="0.875" />
         <AssociationConnector Association="SlavojDB.FK_Kuzelna_WebPages" />
+        <EntityTypeShape EntityType="SlavojDB.Klub" Width="1.5" PointX="14.625" PointY="11.375" />
+        <AssociationConnector Association="SlavojDB.FK_Kluby_WebPages" />
+        <EntityTypeShape EntityType="SlavojDB.CleniInRole" Width="1.5" PointX="7" PointY="7.375" />
+        <EntityTypeShape EntityType="SlavojDB.CleniRole" Width="1.5" PointX="9.125" PointY="7.375" />
+        <AssociationConnector Association="SlavojDB.FK_CleniInRoles_Cleni_ClenId_ClenId" />
+        <AssociationConnector Association="SlavojDB.FK_CleniInRoles_CleniRoles_ClenRoleId_ClenRoleId" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

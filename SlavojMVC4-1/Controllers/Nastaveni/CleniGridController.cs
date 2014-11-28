@@ -519,6 +519,130 @@ namespace SlavojMVC4_1.Controllers
 
         }
 
+        //.......................................................................................................................................................................
+        [GridAction]
+        public ActionResult RoleSelect(int clenId)
+        {
+            return View(new GridModel(ClenCleniInRoleSessionRepository.All(clenId, true)));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [CultureAwareAction]
+        [GridAction]
+        [HandleError]
+        public ActionResult RoleUpdate(int id, int clenId)
+        {
+            ClenCleniInRoleEditable item = ClenCleniInRoleSessionRepository.One(p => p.ClenInRolesId == id, clenId);
+            var values = ModelState.Values;
+            TryUpdateModel(item);
+            //.........................................................................................................................................................
+            if (ModelState.IsValid)
+            {
+                using (var db = new SlavojDBContainer())
+                {
+                    this.ModelState.Clear();
+                    var entity = db.CleniInRoles.Find(item.ClenInRolesId);
+                    if (entity != null)
+                    {
+                        entity.ClenRoleId = item.ClenRoleId;
+                        //.................................................................................................
+                        EfStatus status = db.SaveChangesWithValidation();
+                        if (status.IsValid)
+                        {
+                            ClenCleniInRoleSessionRepository.Insert(item, clenId);
+                        }
+                        else
+                        {
+                            AddModelStateError(status);
+                        }
+                    }
+
+                }
+
+            }
+
+            return View(new GridModel(ClenCleniInRoleSessionRepository.All(clenId)));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [CultureAwareAction]
+        [GridAction]
+        [HandleError]
+        public ActionResult RoleInsert(int clenId)
+        {
+            //Create a new instance of the EditableProduct class.
+            using (var db = new SlavojDBContainer())
+            {
+                this.ModelState.Clear();
+                ClenCleniInRoleEditable item = new ClenCleniInRoleEditable();
+                //Perform model binding (fill the product properties and validate it).
+                if (TryUpdateModel(item))
+                {
+                    if (ModelState.IsValid)
+                    {
+
+                        var entity = new SlavojMVC4_1.Models.CleniInRole();
+                        item.ClenId = clenId;
+                        entity.ClenId = item.ClenId;
+                        entity.ClenRoleId = item.ClenRoleId;
+
+                        // Add the entity
+                        db.CleniInRoles.Add(entity);
+                        //.................................................................................................
+                        EfStatus status = db.SaveChangesWithValidation();
+                        if (status.IsValid)
+                        {
+                            item.ClenInRolesId = entity.ClenInRolesId;
+                            ClenCleniInRoleSessionRepository.Insert(item, clenId);
+                        }
+                        else
+                        {
+                            AddModelStateError(status);
+                        }
+
+                    }
+                }
+
+                //Rebind the grid
+                return View(new GridModel(ClenCleniInRoleSessionRepository.All(clenId)));
+            }
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [GridAction]
+        public ActionResult RoleDelete(int id, int clenId)
+        {
+            ClenCleniInRoleEditable item = ClenCleniInRoleSessionRepository.One(p => p.ClenInRolesId == id, clenId);
+
+            if (item != null)
+            {
+                if (TryValidateModel(item))
+                {
+                    using (var db = new SlavojDBContainer())
+                    {
+
+                        this.ModelState.Clear();
+                        var entity = db.CleniInRoles.Find(item.ClenInRolesId);
+                        if (entity != null)
+                        {
+                            db.CleniInRoles.Remove(entity);
+                            EfStatus status = db.SaveChangesWithValidation();
+                            if (status.IsValid)
+                            {
+                                ClenCleniInRoleSessionRepository.Delete(item, clenId);
+                            }
+                            else
+                            {
+                                AddModelStateError(status);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return View(new GridModel(ClenCleniInRoleSessionRepository.All(clenId)));
+        }
+        //......................................................................................................................................................................
     }
 
 }

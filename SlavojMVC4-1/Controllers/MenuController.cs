@@ -23,10 +23,18 @@ namespace SlavojMVC4_1.Controllers
         }
 
         // GET: Menu
-        public ActionResult Kuzelny()
+        public ActionResult Kuzelna()
         {
             var id = db.Kuzelny.Max(m => m.KuzelnaId);
             var model = db.Kuzelny.Find(id);
+
+            return View(model);
+        }
+        // GET: Menu
+        public ActionResult Kontakty()
+        {
+            var id = db.Kluby.Max(m => m.KlubId);
+            var model = db.Kluby.Find(id);
 
             return View(model);
         }

@@ -52,7 +52,7 @@ namespace SlavojMVC4_1.Models
         [Display(Name = "GPS souřadnice")]
         public string GPS { get; set; }
 
-        [Display(Name = "Webová stránka kuželny")]
+        [Display(Name = "Webová stránka Kuželny")]
         [UIHint("GridForeignKey")]
         public int WebPageId { get; set; }
 

@@ -9,8 +9,10 @@
     }
     Html.Telerik()
                 .Grid<EditableClen>()
+                .Name("CleniGrid")
                 .Localizable("cs-CZ")
-                .ToolBar(commands => {
+                .ToolBar(commands =>
+                {
                     if (User.IsInRole("admin"))
                     {
                         commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" });
@@ -26,7 +28,6 @@
                 .Pageable(p => p.PageSize(20))
         //.Pageable(paging => paging.PageSize(20).Style(GridPagerStyles.NextPreviousAndNumeric).Position(GridPagerPosition.Bottom))
                 .Filterable()
-                .Name("Grid")
                 .DataKeys(keys => keys.Add(c => c.ClenId))
                 .Reorderable(reorder => reorder.Columns(true))
                 .Resizable(resize => resize.Columns(true))
@@ -93,7 +94,56 @@
                             columns.Bound(o => o.TrenerTrida).Width(80);
                             columns.Bound(o => o.TrenerPlatnaDo).Width(130).Format("{0:d}");
                         }
+                 )
+                .DetailView(detail =>
+                    {
+                        detail.ClientTemplate(
+                        Html.Telerik().Grid<ClenCleniInRoleEditable>()
+                            .Name("ClenCleniInRole_<#= ClenId #>")
+                            .DataKeys(keys =>
+                            {
+                                keys.Add(c => c.ClenInRolesId);
+                            })
+                            .Columns(columns =>
+                            {
+                                columns.Command(commands =>
+                                {
+                                    if (User.IsInRole("admin"))
+                                    {
+                                        commands.Edit().ButtonType(GridButtonType.BareImage);
+                                        commands.Delete().ButtonType(GridButtonType.BareImage);
+                                    }
+                                }).Width(80);//.Title("Commands");
+
+                                columns.ForeignKey(o => o.ClenRoleId, (System.Collections.IEnumerable)ViewBag.ClenRoleListItem, "Id", "Name").Width(200);
+                                columns.Bound(o => o.ClenRoleId).ReadOnly(true).Width("*");
+
+                                //columns.Bound(o => o.ClenRoleId).Width(80);
+                            }
                             )
+                            .ToolBar(commands => 
+                                {
+                                    if (User.IsInRole("admin"))
+                                    {
+                                        commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" });
+                                    }
+                                }
+                                )
+                            .Editable(editing => editing.Mode(GridEditMode.InLine))
+                                .DataBinding(dataBinding => dataBinding.Ajax()
+                                .Select("RoleSelect", "CleniGrid", new { clenId = "<#= ClenId #>" })
+                                .Insert("RoleInsert", "CleniGrid", new { clenId = "<#= ClenId #>" })
+                                .Update("RoleUpdate", "CleniGrid", new { clenId = "<#= ClenId #>" })
+                                .Delete("RoleDelete", "CleniGrid", new { clenId = "<#= ClenId #>" })
+                                )
+
+                            .Pageable()
+                            .Sortable()
+                            .Filterable()
+                            .ToHtmlString()
+                        );
+                    }
+                )
                 .Editable(editing => editing.Mode(GridEditMode.InForm).TemplateName("EditableClen"))
         //.ClientRowTemplate(grid =>
         //    "<ul>" +
