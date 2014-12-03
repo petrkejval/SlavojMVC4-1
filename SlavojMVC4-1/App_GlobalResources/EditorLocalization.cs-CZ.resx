@@ -124,108 +124,108 @@
     <value>Zavřít</value>
   </data>
   <data name="CreateLink" xml:space="preserve">
-    <value>Insert hyperlink</value>
+    <value>Vložit hypertextový odkaz</value>
   </data>
   <data name="DeleteFile" xml:space="preserve">
-    <value>Are you sure you want to delete {0}?</value>
+    <value>Jste si jisti, že chcete smazat {0}?</value>
   </data>
   <data name="DirectoryNotFound" xml:space="preserve">
-    <value>A directory with this name was not found.</value>
+    <value>Adresář s tímto názvem nebyl nalezen.</value>
   </data>
   <data name="EmptyFolder" xml:space="preserve">
-    <value>Empty Folder</value>
+    <value>Prázdná Složka</value>
   </data>
   <data name="FontName" xml:space="preserve">
-    <value>Select font family</value>
+    <value>Vyberte rodinu písma</value>
   </data>
   <data name="FontNameInherit" xml:space="preserve">
     <value>(zděděné písmo)</value>
   </data>
   <data name="FontSize" xml:space="preserve">
-    <value>Select font size</value>
+    <value>Vyberte velikost písma</value>
   </data>
   <data name="FontSizeInherit" xml:space="preserve">
     <value>(zděděná velikost)</value>
   </data>
   <data name="FormatBlock" xml:space="preserve">
-    <value>Select block type</value>
+    <value>Vyberte typ bloku</value>
   </data>
   <data name="Indent" xml:space="preserve">
-    <value>Indent</value>
+    <value>Zvětšit odsazení</value>
   </data>
   <data name="Insert" xml:space="preserve">
-    <value>Insert</value>
+    <value>Vložit</value>
   </data>
   <data name="InsertHtml" xml:space="preserve">
-    <value>Insert HTML</value>
+    <value>Vložit HTML</value>
   </data>
   <data name="InsertImage" xml:space="preserve">
-    <value>Insert image</value>
+    <value>Vložit obrázek</value>
   </data>
   <data name="InsertOrderedList" xml:space="preserve">
-    <value>Insert ordered list</value>
+    <value>Vložít číslovaný seznam</value>
   </data>
   <data name="InsertUnorderedList" xml:space="preserve">
-    <value>Insert unordered list</value>
+    <value>Vložit odrážkový seznam</value>
   </data>
   <data name="InvalidFileType" xml:space="preserve">
-    <value>The selected file {0} is not valid. Supported file types are {1}.</value>
+    <value>Vybraný soubor {0} není platný. Podporované typy souborů jsou {1}.</value>
   </data>
   <data name="Italic" xml:space="preserve">
     <value>Kurzíva</value>
   </data>
   <data name="JustifyCenter" xml:space="preserve">
-    <value>Center text</value>
+    <value>Zarovnat na střed</value>
   </data>
   <data name="JustifyFull" xml:space="preserve">
-    <value>Justify</value>
+    <value>Zarovnat do bloku</value>
   </data>
   <data name="JustifyLeft" xml:space="preserve">
-    <value>Align text left</value>
+    <value>Zarovnat doleva</value>
   </data>
   <data name="JustifyRight" xml:space="preserve">
-    <value>Align text right</value>
+    <value>Zarovnat doprava</value>
   </data>
   <data name="OpenInNewWindow" xml:space="preserve">
-    <value>Open link in new window</value>
+    <value>Otevřít odkaz v novém okně</value>
   </data>
   <data name="Or" xml:space="preserve">
-    <value>or</value>
+    <value>nebo</value>
   </data>
   <data name="OrderBy" xml:space="preserve">
-    <value>Arrange by:</value>
+    <value>Setřídit podle:</value>
   </data>
   <data name="OrderByName" xml:space="preserve">
-    <value>Name</value>
+    <value>Jména</value>
   </data>
   <data name="OrderBySize" xml:space="preserve">
-    <value>Size</value>
+    <value>Velikosti</value>
   </data>
   <data name="Outdent" xml:space="preserve">
-    <value>Outdent</value>
+    <value>Zmenšit odsazení</value>
   </data>
   <data name="OverwriteFile" xml:space="preserve">
-    <value>A file with name {0} already exists in the current directory. Do you want to overwrite it?</value>
+    <value>Soubor s názvem {0} již v aktuálním adresáři existuje. Chcete jej přepsat?</value>
   </data>
   <data name="Strikethrough" xml:space="preserve">
-    <value>Strikethrough</value>
+    <value>Přeškrtnuté</value>
   </data>
   <data name="Style" xml:space="preserve">
-    <value>Styles</value>
+    <value>Styly</value>
   </data>
   <data name="Tooltip" xml:space="preserve">
-    <value>Tooltip</value>
+    <value>Bublinová nápověda</value>
   </data>
   <data name="Underline" xml:space="preserve">
     <value>Podtržení</value>
   </data>
   <data name="Unlink" xml:space="preserve">
-    <value>Remove hyperlink</value>
+    <value>Odebrat hypertextový odkaz</value>
   </data>
   <data name="UploadFile" xml:space="preserve">
-    <value>Upload</value>
+    <value>Nahrát</value>
   </data>
   <data name="WebAddress" xml:space="preserve">
-    <value>Web address</value>
+    <value>Webová adresa</value>
   </data>
 </root>

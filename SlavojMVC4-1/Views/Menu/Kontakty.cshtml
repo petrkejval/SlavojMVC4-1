@@ -3,64 +3,348 @@
     ViewBag.Title = "Kontakty";
 }
 <div class="clanek">
-    <div class="text-odstavec clanek-soupisky">
-        <div class="text-image">
-            <img class="obrazek_kuzelny" src="@Model.Image" />
+    @if (ViewBag.OrganizacniPracovnikKlubu != null)
+    {
+        @Html.Raw(@"<div class=""text-odstavec clanek-soupisky"">");
+    }
+        <div class="text-odstavec clanek-soupisky">
+            <div class="text-image">
+                <img class="obrazek_kuzelny" src="@Model.Image" />
+            </div>
+            <div class="predmet">
+                Kontakty na klub
+            </div>
+            <div class="text-label">
+                Název klubu:
+            </div>
+            <div class="text-field">
+                @Model.Nazev
+            </div>
+            <div class="text-label">
+                IČ:
+            </div>
+            <div class="text-field">
+                @Model.IC
+            </div>
+            <div class="text-label">
+                Číslo účtu:
+            </div>
+            <div class="text-field">
+                @Model.CisloUctu
+            </div>
+            <div class="text-label">
+                E-mail:
+            </div>
+            <div class="text-field">
+                @Model.Mail
+            </div>
+            <div class="text-label">
+                Webové stránky:
+            </div>
+            <div class="text-field">
+                @Model.WWW
+            </div>
+            <div class="text-label">
+                Kód klubu u ČKA:
+            </div>
+            <div class="text-field">
+                @Model.KodKlubu
+            </div>
         </div>
-        <div class="predmet">
-            Kontakty na klub
-        </div>
-        <div class="text-label">
-            Název klubu:
-        </div>
-        <div class="text-field">
-            @Model.Nazev
+        @if (ViewBag.OrganizacniPracovnikKlubu != null)
+        { 
+        <div class="text-odstavec clanek-soupisky">
+            <div class="text-label">
+                Oragnizační pracovník klubu:
+            </div>
+            <div class="text-image">
+                @if ((ViewBag.OrganizacniPracovnikKlubu as SlavojMVC4_1.Models.Clen).Fotka.IsEmpty())
+                {
+                    <img class="obrazek_turnaje" src="/Content/images/Nikdo100x20.png" />
+
+                }
+                else
+                {
+                    <img class="obrazek_turnaje" src="@((ViewBag.OrganizacniPracovnikKlubu as SlavojMVC4_1.Models.Clen).Fotka)" />
+
+                }
+
+            </div>
+            <div class="text-field">
+                @SlavojMVC4_1.Infrastructure.Tools.GetFullName(
+                ((ViewBag.OrganizacniPracovnikKlubu as SlavojMVC4_1.Models.Clen).TitulPred),
+                ((ViewBag.OrganizacniPracovnikKlubu as SlavojMVC4_1.Models.Clen).Jmeno),
+                ((ViewBag.OrganizacniPracovnikKlubu as SlavojMVC4_1.Models.Clen).Prijmeni),
+                ((ViewBag.OrganizacniPracovnikKlubu as SlavojMVC4_1.Models.Clen).TitulZa)
+                )
+            </div>
+            @if ((ViewBag.OrganizacniPracovnikKlubu as SlavojMVC4_1.Models.Clen).Kontakt != null)
+            {
+                if (!(ViewBag.OrganizacniPracovnikKlubu as SlavojMVC4_1.Models.Clen).Kontakt.Telefon.IsEmpty())
+                {
+                    <div class="text-label">
+                        Telefon:
+                    </div>
+                    <div class="text-field">
+                        @((ViewBag.OrganizacniPracovnikKlubu as SlavojMVC4_1.Models.Clen).Kontakt.Telefon)
+                    </div>
+                }
+                if (!(ViewBag.OrganizacniPracovnikKlubu as SlavojMVC4_1.Models.Clen).Kontakt.Mail.IsEmpty())
+                {
+                    <div class="text-label">
+                        E-mail:
+                    </div>
+                    <div class="text-field">
+                        @((ViewBag.OrganizacniPracovnikKlubu as SlavojMVC4_1.Models.Clen).Kontakt.Mail)
+                    </div>
+                }
+            }
 
         </div>
-        <div class="text-label">
-            IČ:
-        </div>
-        <div class="text-field">
-            @Model.IC
-        </div>
-        <div class="text-label">
-            Číslo účtu:
-        </div>
-        <div class="text-field">
-            @Model.CisloUctu
-        </div>
-        <div class="text-label">
-            E-mail:
-        </div>
-        <div class="text-field">
-            @Model.Mail
-        </div>
-        <div class="text-label">
-            Webové stránky:
-        </div>
-        <div class="text-field">
-            @Model.WWW
-        </div>
-        <div class="text-label">
-            Kód klubu u ČKA:
-        </div>
-        <div class="text-field">
-            @Model.KodKlubu
-        </div>
-    </div>
+        }
+    @if (ViewBag.OrganizacniPracovnikKlubu != null)
+    {
+    @Html.Raw("</div>");
+    }
+    
+
+
+
     <div class="text-odstavec clanek-soupisky">
-        <div class="predmet">
+        <div class="predmet text-odstavec">
             Kontakty na členy výboru klubu
         </div>
-    </div>
 
-        @if (Model != null)
+        @if (ViewBag.Prezident != null)
         {
-            <div class="clanek-soupisky">
-                @Html.Raw(Model.WebPage.HtmlText)
+            <div class="text-odstavec clanek-soupisky">
+                <div class="text-label">
+                    Prezident klubu:
+                </div>
+                <div class="text-image">
+                    @if ((ViewBag.Prezident as SlavojMVC4_1.Models.Clen).Fotka.IsEmpty())
+                    {
+                        <img class="obrazek_turnaje" src="/Content/images/Nikdo100x20.png" />
+
+                    }
+                    else
+                    {
+                        <img class="obrazek_turnaje" src="@((ViewBag.Prezident as SlavojMVC4_1.Models.Clen).Fotka)" />
+
+                    }
+
+                </div>
+                <div class="text-field">
+                    @SlavojMVC4_1.Infrastructure.Tools.GetFullName(
+                     ((ViewBag.Prezident as SlavojMVC4_1.Models.Clen).TitulPred),
+                     ((ViewBag.Prezident as SlavojMVC4_1.Models.Clen).Jmeno),
+                     ((ViewBag.Prezident as SlavojMVC4_1.Models.Clen).Prijmeni),
+                     ((ViewBag.Prezident as SlavojMVC4_1.Models.Clen).TitulZa)
+                )
+                </div>
+                @if ((ViewBag.Prezident as SlavojMVC4_1.Models.Clen).Kontakt != null)
+                {
+                    if (!(ViewBag.Prezident as SlavojMVC4_1.Models.Clen).Kontakt.Telefon.IsEmpty())
+                    {
+                        <div class="text-label">
+                            Telefon:
+                        </div>
+                        <div class="text-field">
+                            @((ViewBag.Prezident as SlavojMVC4_1.Models.Clen).Kontakt.Telefon)
+                        </div>
+                    }
+                    if (!(ViewBag.Prezident as SlavojMVC4_1.Models.Clen).Kontakt.Mail.IsEmpty())
+                    {
+                        <div class="text-label">
+                            E-mail:
+                        </div>
+                        <div class="text-field">
+                            @((ViewBag.Prezident as SlavojMVC4_1.Models.Clen).Kontakt.Mail)
+                        </div>
+                    }
+                }
+
             </div>
         }
 
+        @if (ViewBag.VicePrezident != null)
+        {
+            <div class="text-odstavec clanek-soupisky">
+                <div class="text-label">
+                    Viceprezident klubu:
+                </div>
+                <div class="text-image">
+                    @if ((ViewBag.VicePrezident as SlavojMVC4_1.Models.Clen).Fotka.IsEmpty())
+                    {
+                        <img class="obrazek_turnaje" src="/Content/images/Nikdo100x20.png" />
+
+                    }
+                    else
+                    {
+                        <img class="obrazek_turnaje" src="@((ViewBag.VicePrezident as SlavojMVC4_1.Models.Clen).Fotka)" />
+
+                    }
+
+                </div>
+                <div class="text-field">
+                    @SlavojMVC4_1.Infrastructure.Tools.GetFullName(
+                     ((ViewBag.VicePrezident as SlavojMVC4_1.Models.Clen).TitulPred),
+                     ((ViewBag.VicePrezident as SlavojMVC4_1.Models.Clen).Jmeno),
+                     ((ViewBag.VicePrezident as SlavojMVC4_1.Models.Clen).Prijmeni),
+                     ((ViewBag.VicePrezident as SlavojMVC4_1.Models.Clen).TitulZa)
+                )
+                </div>
+                @if ((ViewBag.VicePrezident as SlavojMVC4_1.Models.Clen).Kontakt != null)
+                {
+                    if (!(ViewBag.VicePrezident as SlavojMVC4_1.Models.Clen).Kontakt.Telefon.IsEmpty())
+                    {
+                        <div class="text-label">
+                            Telefon:
+                        </div>
+                        <div class="text-field">
+                            @((ViewBag.VicePrezident as SlavojMVC4_1.Models.Clen).Kontakt.Telefon)
+                        </div>
+                    }
+                    if (!(ViewBag.VicePrezident as SlavojMVC4_1.Models.Clen).Kontakt.Mail.IsEmpty())
+                    {
+                        <div class="text-label">
+                            E-mail:
+                        </div>
+                        <div class="text-field">
+                            @((ViewBag.VicePrezident as SlavojMVC4_1.Models.Clen).Kontakt.Mail)
+                        </div>
+                    }
+                }
+
+            </div>
+        }
+
+
+        @if (ViewBag.Pokladnik != null)
+        {
+            <div class="text-odstavec clanek-soupisky">
+                <div class="text-label">
+                    Pokladnik klubu:
+                </div>
+                <div class="text-image">
+                    @if ((ViewBag.Pokladnik as SlavojMVC4_1.Models.Clen).Fotka.IsEmpty())
+                    {
+                        <img class="obrazek_turnaje" src="/Content/images/Nikdo100x20.png" />
+
+                    }
+                    else
+                    {
+                        <img class="obrazek_turnaje" src="@((ViewBag.Pokladnik as SlavojMVC4_1.Models.Clen).Fotka)" />
+
+                    }
+
+                </div>
+                <div class="text-field">
+                    @SlavojMVC4_1.Infrastructure.Tools.GetFullName(
+                     ((ViewBag.Pokladnik as SlavojMVC4_1.Models.Clen).TitulPred),
+                     ((ViewBag.Pokladnik as SlavojMVC4_1.Models.Clen).Jmeno),
+                     ((ViewBag.Pokladnik as SlavojMVC4_1.Models.Clen).Prijmeni),
+                     ((ViewBag.Pokladnik as SlavojMVC4_1.Models.Clen).TitulZa)
+                )
+                </div>
+                @if ((ViewBag.Pokladnik as SlavojMVC4_1.Models.Clen).Kontakt != null)
+                {
+                    if (!(ViewBag.Pokladnik as SlavojMVC4_1.Models.Clen).Kontakt.Telefon.IsEmpty())
+                    {
+                        <div class="text-label">
+                            Telefon:
+                        </div>
+                        <div class="text-field">
+                            @((ViewBag.Pokladnik as SlavojMVC4_1.Models.Clen).Kontakt.Telefon)
+                        </div>
+                    }
+                    if (!(ViewBag.Pokladnik as SlavojMVC4_1.Models.Clen).Kontakt.Mail.IsEmpty())
+                    {
+                        <div class="text-label">
+                            E-mail:
+                        </div>
+                        <div class="text-field">
+                            @((ViewBag.Pokladnik as SlavojMVC4_1.Models.Clen).Kontakt.Mail)
+                        </div>
+                    }
+                }
+
+            </div>
+        }
+
+        @if (ViewBag.CleniVyboruPouze != null)
+        {
+            foreach (SlavojMVC4_1.Models.Clen clen in (System.Collections.IEnumerable)ViewBag.CleniVyboruPouze)
+            {
+                <div class="text-odstavec clanek-soupisky">
+                    <div class="text-label">
+                        Člen výboru klubu:
+                    </div>
+                    <div class="text-image">
+                        @if (clen.Fotka.IsEmpty())
+                        {
+                            <img class="obrazek_turnaje" src="/Content/images/Nikdo100x20.png" />
+
+                        }
+                        else
+                        {
+                            <img class="obrazek_turnaje" src="@clen.Fotka" />
+
+                        }
+
+                    </div>
+                    <div class="text-field">
+                        @SlavojMVC4_1.Infrastructure.Tools.GetFullName(
+                             (clen.TitulPred),
+                             (clen.Jmeno),
+                             (clen.Prijmeni),
+                             (clen.TitulZa)
+                        )
+                    </div>
+                    @if (clen.Kontakt != null)
+                    {
+                        if (!clen.Kontakt.Telefon.IsEmpty())
+                        {
+                            <div class="text-label">
+                                Telefon:
+                            </div>
+                            <div class="text-field">
+                                @clen.Kontakt.Telefon
+                            </div>
+                        }
+                        if (!clen.Kontakt.Mail.IsEmpty())
+                        {
+                            <div class="text-label">
+                                E-mail:
+                            </div>
+                            <div class="text-field">
+                                @clen.Kontakt.Mail
+                            </div>
+                        }
+                    }
+
+                </div>
+
+
+            }
+        }
+
+
     </div>
+
+    @if (Model != null)
+    {
+        if (Model.WebPage != null)
+        { 
+            if (!Model.WebPage.HtmlText.IsEmpty())
+            { 
+                <div class="clanek-soupisky">
+                    @Html.Raw(Model.WebPage.HtmlText)
+                </div>
+            }
+        }
+    }
+
+</div>
 
 

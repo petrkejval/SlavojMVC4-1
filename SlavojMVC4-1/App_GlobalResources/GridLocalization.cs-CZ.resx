@@ -127,16 +127,16 @@
     <value>Storno</value>
   </data>
   <data name="Update" xml:space="preserve">
-    <value>Update</value>
+    <value>Aktualizovat</value>
   </data>
   <data name="Insert" xml:space="preserve">
-    <value>Insert</value>
+    <value>Vložit</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>Upravit</value>
   </data>
   <data name="Select" xml:space="preserve">
-    <value>Select</value>
+    <value>Vybrat</value>
   </data>
   <data name="Page" xml:space="preserve">
     <value>Stana</value>
@@ -148,76 +148,76 @@
     <value>z {0}</value>
   </data>
   <data name="Filter" xml:space="preserve">
-    <value>Filter</value>
+    <value>Filtr</value>
   </data>
   <data name="FilterAnd" xml:space="preserve">
-    <value>And</value>
+    <value>a zároveň</value>
   </data>
   <data name="FilterClear" xml:space="preserve">
-    <value>Clear Filter</value>
+    <value>Zrušit filtr</value>
   </data>
   <data name="FilterDateEq" xml:space="preserve">
-    <value>Is equal to</value>
+    <value>Se rovná</value>
   </data>
   <data name="FilterDateGe" xml:space="preserve">
-    <value>Is after or equal to</value>
+    <value>Je větší nebo rovno</value>
   </data>
   <data name="FilterDateGt" xml:space="preserve">
-    <value>Is after</value>
+    <value>Je větší</value>
   </data>
   <data name="FilterDateLe" xml:space="preserve">
-    <value>Is before or equal to</value>
+    <value>Je menší nebo rovno</value>
   </data>
   <data name="FilterDateLt" xml:space="preserve">
-    <value>Is before</value>
+    <value>Je menší</value>
   </data>
   <data name="FilterDateNe" xml:space="preserve">
-    <value>Is not equal to</value>
+    <value>Není rovno</value>
   </data>
   <data name="FilterNumberEq" xml:space="preserve">
-    <value>Is equal to</value>
+    <value>Je rovno</value>
   </data>
   <data name="FilterNumberGe" xml:space="preserve">
-    <value>Is greater than or equal to</value>
+    <value>Je větší nebo rovno</value>
   </data>
   <data name="FilterNumberGt" xml:space="preserve">
-    <value>Is greater than</value>
+    <value>Je větší</value>
   </data>
   <data name="FilterNumberLe" xml:space="preserve">
-    <value>Is less than or equal to</value>
+    <value>Je menší nebo rovno</value>
   </data>
   <data name="FilterNumberLt" xml:space="preserve">
-    <value>Is less than</value>
+    <value>Je menší</value>
   </data>
   <data name="FilterNumberNe" xml:space="preserve">
-    <value>Is not equal to</value>
+    <value>Není rovno</value>
   </data>
   <data name="FilterShowRows" xml:space="preserve">
-    <value>Show rows with value that</value>
+    <value>Zonrazit řádky, které mají hodnotu</value>
   </data>
   <data name="FilterStringEndsWith" xml:space="preserve">
-    <value>Ends with</value>
+    <value>Končí na</value>
   </data>
   <data name="FilterStringEq" xml:space="preserve">
-    <value>Is equal to</value>
+    <value>Je rovno</value>
   </data>
   <data name="FilterStringNe" xml:space="preserve">
-    <value>Is not equal to</value>
+    <value>Není rovno</value>
   </data>
   <data name="FilterStringStartsWith" xml:space="preserve">
-    <value>Starts with</value>
+    <value>Začíná na</value>
   </data>
   <data name="FilterStringSubstringOf" xml:space="preserve">
-    <value>Contains</value>
+    <value>Obsahuje</value>
   </data>
   <data name="GroupHint" xml:space="preserve">
     <value>Drag a column header and drop it here to group by that column</value>
   </data>
   <data name="FilterEnumEq" xml:space="preserve">
-    <value>Is equal to</value>
+    <value>Je rovno</value>
   </data>
   <data name="FilterEnumNe" xml:space="preserve">
-    <value>Is not equal to</value>
+    <value>Není rovno</value>
   </data>
   <data name="DeleteConfirmation" xml:space="preserve">
     <value>Jste si jisti, že chcete smazat tento záznam?</value>
@@ -226,13 +226,13 @@
     <value>-Select value-</value>
   </data>
   <data name="FilterBoolIsFalse" xml:space="preserve">
-    <value>is false</value>
+    <value>je nepravda</value>
   </data>
   <data name="FilterBoolIsTrue" xml:space="preserve">
-    <value>is true</value>
+    <value>je pravda</value>
   </data>
   <data name="NoRecords" xml:space="preserve">
-    <value>No records to display.</value>
+    <value>Žádné záznamy k zobrazení.</value>
   </data>
   <data name="CancelChanges" xml:space="preserve">
     <value>Storno změn</value>
@@ -241,27 +241,27 @@
     <value>Uložit změny</value>
   </data>
   <data name="Refresh" xml:space="preserve">
-    <value>Refresh</value>
+    <value>Obnovit</value>
   </data>
   <data name="SortedAsc" xml:space="preserve">
-    <value>sorted ascending</value>
+    <value>Seřazeno vzestupně</value>
   </data>
   <data name="SortedDesc" xml:space="preserve">
-    <value>sorted descending</value>
+    <value>řazeno sestupně</value>
   </data>
   <data name="UnGroup" xml:space="preserve">
-    <value>ungroup</value>
+    <value>Zrušit seskupování</value>
   </data>
   <data name="FilterForeignKeyEq" xml:space="preserve">
-    <value>Is equal to</value>
+    <value>Je rovno</value>
   </data>
   <data name="FilterForeignKeyNe" xml:space="preserve">
-    <value>Is not equal to</value>
+    <value>Není rovno</value>
   </data>
   <data name="FilterStringNotSubstringOf" xml:space="preserve">
-    <value>Does not contain</value>
+    <value>Neobsahuje</value>
   </data>
   <data name="FilterOr" xml:space="preserve">
-    <value>Or</value>
+    <value>nebo</value>
   </data>
 </root>
