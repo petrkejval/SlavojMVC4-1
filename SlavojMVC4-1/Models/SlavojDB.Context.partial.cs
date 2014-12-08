@@ -103,6 +103,17 @@
                         result.Add(new ValidationResult(errorMessage));
                     }
                 }
+                else if (errorNum == 2601)
+                {
+                    string[] propertyName = new string[2];
+                    if (errorMessage.IndexOf("IX_Vysledky_RocnikId_SoutezId") > -1)
+                    {
+                        propertyName[0] = "SoutezId";
+                        result.Add(new ValidationResult("Pro zadaný ročník už soutěž existuje.", propertyName));
+                        break;
+                    }
+
+                }
                 else if (errorNum == 50000)
                 {
                     if (errorProcedure == "tiuCleni")

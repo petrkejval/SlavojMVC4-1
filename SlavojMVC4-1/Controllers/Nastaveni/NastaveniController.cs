@@ -23,6 +23,7 @@ namespace SlavojMVC4_1.Controllers.Nastaveni
     public class NastaveniController : Controller
     {
         // GET: Cleni
+
         [Authorize(Roles = ("clen"))]
         public ActionResult Cleni()
         {
@@ -105,11 +106,34 @@ namespace SlavojMVC4_1.Controllers.Nastaveni
             return View();
         }
 
+        [Authorize(Roles = ("admin"))]
+        public ActionResult Rocniky()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = ("superuser"))]
+        public ActionResult Vysledky()
+        {
+            ViewBag.RocnikyListItem = new SlavojDBContainer().Rocniky
+                                                 .Select(e => new { Id = e.RocnikId, Name = e.Nazev })
+                                                 .OrderBy(e => e.Name);
+            ViewBag.SoutezeListItem = new SlavojDBContainer().Souteze
+                                                 .Select(e => new { Id = e.SoutezId, Name = e.Nazev })
+                                                 .OrderBy(e => e.Name);
+
+            ViewBag.WebPagesListItem = new SlavojDBContainer().WebPages
+                                                 .Select(e => new { Id = e.WebPageId, Name = e.Nazev })
+                                                 .OrderBy(e => e.Name);
+            return View();
+        }
+
         [Authorize(Roles = ("superuser"))]
         public ActionResult WebPages()
         {
             return View();
         }
+
 
         [Authorize(Roles = ("admin"))]
         public ActionResult UserClen()

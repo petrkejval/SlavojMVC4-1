@@ -50,5 +50,8 @@ namespace SlavojMVC4_1.Models
         public DbSet<Klub> Kluby { get; set; }
         public DbSet<CleniInRole> CleniInRoles { get; set; }
         public DbSet<CleniRole> CleniRoles { get; set; }
+        public DbSet<Rocnik> Rocniky { get; set; }
+        public DbSet<Vysledek> Vysledky { get; set; }
+        public DbSet<VysledkyKola> VysledkyKol { get; set; }
     }
 }

@@ -22,7 +22,7 @@
         <AssociationConnector Association="SlavojDB.FK_Registrace_Cleni" />
         <AssociationConnector Association="SlavojDB.FK_Rozhodci_Cleni" />
         <EntityTypeShape EntityType="SlavojDB.KategorieSouteze" Width="1.5" PointX="5.625" PointY="10.375" />
-        <EntityTypeShape EntityType="SlavojDB.Soutez" Width="1.5" PointX="3.125" PointY="9.625" />
+        <EntityTypeShape EntityType="SlavojDB.Soutez" Width="1.5" PointX="0.875" PointY="10" />
         <AssociationConnector Association="SlavojDB.FK_Souteze_KategorieSoutezi1" />
         <EntityTypeShape EntityType="SlavojDB.Trener" Width="1.5" PointX="6.5" PointY="14.125" />
         <AssociationConnector Association="SlavojDB.FK_Treneri_Cleni" />
@@ -58,6 +58,12 @@
         <EntityTypeShape EntityType="SlavojDB.CleniRole" Width="1.5" PointX="9.125" PointY="7.375" />
         <AssociationConnector Association="SlavojDB.FK_CleniInRoles_Cleni_ClenId_ClenId" />
         <AssociationConnector Association="SlavojDB.FK_CleniInRoles_CleniRoles_ClenRoleId_ClenRoleId" />
+        <EntityTypeShape EntityType="SlavojDB.Rocnik" Width="1.5" PointX="2.75" PointY="17.625" />
+        <EntityTypeShape EntityType="SlavojDB.Vysledek" Width="1.5" PointX="4.875" PointY="17.25" />
+        <EntityTypeShape EntityType="SlavojDB.VysledkyKola" Width="1.5" PointX="7.25" PointY="17.5" />
+        <AssociationConnector Association="SlavojDB.FK_Vysledky_Rocniky" />
+        <AssociationConnector Association="SlavojDB.FK_Vysledky_Souteze" />
+        <AssociationConnector Association="SlavojDB.FK_VysledkyKola_Vysledky" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

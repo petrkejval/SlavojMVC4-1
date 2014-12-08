@@ -17,6 +17,7 @@ namespace SlavojMVC4_1.Models
         public Soutez()
         {
             this.Druzstvas = new HashSet<Druzstvo>();
+            this.Vysledkies = new HashSet<Vysledek>();
         }
     
         public int SoutezId { get; set; }
@@ -27,5 +28,6 @@ namespace SlavojMVC4_1.Models
     
         public virtual KategorieSouteze KategorieSouteze { get; set; }
         public virtual ICollection<Druzstvo> Druzstvas { get; set; }
+        public virtual ICollection<Vysledek> Vysledkies { get; set; }
     }
 }

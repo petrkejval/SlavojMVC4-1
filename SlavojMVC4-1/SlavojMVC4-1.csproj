@@ -219,9 +219,11 @@
     <Compile Include="Controllers\Nastaveni\KlubyGridController.cs" />
     <Compile Include="Controllers\Nastaveni\KuzelnyGridController.cs" />
     <Compile Include="Controllers\Nastaveni\NastaveniController.cs" />
+    <Compile Include="Controllers\Nastaveni\RocnikyGridController.cs" />
     <Compile Include="Controllers\Nastaveni\SoutezeGridController.cs" />
     <Compile Include="Controllers\Nastaveni\TurnajeGridController.cs" />
     <Compile Include="Controllers\Nastaveni\UserCleniGridController.cs" />
+    <Compile Include="Controllers\Nastaveni\VysledkyGridController.cs" />
     <Compile Include="Controllers\Nastaveni\WebPagesGridController.cs" />
     <Compile Include="Controllers\TurnajeController.cs" />
     <Compile Include="Extensions\HtmlHelpersExtensions.cs" />
@@ -499,6 +501,11 @@
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Registrace.partial.cs" />
+    <Compile Include="Models\Rocnik.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RocnikEditable.cs" />
+    <Compile Include="Models\RocnikySessionRepository.cs" />
     <Compile Include="Models\Rozhodci.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
@@ -543,6 +550,14 @@
     <Compile Include="Models\UserProfile.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Vysledek.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VysledekEditable.cs" />
+    <Compile Include="Models\VysledkyKola.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VysledkySessionRepository.cs" />
     <Compile Include="Models\WebPage.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
@@ -1374,6 +1389,8 @@
     <Content Include="Views\Nastaveni\Kluby.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\KlubEditable.cshtml" />
     <Content Include="Views\Menu\Kontakty.cshtml" />
+    <Content Include="Views\Nastaveni\Rocniky.cshtml" />
+    <Content Include="Views\Nastaveni\Vysledky.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -1385,6 +1402,8 @@
     <Folder Include="Content\themes\base\minified\" />
     <Folder Include="Views\KezelnaGrid\" />
     <Folder Include="Views\Kuzelna\" />
+    <Folder Include="Views\RocnikyGrid\" />
+    <Folder Include="Views\VysledkyGrid\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.zh-CN.resx">
