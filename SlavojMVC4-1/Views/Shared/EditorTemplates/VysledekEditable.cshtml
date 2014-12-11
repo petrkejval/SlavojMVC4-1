@@ -1,0 +1,109 @@
+﻿@model SlavojMVC4_1.Models.VysledekEditable
+
+@{
+    ViewBag.Title = "Výsledky - editace";
+}
+<fieldset class="turnaj-fields">
+    @Html.AntiForgeryToken()
+    @*@Html.ValidationSummary(true)*@
+
+    <div class="clen-osoba">
+        <div class="clen-nadpis editor-label">
+            Výsledky
+        </div>
+        @Html.HiddenFor(model => model.VysledekId)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RocnikId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RocnikId)
+            @Html.ValidationMessageFor(model => model.RocnikId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SoutezId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SoutezId)
+            @Html.ValidationMessageFor(model => model.SoutezId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Rozpis)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Rozpis)
+            @Html.ValidationMessageFor(model => model.Rozpis)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Rozlosovani)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Rozlosovani)
+            @Html.ValidationMessageFor(model => model.Rozlosovani)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SoupiskaPodzim)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SoupiskaPodzim)
+            @Html.ValidationMessageFor(model => model.SoupiskaPodzim)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SoupiskaJaro)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SoupiskaJaro)
+            @Html.ValidationMessageFor(model => model.SoupiskaJaro)
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tabulka)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tabulka)
+            @Html.ValidationMessageFor(model => model.Tabulka)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WebPageIId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WebPageIId)
+            @Html.ValidationMessageFor(model => model.WebPageIId)
+        </div>
+    </div>
+
+    <div>
+        @Html.ValidationMessage(String.Empty)
+
+    </div>
+
+
+</fieldset>
+<style type="text/css">
+    .t-grid .input-validation-error {
+        border-style: solid;
+    }
+
+    .t-input {
+        border-color: #e2e2e2;
+    }
+
+    .t-calendar {
+        color: black;
+    }
+
+    .t-content, .t-editable-area {
+        background-color: #87B9D6;
+    }
+
+    .t-footer {
+        background-color: #87B9D6;
+    }
+</style>
+

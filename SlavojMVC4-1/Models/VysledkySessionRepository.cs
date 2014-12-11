@@ -23,7 +23,11 @@
                          RocnikId = item.RocnikId,
                          SoutezId = item.SoutezId,
                          Tabulka = item.Tabulka,
-                         WebPageIId = item.WebPageIId
+                         WebPageIId = item.WebPageIId,
+                         Rozpis = item.Rozpis,
+                         Rozlosovani = item.Rozlosovani,
+                         SoupiskaPodzim = item.SoupiskaPodzim,
+                         SoupiskaJaro = item.SoupiskaJaro
                      }
                     ).ToList();
 
@@ -54,6 +58,10 @@
                 target.SoutezId = item.SoutezId;
                 target.Tabulka = item.Tabulka;
                 target.WebPageIId = item.WebPageIId;
+                target.Rozpis = item.Rozpis;
+                target.Rozlosovani = item.Rozlosovani;
+                target.SoupiskaPodzim = item.SoupiskaPodzim;
+                target.SoupiskaJaro = item.SoupiskaJaro;
             }
 
         }

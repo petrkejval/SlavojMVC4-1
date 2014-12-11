@@ -1,0 +1,91 @@
+﻿@model IEnumerable<SlavojMVC4_1.Models.Vysledek>
+@{
+    ViewBag.Title = "Výsledky";
+}
+<div class="clanek">
+    @if (@Model != null)
+    {
+        foreach(var vysledek in Model)
+        {
+            int maxKolo = 0;
+            if ( !vysledek.Tabulka.IsEmpty() || vysledek.WebPageIId > 0 || vysledek.VysledkyKol.Count() > 0)
+            {
+                <div class="text-odstavec clanek-soupisky">
+                    <div class="predmet">
+                        @vysledek.Soutez.Nazev @vysledek.Rocnik.Nazev
+                    </div>
+                    @if (vysledek.VysledkyKol != null)
+                    {
+                        if (vysledek.VysledkyKol.Count() > 0)
+                        {
+                            maxKolo = @vysledek.VysledkyKol.Max(m => m.PorCisloKola);
+                        }
+                    }
+                    @if (!vysledek.Tabulka.IsEmpty() && @maxKolo > 0)
+                    {
+                        <div>
+                            Tabulka po @maxKolo. kole:
+                        </div>
+                    }
+                    @if (!vysledek.Tabulka.IsEmpty())
+                    { 
+                        <div>
+                            <img alt="Tabulka po @maxKolo kole" src="@vysledek.Tabulka" />
+                        </div>
+                    }
+                    @if (!vysledek.Rozpis.IsEmpty() || !vysledek.Rozlosovani.IsEmpty() || !vysledek.SoupiskaPodzim.IsEmpty() || !vysledek.SoupiskaJaro.IsEmpty())
+                    {
+                        <div class="text-odstavec-vysledky">
+                            @if (!vysledek.Rozpis.IsEmpty())
+                            {
+                                <div class="float-left">
+                                    <a href="@vysledek.Rozpis" title="Zobrazí Rozpis soutěže">Rozpis soutěže</a>
+                                </div>
+
+                            }
+
+                            @if (!vysledek.Rozlosovani.IsEmpty())
+                            {
+                                <div class="float-left">
+                                    <a href="@vysledek.Rozlosovani" title="Zobrazí Rozlosování soutěže">Rozlosování soutěže</a>
+                                </div>
+
+                            }
+                            @if (!vysledek.SoupiskaPodzim.IsEmpty())
+                            {
+                                <div class="float-left">
+                                    <a href="@vysledek.SoupiskaPodzim" title="Zobrazí Soupisky Podzim">Soupisky Podzim</a>
+                                </div>
+
+                            }
+                            @if (!vysledek.SoupiskaJaro.IsEmpty())
+                            {
+                                <div class="float-left">
+                                    <a href="@vysledek.SoupiskaJaro" title="Zobrazí Soupisky Jaro">Soupisky Jaro</a>
+                                </div>
+
+                            }
+                        </div>
+                    }
+                    @if (vysledek.VysledkyKol.Count() > 0)
+                    { 
+                        <div class="text-odstavec-vysledky">
+                            @foreach (var kolo in vysledek.VysledkyKol.OrderByDescending(o => o.PorCisloKola))
+                            {
+                                <div class="float-left">
+                                    <a href="@kolo.Zpravodaj" title="Zobrazí Zpravodaj č.@kolo.PorCisloKola">Zpravodaj č.@kolo.PorCisloKola</a>
+                                </div>
+                            }
+                        </div>
+                    }
+                    @if (vysledek.WebPageIId > 0 && !vysledek.WebPage.HtmlText.IsEmpty())
+                    {
+                        <div class="text-odstavec-vysledky">
+                            @Html.Raw(vysledek.WebPage.HtmlText)
+                        </div>
+                    }    
+                </div>
+            }
+        }
+    }
+</div>

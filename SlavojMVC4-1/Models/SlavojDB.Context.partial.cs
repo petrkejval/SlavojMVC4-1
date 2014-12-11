@@ -98,6 +98,12 @@
                         result.Add(new ValidationResult("Člen už má přidělenu tuto roli.", propertyName));
                         break;
                     }
+                    else if (errorMessage.IndexOf("IX_VysledkyKola_VysledekId_PorCisloKola") > -1)
+                    {
+                        propertyName[0] = "PorCisloKola";
+                        result.Add(new ValidationResult("Pořadové číslo kola už existuje.", propertyName));
+                        break;
+                    }
                     else
                     {
                         result.Add(new ValidationResult(errorMessage));

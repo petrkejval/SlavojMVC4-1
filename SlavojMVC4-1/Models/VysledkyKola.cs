@@ -15,7 +15,7 @@ namespace SlavojMVC4_1.Models
     public partial class VysledkyKola
     {
         public int VysledkyKoloId { get; set; }
-        public Nullable<int> VysledekId { get; set; }
+        public int VysledekId { get; set; }
         public int PorCisloKola { get; set; }
         public string Zpravodaj { get; set; }
     

@@ -33,5 +33,18 @@
         [Display(Name = "Webová stránka soutěže")]
         [UIHint("GridForeignKey")]
         public int WebPageIId { get; set; }
+
+        [Display(Name = "Rozpis soutěže")]
+        public string Rozpis { get; set; }
+
+        [Display(Name = "Rozlosování soutěže")]
+        public string Rozlosovani { get; set; }
+        
+        [Display(Name = "Soupiska podzim")]
+        public string SoupiskaPodzim { get; set; }
+        
+        [Display(Name = "Soupiska jaro")]
+        public string SoupiskaJaro { get; set; }
+
     }
 }

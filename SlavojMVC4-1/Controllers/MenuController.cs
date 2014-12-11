@@ -21,6 +21,13 @@ namespace SlavojMVC4_1.Controllers
             var model = db.WebPages.Find(id);
             return View(model);
         }
+        // GET: Menu
+        public ActionResult Vysledky()
+        {
+            var model = db.Vysledky.Where(w => w.Rocnik.JeVybrany).OrderBy(o => o.SoutezId);
+
+            return View(model);
+        }
 
         // GET: Menu
         public ActionResult Kuzelna()

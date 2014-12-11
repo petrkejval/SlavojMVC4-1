@@ -228,13 +228,17 @@
           <Property Name="SoutezId" Type="int" Nullable="false" />
           <Property Name="Tabulka" Type="varchar" MaxLength="200" />
           <Property Name="WebPageIId" Type="int" Nullable="false" />
+          <Property Name="Rozpis" Type="varchar" MaxLength="200" />
+          <Property Name="Rozlosovani" Type="varchar" MaxLength="200" />
+          <Property Name="SoupiskaPodzim" Type="varchar" MaxLength="200" />
+          <Property Name="SoupiskaJaro" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="VysledkyKola">
           <Key>
             <PropertyRef Name="VysledkyKoloId" />
           </Key>
           <Property Name="VysledkyKoloId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="VysledekId" Type="int" />
+          <Property Name="VysledekId" Type="int" Nullable="false" />
           <Property Name="PorCisloKola" Type="int" Nullable="false" />
           <Property Name="Zpravodaj" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
@@ -598,8 +602,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Vysledky_WebPages">
+          <End Role="WebPages" Type="Self.WebPages" Multiplicity="1" />
+          <End Role="Vysledky" Type="Self.Vysledky" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebPages">
+              <PropertyRef Name="WebPageId" />
+            </Principal>
+            <Dependent Role="Vysledky">
+              <PropertyRef Name="WebPageIId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_VysledkyKola_Vysledky">
-          <End Role="Vysledky" Type="Self.Vysledky" Multiplicity="0..1" />
+          <End Role="Vysledky" Type="Self.Vysledky" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="VysledkyKola" Type="Self.VysledkyKola" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Vysledky">
@@ -779,6 +797,10 @@
             <End Role="Souteze" EntitySet="Souteze" />
             <End Role="Vysledky" EntitySet="Vysledky" />
           </AssociationSet>
+          <AssociationSet Name="FK_Vysledky_WebPages" Association="Self.FK_Vysledky_WebPages">
+            <End Role="WebPages" EntitySet="WebPages" />
+            <End Role="Vysledky" EntitySet="Vysledky" />
+          </AssociationSet>
           <AssociationSet Name="FK_VysledkyKola_Vysledky" Association="Self.FK_VysledkyKola_Vysledky">
             <End Role="Vysledky" EntitySet="Vysledky" />
             <End Role="VysledkyKola" EntitySet="VysledkyKola" />
@@ -932,7 +954,6 @@
           </AssociationSet>
           <EntitySet Name="Rocniky" EntityType="SlavojDB.Rocnik" />
           <EntitySet Name="Vysledky" EntityType="SlavojDB.Vysledek" />
-          <EntitySet Name="VysledkyKol" EntityType="SlavojDB.VysledkyKola" />
           <AssociationSet Name="FK_Vysledky_Rocniky" Association="SlavojDB.FK_Vysledky_Rocniky">
             <End Role="Rocniky" EntitySet="Rocniky" />
             <End Role="Vysledky" EntitySet="Vysledky" />
@@ -941,9 +962,14 @@
             <End Role="Soutez" EntitySet="Souteze" />
             <End Role="Vysledky" EntitySet="Vysledky" />
           </AssociationSet>
+          <EntitySet Name="VysledkyKol" EntityType="SlavojDB.VysledkyKola" />
           <AssociationSet Name="FK_VysledkyKola_Vysledky" Association="SlavojDB.FK_VysledkyKola_Vysledky">
-            <End Role="Vysledky" EntitySet="Vysledky" />
+            <End Role="Vysledek" EntitySet="Vysledky" />
             <End Role="VysledkyKola" EntitySet="VysledkyKol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vysledky_WebPages" Association="SlavojDB.FK_Vysledky_WebPages">
+            <End Role="WebPage" EntitySet="WebPages" />
+            <End Role="Vysledek" EntitySet="Vysledky" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="webpages_Membership">
@@ -1328,8 +1354,9 @@
           <NavigationProperty Name="MainMenus" Relationship="SlavojDB.FK_MainMenu_WebPages" FromRole="WebPage" ToRole="MainMenu" />
           <NavigationProperty Name="Druzstva" Relationship="SlavojDB.FK_Druzstva_WebPages" FromRole="WebPage" ToRole="Druzstvo" />
           <NavigationProperty Name="Turnaje" Relationship="SlavojDB.FK_Turnaje_WebPages" FromRole="WebPage" ToRole="Turnaj" />
-          <NavigationProperty Name="Kuzelnas" Relationship="SlavojDB.FK_Kuzelna_WebPages" FromRole="WebPage" ToRole="Kuzelna" />
-          <NavigationProperty Name="Klubies" Relationship="SlavojDB.FK_Kluby_WebPages" FromRole="WebPage" ToRole="Kluby" />
+          <NavigationProperty Name="Kuzelny" Relationship="SlavojDB.FK_Kuzelna_WebPages" FromRole="WebPage" ToRole="Kuzelna" />
+          <NavigationProperty Name="Kluby" Relationship="SlavojDB.FK_Kluby_WebPages" FromRole="WebPage" ToRole="Kluby" />
+          <NavigationProperty Name="Vysledky" Relationship="SlavojDB.FK_Vysledky_WebPages" FromRole="WebPage" ToRole="Vysledek" />
         </EntityType>
         <Association Name="FK_MainMenu_WebPages">
           <End Type="SlavojDB.WebPage" Role="WebPage" Multiplicity="1" />
@@ -1597,17 +1624,12 @@
           <Property Name="WebPageIId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Rocnik" Relationship="SlavojDB.FK_Vysledky_Rocniky" FromRole="Vysledky" ToRole="Rocniky" />
           <NavigationProperty Name="Soutez" Relationship="SlavojDB.FK_Vysledky_Souteze" FromRole="Vysledky" ToRole="Soutez" />
-          <NavigationProperty Name="VysledkyKol" Relationship="SlavojDB.FK_VysledkyKola_Vysledky" FromRole="Vysledky" ToRole="VysledkyKola" />
-        </EntityType>
-        <EntityType Name="VysledkyKola">
-          <Key>
-            <PropertyRef Name="VysledkyKoloId" />
-          </Key>
-          <Property Name="VysledkyKoloId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VysledekId" Type="Int32" />
-          <Property Name="PorCisloKola" Type="Int32" Nullable="false" />
-          <Property Name="Zpravodaj" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Vysledek" Relationship="SlavojDB.FK_VysledkyKola_Vysledky" FromRole="VysledkyKola" ToRole="Vysledky" />
+          <NavigationProperty Name="VysledkyKol" Relationship="SlavojDB.FK_VysledkyKola_Vysledky" FromRole="Vysledek" ToRole="VysledkyKola" />
+          <NavigationProperty Name="WebPage" Relationship="SlavojDB.FK_Vysledky_WebPages" FromRole="Vysledek" ToRole="WebPage" />
+          <Property Name="Rozpis" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Rozlosovani" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SoupiskaPodzim" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SoupiskaJaro" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Vysledky_Rocniky">
           <End Type="SlavojDB.Rocnik" Role="Rocniky" Multiplicity="1" />
@@ -1633,15 +1655,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VysledkyKola">
+          <Key>
+            <PropertyRef Name="VysledkyKoloId" />
+          </Key>
+          <Property Name="VysledkyKoloId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VysledekId" Type="Int32" Nullable="false" />
+          <Property Name="PorCisloKola" Type="Int32" Nullable="false" />
+          <Property Name="Zpravodaj" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Vysledek" Relationship="SlavojDB.FK_VysledkyKola_Vysledky" FromRole="VysledkyKola" ToRole="Vysledek" />
+        </EntityType>
         <Association Name="FK_VysledkyKola_Vysledky">
-          <End Type="SlavojDB.Vysledek" Role="Vysledky" Multiplicity="0..1" />
+          <End Type="SlavojDB.Vysledek" Role="Vysledek" Multiplicity="1" />
           <End Type="SlavojDB.VysledkyKola" Role="VysledkyKola" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Vysledky">
+            <Principal Role="Vysledek">
               <PropertyRef Name="VysledekId" />
             </Principal>
             <Dependent Role="VysledkyKola">
               <PropertyRef Name="VysledekId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vysledky_WebPages">
+          <End Type="SlavojDB.WebPage" Role="WebPage" Multiplicity="1" />
+          <End Type="SlavojDB.Vysledek" Role="Vysledek" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebPage">
+              <PropertyRef Name="WebPageId" />
+            </Principal>
+            <Dependent Role="Vysledek">
+              <PropertyRef Name="WebPageIId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1941,6 +1985,10 @@
           <EntitySetMapping Name="Vysledky">
             <EntityTypeMapping TypeName="SlavojDB.Vysledek">
               <MappingFragment StoreEntitySet="Vysledky">
+                <ScalarProperty Name="SoupiskaJaro" ColumnName="SoupiskaJaro" />
+                <ScalarProperty Name="SoupiskaPodzim" ColumnName="SoupiskaPodzim" />
+                <ScalarProperty Name="Rozlosovani" ColumnName="Rozlosovani" />
+                <ScalarProperty Name="Rozpis" ColumnName="Rozpis" />
                 <ScalarProperty Name="WebPageIId" ColumnName="WebPageIId" />
                 <ScalarProperty Name="Tabulka" ColumnName="Tabulka" />
                 <ScalarProperty Name="SoutezId" ColumnName="SoutezId" />

@@ -31,7 +31,6 @@ namespace SlavojMVC4_1.Controllers
         [GridAction]
         public ActionResult VysledkySelect()
         {
-
             return View(new GridModel(VysledkySessionRepository.All(true)));
         }
 
@@ -61,6 +60,10 @@ namespace SlavojMVC4_1.Controllers
                     entity.SoutezId = item.SoutezId;
                     entity.Tabulka = item.Tabulka;
                     entity.WebPageIId = item.WebPageIId;
+                    entity.Rozpis = item.Rozpis;
+                    entity.Rozlosovani = item.Rozlosovani;
+                    entity.SoupiskaPodzim = item.SoupiskaPodzim;
+                    entity.SoupiskaJaro = item.SoupiskaJaro;
 
 
                     //Nastaví všechna modifikovaná pole jako modifikovaná
@@ -107,6 +110,10 @@ namespace SlavojMVC4_1.Controllers
                         entity.SoutezId = item.SoutezId;
                         entity.Tabulka = item.Tabulka;
                         entity.WebPageIId = item.WebPageIId;
+                        entity.Rozpis = item.Rozpis;
+                        entity.Rozlosovani = item.Rozlosovani;
+                        entity.SoupiskaPodzim = item.SoupiskaPodzim;
+                        entity.SoupiskaJaro = item.SoupiskaJaro;
 
 
                         // Add the entity
@@ -170,6 +177,136 @@ namespace SlavojMVC4_1.Controllers
 
             //Rebind the grid
             return View(new GridModel(VysledkySessionRepository.All()));
+        }
+        //.......................................................................................................................................................................
+        [GridAction]
+        public ActionResult KoloSelect(int VysledekId)
+        {
+            var model = new GridModel(VysledekVysledkyKolaSessionRepository.All(VysledekId, true));
+            //int maxValue = VysledekVysledkyKolaSessionRepository.MaxKolo(VysledekId, false);
+            //ViewBag.MaxValue = maxValue;
+            return View(model);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [CultureAwareAction]
+        [GridAction]
+        [HandleError]
+        public ActionResult KoloUpdate(int id, int VysledekId)
+        {
+            VysledekVysledkyKolaEditable item = VysledekVysledkyKolaSessionRepository.One(p => p.VysledkyKoloId == id, VysledekId);
+            var values = ModelState.Values;
+            TryUpdateModel(item);
+            //.........................................................................................................................................................
+            if (ModelState.IsValid)
+            {
+                using (var db = new SlavojDBContainer())
+                {
+                    this.ModelState.Clear();
+                    var entity = db.VysledkyKol.Find(item.VysledkyKoloId);
+                    if (entity != null)
+                    {
+                        entity.PorCisloKola = item.PorCisloKola;
+                        entity.Zpravodaj = item.Zpravodaj;
+                        //.................................................................................................
+                        EfStatus status = db.SaveChangesWithValidation();
+                        if (status.IsValid)
+                        {
+                            VysledekVysledkyKolaSessionRepository.Update(item, VysledekId);
+                        }
+                        else
+                        {
+                            AddModelStateError(status);
+                        }
+                    }
+
+                }
+
+            }
+
+            return View(new GridModel(VysledekVysledkyKolaSessionRepository.All(VysledekId)));
+        }
+
+
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [CultureAwareAction]
+        [GridAction]
+        [HandleError]
+        public ActionResult KoloInsert(int VysledekId)
+        {
+            //Create a new instance of the EditableProduct class.
+            using (var db = new SlavojDBContainer())
+            {
+                this.ModelState.Clear();
+                VysledekVysledkyKolaEditable item = new VysledekVysledkyKolaEditable();
+                //Perform model binding (fill the product properties and validate it).
+                if (TryUpdateModel(item))
+                {
+                    if (ModelState.IsValid)
+                    {
+
+                        var entity = new SlavojMVC4_1.Models.VysledkyKola();
+                        item.VysledekId = VysledekId;
+                        entity.VysledekId = item.VysledekId;
+                        entity.PorCisloKola = item.PorCisloKola;
+                        entity.Zpravodaj = item.Zpravodaj;
+
+                        // Add the entity
+                        db.VysledkyKol.Add(entity);
+                        //.................................................................................................
+                        EfStatus status = db.SaveChangesWithValidation();
+                        if (status.IsValid)
+                        {
+                            item.VysledkyKoloId = entity.VysledkyKoloId;
+                            VysledekVysledkyKolaSessionRepository.Insert(item, VysledekId);
+                        }
+                        else
+                        {
+                            AddModelStateError(status);
+                        }
+
+                    }
+                }
+
+                //Rebind the grid
+                return View(new GridModel(VysledekVysledkyKolaSessionRepository.All(VysledekId)));
+            }
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [GridAction]
+        public ActionResult KoloDelete(int id, int VysledekId)
+        {
+            VysledekVysledkyKolaEditable item = VysledekVysledkyKolaSessionRepository.One(p => p.VysledkyKoloId == id, VysledekId);
+
+            if (item != null)
+            {
+                if (TryValidateModel(item))
+                {
+                    using (var db = new SlavojDBContainer())
+                    {
+
+                        this.ModelState.Clear();
+                        var entity = db.VysledkyKol.Find(item.VysledkyKoloId);
+                        if (entity != null)
+                        {
+                            db.VysledkyKol.Remove(entity);
+                            EfStatus status = db.SaveChangesWithValidation();
+                            if (status.IsValid)
+                            {
+                                VysledekVysledkyKolaSessionRepository.Delete(item, VysledekId);
+                            }
+                            else
+                            {
+                                AddModelStateError(status);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return View(new GridModel(VysledekVysledkyKolaSessionRepository.All(VysledekId)));
         }
         //......................................................................................................................................................................
         private void AddModelStateError(EfStatus status)

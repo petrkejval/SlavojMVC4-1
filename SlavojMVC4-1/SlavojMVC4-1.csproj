@@ -554,9 +554,11 @@
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VysledekEditable.cs" />
+    <Compile Include="Models\VysledekVysledkyKolaSessionRepository.cs" />
     <Compile Include="Models\VysledkyKola.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VysledekVysledkyKolaEditable.cs" />
     <Compile Include="Models\VysledkySessionRepository.cs" />
     <Compile Include="Models\WebPage.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
@@ -1391,6 +1393,8 @@
     <Content Include="Views\Menu\Kontakty.cshtml" />
     <Content Include="Views\Nastaveni\Rocniky.cshtml" />
     <Content Include="Views\Nastaveni\Vysledky.cshtml" />
+    <Content Include="Views\Menu\Vysledky.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\VysledekEditable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -1400,10 +1404,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\themes\base\minified\" />
-    <Folder Include="Views\KezelnaGrid\" />
-    <Folder Include="Views\Kuzelna\" />
-    <Folder Include="Views\RocnikyGrid\" />
-    <Folder Include="Views\VysledkyGrid\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\UploadLocalization.zh-CN.resx">

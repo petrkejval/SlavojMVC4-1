@@ -24,9 +24,14 @@ namespace SlavojMVC4_1.Models
         public int SoutezId { get; set; }
         public string Tabulka { get; set; }
         public int WebPageIId { get; set; }
+        public string Rozpis { get; set; }
+        public string Rozlosovani { get; set; }
+        public string SoupiskaPodzim { get; set; }
+        public string SoupiskaJaro { get; set; }
     
         public virtual Rocnik Rocnik { get; set; }
         public virtual Soutez Soutez { get; set; }
         public virtual ICollection<VysledkyKola> VysledkyKol { get; set; }
+        public virtual WebPage WebPage { get; set; }
     }
 }

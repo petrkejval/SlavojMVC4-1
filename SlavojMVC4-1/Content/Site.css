@@ -1087,6 +1087,12 @@ tr.pager td {
     /*overflow-y:auto;*/
 }
 
+.text-odstavec-vysledky
+{
+    padding-top:10px;
+    overflow:auto;
+}
+
 .platnodo-upozorneni
 {
     color:orange;
