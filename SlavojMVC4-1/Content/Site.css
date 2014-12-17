@@ -1,4 +1,13 @@
 ﻿html {
+    background: repeating-linear-gradient(
+      to right,
+      #E2F6FE,
+      #E2F6FE 200px,
+      #fff 200px,
+
+      #fff 400px
+     );  
+
     background-color: #e2e2e2; /*pozadí celé stránky*/
     margin: 0;
     padding: 0;
@@ -6,13 +15,30 @@
 
 body {
     background-color: #fff; /*pozadí těla celé stránky*/
+    background: repeating-linear-gradient(
+      to right,
+      #E2F6FE,
+      #E2F6FE 200px,
+      #fff 200px,
+
+      #fff 400px
+     );  
     border-top: solid 10px #000;
     color: #333;
-    /*font-size: .85em;*/
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
-    padding: 0;
+}
+footer
+{
+    background: repeating-linear-gradient(
+      to right,
+      #E2F6FE,
+      #E2F6FE 200px,
+      #fff 200px,
+
+      #fff 400px
+     );  
 }
 
 a {
@@ -100,20 +126,11 @@ h5, h6 {
 }
 
 #body {
-    /*background-color: #efeeef;*/ /*pozadí těla*/
-    background-color: #e2e2e2;
-    clear: both;
-    padding-bottom: 35px;
 }
 
     .main-content {
         /*background: url("../Images/accent.png") no-repeat;*/
-        padding-left: 10px;
-        padding-top: 30px;
-    }
-
-    .featured + .main-content {
-        background: url("../Images/heroAccent.png") no-repeat;
+        padding-top: 5px;
     }
 
     #contentwrapper{
@@ -130,14 +147,15 @@ h5, h6 {
         /*background: #FDE95E;*/
     }
     .innertube{
-        margin: 10px; /*Margins for inner DIV inside each column (to provide padding)*/
+        margin: 0px; /*Margins for inner DIV inside each column (to provide padding)*/
         margin-top: 0;
         margin-left: 0;
     }
 
 
 header .content-wrapper {
-    padding-top: 20px;
+    padding-top: 10px;
+
 }
 
 header a
@@ -160,7 +178,6 @@ footer {
 ----------------------------------------------------------*/
 .site-menu
 {
-    margin-bottom:5px;
     clear:both;
 }
     
@@ -168,7 +185,7 @@ footer {
 /* site title
 ----------------------------------------------------------*/
 .site-title {
-    color: #c8c8c8;
+    /*color: #c8c8c8;*/
     font-family: Arial /*Rockwell, Consolas, "Courier New", Courier, monospace*/;
     font-size: 40px/*3.3em*/;
     margin: 0;
@@ -178,28 +195,33 @@ footer {
 .site-title a, .site-title a:hover, .site-title a:active
 {
     background: none; 
-    /*color: #c8c8c8;*/
     color: #1877AF;
     outline: none;
     text-decoration: none;
 }
     .site-title img
-    /*.znak*/
     {
-        border: 0;
+        border: none;
+        margin-bottom:0;
+        outline:0;
+        font-size: 20px;
+
     }
+
 /* login
 ----------------------------------------------------------*/
 #login {
     display: block;
     font-size: .85em;
     /*margin: 0 0 10px;*/
-    /*margin-top: 100px;*/
+    margin-top: -30px;
+    margin-right:5px;
     text-align: right;
 }
 
     #login a {
         background-color: #d3dce0;
+        color: #333;
         margin-left: 10px;
         margin-right: 3px;
         padding: 2px 3px;
@@ -208,10 +230,13 @@ footer {
     }
 
     #login a.username {
-        background: none;
+        /*background: none;*/
+        background-color: #d3dce0;
+        color: #333;
         margin: 0;
         padding: 0;
-        text-decoration: underline;
+        /*text-decoration: underline;*/
+        text-decoration:none;
     }
 
     #login ul {
@@ -222,6 +247,9 @@ footer {
         display: inline;
         list-style: none;
     }
+    #login a:hover {
+            color: #1877AF;
+        }
 
 
 /* menu
@@ -716,6 +744,13 @@ tr.pager td {
             margin: 2px;
             padding: 0;
         }
+        #login a.username {
+                background: none;
+                color: #999;
+                font-weight: 600;
+                margin: 2px;
+                padding: 0;
+        }
 
         #login a:hover {
             color: #333;
@@ -848,7 +883,6 @@ tr.pager td {
     background-color: white;
     margin-bottom: 10px;
     padding: 15px 20px 20px 20px;
-    
     border-width: 1px;
     border-color:silver;
     border-style:none solid solid none;
@@ -891,6 +925,8 @@ tr.pager td {
     }
 .novyclanek
 {
+    margin-top:0px;
+    padding-top:0px;
     padding-bottom:2px;
 }
 /*grid
@@ -1104,4 +1140,14 @@ tr.pager td {
 .iframe{
     width:600px; 
     height:400px; 
+}
+.pagedList
+{
+    padding-top:0;
+    margin-top:0px;
+    height:60px;
+}
+.znak
+{
+    padding-top:8px;
 }

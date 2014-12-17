@@ -1,0 +1,109 @@
+﻿@model SlavojMVC4_1.Models.DruzstvoEditable
+
+@{
+    ViewBag.Title = "Družstvo - editace";
+}
+<fieldset class="turnaj-fields">
+    @Html.AntiForgeryToken()
+    @*@Html.ValidationSummary(true)*@
+
+    <div class="clen-osoba">
+        <div class="clen-nadpis editor-label">
+            Družstvo
+        </div>
+        @Html.HiddenFor(model => model.DruzstvoId)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nazev)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nazev)
+            @Html.ValidationMessageFor(model => model.Nazev)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Pismeno)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Pismeno)
+            @Html.ValidationMessageFor(model => model.Pismeno)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SoutezId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SoutezId)
+            @Html.ValidationMessageFor(model => model.SoutezId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VedouciId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VedouciId)
+            @Html.ValidationMessageFor(model => model.VedouciId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TrenerId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TrenerId)
+            @Html.ValidationMessageFor(model => model.TrenerId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Image)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Image)
+            @Html.ValidationMessageFor(model => model.Image)
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.WebPageId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.WebPageId)
+            @Html.ValidationMessageFor(model => model.WebPageId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Existuje)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Existuje)
+            @Html.ValidationMessageFor(model => model.Existuje)
+        </div>
+    </div>
+
+    <div>
+        @Html.ValidationMessage(String.Empty)
+
+    </div>
+
+
+</fieldset>
+<style type="text/css">
+    .t-grid .input-validation-error {
+        border-style: solid;
+    }
+
+    .t-input {
+        border-color: #e2e2e2;
+    }
+
+    .t-calendar {
+        color: black;
+    }
+
+    .t-content, .t-editable-area {
+        background-color: #87B9D6;
+    }
+
+    .t-footer {
+        background-color: #87B9D6;
+    }
+</style>
+

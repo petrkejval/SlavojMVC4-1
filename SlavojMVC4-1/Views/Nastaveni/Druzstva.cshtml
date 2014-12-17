@@ -18,7 +18,8 @@
             .Delete("DruzstvaDelete", "DruzstvaGrid")
             )
         .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
-        .Editable(editing => editing.Mode(GridEditMode.InLine))
+        //.Editable(editing => editing.Mode(GridEditMode.InLine))
+        .Editable(editing => editing.Mode(GridEditMode.InForm).TemplateName("DruzstvoEditable"))
         .Columns(columns =>
                 {
                     columns.Command(commands =>

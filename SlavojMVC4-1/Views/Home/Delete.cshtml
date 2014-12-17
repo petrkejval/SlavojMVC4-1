@@ -6,7 +6,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Jste si jisti, že chcete smazat tento článek?</h3>
 <fieldset>
     <legend>Clanek</legend>
 
@@ -21,7 +21,7 @@
          @Html.DisplayNameFor(model => model.Text)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Text)
+        @Html.Raw(Model.Text)
     </div>
 
     <div class="display-label">
@@ -55,7 +55,7 @@
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     <p>
-        <input type="submit" class="t-button t-state-default" value="Delete" /> |
+        <input type="submit" class="t-button t-state-default" value="Smazat" /> |
         @Html.ActionLink("Zpět na seznam článků", "Index")
     </p>
 }

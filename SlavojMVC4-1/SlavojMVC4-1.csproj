@@ -785,20 +785,8 @@
     <Content Include="Content\2013.2.611\Windows7\sprite-vertical.png" />
     <Content Include="Content\2013.2.611\Windows7\sprite.png" />
     <Content Include="Content\Common\validation-error-message.png" />
-    <Content Include="Content\Images\ClenFoto\1.png" />
-    <Content Include="Content\Images\ClenFoto\10.png" />
-    <Content Include="Content\Images\ClenFoto\11.png" />
-    <Content Include="Content\Images\ClenFoto\12.png" />
-    <Content Include="Content\Images\ClenFoto\13.png" />
-    <Content Include="Content\Images\ClenFoto\24.png" />
-    <Content Include="Content\Images\ClenFoto\25.png" />
-    <Content Include="Content\Images\ClenFoto\8.png" />
-    <Content Include="Content\Images\ClenFoto\9.png" />
-    <Content Include="Content\Images\Kuželna Žirovnice 1.320 x 240.bmp" />
-    <Content Include="Content\Images\Nikdo100x20.png" />
-    <Content Include="Content\Images\Nikdo50x60.png" />
-    <Content Include="Content\Images\Pruh1.gif" />
-    <Content Include="Content\Images\VelikonocniVajicko.png" />
+    <Content Include="Content\Images\Pruh2.jpg" />
+    <Content Include="Content\Images\Znak.KK.Slavoj.Zirovnice.150.gif" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -823,7 +811,6 @@
     <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\themes\base\jquery-ui.css" />
-    <Content Include="Content\Images\Znak.KK.Slavoj.Zirovnice.150.jpg" />
     <None Include="Content\pk.SlavojZirovnice.min.css.old" />
     <Content Include="Content\themes\base\menu.css" />
     <Content Include="Content\themes\base\progressbar.css" />
@@ -1395,6 +1382,7 @@
     <Content Include="Views\Nastaveni\Vysledky.cshtml" />
     <Content Include="Views\Menu\Vysledky.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\VysledekEditable.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DruzstvoEditable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
