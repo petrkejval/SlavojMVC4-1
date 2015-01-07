@@ -4,67 +4,134 @@
 }
 
 <div class="clanek">
-        <div class="text-odstavec clanek-soupisky">
-            <div class="text-image">
-                <img class="obrazek_kuzelny" src="@Model.Image" />
-            </div>
-            <div class="text-label">
-                Adresa kuželny:
-            </div>
-            <div class="text-field">
-                @Model.Ulice @Model.CisloPopisne, @Model.Psc, @Model.Obec
-
-            </div>
-            <div class="text-label">
-                Koladace platná do:
-            </div>
-            <div class="text-field">
-                @Model.KolaudacePlatnaDo.Date.ToString("d")
-            </div>
-            @if (!Model.GPS.IsEmpty())
-            {
-                <div class="text-label">
-                    GPS souřadnice:
-                </div>
-                <div class="text-field">
-                    @Model.GPS
-                </div>
-            }
-            @if (!Model.LinkKuzelkyCz.IsEmpty())
-            {
-                <div class="text-label">
-                    Parametry kuželny zapasné na www.kuzelky.cz:
-                </div>
-                <div class="text-field">
-                    <a href="@Model.LinkKuzelkyCz">KK Slavoj Žirovnice</a>
-
-                </div>
-            }
-            @if (!Model.Mapa.IsEmpty())
-            {
-                <div class="text-image-left">
-                    <div class="text-label-image">
-                        Mapa:
-                    </div>
-                    <iframe src="@Model.Mapa" width="305" height="240" frameborder="0" style="border:0"></iframe>
-                </div>
-            }
-            @if (!Model.StreeView.IsEmpty())
-            {
-                <div class="text-image-left">
-                    <div class="text-label-image">
-                        Pohled z ulice:
-                    </div>
-                    <iframe src="@Model.StreeView" width="305" height="240" frameborder="0" style="border:0"></iframe>
-                </div>
-            }
+    <div class="text-odstavec clanek-soupisky">
+        <div class="predmet">
+            O kuželně
+        </div>
+        <div class="text-image">
+            <img class="obrazek_kuzelny" src="@Model.Image" />
+        </div>
+        <div class="text-label">
+            Adresa kuželny:
+        </div>
+        <div class="text-field">
+            @Model.Ulice @Model.CisloPopisne, @Model.Psc, @Model.Obec
 
         </div>
+        <div class="text-label">
+            Koladace platná do:
+        </div>
+        <div class="text-field">
+            @Model.KolaudacePlatnaDo.Date.ToString("d")
+        </div>
+        @if (!Model.GPS.IsEmpty())
+        {
+            <div class="text-label">
+                GPS souřadnice:
+            </div>
+            <div class="text-field">
+                @Model.GPS
+            </div>
+        }
+        @if (!Model.LinkKuzelkyCz.IsEmpty())
+        {
+            <div class="text-label">
+                Parametry kuželny zapasné na www.kuzelky.cz:
+            </div>
+            <div class="text-field">
+                <a href="@Model.LinkKuzelkyCz">KK Slavoj Žirovnice</a>
 
-    @if (Model != null)
+            </div>
+        }
+        @if (!Model.Mapa.IsEmpty())
+        {
+            <div class="text-image-left" >
+                <div class="text-label-image">
+                    Mapa:
+                </div>
+                <iframe src="@Model.Mapa" width="305" height="240" frameborder="0" style="border:0"></iframe>
+            </div>
+        }
+        @if (!Model.StreeView.IsEmpty())
+        {
+            <div class="float-right">
+                <div class="text-label-image">
+                    Pohled z ulice:
+                </div>
+                <iframe src="@Model.StreeView" width="305" height="240" frameborder="0" style="border:0"></iframe>
+            </div>
+        }
+        @if (Model != null && Model.WebPageId > 0 && !Model.WebPage.HtmlText.IsEmpty())
+        {
+            <div class="float-left">
+                @Html.Raw(Model.WebPage.HtmlText)
+            </div>
+        }
+    </div>
+
+    @if ((ViewBag.RecordyGroup as IEnumerable<SlavojMVC4_1.Models.RekordGroup>).Count() > 0)
     {
-        <div class="clanek-soupisky">
-            @Html.Raw(Model.WebPage.HtmlText)
+        <div class="text-odstavec clanek-soupisky">
+            <div class="predmet">
+                Rekordy na kuželně
+            </div>
+            @foreach (var group in ViewBag.RecordyGroup as IEnumerable<SlavojMVC4_1.Models.RekordGroup>)
+            {
+                int poradi = 0;
+                <div class="text-odstavec clanek-soupisky">
+                    <div class="text-label-rekord">
+                        @group.RegistrovanNazev @group.RekordyKategorieNazev @group.DisciplinaPocetHodu @group.DisciplinaKategorieNazev @group.DisciplinaNazev
+                    </div>
+                    <table>
+                        @foreach (var item in (ViewBag.Recordy as IEnumerable<SlavojMVC4_1.Models.Rekord>)
+                        .Where(w => (
+                        w.JeRegistrovan == group.JeRegistrovan
+                        && w.RekordyKategorieId == group.RekordyKategorieId
+                        && w.DisciplinaId == group.DisciplinaId
+                        && w.PocetHracu == group.PocetHracu
+                        )
+                        )
+                        .OrderByDescending(o => o.Nahoz)
+                        .Take(group.PocetHracu == 1 ? 10 : 5)
+                        )
+                        {
+                            poradi = poradi + 1;
+                            string barva = null;
+                            <tr>
+                                @if (poradi == 1)
+                                {
+                                    barva = "#1877AF";
+                                }
+                                else if (poradi == 2)
+                                {
+                                    barva = "#B97A57";
+                                }
+                                else if (poradi == 3)
+                                {
+                                    barva = "#D9C06A";
+                                }
+                                     
+                                <td width="20px" align="right" @Html.Raw(barva == null ? null : String.Format("style={0}", "color:" + barva)) >
+                                    @Html.Raw(poradi.ToString() + ".")
+                                </td>
+                                <td width="200px" @Html.Raw(barva == null ? null : String.Format("style={0}", "color:" + barva))>
+                                    @item.Nazev
+                                </td>
+                                <td width="30px" align="right" @Html.Raw(barva == null ? null : String.Format("style={0}", "color:" + barva))>
+                                    @item.Nahoz
+                                </td>
+                                <td width="200px" @Html.Raw(barva == null ? null : String.Format("style={0}", "color:" + barva))>
+                                    @item.Popis
+                                </td>
+                                <td align="right" @Html.Raw(barva == null ? null : String.Format("style={0}", "color:" + barva))>
+                                    @item.DatumNahozu.ToShortDateString()
+                                </td>
+
+                            </tr>
+                        }
+                    </table>
+                </div>
+            }
         </div>
     }
 

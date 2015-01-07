@@ -53,5 +53,9 @@ namespace SlavojMVC4_1.Models
         public DbSet<Rocnik> Rocniky { get; set; }
         public DbSet<Vysledek> Vysledky { get; set; }
         public DbSet<VysledkyKola> VysledkyKol { get; set; }
+        public DbSet<RekordyKategorie> RekordyKategories { get; set; }
+        public DbSet<Disciplina> Discipliny { get; set; }
+        public DbSet<DisciplinyKategorie> DisciplinyKategories { get; set; }
+        public DbSet<Rekord> Rekordy { get; set; }
     }
 }

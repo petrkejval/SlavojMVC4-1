@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Nastavení-Disciplíny-Kategorie";
+}
+
+@{
+    Html.Telerik()
+        .Grid<DisciplinyKategorieEditable>()
+        .Name("DisciplinyKategoriesGrid")
+        .DataKeys(keys => keys.Add(c => c.DisciplinyKategorieId))
+        .DataBinding(dataBinding => dataBinding.Ajax()
+            .Select("DisciplinyKategoriesSelect", "DisciplinyKategoriesGrid")
+            .Insert("DisciplinyKategoriesInsert", "DisciplinyKategoriesGrid")
+            .Update("DisciplinyKategoriesUpdate", "DisciplinyKategoriesGrid")
+            .Delete("DisciplinyKategoriesDelete", "DisciplinyKategoriesGrid")
+            )
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
+        .Editable(editing => editing.Mode(GridEditMode.InLine))
+        //.Editable(editing => editing.Mode(GridEditMode.InForm).TemplateName("DisciplinyKategorieEditable"))
+        .Columns(columns =>
+                {
+                    columns.Command(commands =>
+                    {
+                        commands.Edit().ButtonType(GridButtonType.BareImage);
+                        commands.Delete().ButtonType(GridButtonType.BareImage);
+                    }).Width(80);//.Title("Commands");
+
+                    columns.Bound(o => o.Nazev);
+                }
+            )
+        .Localizable("cs-CZ")
+        .Reorderable(reorder => reorder.Columns(true))
+        .Resizable(resize => resize.Columns(true))
+        .Scrollable(sc => sc.Height("*"))
+        .Filterable()
+        .Sortable()
+        .Pageable()
+        .Render()
+        ;
+}
+@Scripts.Render("~/bundles/globalize")
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $.validator.methods.date = function (value, element) {
+                Globalize.culture("cs-CZ");
+                // you can alternatively pass the culture to parseDate instead of
+                // setting the culture above, like so:
+                // parseDate(value, null, "cs-CZ")
+                return this.optional(element) || Globalize.parseDate(value) !== null;
+            }
+        });
+    </script>
+}
+<style type="text/css">
+    #contentcolumn {
+        margin-right: 0;
+    }
+
+    #rightcolumn {
+        display: none;
+    }
+</style>
+
+

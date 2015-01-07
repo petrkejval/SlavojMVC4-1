@@ -104,6 +104,12 @@
                         result.Add(new ValidationResult("Pořadové číslo kola už existuje.", propertyName));
                         break;
                     }
+                    else if (errorMessage.IndexOf("IX_Discipliny_PocetHodu_DisciplinyKategorieId") > -1)
+                    {
+                        propertyName[0] = "PocetHodu";
+                        result.Add(new ValidationResult("Disciplína se zadaným počtem hodů a názvem už existuje. ", propertyName));
+                        break;
+                    }
                     else
                     {
                         result.Add(new ValidationResult(errorMessage));

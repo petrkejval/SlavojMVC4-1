@@ -235,6 +235,7 @@ namespace SlavojMVC4_1.Controllers
             {
                 var error = ex.EntityValidationErrors.First().ValidationErrors.First();
                 this.ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                ViewBag.KategoriesListItem = new SelectList(db.Kategories.OrderBy(r => r.Nazev).ToList(), "KategorieId", "Nazev");
                 return View(clanek);
             }
         }

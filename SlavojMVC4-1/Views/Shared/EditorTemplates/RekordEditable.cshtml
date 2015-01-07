@@ -1,0 +1,108 @@
+﻿@model SlavojMVC4_1.Models.RekordEditable
+
+@{
+    ViewBag.Title = "RekordEditable";
+}
+<fieldset class="turnaj-fields">
+    @Html.AntiForgeryToken()
+    @*@Html.ValidationSummary(true)*@
+
+    <div class="clen-osoba">
+        <div class="clen-nadpis editor-label">
+            Rekordy
+        </div>
+        @Html.HiddenFor(model => model.RekordId)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nazev)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nazev)
+            @Html.ValidationMessageFor(model => model.Nazev)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DisciplinaId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DisciplinaId)
+            @Html.ValidationMessageFor(model => model.DisciplinaId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PocetHracu)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PocetHracu)
+            @Html.ValidationMessageFor(model => model.PocetHracu)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RekordyKategorieId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RekordyKategorieId)
+            @Html.ValidationMessageFor(model => model.RekordyKategorieId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.JeRegistrovan)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.JeRegistrovan)
+            @Html.ValidationMessageFor(model => model.JeRegistrovan)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Nahoz)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Nahoz)
+            @Html.ValidationMessageFor(model => model.Nahoz)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DatumNahozu)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DatumNahozu)
+            @Html.ValidationMessageFor(model => model.DatumNahozu)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Popis)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Popis)
+            @Html.ValidationMessageFor(model => model.Popis)
+        </div>
+    </div>
+
+    <div>
+        @Html.ValidationMessage(String.Empty)
+
+    </div>
+
+
+</fieldset>
+<style type="text/css">
+    .t-grid .input-validation-error {
+        border-style: solid;
+    }
+
+    .t-input {
+        border-color: #e2e2e2;
+    }
+
+    .t-calendar {
+        color: black;
+    }
+
+    .t-content, .t-editable-area {
+        background-color: #87B9D6;
+    }
+
+    .t-footer {
+        background-color: #87B9D6;
+    }
+</style>
+
+

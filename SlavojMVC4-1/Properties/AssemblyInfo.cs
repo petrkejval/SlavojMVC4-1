@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Resources;
 
 // Obecné informace o sestavení jsou řízeny prostřednictvím následující 
 // sady atributů. Chcete-li změnit informace související se sestavením,
@@ -33,3 +34,4 @@ using System.Runtime.InteropServices;
 // zadáním znaku * jako v příkladu níže:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguageAttribute("cs")]

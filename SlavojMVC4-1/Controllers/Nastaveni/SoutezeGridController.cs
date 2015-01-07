@@ -55,6 +55,7 @@ namespace SlavojMVC4_1.Controllers
                     }
                     entity.Nazev = soutez.Nazev;
                     entity.KategorieSoutezeId = soutez.KategorieSoutezeId;
+                    entity.DisciplinaId = soutez.DisciplinaId;
                     entity.MinPocetHracu = soutez.MinPocetHracu;
                     entity.PocetNutnychDrah = soutez.PocetNutnychDrah;
 
@@ -98,6 +99,7 @@ namespace SlavojMVC4_1.Controllers
 
                         entity.Nazev = soutez.Nazev;
                         entity.KategorieSoutezeId = soutez.KategorieSoutezeId;
+                        entity.DisciplinaId = soutez.DisciplinaId;
                         entity.MinPocetHracu = soutez.MinPocetHracu;
                         entity.PocetNutnychDrah = soutez.PocetNutnychDrah;
 

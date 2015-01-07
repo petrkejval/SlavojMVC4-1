@@ -62,11 +62,51 @@ namespace SlavojMVC4_1.Controllers.Nastaveni
             ViewBag.KategorieSouteziListItem = new SlavojDBContainer().KategorieSoutezi
                                                  .Select(e => new { Id = e.KategorieSoutezeId, Name = e.Nazev })
                                                  .OrderBy(e => e.Name);
+
+            ViewBag.DisciplinyListItem = new SlavojDBContainer().Discipliny
+                                                 .Select(e => new { Id = e.DisciplinaId, Name = e.PocetHodu + " " + e.DisciplinyKategorie.Nazev })
+                                                 .OrderBy(e => e.Name);
             return View();
         }
 
         [Authorize(Roles = ("superuser"))]
         public ActionResult KategorieSoutezi()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = ("superuser"))]
+        public ActionResult Rekordy()
+        {
+            ViewBag.RekordyDisciplinyListItem = new SlavojDBContainer().Discipliny
+                                                 .Select(e => new { Id = e.DisciplinaId, Name = e.PocetHodu + " " + e.DisciplinyKategorie.Nazev })
+                                                 .OrderBy(e => e.Name);
+
+            ViewBag.RekordyKategorieListItem = new SlavojDBContainer().RekordyKategories
+                                                 .Select(e => new { Id = e.RekordyKategorieId, Name = e.Nazev})
+                                                 .OrderBy(e => e.Name);
+
+            
+            return View();
+        }
+
+        [Authorize(Roles = ("superuser"))]
+        public ActionResult RekordyKategories()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = ("superuser"))]
+        public ActionResult Discipliny()
+        {
+            ViewBag.DisciplinyKategorieListItem = new SlavojDBContainer().DisciplinyKategories
+                                                 .Select(e => new { Id = e.DisciplinyKategorieId, Name = e.Nazev })
+                                                 .OrderBy(e => e.Name);
+            return View();
+        }
+
+        [Authorize(Roles = ("superuser"))]
+        public ActionResult DisciplinyKategories()
         {
             return View();
         }

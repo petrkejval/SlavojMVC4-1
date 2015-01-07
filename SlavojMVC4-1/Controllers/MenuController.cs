@@ -35,6 +35,26 @@ namespace SlavojMVC4_1.Controllers
             var id = db.Kuzelny.Max(m => m.KuzelnaId);
             var model = db.Kuzelny.Find(id);
 
+            ViewBag.RecordyGroup =
+            (from item in new SlavojDBContainer().Rekordy
+             select new RekordGroup
+             {
+                 JeRegistrovan = item.JeRegistrovan,
+                 RegistrovanNazev = item.JeRegistrovan ? "Registrovaní" : "Neregistrovaní",
+                 RekordyKategorieId = item.RekordyKategorieId,
+                 RekordyKategorieNazev = item.RekordyKategorie.Nazev,
+                 DisciplinaId = item.DisciplinaId,
+                 DisciplinaPocetHodu = item.Disciplina.PocetHodu,
+                 DisciplinaNazev = item.PocetHracu == 1 ? "Jednotlivci" : item.PocetHracu.ToString() + " členná družstva",
+                 DisciplinaKategorieNazev = item.Disciplina.DisciplinyKategorie.Nazev,
+                 PocetHracu = item.PocetHracu,
+             }
+            )
+            .Distinct().OrderByDescending(o => o.JeRegistrovan).ThenBy(o => o.RekordyKategorieId).ThenBy(o => o.DisciplinaId).ThenByDescending(o => o.PocetHracu)
+            .ToList();
+
+            ViewBag.Recordy = db.Rekordy as IEnumerable<SlavojMVC4_1.Models.Rekord>;
+
             return View(model);
         }
         // GET: Menu

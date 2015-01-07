@@ -65,6 +65,14 @@
         <EntityTypeShape EntityType="SlavojDB.VysledkyKola" Width="1.5" PointX="7.125" PointY="17.5" />
         <AssociationConnector Association="SlavojDB.FK_VysledkyKola_Vysledky" />
         <AssociationConnector Association="SlavojDB.FK_Vysledky_WebPages" />
+        <EntityTypeShape EntityType="SlavojDB.RekordyKategorie" Width="1.5" PointX="5" PointY="21.75" />
+        <EntityTypeShape EntityType="SlavojDB.Disciplina" Width="1.5" PointX="0.75" PointY="15.875" />
+        <AssociationConnector Association="SlavojDB.FK_Souteze_Discipliny" />
+        <EntityTypeShape EntityType="SlavojDB.DisciplinyKategorie" Width="1.5" PointX="1" PointY="20.625" />
+        <AssociationConnector Association="SlavojDB.FK_Discipliny_DisciplinyKategorie" />
+        <EntityTypeShape EntityType="SlavojDB.Rekord" Width="1.5" PointX="7.25" PointY="21" />
+        <AssociationConnector Association="SlavojDB.FK_Rekordy_Discipliny" />
+        <AssociationConnector Association="SlavojDB.FK_Rekordy_RekordyKategorie" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

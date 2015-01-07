@@ -59,6 +59,22 @@
           <Property Name="ClenRoleId" Type="int" Nullable="false" />
           <Property Name="ClenRoleName" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Discipliny">
+          <Key>
+            <PropertyRef Name="DisciplinaId" />
+          </Key>
+          <Property Name="DisciplinaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PocetHodu" Type="int" Nullable="false" />
+          <Property Name="DisciplinyKategorieId" Type="int" Nullable="false" />
+          <Property Name="Popis" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DisciplinyKategorie">
+          <Key>
+            <PropertyRef Name="DisciplinyKategorieId" />
+          </Key>
+          <Property Name="DisciplinyKategorieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazev" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Druzstva">
           <Key>
             <PropertyRef Name="DruzstvoId" />
@@ -155,6 +171,27 @@
           <Property Name="CisloRegistrace" Type="int" Nullable="false" />
           <Property Name="PlatnaDo" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
+        <EntityType Name="Rekordy">
+          <Key>
+            <PropertyRef Name="RekordId" />
+          </Key>
+          <Property Name="RekordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazev" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DisciplinaId" Type="int" Nullable="false" />
+          <Property Name="PocetHracu" Type="int" Nullable="false" />
+          <Property Name="RekordyKategorieId" Type="int" Nullable="false" />
+          <Property Name="JeRegistrovan" Type="bit" Nullable="false" />
+          <Property Name="Nahoz" Type="int" Nullable="false" />
+          <Property Name="DatumNahozu" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Popis" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RekordyKategorie">
+          <Key>
+            <PropertyRef Name="RekordyKategorieId" />
+          </Key>
+          <Property Name="RekordyKategorieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazev" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Rocniky">
           <Key>
             <PropertyRef Name="RocnikId" />
@@ -179,6 +216,7 @@
           <Property Name="SoutezId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nazev" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="KategorieSoutezeId" Type="int" Nullable="false" />
+          <Property Name="DisciplinaId" Type="int" Nullable="false" />
           <Property Name="MinPocetHracu" Type="int" Nullable="false" />
           <Property Name="PocetNutnychDrah" Type="int" Nullable="false" />
         </EntityType>
@@ -352,6 +390,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Discipliny_DisciplinyKategorie">
+          <End Role="DisciplinyKategorie" Type="Self.DisciplinyKategorie" Multiplicity="1" />
+          <End Role="Discipliny" Type="Self.Discipliny" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DisciplinyKategorie">
+              <PropertyRef Name="DisciplinyKategorieId" />
+            </Principal>
+            <Dependent Role="Discipliny">
+              <PropertyRef Name="DisciplinyKategorieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Druzstva_Souteze">
           <End Role="Souteze" Type="Self.Souteze" Multiplicity="1" />
           <End Role="Druzstva" Type="Self.Druzstva" Multiplicity="*" />
@@ -490,6 +540,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Rekordy_Discipliny">
+          <End Role="Discipliny" Type="Self.Discipliny" Multiplicity="1" />
+          <End Role="Rekordy" Type="Self.Rekordy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipliny">
+              <PropertyRef Name="DisciplinaId" />
+            </Principal>
+            <Dependent Role="Rekordy">
+              <PropertyRef Name="DisciplinaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rekordy_RekordyKategorie">
+          <End Role="RekordyKategorie" Type="Self.RekordyKategorie" Multiplicity="1" />
+          <End Role="Rekordy" Type="Self.Rekordy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RekordyKategorie">
+              <PropertyRef Name="RekordyKategorieId" />
+            </Principal>
+            <Dependent Role="Rekordy">
+              <PropertyRef Name="RekordyKategorieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Rozhodci_Cleni">
           <End Role="Cleni" Type="Self.Cleni" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -501,6 +575,18 @@
             </Principal>
             <Dependent Role="Rozhodci">
               <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Souteze_Discipliny">
+          <End Role="Discipliny" Type="Self.Discipliny" Multiplicity="1" />
+          <End Role="Souteze" Type="Self.Souteze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipliny">
+              <PropertyRef Name="DisciplinaId" />
+            </Principal>
+            <Dependent Role="Souteze">
+              <PropertyRef Name="DisciplinaId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -674,6 +760,8 @@
           <EntitySet Name="Cleni" EntityType="Self.Cleni" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CleniInRoles" EntityType="Self.CleniInRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CleniRoles" EntityType="Self.CleniRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Discipliny" EntityType="Self.Discipliny" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DisciplinyKategorie" EntityType="Self.DisciplinyKategorie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Druzstva" EntityType="Self.Druzstva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DruzstvaCleni" EntityType="Self.DruzstvaCleni" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kategorie" EntityType="Self.Kategorie" Schema="dbo" store:Type="Tables" />
@@ -683,6 +771,8 @@
           <EntitySet Name="Kuzelna" EntityType="Self.Kuzelna" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MainMenu" EntityType="Self.MainMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Registrace" EntityType="Self.Registrace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rekordy" EntityType="Self.Rekordy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RekordyKategorie" EntityType="Self.RekordyKategorie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rocniky" EntityType="Self.Rocniky" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rozhodci" EntityType="Self.Rozhodci" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Souteze" EntityType="Self.Souteze" Schema="dbo" store:Type="Tables" />
@@ -716,6 +806,10 @@
           <AssociationSet Name="FK_CleniInRoles_CleniRoles_ClenRoleId_ClenRoleId" Association="Self.FK_CleniInRoles_CleniRoles_ClenRoleId_ClenRoleId">
             <End Role="CleniRoles" EntitySet="CleniRoles" />
             <End Role="CleniInRoles" EntitySet="CleniInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Discipliny_DisciplinyKategorie" Association="Self.FK_Discipliny_DisciplinyKategorie">
+            <End Role="DisciplinyKategorie" EntitySet="DisciplinyKategorie" />
+            <End Role="Discipliny" EntitySet="Discipliny" />
           </AssociationSet>
           <AssociationSet Name="FK_Druzstva_Souteze" Association="Self.FK_Druzstva_Souteze">
             <End Role="Souteze" EntitySet="Souteze" />
@@ -761,9 +855,21 @@
             <End Role="Cleni" EntitySet="Cleni" />
             <End Role="Registrace" EntitySet="Registrace" />
           </AssociationSet>
+          <AssociationSet Name="FK_Rekordy_Discipliny" Association="Self.FK_Rekordy_Discipliny">
+            <End Role="Discipliny" EntitySet="Discipliny" />
+            <End Role="Rekordy" EntitySet="Rekordy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rekordy_RekordyKategorie" Association="Self.FK_Rekordy_RekordyKategorie">
+            <End Role="RekordyKategorie" EntitySet="RekordyKategorie" />
+            <End Role="Rekordy" EntitySet="Rekordy" />
+          </AssociationSet>
           <AssociationSet Name="FK_Rozhodci_Cleni" Association="Self.FK_Rozhodci_Cleni">
             <End Role="Cleni" EntitySet="Cleni" />
             <End Role="Rozhodci" EntitySet="Rozhodci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Souteze_Discipliny" Association="Self.FK_Souteze_Discipliny">
+            <End Role="Discipliny" EntitySet="Discipliny" />
+            <End Role="Souteze" EntitySet="Souteze" />
           </AssociationSet>
           <AssociationSet Name="FK_Souteze_KategorieSoutezi1" Association="Self.FK_Souteze_KategorieSoutezi1">
             <End Role="KategorieSoutezi" EntitySet="KategorieSoutezi" />
@@ -971,6 +1077,26 @@
             <End Role="WebPage" EntitySet="WebPages" />
             <End Role="Vysledek" EntitySet="Vysledky" />
           </AssociationSet>
+          <EntitySet Name="RekordyKategories" EntityType="SlavojDB.RekordyKategorie" />
+          <EntitySet Name="Discipliny" EntityType="SlavojDB.Disciplina" />
+          <AssociationSet Name="FK_Souteze_Discipliny" Association="SlavojDB.FK_Souteze_Discipliny">
+            <End Role="Discipliny" EntitySet="Discipliny" />
+            <End Role="Soutez" EntitySet="Souteze" />
+          </AssociationSet>
+          <EntitySet Name="DisciplinyKategories" EntityType="SlavojDB.DisciplinyKategorie" />
+          <AssociationSet Name="FK_Discipliny_DisciplinyKategorie" Association="SlavojDB.FK_Discipliny_DisciplinyKategorie">
+            <End Role="DisciplinyKategorie" EntitySet="DisciplinyKategories" />
+            <End Role="Disciplina" EntitySet="Discipliny" />
+          </AssociationSet>
+          <EntitySet Name="Rekordy" EntityType="SlavojDB.Rekord" />
+          <AssociationSet Name="FK_Rekordy_Discipliny" Association="SlavojDB.FK_Rekordy_Discipliny">
+            <End Role="Disciplina" EntitySet="Discipliny" />
+            <End Role="Rekordy" EntitySet="Rekordy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rekordy_RekordyKategorie" Association="SlavojDB.FK_Rekordy_RekordyKategorie">
+            <End Role="RekordyKategorie" EntitySet="RekordyKategories" />
+            <End Role="Rekordy" EntitySet="Rekordy" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -1172,9 +1298,11 @@
           <Property Type="Int32" Name="KategorieSoutezeId" Nullable="false" />
           <Property Type="Int32" Name="PocetNutnychDrah" Nullable="false" />
           <NavigationProperty Name="KategorieSouteze" Relationship="SlavojDB.FK_Souteze_KategorieSoutezi1" FromRole="Souteze" ToRole="KategorieSoutezi" />
-          <NavigationProperty Name="Druzstvas" Relationship="SlavojDB.FK_Druzstva_Souteze" FromRole="Soutez" ToRole="Druzstva" />
+          <NavigationProperty Name="Druzstva" Relationship="SlavojDB.FK_Druzstva_Souteze" FromRole="Soutez" ToRole="Druzstva" />
           <Property Name="MinPocetHracu" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Vysledkies" Relationship="SlavojDB.FK_Vysledky_Souteze" FromRole="Soutez" ToRole="Vysledky" />
+          <NavigationProperty Name="Vysledky" Relationship="SlavojDB.FK_Vysledky_Souteze" FromRole="Soutez" ToRole="Vysledky" />
+          <Property Name="DisciplinaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Discipliny" Relationship="SlavojDB.FK_Souteze_Discipliny" FromRole="Soutez" ToRole="Discipliny" />
         </EntityType>
         <Association Name="FK_Souteze_KategorieSoutezi1">
           <End Type="SlavojDB.KategorieSouteze" Role="KategorieSoutezi" Multiplicity="1" />
@@ -1689,6 +1817,98 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="RekordyKategorie">
+          <Key>
+            <PropertyRef Name="RekordyKategorieId" />
+          </Key>
+          <Property Name="RekordyKategorieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazev" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Rekordy" Relationship="SlavojDB.FK_Rekordy_RekordyKategorie" FromRole="RekordyKategorie" ToRole="Rekordy" />
+        </EntityType>
+        <EntityType Name="Disciplina">
+          <Key>
+            <PropertyRef Name="DisciplinaId" />
+          </Key>
+          <Property Name="DisciplinaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PocetHodu" Type="Int32" Nullable="false" />
+          <Property Name="DisciplinyKategorieId" Type="Int32" Nullable="false" />
+          <Property Name="Popis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Souteze" Relationship="SlavojDB.FK_Souteze_Discipliny" FromRole="Discipliny" ToRole="Soutez" />
+          <NavigationProperty Name="DisciplinyKategorie" Relationship="SlavojDB.FK_Discipliny_DisciplinyKategorie" FromRole="Disciplina" ToRole="DisciplinyKategorie" />
+          <NavigationProperty Name="Rekordy" Relationship="SlavojDB.FK_Rekordy_Discipliny" FromRole="Disciplina" ToRole="Rekordy" />
+        </EntityType>
+        <Association Name="FK_Souteze_Discipliny">
+          <End Type="SlavojDB.Disciplina" Role="Discipliny" Multiplicity="1" />
+          <End Type="SlavojDB.Soutez" Role="Soutez" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipliny">
+              <PropertyRef Name="DisciplinaId" />
+            </Principal>
+            <Dependent Role="Soutez">
+              <PropertyRef Name="DisciplinaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DisciplinyKategorie">
+          <Key>
+            <PropertyRef Name="DisciplinyKategorieId" />
+          </Key>
+          <Property Name="DisciplinyKategorieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazev" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Discipliny" Relationship="SlavojDB.FK_Discipliny_DisciplinyKategorie" FromRole="DisciplinyKategorie" ToRole="Disciplina" />
+        </EntityType>
+        <Association Name="FK_Discipliny_DisciplinyKategorie">
+          <End Type="SlavojDB.DisciplinyKategorie" Role="DisciplinyKategorie" Multiplicity="1" />
+          <End Type="SlavojDB.Disciplina" Role="Disciplina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DisciplinyKategorie">
+              <PropertyRef Name="DisciplinyKategorieId" />
+            </Principal>
+            <Dependent Role="Disciplina">
+              <PropertyRef Name="DisciplinyKategorieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Rekord">
+          <Key>
+            <PropertyRef Name="RekordId" />
+          </Key>
+          <Property Name="RekordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazev" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DisciplinaId" Type="Int32" Nullable="false" />
+          <Property Name="PocetHracu" Type="Int32" Nullable="false" />
+          <Property Name="RekordyKategorieId" Type="Int32" Nullable="false" />
+          <Property Name="JeRegistrovan" Type="Boolean" Nullable="false" />
+          <Property Name="Nahoz" Type="Int32" Nullable="false" />
+          <Property Name="DatumNahozu" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Popis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Disciplina" Relationship="SlavojDB.FK_Rekordy_Discipliny" FromRole="Rekordy" ToRole="Disciplina" />
+          <NavigationProperty Name="RekordyKategorie" Relationship="SlavojDB.FK_Rekordy_RekordyKategorie" FromRole="Rekordy" ToRole="RekordyKategorie" />
+        </EntityType>
+        <Association Name="FK_Rekordy_Discipliny">
+          <End Type="SlavojDB.Disciplina" Role="Disciplina" Multiplicity="1" />
+          <End Type="SlavojDB.Rekord" Role="Rekordy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disciplina">
+              <PropertyRef Name="DisciplinaId" />
+            </Principal>
+            <Dependent Role="Rekordy">
+              <PropertyRef Name="DisciplinaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rekordy_RekordyKategorie">
+          <End Type="SlavojDB.RekordyKategorie" Role="RekordyKategorie" Multiplicity="1" />
+          <End Type="SlavojDB.Rekord" Role="Rekordy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RekordyKategorie">
+              <PropertyRef Name="RekordyKategorieId" />
+            </Principal>
+            <Dependent Role="Rekordy">
+              <PropertyRef Name="RekordyKategorieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1811,6 +2031,7 @@
           <EntitySetMapping Name="Souteze">
             <EntityTypeMapping TypeName="SlavojDB.Soutez">
               <MappingFragment StoreEntitySet="Souteze">
+                <ScalarProperty Name="DisciplinaId" ColumnName="DisciplinaId" />
                 <ScalarProperty Name="MinPocetHracu" ColumnName="MinPocetHracu" />
                 <ScalarProperty Name="PocetNutnychDrah" ColumnName="PocetNutnychDrah" />
                 <ScalarProperty Name="KategorieSoutezeId" ColumnName="KategorieSoutezeId" />
@@ -2004,6 +2225,47 @@
                 <ScalarProperty Name="PorCisloKola" ColumnName="PorCisloKola" />
                 <ScalarProperty Name="VysledekId" ColumnName="VysledekId" />
                 <ScalarProperty Name="VysledkyKoloId" ColumnName="VysledkyKoloId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RekordyKategories">
+            <EntityTypeMapping TypeName="SlavojDB.RekordyKategorie">
+              <MappingFragment StoreEntitySet="RekordyKategorie">
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="RekordyKategorieId" ColumnName="RekordyKategorieId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Discipliny">
+            <EntityTypeMapping TypeName="SlavojDB.Disciplina">
+              <MappingFragment StoreEntitySet="Discipliny">
+                <ScalarProperty Name="Popis" ColumnName="Popis" />
+                <ScalarProperty Name="DisciplinyKategorieId" ColumnName="DisciplinyKategorieId" />
+                <ScalarProperty Name="PocetHodu" ColumnName="PocetHodu" />
+                <ScalarProperty Name="DisciplinaId" ColumnName="DisciplinaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DisciplinyKategories">
+            <EntityTypeMapping TypeName="SlavojDB.DisciplinyKategorie">
+              <MappingFragment StoreEntitySet="DisciplinyKategorie">
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="DisciplinyKategorieId" ColumnName="DisciplinyKategorieId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rekordy">
+            <EntityTypeMapping TypeName="SlavojDB.Rekord">
+              <MappingFragment StoreEntitySet="Rekordy">
+                <ScalarProperty Name="Popis" ColumnName="Popis" />
+                <ScalarProperty Name="DatumNahozu" ColumnName="DatumNahozu" />
+                <ScalarProperty Name="Nahoz" ColumnName="Nahoz" />
+                <ScalarProperty Name="JeRegistrovan" ColumnName="JeRegistrovan" />
+                <ScalarProperty Name="RekordyKategorieId" ColumnName="RekordyKategorieId" />
+                <ScalarProperty Name="PocetHracu" ColumnName="PocetHracu" />
+                <ScalarProperty Name="DisciplinaId" ColumnName="DisciplinaId" />
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="RekordId" ColumnName="RekordId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

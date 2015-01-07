@@ -27,6 +27,12 @@
         [Range(1, int.MaxValue, ErrorMessage = "Minimální počet hráčů musí být vyplněn.")]
         public int MinPocetHracu { get; set; }
 
+        [Display(Name = "Disciplína")]
+        [Required]
+        [UIHint("GridForeignKey")]
+        [Range(1, int.MaxValue, ErrorMessage = "Disciplína musí být vyplněna.")]
+        public int DisciplinaId { get; set; }
+
         [Range(1,9)]
         [Display(Name = "Počet nutných drah")]
         public int PocetNutnychDrah { get; set; }

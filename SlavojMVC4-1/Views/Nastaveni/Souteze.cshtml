@@ -25,6 +25,7 @@
                     }).Width(80);//.Title("Commands");
 
                     columns.ForeignKey(o => o.KategorieSoutezeId, (System.Collections.IEnumerable)ViewBag.KategorieSouteziListItem, "Id", "Name").Width("*");
+                    columns.ForeignKey(o => o.DisciplinaId, (System.Collections.IEnumerable)ViewBag.DisciplinyListItem, "Id", "Name").Width("*");
                     columns.Bound(o => o.Nazev).Width("*");
                     columns.Bound(o => o.MinPocetHracu).Width(180);
                     columns.Bound(o => o.PocetNutnychDrah).Width(180);
