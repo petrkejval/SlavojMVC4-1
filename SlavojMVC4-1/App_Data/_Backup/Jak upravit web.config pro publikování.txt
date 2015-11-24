@@ -1,0 +1,17 @@
+1. Nahradit sekci <connectionStrings> toto sekcí
+
+  <connectionStrings>
+    <!-- TODO: Replace the ****'s with the correct entries -->
+    <add name="DefaultConnection" 
+         connectionString="server=192.168.1.5;uid=db5030;pwd=Of18RUS2rBePw1j3Iobq;database=db5030" 
+         providerName="System.Data.SqlClient" />
+      
+    <add name="SlavojDBContainer" 
+         connectionString="metadata=res://*/Models.SlavojDB.csdl|res://*/Models.SlavojDB.ssdl|res://*/Models.SlavojDB.msl;provider=System.Data.SqlClient;provider connection string=&quot;server=192.168.1.5;uid=db5030;pwd=Of18RUS2rBePw1j3Iobq;database=db5030;MultipleActiveResultSets=True;App=EntityFramework&quot;" 
+         providerName="System.Data.EntityClient" />
+
+  </connectionStrings>
+
+2. Do sekce <system.web> doplnit viz. níže pro výpis chyb
+    <customErrors mode="Off"/>
+
