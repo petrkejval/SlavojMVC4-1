@@ -9,32 +9,39 @@
           data-otf-target="#listClanky"
         >
 
-        @*<input 
-            type="search" 
-            name="searchTerm" 
-            data-otf-autocomplete="@Url.Action("Autocomplete", "Home")
-         />*@
-        <div class="t-state-default">
-            @(Html.Telerik().AutoComplete()
+            @*<input
+               type="search"
+               name="searchTerm"
+               data-otf-autocomplete="@Url.Action("Autocomplete", "Home")
+            />*@
+            <div class="t-state-default">
+                <section >
+                    <div class="filter-item">
+                        @(Html.Telerik().AutoComplete()
                         .Name("searchTerm")
                         .DataBinding(binding => binding.Ajax().Select("_AutoCompleteAjaxLoading", "Home"))
                         .HighlightFirstMatch(false)
-                        .Filterable(filtering => 
+                        .Filterable(filtering =>
                         {
                             filtering.FilterMode(AutoCompleteFilterMode.Contains);
                             //filtering.MinimumChars(2);
                         })
                         .AutoFill(false)
-                    
+
                         //.DropDownHtmlAttributes(new { style = string.Format("margin-top:{0}px", 20) })
                         //.HtmlAttributes(new {style = "t-dropdown.height:20px" })
-             )
-            <button type="submit" class="t-button t-state-default">Najdi</button>
-        </div>
+                        )
+                    </div>
+                    <div class="filter-item" style="margin-top:3px">
+                        <button type="submit" class="t-button t-state-default">Najdi</button>
+                        @*<input type="submit" value="Najdi" />*@
+                    </div>
+                    <br style="clear:both;" />
+                </section>
+            </div>
 
-        @*<input type="submit" value="Najdi" />*@
 
-    </form>
+</form>
 
     @Html.Partial("_Clanky", Model)
 </div>

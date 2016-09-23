@@ -1,0 +1,49 @@
+﻿@*@model IEnumerable<SlavojMVC4_1.Models.ZapasNejblizsi>*@
+
+@model IPagedList<ZapasNejblizsi>
+@{
+    ViewBag.Title = "Zápasy";
+}
+<div class="clanek">
+    <div class="text-odstavec* clanek-soupisky">
+        <div class="predmet">
+            Zápasy neodehrané
+        </div>
+        <div>
+            <form name="filtrForm" method="get" action="@Url.Action("Zapasy", "Menu")" id="filtrForm" 
+                  data-otf-ajax="true"
+                  data-otf-target="#listZapasy"
+                  >
+                <div class="t-state-default widget-body" >
+                    <section>
+
+                        <div class="filter-item">
+                            <div for="podmDruzstva">Vyber družstvo </div>
+                            @( Html.Telerik().DropDownList()
+                            .Name("podmDruzstva")
+                            .BindTo((IEnumerable<DropDownItem>)ViewBag.DruzstvaListItem)
+                            )
+                        </div>
+                        <div class="filter-item">
+                            <div for="podmKde">Vyber kuželnu </div>
+                            @( Html.Telerik().DropDownList()
+                            .Name("podmKde")
+                            .BindTo((IEnumerable<DropDownItem>)ViewBag.KdeListItem)
+                            )
+                        </div>
+                        <div class="filter-item">
+                            <br />
+                            <button type="submit" class="t-button t-state-default" id="idFiltruj">Filtruj</button>
+                            </>
+                        </div>
+                        <br style="clear:both;" />
+                    </section>
+               </div>
+            </form>
+        </div>
+        <div class="site-menu">
+            @Html.Partial("_Zapasy", Model)
+        </div>
+    </div>
+</div>
+

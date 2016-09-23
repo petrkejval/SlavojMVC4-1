@@ -151,6 +151,38 @@
           <Property Name="GPS" Type="nvarchar" MaxLength="50" />
           <Property Name="WebPageId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="KuzelnaProgramKategorie">
+          <Key>
+            <PropertyRef Name="KuzelnaProgramKategorieId" />
+          </Key>
+          <Property Name="KuzelnaProgramKategorieId" Type="int" Nullable="false" />
+          <Property Name="Nazev" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Barva" Type="varchar" MaxLength="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KuzelnaProgramSluzby">
+          <Key>
+            <PropertyRef Name="KuzelnaProgramSluzbaId" />
+          </Key>
+          <Property Name="KuzelnaProgramSluzbaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KuzelnaProgramId" Type="int" Nullable="false" />
+          <Property Name="ClenId" Type="int" Nullable="false" />
+          <Property Name="SluzbaDatumCasOd" Type="datetime2" Precision="7" />
+          <Property Name="SluzbaDatumCasDo" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="KuzelnaProgramy">
+          <Key>
+            <PropertyRef Name="KuzelnaProgramId" />
+          </Key>
+          <Property Name="KuzelnaProgramId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramNazev" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProgramDatumCasOd" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ProgramDatumCasDo" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Poznamka" Type="varchar" MaxLength="500" />
+          <Property Name="OpakovatKazdyTyden" Type="bit" Nullable="false" />
+          <Property Name="OpakovatDatumDo" Type="datetime2" Precision="7" />
+          <Property Name="JeAktivni" Type="bit" Nullable="false" />
+          <Property Name="ProgramKategorieId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="MainMenu">
           <Key>
             <PropertyRef Name="MainMenuId" />
@@ -327,6 +359,31 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="UserInRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zapasy">
+          <Key>
+            <PropertyRef Name="ZapasId" />
+          </Key>
+          <Property Name="ZapasId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SoutezId" Type="int" Nullable="false" />
+          <Property Name="KuzelnaNazev" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="KuzelnaDomaci" Type="bit" Nullable="false" />
+          <Property Name="ZapasDatumCasOd" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ZapasDatumCasDo" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Druzstvo1Nazev" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Druzstvo2Nazev" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SrazDatumCas" Type="datetime2" Precision="7" />
+          <Property Name="MistoSrazu" Type="varchar" MaxLength="50" />
+          <Property Name="Poznamka" Type="varchar" MaxLength="500" />
+          <Property Name="RozhodciId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZapasyBarvy">
+          <Key>
+            <PropertyRef Name="ZapasBarvaId" />
+          </Key>
+          <Property Name="ZapasBarvaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DruzstvoNazev" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Barva" Type="varchar" MaxLength="7" Nullable="false" />
         </EntityType>
         <Association Name="FK_Adresy_Cleni">
           <End Role="Cleni" Type="Self.Cleni" Multiplicity="1">
@@ -511,6 +568,44 @@
             </Principal>
             <Dependent Role="Kuzelna">
               <PropertyRef Name="WebPageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KuzelnaProgramSluzby_Cleni">
+          <End Role="Cleni" Type="Self.Cleni" Multiplicity="1" />
+          <End Role="KuzelnaProgramSluzby" Type="Self.KuzelnaProgramSluzby" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cleni">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="KuzelnaProgramSluzby">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KuzelnaProgramSluzby_KuzelnaProgramy">
+          <End Role="KuzelnaProgramy" Type="Self.KuzelnaProgramy" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="KuzelnaProgramSluzby" Type="Self.KuzelnaProgramSluzby" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KuzelnaProgramy">
+              <PropertyRef Name="KuzelnaProgramId" />
+            </Principal>
+            <Dependent Role="KuzelnaProgramSluzby">
+              <PropertyRef Name="KuzelnaProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KuzelnaProgramy_KuzelnaProgramKategorie">
+          <End Role="KuzelnaProgramKategorie" Type="Self.KuzelnaProgramKategorie" Multiplicity="1" />
+          <End Role="KuzelnaProgramy" Type="Self.KuzelnaProgramy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KuzelnaProgramKategorie">
+              <PropertyRef Name="KuzelnaProgramKategorieId" />
+            </Principal>
+            <Dependent Role="KuzelnaProgramy">
+              <PropertyRef Name="ProgramKategorieId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -754,6 +849,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Zapasy_Rozhodci">
+          <End Role="Rozhodci" Type="Self.Rozhodci" Multiplicity="1" />
+          <End Role="Zapasy" Type="Self.Zapasy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rozhodci">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Zapasy">
+              <PropertyRef Name="RozhodciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zapasy_Souteze">
+          <End Role="Souteze" Type="Self.Souteze" Multiplicity="1" />
+          <End Role="Zapasy" Type="Self.Zapasy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Souteze">
+              <PropertyRef Name="SoutezId" />
+            </Principal>
+            <Dependent Role="Zapasy">
+              <PropertyRef Name="SoutezId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SlavojDBStoreContainer">
           <EntitySet Name="Adresy" EntityType="Self.Adresy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clanky" EntityType="Self.Clanky" Schema="dbo" store:Type="Tables" />
@@ -769,6 +888,9 @@
           <EntitySet Name="Kluby" EntityType="Self.Kluby" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kontakty" EntityType="Self.Kontakty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kuzelna" EntityType="Self.Kuzelna" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KuzelnaProgramKategorie" EntityType="Self.KuzelnaProgramKategorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KuzelnaProgramSluzby" EntityType="Self.KuzelnaProgramSluzby" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KuzelnaProgramy" EntityType="Self.KuzelnaProgramy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MainMenu" EntityType="Self.MainMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Registrace" EntityType="Self.Registrace" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rekordy" EntityType="Self.Rekordy" Schema="dbo" store:Type="Tables" />
@@ -787,6 +909,8 @@
           <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zapasy" EntityType="Self.Zapasy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZapasyBarvy" EntityType="Self.ZapasyBarvy" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Adresy_Cleni" Association="Self.FK_Adresy_Cleni">
             <End Role="Cleni" EntitySet="Cleni" />
             <End Role="Adresy" EntitySet="Adresy" />
@@ -846,6 +970,18 @@
           <AssociationSet Name="FK_Kuzelna_WebPages" Association="Self.FK_Kuzelna_WebPages">
             <End Role="WebPages" EntitySet="WebPages" />
             <End Role="Kuzelna" EntitySet="Kuzelna" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KuzelnaProgramSluzby_Cleni" Association="Self.FK_KuzelnaProgramSluzby_Cleni">
+            <End Role="Cleni" EntitySet="Cleni" />
+            <End Role="KuzelnaProgramSluzby" EntitySet="KuzelnaProgramSluzby" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KuzelnaProgramSluzby_KuzelnaProgramy" Association="Self.FK_KuzelnaProgramSluzby_KuzelnaProgramy">
+            <End Role="KuzelnaProgramy" EntitySet="KuzelnaProgramy" />
+            <End Role="KuzelnaProgramSluzby" EntitySet="KuzelnaProgramSluzby" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KuzelnaProgramy_KuzelnaProgramKategorie" Association="Self.FK_KuzelnaProgramy_KuzelnaProgramKategorie">
+            <End Role="KuzelnaProgramKategorie" EntitySet="KuzelnaProgramKategorie" />
+            <End Role="KuzelnaProgramy" EntitySet="KuzelnaProgramy" />
           </AssociationSet>
           <AssociationSet Name="FK_MainMenu_WebPages" Association="Self.FK_MainMenu_WebPages">
             <End Role="WebPages" EntitySet="WebPages" />
@@ -922,6 +1058,14 @@
           <AssociationSet Name="FK_webpages_UsersInRoles_webpages_Roles" Association="Self.FK_webpages_UsersInRoles_webpages_Roles">
             <End Role="webpages_Roles" EntitySet="webpages_Roles" />
             <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zapasy_Rozhodci" Association="Self.FK_Zapasy_Rozhodci">
+            <End Role="Rozhodci" EntitySet="Rozhodci" />
+            <End Role="Zapasy" EntitySet="Zapasy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zapasy_Souteze" Association="Self.FK_Zapasy_Souteze">
+            <End Role="Souteze" EntitySet="Souteze" />
+            <End Role="Zapasy" EntitySet="Zapasy" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1097,6 +1241,31 @@
             <End Role="RekordyKategorie" EntitySet="RekordyKategories" />
             <End Role="Rekordy" EntitySet="Rekordy" />
           </AssociationSet>
+          <EntitySet Name="KuzelnaProgramSluzby" EntityType="SlavojDB.KuzelnaProgramSluzba" />
+          <AssociationSet Name="FK_KuzelnaProgramSluzby_Cleni" Association="SlavojDB.FK_KuzelnaProgramSluzby_Cleni">
+            <End Role="Clen" EntitySet="Cleni" />
+            <End Role="KuzelnaProgramSluzby" EntitySet="KuzelnaProgramSluzby" />
+          </AssociationSet>
+          <EntitySet Name="ZapasyBarvy" EntityType="SlavojDB.ZapasBarva" />
+          <EntitySet Name="KuzelnaProgramy" EntityType="SlavojDB.KuzelnaProgram" />
+          <AssociationSet Name="FK_KuzelnaProgramSluzby_KuzelnaProgramy" Association="SlavojDB.FK_KuzelnaProgramSluzby_KuzelnaProgramy">
+            <End Role="KuzelnaProgramy" EntitySet="KuzelnaProgramy" />
+            <End Role="KuzelnaProgramSluzba" EntitySet="KuzelnaProgramSluzby" />
+          </AssociationSet>
+          <EntitySet Name="Zapasy" EntityType="SlavojDB.Zapas" />
+          <AssociationSet Name="FK_Zapasy_Rozhodci" Association="SlavojDB.FK_Zapasy_Rozhodci">
+            <End Role="Rozhodci" EntitySet="Rozhodcis" />
+            <End Role="Zapasy" EntitySet="Zapasy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zapasy_Souteze" Association="SlavojDB.FK_Zapasy_Souteze">
+            <End Role="Soutez" EntitySet="Souteze" />
+            <End Role="Zapasy" EntitySet="Zapasy" />
+          </AssociationSet>
+          <EntitySet Name="KuzelnaProgramKategories" EntityType="SlavojDB.KuzelnaProgramKategorie" />
+          <AssociationSet Name="FK_KuzelnaProgramy_KuzelnaProgramKategorie" Association="SlavojDB.FK_KuzelnaProgramy_KuzelnaProgramKategorie">
+            <End Role="KuzelnaProgramKategorie" EntitySet="KuzelnaProgramKategories" />
+            <End Role="KuzelnaProgram" EntitySet="KuzelnaProgramy" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -1184,6 +1353,7 @@
           <Property Name="Fotka" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="UserCleni" Relationship="SlavojDB.FK_UserClen_Cleni" FromRole="Clen" ToRole="UserClen" />
           <NavigationProperty Name="CleniInRoles" Relationship="SlavojDB.FK_CleniInRoles_Cleni_ClenId_ClenId" FromRole="Clen" ToRole="CleniInRole" />
+          <NavigationProperty Name="KuzelnaProgramSluzby" Relationship="SlavojDB.FK_KuzelnaProgramSluzby_Cleni" FromRole="Clen" ToRole="KuzelnaProgramSluzby" />
           </EntityType>
         <EntityType Name="Adresa">
           <Key>
@@ -1224,6 +1394,7 @@
           <Property Type="String" Name="Trida" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cleni" Relationship="SlavojDB.FK_Rozhodci_Cleni" FromRole="Rozhodci" ToRole="Clen" />
           <Property Type="DateTime" Name="PlatnaDo" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Zapasy" Relationship="SlavojDB.FK_Zapasy_Rozhodci" FromRole="Rozhodci" ToRole="Zapasy" />
         </EntityType>
         <Association Name="FK_Adresy_Cleni">
           <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="1">
@@ -1303,6 +1474,7 @@
           <NavigationProperty Name="Vysledky" Relationship="SlavojDB.FK_Vysledky_Souteze" FromRole="Soutez" ToRole="Vysledky" />
           <Property Name="DisciplinaId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Discipliny" Relationship="SlavojDB.FK_Souteze_Discipliny" FromRole="Soutez" ToRole="Discipliny" />
+          <NavigationProperty Name="Zapasy" Relationship="SlavojDB.FK_Zapasy_Souteze" FromRole="Soutez" ToRole="Zapasy" />
         </EntityType>
         <Association Name="FK_Souteze_KategorieSoutezi1">
           <End Type="SlavojDB.KategorieSouteze" Role="KategorieSoutezi" Multiplicity="1" />
@@ -1909,6 +2081,132 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="KuzelnaProgramSluzba">
+          <Key>
+            <PropertyRef Name="KuzelnaProgramSluzbaId" />
+          </Key>
+          <Property Name="KuzelnaProgramSluzbaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KuzelnaProgramId" Type="Int32" Nullable="false" />
+          <Property Name="ClenId" Type="Int32" Nullable="false" />
+          <Property Name="SluzbaDatumCasOd" Type="DateTime" Precision="7" />
+          <Property Name="SluzbaDatumCasDo" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Clen" Relationship="SlavojDB.FK_KuzelnaProgramSluzby_Cleni" FromRole="KuzelnaProgramSluzby" ToRole="Clen" />
+          <NavigationProperty Name="KuzelnaProgram" Relationship="SlavojDB.FK_KuzelnaProgramSluzby_KuzelnaProgramy" FromRole="KuzelnaProgramSluzba" ToRole="KuzelnaProgramy" />
+        </EntityType>
+        <Association Name="FK_KuzelnaProgramSluzby_Cleni">
+          <End Type="SlavojDB.Clen" Role="Clen" Multiplicity="1" />
+          <End Type="SlavojDB.KuzelnaProgramSluzba" Role="KuzelnaProgramSluzby" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clen">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="KuzelnaProgramSluzby">
+              <PropertyRef Name="ClenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ZapasBarva">
+          <Key>
+            <PropertyRef Name="ZapasBarvaId" />
+          </Key>
+          <Property Name="ZapasBarvaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DruzstvoNazev" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Barva" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="KuzelnaProgram">
+          <Key>
+            <PropertyRef Name="KuzelnaProgramId" />
+          </Key>
+          <Property Name="KuzelnaProgramId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgramNazev" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProgramDatumCasOd" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ProgramDatumCasDo" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Poznamka" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="OpakovatKazdyTyden" Type="Boolean" Nullable="false" />
+          <Property Name="OpakovatDatumDo" Type="DateTime" Precision="7" />
+          <Property Name="JeAktivni" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="KuzelnaProgramSluzby" Relationship="SlavojDB.FK_KuzelnaProgramSluzby_KuzelnaProgramy" FromRole="KuzelnaProgramy" ToRole="KuzelnaProgramSluzba" />
+          <Property Name="ProgramKategorieId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="KuzelnaProgramKategorie" Relationship="SlavojDB.FK_KuzelnaProgramy_KuzelnaProgramKategorie" FromRole="KuzelnaProgram" ToRole="KuzelnaProgramKategorie" />
+        </EntityType>
+        <Association Name="FK_KuzelnaProgramSluzby_KuzelnaProgramy">
+          <End Type="SlavojDB.KuzelnaProgram" Role="KuzelnaProgramy" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SlavojDB.KuzelnaProgramSluzba" Role="KuzelnaProgramSluzba" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KuzelnaProgramy">
+              <PropertyRef Name="KuzelnaProgramId" />
+            </Principal>
+            <Dependent Role="KuzelnaProgramSluzba">
+              <PropertyRef Name="KuzelnaProgramId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Zapas">
+          <Key>
+            <PropertyRef Name="ZapasId" />
+          </Key>
+          <Property Name="ZapasId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SoutezId" Type="Int32" Nullable="false" />
+          <Property Name="KuzelnaNazev" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KuzelnaDomaci" Type="Boolean" Nullable="false" />
+          <Property Name="ZapasDatumCasOd" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ZapasDatumCasDo" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Druzstvo1Nazev" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Druzstvo2Nazev" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SrazDatumCas" Type="DateTime" Precision="7" />
+          <Property Name="MistoSrazu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Poznamka" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RozhodciId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Rozhodci" Relationship="SlavojDB.FK_Zapasy_Rozhodci" FromRole="Zapasy" ToRole="Rozhodci" />
+          <NavigationProperty Name="Soutez" Relationship="SlavojDB.FK_Zapasy_Souteze" FromRole="Zapasy" ToRole="Soutez" />
+        </EntityType>
+        <Association Name="FK_Zapasy_Rozhodci">
+          <End Type="SlavojDB.Rozhodci" Role="Rozhodci" Multiplicity="1" />
+          <End Type="SlavojDB.Zapas" Role="Zapasy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rozhodci">
+              <PropertyRef Name="ClenId" />
+            </Principal>
+            <Dependent Role="Zapasy">
+              <PropertyRef Name="RozhodciId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zapasy_Souteze">
+          <End Type="SlavojDB.Soutez" Role="Soutez" Multiplicity="1" />
+          <End Type="SlavojDB.Zapas" Role="Zapasy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Soutez">
+              <PropertyRef Name="SoutezId" />
+            </Principal>
+            <Dependent Role="Zapasy">
+              <PropertyRef Name="SoutezId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="KuzelnaProgramKategorie">
+          <Key>
+            <PropertyRef Name="KuzelnaProgramKategorieId" />
+          </Key>
+          <Property Name="KuzelnaProgramKategorieId" Type="Int32" Nullable="false" />
+          <Property Name="Nazev" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Barva" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="KuzelnaProgramy" Relationship="SlavojDB.FK_KuzelnaProgramy_KuzelnaProgramKategorie" FromRole="KuzelnaProgramKategorie" ToRole="KuzelnaProgram" />
+        </EntityType>
+        <Association Name="FK_KuzelnaProgramy_KuzelnaProgramKategorie">
+          <End Type="SlavojDB.KuzelnaProgramKategorie" Role="KuzelnaProgramKategorie" Multiplicity="1" />
+          <End Type="SlavojDB.KuzelnaProgram" Role="KuzelnaProgram" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KuzelnaProgramKategorie">
+              <PropertyRef Name="KuzelnaProgramKategorieId" />
+            </Principal>
+            <Dependent Role="KuzelnaProgram">
+              <PropertyRef Name="ProgramKategorieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2266,6 +2564,68 @@
                 <ScalarProperty Name="DisciplinaId" ColumnName="DisciplinaId" />
                 <ScalarProperty Name="Nazev" ColumnName="Nazev" />
                 <ScalarProperty Name="RekordId" ColumnName="RekordId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KuzelnaProgramSluzby">
+            <EntityTypeMapping TypeName="SlavojDB.KuzelnaProgramSluzba">
+              <MappingFragment StoreEntitySet="KuzelnaProgramSluzby">
+                <ScalarProperty Name="SluzbaDatumCasDo" ColumnName="SluzbaDatumCasDo" />
+                <ScalarProperty Name="SluzbaDatumCasOd" ColumnName="SluzbaDatumCasOd" />
+                <ScalarProperty Name="ClenId" ColumnName="ClenId" />
+                <ScalarProperty Name="KuzelnaProgramId" ColumnName="KuzelnaProgramId" />
+                <ScalarProperty Name="KuzelnaProgramSluzbaId" ColumnName="KuzelnaProgramSluzbaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZapasyBarvy">
+            <EntityTypeMapping TypeName="SlavojDB.ZapasBarva">
+              <MappingFragment StoreEntitySet="ZapasyBarvy">
+                <ScalarProperty Name="Barva" ColumnName="Barva" />
+                <ScalarProperty Name="DruzstvoNazev" ColumnName="DruzstvoNazev" />
+                <ScalarProperty Name="ZapasBarvaId" ColumnName="ZapasBarvaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KuzelnaProgramy">
+            <EntityTypeMapping TypeName="SlavojDB.KuzelnaProgram">
+              <MappingFragment StoreEntitySet="KuzelnaProgramy">
+                <ScalarProperty Name="ProgramKategorieId" ColumnName="ProgramKategorieId" />
+                <ScalarProperty Name="JeAktivni" ColumnName="JeAktivni" />
+                <ScalarProperty Name="OpakovatDatumDo" ColumnName="OpakovatDatumDo" />
+                <ScalarProperty Name="OpakovatKazdyTyden" ColumnName="OpakovatKazdyTyden" />
+                <ScalarProperty Name="Poznamka" ColumnName="Poznamka" />
+                <ScalarProperty Name="ProgramDatumCasDo" ColumnName="ProgramDatumCasDo" />
+                <ScalarProperty Name="ProgramDatumCasOd" ColumnName="ProgramDatumCasOd" />
+                <ScalarProperty Name="ProgramNazev" ColumnName="ProgramNazev" />
+                <ScalarProperty Name="KuzelnaProgramId" ColumnName="KuzelnaProgramId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zapasy">
+            <EntityTypeMapping TypeName="SlavojDB.Zapas">
+              <MappingFragment StoreEntitySet="Zapasy">
+                <ScalarProperty Name="RozhodciId" ColumnName="RozhodciId" />
+                <ScalarProperty Name="Poznamka" ColumnName="Poznamka" />
+                <ScalarProperty Name="MistoSrazu" ColumnName="MistoSrazu" />
+                <ScalarProperty Name="SrazDatumCas" ColumnName="SrazDatumCas" />
+                <ScalarProperty Name="Druzstvo2Nazev" ColumnName="Druzstvo2Nazev" />
+                <ScalarProperty Name="Druzstvo1Nazev" ColumnName="Druzstvo1Nazev" />
+                <ScalarProperty Name="ZapasDatumCasDo" ColumnName="ZapasDatumCasDo" />
+                <ScalarProperty Name="ZapasDatumCasOd" ColumnName="ZapasDatumCasOd" />
+                <ScalarProperty Name="KuzelnaDomaci" ColumnName="KuzelnaDomaci" />
+                <ScalarProperty Name="KuzelnaNazev" ColumnName="KuzelnaNazev" />
+                <ScalarProperty Name="SoutezId" ColumnName="SoutezId" />
+                <ScalarProperty Name="ZapasId" ColumnName="ZapasId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KuzelnaProgramKategories">
+            <EntityTypeMapping TypeName="SlavojDB.KuzelnaProgramKategorie">
+              <MappingFragment StoreEntitySet="KuzelnaProgramKategorie">
+                <ScalarProperty Name="Barva" ColumnName="Barva" />
+                <ScalarProperty Name="Nazev" ColumnName="Nazev" />
+                <ScalarProperty Name="KuzelnaProgramKategorieId" ColumnName="KuzelnaProgramKategorieId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

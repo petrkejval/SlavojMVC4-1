@@ -1,6 +1,8 @@
 @model DateTime?
 
 @(Html.Telerik().DatePickerFor(m => m)
-      .TodayButton()
-      .HtmlAttributes(new { id = ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty) + "_wrapper" })
+    .TodayButton()
+    .HtmlAttributes(new { id = ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty) + "_wrapper" })
+
 )
+

@@ -1,0 +1,16 @@
+﻿Protože jsem na svém serveru přidal nové tabulky, ale ještě je nazahrnul do projetku je nutno do vygenerovaného skriptu volbou Export dat přidat tyto příkazy
+1. na začátek skriptu
+ALTER TABLE [dbo].[Zapasy] DROP CONSTRAINT [FK_Zapasy_Souteze]
+
+ALTER TABLE [dbo].[KuzelnaProgramSluzby] DROP CONSTRAINT [FK_KuzelnaProgramSluzby_Cleni]
+
+2. na konec skriptu
+ALTER TABLE [dbo].[Zapasy]  WITH CHECK ADD  CONSTRAINT [FK_Zapasy_Souteze] FOREIGN KEY([SoutezId])
+REFERENCES [dbo].[Souteze] ([SoutezId])
+
+ALTER TABLE [dbo].[Zapasy] CHECK CONSTRAINT [FK_Zapasy_Souteze]
+
+ALTER TABLE [dbo].[KuzelnaProgramSluzby]  WITH CHECK ADD  CONSTRAINT [FK_KuzelnaProgramSluzby_Cleni] FOREIGN KEY([ClenId])
+REFERENCES [dbo].[Cleni] ([ClenId])
+
+ALTER TABLE [dbo].[KuzelnaProgramSluzby] CHECK CONSTRAINT [FK_KuzelnaProgramSluzby_Cleni]

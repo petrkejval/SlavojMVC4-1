@@ -1,80 +1,81 @@
-﻿@(Html.Telerik().Menu()
+﻿    @(Html.Telerik().Menu()
             .Name("menu")
             .Items(item =>
+            {
+                foreach (var menu in ((IList<MainMenu>)(HttpContext.Current.Session["MainMenu"])).Where(m => m.MenuLevelId == 0).OrderBy(o => o.OrderId).ToList())
+                //foreach (var menu in (HttpContext.Current.Session["MainMenu"] as IList<MainMenu>).Where(m => m.MenuLevelId == 0).ToList())
+                {
+                    if (menu.MenuLevelId == 0)
+                    {
+                        var mitem = item.Add();
+                        mitem.Text(menu.Text);
+
+                        if (!menu.ActionName.IsEmpty())
                         {
-                            foreach (var menu in ((IList<MainMenu>)(HttpContext.Current.Session["MainMenu"])).Where(m => m.MenuLevelId == 0).OrderBy(o => o.OrderId).ToList())
-                            //foreach (var menu in (HttpContext.Current.Session["MainMenu"] as IList<MainMenu>).Where(m => m.MenuLevelId == 0).ToList()) 
+                            if (menu.WebPageId > 0)
                             {
-                                if (menu.MenuLevelId == 0)
-                                {
-                                    var mitem = item.Add();
-                                        mitem.Text(menu.Text);
-                                    
-                                    if (!menu.ActionName.IsEmpty())
-                                    {
-                                        if (menu.WebPageId > 0)
-                                        {
-                                            mitem.Action(menu.ActionName, menu.ControllerName, new { id = menu.WebPageId });
+                                mitem.Action(menu.ActionName, menu.ControllerName, new { id = menu.WebPageId });
 
-                                        }
-                                        else
-                                        {
-                                            mitem.Action(menu.ActionName, menu.ControllerName);
-                                        }
-                                    }
-                                    //Nastavení
-                                    if (menu.MainMenuId == 10)
-                                    {
-                                        mitem.Visible(User.IsInRole("clen"));
-                                    }
-                                    mitem.Items(children =>
-                                        {
-                                            //Druzstva
-                                            if (menu.MainMenuId == 2)
-                                            {
-                                                foreach (var childmenu in ((IList<Druzstvo>)(HttpContext.Current.Session["DruzstvaMenu"])).ToList())
-                                                //foreach (var childmenu in (HttpContext.Current.Session["DruzstvaMenu"] as IList<Druzstvo>).ToList())
-                                                {
-                                                    var mchildren = children.Add();
-                                                    mchildren.Text(childmenu.Nazev + " " + childmenu.Pismeno + ", " + childmenu.Soutez.Nazev + ", " + "(" + childmenu.Soutez.KategorieSouteze.Nazev + ")");
-                                                    mchildren.Action("Index", "Druzstva", new { id = childmenu.DruzstvoId });
-                                                }
-
-                                            }
-                                            else if (menu.MainMenuId == 4)
-                                            {
-                                                foreach (var childmenu in ((IList<Turnaj>)(HttpContext.Current.Session["TurnajeMenu"])).ToList())
-                                                //foreach (var childmenu in (HttpContext.Current.Session["TurnajeMenu"] as IList<Turnaj>).ToList())
-                                                {
-                                                    var mchildren = children.Add();
-                                                    mchildren.Text(childmenu.Nazev);
-                                                    mchildren.Action("Index", "Turnaje", new { id = childmenu.TurnajId });
-                                                }
-
-                                            }
-                                            else
-                                            {
-                                                foreach (var childmenu in ((IList<MainMenu>)(HttpContext.Current.Session["MainMenu"])).Where(m => m.MenuLevelId == menu.MainMenuId).OrderBy(o => o.OrderId).ToList())
-                                                //foreach (var childmenu in (HttpContext.Current.Session["MainMenu"] as IList<MainMenu>).Where(m => m.MenuLevelId == menu.MainMenuId).ToList())
-                                                {
-                                                    var mchildren = children.Add();
-                                                    mchildren.Text(childmenu.Text);
-                                                    if (!childmenu.ActionName.IsEmpty())
-                                                    {
-                                                        mchildren.Action(childmenu.ActionName, childmenu.ControllerName);
-                                                    }
-                                                    if (childmenu.MenuLevelId == 10)
-                                                    {
-                                                        mchildren.Visible(User.IsInRole("clen"));
-                                                    }
-                                                }
-                                            }
-
-                                        }
-                                    );
-                                       
-                                } 
+                            }
+                            else
+                            {
+                                mitem.Action(menu.ActionName, menu.ControllerName);
                             }
                         }
+                        //Nastavení
+                        if (menu.MainMenuId == 11)
+                        {
+                            mitem.Visible(User.IsInRole("clen"));
+                        }
+                        mitem.Items(children =>
+                        {
+                            //Druzstva
+                            if (menu.MainMenuId == 2)
+                            {
+                                foreach (var childmenu in ((IList<Druzstvo>)(HttpContext.Current.Session["DruzstvaMenu"])).ToList())
+                                //foreach (var childmenu in (HttpContext.Current.Session["DruzstvaMenu"] as IList<Druzstvo>).ToList())
+                                {
+                                    var mchildren = children.Add();
+                                    mchildren.Text(childmenu.Nazev + " " + childmenu.Pismeno + ", " + childmenu.Soutez.Nazev + ", " + "(" + childmenu.Soutez.KategorieSouteze.Nazev + ")");
+                                    mchildren.Action("Index", "Druzstva", new { id = childmenu.DruzstvoId });
+                                }
+
+                            }
+                            //Turnaje
+                            else if (menu.MainMenuId == 4)
+                            {
+                                foreach (var childmenu in ((IList<Turnaj>)(HttpContext.Current.Session["TurnajeMenu"])).ToList())
+                                //foreach (var childmenu in (HttpContext.Current.Session["TurnajeMenu"] as IList<Turnaj>).ToList())
+                                {
+                                    var mchildren = children.Add();
+                                    mchildren.Text(childmenu.Nazev);
+                                    mchildren.Action("Index", "Turnaje", new { id = childmenu.TurnajId });
+                                }
+
+                            }
+                            else
+                            {
+                                foreach (var childmenu in ((IList<MainMenu>)(HttpContext.Current.Session["MainMenu"])).Where(m => m.MenuLevelId == menu.MainMenuId).OrderBy(o => o.OrderId).ToList())
+                                //foreach (var childmenu in (HttpContext.Current.Session["MainMenu"] as IList<MainMenu>).Where(m => m.MenuLevelId == menu.MainMenuId).ToList())
+                                {
+                                    var mchildren = children.Add();
+                                    mchildren.Text(childmenu.Text);
+                                    if (!childmenu.ActionName.IsEmpty())
+                                    {
+                                        mchildren.Action(childmenu.ActionName, childmenu.ControllerName);
+                                    }
+                                    if (childmenu.MenuLevelId == 11)
+                                    {
+                                        mchildren.Visible(User.IsInRole("clen"));
+                                    }
+                                }
+                            }
+
+                        }
+                        );
+
+                    }
+                }
+            }
                 )
-)
+    )

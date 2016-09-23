@@ -1,0 +1,78 @@
+﻿@model IEnumerable <SlavojMVC4_1.Models.ZapasNejblizsi>
+
+<div class="widget">
+    <div class="t-header widget-header">
+        Nejbližší zápasy
+    </div>
+    @foreach (var item in Model)
+    {
+        string className = "widget-body";
+
+        if (item.KuzelnaDomaci) { className = "widget-body-color"; }
+        <div class=@className>
+            <div class="zapasy-header zapasy-header-color">
+                @item.SoutezNazev
+            </div>
+            <div class="zapasy-body">
+                @if (item.Druzstvo1Barva != null)
+                {
+                    <span style="color:@item.Druzstvo1Barva"> @item.Druzstvo1Nazev </span>
+                }
+                else
+                {
+                    @item.Druzstvo1Nazev
+
+                }
+                -
+                @if (item.Druzstvo2Barva != null)
+                {
+                    <span style="color:@item.Druzstvo2Barva"> @item.Druzstvo2Nazev </span>
+                }
+                else
+                {
+                    @item.Druzstvo2Nazev
+
+                }
+            </div>
+            <div class="zapasy-header zapasy-header-color1">
+                @item.ZapasDatumCasOd.ToString("ddd d/M/yyyy HH:mm") kuželna @item.KuzelnaNazev
+            </div>
+            @if (item.SrazDatumCas != null)
+            {
+                DateTime d = (DateTime)(item.SrazDatumCas);
+
+                <div class="zapasy-body-rozhodci">
+                    Datum a čas srazu @d.ToString("ddd d/M/yyyy HH:mm")
+                </div>
+
+            }
+            @if (item.MistoSrazu != null)
+            {
+                <div class="zapasy-body-rozhodci">
+                    Místo srazu @item.MistoSrazu
+                </div>
+
+            }
+            @if (item.Poznamka != null)
+            {
+                <div class="zapasy-body-rozhodci">
+                    @item.Poznamka
+                </div>
+
+            }
+            @if (item.Rozhodci.ClenId > 0)
+            {
+                <div class="zapasy-body-rozhodci">
+                    Rozhodčí @SlavojMVC4_1.Infrastructure.Tools.GetFullName(item.Rozhodci.Cleni.TitulPred, item.Rozhodci.Cleni.Jmeno, item.Rozhodci.Cleni.Prijmeni, item.Rozhodci.Cleni.TitulZa)
+                </div>
+
+            }
+
+        </div>
+    }
+    <div>
+        @Html.ActionLink("Více zde...", "Zapasy", "Menu")
+    </div>
+</div>
+
+

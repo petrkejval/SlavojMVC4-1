@@ -14,11 +14,17 @@ namespace SlavojMVC4_1.Models
     
     public partial class Rozhodci
     {
+        public Rozhodci()
+        {
+            this.Zapasy = new HashSet<Zapas>();
+        }
+    
         public int ClenId { get; set; }
         public string CisloRegistrace { get; set; }
         public string Trida { get; set; }
         public System.DateTime PlatnaDo { get; set; }
     
         public virtual Clen Cleni { get; set; }
+        public virtual ICollection<Zapas> Zapasy { get; set; }
     }
 }

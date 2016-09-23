@@ -122,7 +122,8 @@ h5, h6 {
 ----------------------------------------------------------*/
 .content-wrapper {
     margin: 0 auto;
-    max-width: 960px;
+    /*max-width: 960px;*/
+    max-width: 1100px;
 }
 
 #body {
@@ -138,16 +139,16 @@ h5, h6 {
         width: 100%;
     }
     #contentcolumn{
-        margin-right: 250px; /*Set right margin to RightColumnWidth*/
+        margin-right: 300px; /*Set right margin to RightColumnWidth*/
     }
     #rightcolumn{
         float: left;
-        width: 250px; /*Width of right column in pixels*/
-        margin-left: -250px; /*Set left margin to -(RightColumnWidth) */
+        width: 300px; /*Width of right column in pixels*/
+        margin-left: -300px; /*Set left margin to -(RightColumnWidth) */
         /*background: #FDE95E;*/
     }
     .innertube{
-        margin: 0px; /*Margins for inner DIV inside each column (to provide padding)*/
+        margin: 0; /*Margins for inner DIV inside each column (to provide padding)*/
         margin-top: 0;
         margin-left: 0;
     }
@@ -283,7 +284,8 @@ footer {
 {
     position: relative;
     margin: 0;
-    text-align: right;
+    /*text-align: right;*/
+    text-align: left;
 }
 
 #menu .t-item
@@ -452,7 +454,7 @@ aside {
     }
 
     #loginForm input {
-        width: 250px;
+        width: 300px;
     }
 
     #loginForm input[type="checkbox"],
@@ -637,7 +639,7 @@ table {
 th {
     font-size: 1.2em;
     text-align: left;
-    border: none 0px;
+    border: none 0;
     padding-left: 0;
 }
 
@@ -664,7 +666,7 @@ th {
     th.asc a:after, th.desc a:after {
         display: block;
         position: absolute;
-        right: 0em;
+        right: 0;
         top: 0;
         font-size: 0.75em;
     }
@@ -678,7 +680,7 @@ th {
     }
 
 td {
-    padding: 0.25em 1em 0 0em;
+    padding: 0.25em 1em 0 0;
     border: 0 none;
     
 }
@@ -691,15 +693,20 @@ tr.pager td {
 /********************
 *   Mobile Styles   *
 ********************/
-@media only screen and (max-width: 850px) {
+/*@media only screen and (max-width: 850px)*/ 
+@media only screen and (max-width: 1115px)
+{
+/*
     #rightcolumn
     {
         visibility:collapse;
         display:none;
     }
-    #contentcolumn{
+    #contentcolumn 
+    {
         margin-right: 0;
     }
+*/
     .pruh
     {
         visibility:collapse;
@@ -709,43 +716,50 @@ tr.pager td {
     /* header
     ----------------------------------------------------------*/
     header .float-left,
-    header .float-right {
+    header .float-right 
+    {
         float: none;
     }
 
     /* logo */
-    header .site-title {
+    header .site-title 
+    {
         margin: 10px;
         text-align: center;
     }
 
     /* login */
-    #login {
+    #login 
+    {
         font-size: .85em;
         margin: 0 0 12px;
         text-align: center;
     }
 
-        #login ul {
+        #login ul 
+        {
             margin: 5px 0;
             padding: 0;
         }
 
-        #login li {
+        #login li 
+        {
             display: inline;
             list-style: none;
             margin: 0;
             padding: 0;
         }
 
-        #login a {
+        #login a 
+        {
             background: none;
             color: #999;
             font-weight: 600;
             margin: 2px;
             padding: 0;
         }
-        #login a.username {
+        #login a.username 
+        {
                 background: none;
                 color: #999;
                 font-weight: 600;
@@ -753,22 +767,26 @@ tr.pager td {
                 padding: 0;
         }
 
-        #login a:hover {
+        #login a:hover 
+        {
             color: #333;
         }
 
     /* menu */
-    nav {
+    nav 
+    {
         margin-bottom: 5px;
     }
 
-    ul#menu {
+    ul#menu 
+    {
         margin: 0;
         padding: 0;
         text-align: center;
     }
 
-        ul#menu li {
+        ul#menu li 
+        {
             margin: 0;
             padding: 0;
         }
@@ -777,32 +795,38 @@ tr.pager td {
     /* main layout
     ----------------------------------------------------------*/
     .main-content,
-    .featured + .main-content {
+    .featured + .main-content 
+    {
         background-position: 10px 0;
     }
 
-    .content-wrapper {
+    .content-wrapper 
+    {
         padding-right: 10px;
         padding-left: 10px;
     }
 
-    .featured .content-wrapper {
+    .featured .content-wrapper 
+    {
         padding: 10px;
     }
 
     /* page content */
-    article, aside {
+    article, aside 
+    {
         float: none;
         width: 100%;
     }
 
     /* ordered list */
-    ol.round {
+    ol.round 
+    {
         list-style-type: none;
         padding-left: 0;
     }
 
-        ol.round li {
+        ol.round li 
+        {
             padding-left: 10px;
             margin: 25px 0;
         }
@@ -816,18 +840,21 @@ tr.pager td {
             ol.round li.six,
             ol.round li.seven,
             ol.round li.eight,
-            ol.round li.nine {
+            ol.round li.nine 
+            {
                 background: none;
             }
 
      /* features */
-     section.feature {
+     section.feature 
+     {
         float: none;
         padding: 10px;
         width: auto;
      }
 
-        section.feature img {
+        section.feature img 
+        {
             color: #999;
             content: attr(alt);
             font-size: 1.5em;
@@ -835,46 +862,269 @@ tr.pager td {
         }
 
     /* forms */
-    input {
+    input 
+    {
         width: 90%;
     }
 
     /* login page */
-    #loginForm {
+    #loginForm 
+    {
         border-right: none;
         float: none;
         width: auto;
     }
 
-        #loginForm .validation-error {
+        #loginForm .validation-error 
+        {
             display: block;
             margin-left: 15px;
         }
 
-    #socialLoginForm {
+    #socialLoginForm 
+    {
         margin-left: 0;
         float: none;
         width: auto;
     }
 
-
     /* footer
     ----------------------------------------------------------*/
     footer .float-left,
-    footer .float-right {
+    footer .float-right 
+    {
         float: none;
     }
 
-    footer {
+    footer 
+    {
         text-align: center;
         height: auto;
         padding: 10px 0;
     }
 
-        footer p {
+        footer p 
+        {
             margin: 0;
         }
 }
+
+/*@media only screen and (max-width: 850px) {*/
+@media only screen and (max-width: 635px) 
+{
+    #rightcolumn
+    {
+        visibility:collapse;
+        display:none;
+    }
+    #contentcolumn 
+    {
+        margin-right: 0;
+    }
+    .pruh
+    {
+        visibility:collapse;
+        display:none;
+
+    }
+    /* header
+    ----------------------------------------------------------*/
+    header .float-left,
+    header .float-right 
+    {
+        float: none;
+    }
+
+    /* logo */
+    header .site-title 
+    {
+        margin: 10px;
+        text-align: center;
+    }
+
+    /* login */
+    #login 
+    {
+        font-size: .85em;
+        margin: 0 0 12px;
+        text-align: center;
+    }
+
+        #login ul 
+        {
+            margin: 5px 0;
+            padding: 0;
+        }
+
+        #login li 
+        {
+            display: inline;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #login a 
+        {
+            background: none;
+            color: #999;
+            font-weight: 600;
+            margin: 2px;
+            padding: 0;
+        }
+        #login a.username 
+        {
+                background: none;
+                color: #999;
+                font-weight: 600;
+                margin: 2px;
+                padding: 0;
+        }
+
+        #login a:hover 
+        {
+            color: #333;
+        }
+
+    /* menu */
+    nav 
+    {
+        margin-bottom: 5px;
+    }
+
+    ul#menu 
+    {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+        ul#menu li 
+        {
+            margin: 0;
+            padding: 0;
+        }
+
+
+    /* main layout
+    ----------------------------------------------------------*/
+    .main-content,
+    .featured + .main-content 
+    {
+        background-position: 10px 0;
+    }
+
+    .content-wrapper 
+    {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .featured .content-wrapper 
+    {
+        padding: 10px;
+    }
+
+    /* page content */
+    article, aside 
+    {
+        float: none;
+        width: 100%;
+    }
+
+    /* ordered list */
+    ol.round 
+    {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+        ol.round li 
+        {
+            padding-left: 10px;
+            margin: 25px 0;
+        }
+
+            ol.round li.zero,
+            ol.round li.one,
+            ol.round li.two,
+            ol.round li.three,
+            ol.round li.four,
+            ol.round li.five,
+            ol.round li.six,
+            ol.round li.seven,
+            ol.round li.eight,
+            ol.round li.nine 
+            {
+                background: none;
+            }
+
+     /* features */
+     section.feature 
+     {
+        float: none;
+        padding: 10px;
+        width: auto;
+     }
+
+        section.feature img 
+        {
+            color: #999;
+            content: attr(alt);
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+    /* forms */
+    input 
+    {
+        width: 90%;
+    }
+
+    /* login page */
+    #loginForm 
+    {
+        border-right: none;
+        float: none;
+        width: auto;
+    }
+
+        #loginForm .validation-error 
+        {
+            display: block;
+            margin-left: 15px;
+        }
+
+    #socialLoginForm 
+    {
+        margin-left: 0;
+        float: none;
+        width: auto;
+    }
+
+    /* footer
+    ----------------------------------------------------------*/
+    footer .float-left,
+    footer .float-right 
+    {
+        float: none;
+    }
+
+    footer 
+    {
+        text-align: center;
+        height: auto;
+        padding: 10px 0;
+    }
+
+        footer p 
+        {
+            margin: 0;
+        }
+}
+/********************
+*   Konec Mobile Styles   *
+********************/
 
 
 /*  článek
@@ -904,6 +1154,172 @@ tr.pager td {
     
     
 }
+.widgets
+{
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 0 10px 0 10px;
+    border-width: 1px;
+    border-color:silver;
+    border-style:none solid solid none;
+    border-radius: 10px 10px 10px 10px;
+    
+    
+}
+.widget
+{
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 10px 10px 10px 10px;
+    
+    border-width: 1px;
+    border-color:silver;
+    border-style:solid solid solid solid;
+    border-radius: 10px 10px 10px 10px;
+    
+    
+}
+
+.widget-header
+{
+    /* Takto bez užití t-header
+    background-color: #1877af;
+    background: linear-gradient(#8CBBD7, #1877af);
+    font-weight: bold;
+    color:white;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    */
+
+    /* Takto se současným užitím t-header */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    height: 25px;
+}    
+.widget-body
+{
+    /* Článek je pouze podtržen */
+    border-width: 1px;
+    border-color:silver;
+    border-style:none none solid none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: white;
+
+    /* Kulatý rámeček
+    background-color: white;
+    margin-bottom: 5px;
+    padding: 5px 5px 5px 5px;
+    
+    border-width: 1px;
+    border-color:silver;
+    border-style:solid solid solid solid;
+    border-radius: 10px 10px 10px 10px;
+    */
+    
+    
+}
+.widget-body-color
+{
+    /* Článek je pouze podtržen */
+    border-width: 1px;
+    border-color:silver;
+    border-style:none none solid none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: lightgoldenrodyellow;
+
+
+    /* Kulatý rámeček
+    background-color: white;
+    margin-bottom: 5px;
+    padding: 5px 5px 5px 5px;
+    
+    border-width: 1px;
+    border-color:silver;
+    border-style:solid solid solid solid;
+    border-radius: 10px 10px 10px 10px;
+    */
+    
+    
+}
+
+.zapasy-header
+{
+        
+    /*font-size: 10px;*/
+        
+}
+.zapasy-body
+{
+    /*font-size: 10px;*/
+    color:#1877af;
+
+}
+.zapasy-body-rozhodci
+{
+    /*font-size: 10px;*/
+
+}
+.zapasy-header-color
+{
+    /*color:dimgray;*/
+        
+}
+.zapasy-header-color1
+{
+    color:darkblue;
+        
+}
+
+.programy-header
+{
+        
+    /*font-size: 10px;*/
+    color:#1877af;
+        
+}
+.programy-header-page
+{
+        
+    /*font-size: 16px;*/
+    color:#1877af;
+        
+}
+.programy-body
+{
+    /*font-size: 10px;*/
+    /*font-weight: bold;*/
+    color:darkblue;
+
+}
+.programy-body-page
+{
+    /*font-size: 12px;*/
+    /*font-weight: bold;*/
+    color:darkblue;
+
+}
+
+.programy-footer
+{
+    /*font-size: 10px;*/
+    /*color:dimgray;*/
+}
+.programy-footer-page
+{
+    /*font-size: 12px;*/
+    /*color:dimgray;*/
+}
+.filter-item
+{
+    float:left;
+    margin-right:5px;
+}
 
     .predmet
     {
@@ -926,8 +1342,8 @@ tr.pager td {
     }
 .novyclanek
 {
-    margin-top:0px;
-    padding-top:0px;
+    margin-top:0;
+    padding-top:0;
     padding-bottom:2px;
 }
 /*grid
@@ -1010,7 +1426,7 @@ tr.pager td {
     /* in-form editing */
     .t-edit-form-container
     {
-        width: 350px;
+        width: 300px;
         margin: 1em;
     }
     
@@ -1150,9 +1566,17 @@ tr.pager td {
 }
 .pagedList
 {
-    padding-top:0;
-    margin-top:0px;
-    height:60px;
+    padding-top: 0;
+    margin-top: 0;
+    /*height: 15px;*/
+}
+
+.pagedListZapasy
+{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 0;
+    /*height: 15px;*/
 }
 .znak
 {

@@ -21,6 +21,7 @@ namespace SlavojMVC4_1.Models
             this.Turnajes = new HashSet<Turnaj>();
             this.UserCleni = new HashSet<UserClen>();
             this.CleniInRoles = new HashSet<CleniInRole>();
+            this.KuzelnaProgramSluzby = new HashSet<KuzelnaProgramSluzba>();
         }
     
         public int ClenId { get; set; }
@@ -46,5 +47,6 @@ namespace SlavojMVC4_1.Models
         public virtual ICollection<Turnaj> Turnajes { get; set; }
         public virtual ICollection<UserClen> UserCleni { get; set; }
         public virtual ICollection<CleniInRole> CleniInRoles { get; set; }
+        public virtual ICollection<KuzelnaProgramSluzba> KuzelnaProgramSluzby { get; set; }
     }
 }

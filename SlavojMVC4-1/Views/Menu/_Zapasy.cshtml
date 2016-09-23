@@ -1,0 +1,82 @@
+﻿@*@model IEnumerable<SlavojMVC4_1.Models.ZapasNejblizsi>*@
+@model IPagedList<ZapasNejblizsi>
+<div id="listZapasy">
+    @Html.Partial("_ZapasyPagedList", Model)
+    @foreach (var item in Model)
+    {
+        string className = "widget-body";
+
+        if (item.KuzelnaDomaci) { className = "widget-body-color"; }
+        <div class=@className style="position:relative">
+                <div class="zapasy-header zapasy-header-color">
+                    @item.SoutezNazev
+                </div>
+                <div class="zapasy-body">
+                    @if (item.Druzstvo1Barva != null)
+                    {
+                        <span style="color:@item.Druzstvo1Barva"> @item.Druzstvo1Nazev </span>
+                    }
+                    else
+                    {
+                        @item.Druzstvo1Nazev
+
+                    }
+                    -
+                    @if (item.Druzstvo2Barva != null)
+                    {
+                        <span style="color:@item.Druzstvo2Barva"> @item.Druzstvo2Nazev </span>
+                    }
+                    else
+                    {
+                        @item.Druzstvo2Nazev
+
+                    }
+                </div>
+                <div class="zapasy-header zapasy-header-color1">
+                    @item.ZapasDatumCasOd.ToString("ddd d/M/yyyy HH:mm") kuželna @item.KuzelnaNazev
+                </div>
+                @if (item.SrazDatumCas != null)
+                {
+                    DateTime d = (DateTime)(item.SrazDatumCas);
+
+                    <div class="zapasy-body-rozhodci">
+                        Datum a čas srazu @d.ToString("ddd d/M/yyyy HH:mm")
+                    </div>
+
+                }
+                @if (item.MistoSrazu != null)
+                {
+                    <div class="zapasy-body-rozhodci">
+                        Místo srazu @item.MistoSrazu
+                    </div>
+
+                }
+                @if (item.Poznamka != null)
+                {
+                    <div class="zapasy-body-rozhodci">
+                        @item.Poznamka
+                    </div>
+
+                }
+                @if (item.Rozhodci.ClenId > 0)
+                {
+                    <div class="zapasy-body-rozhodci">
+                        Rozhodčí @SlavojMVC4_1.Infrastructure.Tools.GetFullName(item.Rozhodci.Cleni.TitulPred, item.Rozhodci.Cleni.Jmeno, item.Rozhodci.Cleni.Prijmeni, item.Rozhodci.Cleni.TitulZa)
+                    </div>
+
+                }
+            @if ((WebSecurity.HasUserId) && (User.IsInRole("superuser")))
+            {
+                <div style="position:absolute; bottom:5px; right:0">
+                    <div class="">
+                        <a href="@Url.Action("ZapasEdit", new { zapasId = item.ZapasId, podmDruzstva = ViewBag.PodmDruzstva, podmKde = ViewBag.PodmKde, page = ViewBag.Page })" class="t-button t-button-icon t-button-bare" title="Upravit">
+                            <span class="t-icon t-edit"></span>
+                        </a>
+                    </div>
+                </div>
+
+            }
+        </div>
+    }
+    @Html.Partial("_ZapasyPagedList", Model)
+</div>

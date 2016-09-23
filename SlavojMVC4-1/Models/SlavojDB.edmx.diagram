@@ -40,7 +40,7 @@
         <AssociationConnector Association="SlavojDB.FK_MainMenu_WebPages" />
         <AssociationConnector Association="SlavojDB.FK_Druzstva_WebPages" />
         <AssociationConnector Association="SlavojDB.FK_Turnaje_WebPages" />
-        <EntityTypeShape EntityType="SlavojDB.UserClen" Width="1.5" PointX="11" PointY="10.75" />
+        <EntityTypeShape EntityType="SlavojDB.UserClen" Width="1.5" PointX="9.625" PointY="9.5" />
         <AssociationConnector Association="SlavojDB.FK_UserClen_Cleni" />
         <EntityTypeShape EntityType="SlavojDB.UserProfile" Width="1.5" PointX="0.625" PointY="0.5" />
         <EntityTypeShape EntityType="SlavojDB.webpages_Roles" Width="1.5" PointX="2.5" PointY="3.25" />
@@ -73,6 +73,16 @@
         <EntityTypeShape EntityType="SlavojDB.Rekord" Width="1.5" PointX="7.25" PointY="21" />
         <AssociationConnector Association="SlavojDB.FK_Rekordy_Discipliny" />
         <AssociationConnector Association="SlavojDB.FK_Rekordy_RekordyKategorie" />
+        <EntityTypeShape EntityType="SlavojDB.KuzelnaProgramSluzba" Width="2.25" PointX="7.75" PointY="25" />
+        <AssociationConnector Association="SlavojDB.FK_KuzelnaProgramSluzby_Cleni" />
+        <EntityTypeShape EntityType="SlavojDB.ZapasBarva" Width="1.5" PointX="2.5" PointY="24" />
+        <EntityTypeShape EntityType="SlavojDB.KuzelnaProgram" Width="1.5" PointX="4.625" PointY="24.5" />
+        <AssociationConnector Association="SlavojDB.FK_KuzelnaProgramSluzby_KuzelnaProgramy" />
+        <EntityTypeShape EntityType="SlavojDB.Zapas" Width="1.5" PointX="0.5" PointY="24" />
+        <AssociationConnector Association="SlavojDB.FK_Zapasy_Rozhodci" />
+        <AssociationConnector Association="SlavojDB.FK_Zapasy_Souteze" />
+        <EntityTypeShape EntityType="SlavojDB.KuzelnaProgramKategorie" Width="1.5" PointX="5.125" PointY="28.875" />
+        <AssociationConnector Association="SlavojDB.FK_KuzelnaProgramy_KuzelnaProgramKategorie" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

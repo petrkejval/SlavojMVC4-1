@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Nastavení-Zápasy";
+}
+
+@{
+    Html.Telerik()
+        .Grid<ZapasEditable>()
+        .Name("ZapasyGrid")
+        .DataKeys(keys => keys.Add(c => c.ZapasId))
+        .DataBinding(dataBinding => dataBinding.Ajax()
+            .Select("ZapasySelect", "ZapasyGrid")
+            .Insert("ZapasyInsert", "ZapasyGrid")
+            .Update("ZapasyUpdate", "ZapasyGrid")
+            .Delete("ZapasyDelete", "ZapasyGrid")
+            )
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
+        //.Editable(editing => editing.Mode(GridEditMode.PopUp))
+        .Editable(editing => editing.Mode(GridEditMode.InForm).TemplateName("ZapasEditable"))
+        .Columns(columns =>
+        {
+            columns.Command(commands =>
+            {
+                commands.Edit().ButtonType(GridButtonType.BareImage);
+                commands.Delete().ButtonType(GridButtonType.BareImage);
+            }).Width(80);//.Title("Commands");
+            columns.ForeignKey(o => o.SoutezId, (System.Collections.IEnumerable)ViewBag.SoutezeListItem, "Id", "Name").Width("*");
+            columns.Bound(o => o.KuzelnaNazev);
+            columns.Bound(o => o.KuzelnaDomaci).Width(100)
+                                .ClientTemplate("<input type='checkbox' disabled='disabled' name='cbKuzelnaDomaci' <#=KuzelnaDomaci? checked='checked' : '' #> />");
+            columns.Bound(o => o.ZapasDatumCasOd);
+            columns.Bound(o => o.ZapasDatumCasDo);
+            columns.Bound(o => o.Druzstvo1Nazev);
+            columns.Bound(o => o.Druzstvo2Nazev);
+            columns.Bound(o => o.SrazDatumCas);
+            columns.Bound(o => o.MistoSrazu);
+            columns.Bound(o => o.Poznamka);
+            columns.ForeignKey(o => o.RozhodciId, (System.Collections.IEnumerable)ViewBag.RozhodciListItem, "Id", "Name").Width("*");
+            columns.Bound(o => o.ZapasId).Visible(ViewBag.ZapasId != 0);
+
+
+        }
+            )
+        .Localizable("cs-CZ")
+        .Reorderable(reorder => reorder.Columns(true))
+        .Resizable(resize => resize.Columns(true))
+        .Scrollable(sc => sc.Height("*"))
+        .Filterable(f => f.Filters(fi =>
+        {
+            if (ViewBag.ZapasId != 0)
+            {
+                fi.Add(o => o.ZapasId).IsEqualTo(ViewBag.ZapasId);
+            }
+        }
+        ))
+        .Sortable()
+        .Pageable()
+        .Render()
+        ;
+    if (ViewBag.ZapasId != 0)
+    {
+        @Html.ActionLink("Zpět na Zápasy", "Zapasy", "Menu", new {podmDruzstva = ViewBag.PodmDruzstva, podmKde = ViewBag.PodmKde, page = ViewBag.Page }, null)
+    }
+}
+
+@Scripts.Render("~/bundles/globalize")
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $.validator.methods.date = function (value, element) {
+                Globalize.culture("cs-CZ");
+                // you can alternatively pass the culture to parseDate instead of
+                // setting the culture above, like so:
+                // parseDate(value, null, "cs-CZ")
+                return this.optional(element) || Globalize.parseDate(value, Globalize.culture().calendar.patterns.d + " " + Globalize.culture().calendar.patterns.t) !== null;
+            }
+        });
+    </script>
+}
+
+<style type="text/css">
+    #contentcolumn {
+        margin-right: 0;
+    }
+
+    #rightcolumn {
+        display: none;
+    }
+</style>
+

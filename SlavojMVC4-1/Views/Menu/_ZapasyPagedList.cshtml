@@ -1,0 +1,10 @@
+﻿@model IPagedList<ZapasNejblizsi>
+
+<div class="pagedList"
+     data-otf-target="#listZapasy">
+    @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< První", LinkToPreviousPageFormat = "< Předchozí", LinkToNextPageFormat = "Další >", LinkToLastPageFormat = "Poslední >>" })*@
+
+    @Html.PagedListPager(Model, page => Url.Action("Zapasy", new { page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+</div>
+
+

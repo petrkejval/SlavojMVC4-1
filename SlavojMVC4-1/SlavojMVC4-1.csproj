@@ -222,6 +222,8 @@
     <Compile Include="Controllers\Nastaveni\DruzstvaGridController.cs" />
     <Compile Include="Controllers\Nastaveni\KategorieSouteziGridController.cs" />
     <Compile Include="Controllers\Nastaveni\KlubyGridController.cs" />
+    <Compile Include="Controllers\Nastaveni\KuzelnaProgramKategoriesGridController.cs" />
+    <Compile Include="Controllers\Nastaveni\KuzelnaProgramyGridController.cs" />
     <Compile Include="Controllers\Nastaveni\KuzelnyGridController.cs" />
     <Compile Include="Controllers\Nastaveni\NastaveniController.cs" />
     <Compile Include="Controllers\Nastaveni\RekordyGridController.cs" />
@@ -232,7 +234,10 @@
     <Compile Include="Controllers\Nastaveni\UserCleniGridController.cs" />
     <Compile Include="Controllers\Nastaveni\VysledkyGridController.cs" />
     <Compile Include="Controllers\Nastaveni\WebPagesGridController.cs" />
+    <Compile Include="Controllers\Nastaveni\ZapasyBarvyController.cs" />
+    <Compile Include="Controllers\Nastaveni\ZapasyGridController.cs" />
     <Compile Include="Controllers\TurnajeController.cs" />
+    <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Extensions\HtmlHelpersExtensions.cs" />
     <Compile Include="Filters\ConditionalValidationAttribute.cs" />
     <Compile Include="Models\Adresa.cs">
@@ -286,6 +291,22 @@
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\KuzelnaEditable.cs" />
+    <Compile Include="Models\KuzelnaProgram.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KuzelnaProgramEditable.cs" />
+    <Compile Include="Models\KuzelnaProgramKategorie.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KuzelnaProgramKategorieEditable.cs" />
+    <Compile Include="Models\KuzelnaProgramSluzba.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KuzelnaProgramSluzbaEditable.cs" />
+    <Compile Include="Models\KuzelnaProgramSluzbySessionRepository.cs" />
+    <Compile Include="Models\KuzelnaProgramySessionRepository.cs" />
+    <Compile Include="Models\KuzelnaProgramZapas.cs" />
+    <Compile Include="Models\KuzelnaProgramKategoriesSessionRepository.cs" />
     <Compile Include="Models\KuzelnySessionRepository.cs" />
     <Compile Include="Models\MainMenu.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
@@ -604,6 +625,17 @@
     <Compile Include="Models\webpages_UsersInRoles.cs">
       <DependentUpon>SlavojDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Zapas.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZapasBarva.cs">
+      <DependentUpon>SlavojDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZapasBarvaEditable.cs" />
+    <Compile Include="Models\ZapasEditable.cs" />
+    <Compile Include="Models\ZapasNejblizsi.cs" />
+    <Compile Include="Models\ZapasyBarvySessionRepository.cs" />
+    <Compile Include="Models\ZapasySessionRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1196,6 +1228,18 @@
     <Content Include="Views\Nastaveni\RekordyKategories.cshtml" />
     <Content Include="Views\Nastaveni\Rekordy.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RekordEditable.cshtml" />
+    <Content Include="Views\Widget\NejblizsiProgram.cshtml" />
+    <Content Include="Views\Widget\NejblizsiZapasy.cshtml" />
+    <Content Include="Views\Nastaveni\Zapasy.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ZapasEditable.cshtml" />
+    <Content Include="Views\Nastaveni\ZapasyBarvy.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\KuzelnaProgramEditable.cshtml" />
+    <Content Include="Views\Nastaveni\KuzelnaProgramy.cshtml" />
+    <Content Include="Views\Menu\ProgramNaKuzelne.cshtml" />
+    <Content Include="Views\Menu\Zapasy.cshtml" />
+    <Content Include="Views\Menu\_Zapasy.cshtml" />
+    <Content Include="Views\Menu\_ZapasyPagedList.cshtml" />
+    <Content Include="Views\Nastaveni\KuzelnaProgramKategorie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -1208,8 +1252,12 @@
     <Folder Include="Images\" />
     <Folder Include="Views\DisciplinyGrid\" />
     <Folder Include="Views\DisciplinyKategoriesGrid\" />
+    <Folder Include="Views\KuzelnaProgramKategoriesGrid\" />
+    <Folder Include="Views\KuzelnaProgramyGrid\" />
     <Folder Include="Views\RekordyGrid\" />
     <Folder Include="Views\RekordyKategoriesGrid\" />
+    <Folder Include="Views\ZapasyBarvy\" />
+    <Folder Include="Views\ZapasyGrid\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App_GlobalResources\UploadLocalization.zh-CN.resx">

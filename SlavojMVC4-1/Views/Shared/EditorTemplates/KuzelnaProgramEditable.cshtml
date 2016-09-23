@@ -1,0 +1,60 @@
+﻿
+@model SlavojMVC4_1.Models.KuzelnaProgramEditable
+
+@{
+    ViewBag.Title = "Program - editace";
+}
+
+<fieldset class="turnaj-fields">
+    @Html.AntiForgeryToken()
+    @*@Html.ValidationSummary(true)*@
+
+    <div class="clen-osoba">
+        <div class="clen-nadpis editor-label">
+            Program
+        </div>
+        @Html.HiddenFor(model => model.KuzelnaProgramId)
+
+        <div class="editor-label">@Html.LabelFor(model => model.ProgramNazev)</div><div class="editor-field">@Html.EditorFor(model => model.ProgramNazev)@Html.ValidationMessageFor(model => model.ProgramNazev)</div>
+        <div class="editor-label">@Html.LabelFor(model => model.ProgramKategorieId)</div><div class="editor-field">@Html.EditorFor(model => model.ProgramKategorieId)@Html.ValidationMessageFor(model => model.ProgramKategorieId)</div>
+        <div class="editor-label">@Html.LabelFor(model => model.ProgramDatumCasOd)</div><div class="editor-field">@Html.EditorFor(model => model.ProgramDatumCasOd)@Html.ValidationMessageFor(model => model.ProgramDatumCasOd)</div>
+        <div class="editor-label">@Html.LabelFor(model => model.ProgramDatumCasDo)</div><div class="editor-field">@Html.EditorFor(model => model.ProgramDatumCasDo)@Html.ValidationMessageFor(model => model.ProgramDatumCasDo)</div>
+        <div class="editor-label">@Html.LabelFor(model => model.Poznamka)</div><div class="editor-field">@Html.EditorFor(model => model.Poznamka)@Html.ValidationMessageFor(model => model.Poznamka)</div>
+        <div class="editor-label">@Html.LabelFor(model => model.OpakovatKazdyTyden)</div><div class="editor-field">@Html.EditorFor(model => model.OpakovatKazdyTyden)@Html.ValidationMessageFor(model => model.OpakovatKazdyTyden)</div>
+        <div class="editor-label">
+          @Html.LabelFor(model => model.OpakovatDatumDo)
+        </div><div class="editor-field">
+          @Html.EditorFor(model => model.OpakovatDatumDo)
+          @Html.ValidationMessageFor(model => model.OpakovatDatumDo)
+        </div>
+        <div class="editor-label">@Html.LabelFor(model => model.JeAktivni)</div><div class="editor-field">@Html.EditorFor(model => model.JeAktivni)@Html.ValidationMessageFor(model => model.JeAktivni)</div>
+    </div>
+
+    <div>
+        @Html.ValidationMessage(String.Empty)
+
+    </div>
+
+
+</fieldset>
+<style type="text/css">
+    .t-grid .input-validation-error {
+        border-style: solid;
+    }
+
+    .t-input {
+        border-color: #e2e2e2;
+    }
+
+    .t-calendar {
+        color: black;
+    }
+
+    .t-content, .t-editable-area {
+        background-color: #87B9D6;
+    }
+
+    .t-footer {
+        background-color: #87B9D6;
+    }
+</style>

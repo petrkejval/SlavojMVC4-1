@@ -57,5 +57,10 @@ namespace SlavojMVC4_1.Models
         public DbSet<Disciplina> Discipliny { get; set; }
         public DbSet<DisciplinyKategorie> DisciplinyKategories { get; set; }
         public DbSet<Rekord> Rekordy { get; set; }
+        public DbSet<KuzelnaProgramSluzba> KuzelnaProgramSluzby { get; set; }
+        public DbSet<ZapasBarva> ZapasyBarvy { get; set; }
+        public DbSet<KuzelnaProgram> KuzelnaProgramy { get; set; }
+        public DbSet<Zapas> Zapasy { get; set; }
+        public DbSet<KuzelnaProgramKategorie> KuzelnaProgramKategories { get; set; }
     }
 }

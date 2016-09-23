@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "Nastavení-Program na Kuželně";
+}
+@{
+    Html.Telerik()
+        .Grid<KuzelnaProgramEditable>()
+        .Name("KuzelnaProgramyGrid")
+        .DataKeys(keys => keys.Add(c => c.KuzelnaProgramId))
+        .DataBinding(dataBinding => dataBinding.Ajax()
+            .Select("KuzelnaProgramySelect", "KuzelnaProgramyGrid")
+            .Insert("KuzelnaProgramyInsert", "KuzelnaProgramyGrid")
+            .Update("KuzelnaProgramyUpdate", "KuzelnaProgramyGrid")
+            .Delete("KuzelnaProgramyDelete", "KuzelnaProgramyGrid")
+            )
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
+        //.Editable(editing => editing.Mode(GridEditMode.InLine))
+        .Editable(editing => editing.Mode(GridEditMode.InForm).TemplateName("KuzelnaProgramEditable"))
+        .Columns(columns =>
+        {
+            columns.Command(commands =>
+            {
+                commands.Edit().ButtonType(GridButtonType.BareImage);
+                commands.Delete().ButtonType(GridButtonType.BareImage);
+            }).Width(80);//.Title("Commands");
+
+            columns.Bound(o => o.ProgramNazev);
+            columns.ForeignKey(o => o.ProgramKategorieId, (System.Collections.IEnumerable)ViewBag.ProgramKategorieListItem, "Id", "Name").Width("*");
+            columns.Bound(o => o.ProgramDatumCasOd);
+            columns.Bound(o => o.ProgramDatumCasDo);
+            columns.Bound(o => o.Poznamka);
+            columns.Bound(o => o.OpakovatKazdyTyden).Width(100)
+                                .ClientTemplate("<input type='checkbox' disabled='disabled' name='cbOpakovatKazdyTyden' <#=OpakovatKazdyTyden? checked='checked' : '' #> />");
+            columns.Bound(o => o.OpakovatDatumDo).Format("{0:d}");
+            columns.Bound(o => o.JeAktivni).Width(100)
+                                .ClientTemplate("<input type='checkbox' disabled='disabled' name='cbJeAktivni' <#=JeAktivni? checked='checked' : '' #> />");
+        }
+            )
+        .DetailView(detail => detail.ClientTemplate(
+            Html.Telerik().Grid<KuzelnaProgramSluzbaEditable>()
+                .Name("KuzelnaProgramSluzba_<#= KuzelnaProgramId #>")
+                .DataKeys(keys =>
+                {
+                    keys.Add(c => c.KuzelnaProgramSluzbaId);
+                })
+                .Columns(columns =>
+                {
+                    columns.Command(commands =>
+                    {
+                        commands.Edit().ButtonType(GridButtonType.BareImage);
+                        commands.Delete().ButtonType(GridButtonType.BareImage);
+                    }).Width(80);//.Title("Commands");
+
+                    columns.ForeignKey(o => o.ClenId, (System.Collections.IEnumerable)ViewBag.KuzelnaProgramSluzbaListItem, "Id", "Name").Width("*");
+                    columns.Bound(o => o.SluzbaDatumCasOd);
+                    columns.Bound(o => o.SluzbaDatumCasDo);
+                }
+                )
+                .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
+                .Editable(editing => editing.Mode(GridEditMode.InLine))
+                .DataBinding(dataBinding => dataBinding.Ajax()
+                    .Select("SluzbaSelect", "KuzelnaProgramyGrid", new { KuzelnaProgramId = "<#= KuzelnaProgramId #>" })
+                    .Insert("SluzbaInsert", "KuzelnaProgramyGrid", new { KuzelnaProgramId = "<#= KuzelnaProgramId #>" })
+                    .Update("SluzbaUpdate", "KuzelnaProgramyGrid", new { KuzelnaProgramId = "<#= KuzelnaProgramId #>" })
+                    .Delete("SluzbaDelete", "KuzelnaProgramyGrid", new { KuzelnaProgramId = "<#= KuzelnaProgramId #>" })
+                    )
+
+                .Pageable()
+                .Sortable()
+                .Filterable()
+                .ToHtmlString()
+
+            )
+        )
+
+        .Localizable("cs-CZ")
+        .Reorderable(reorder => reorder.Columns(true))
+        .Resizable(resize => resize.Columns(true))
+        .Scrollable(sc => sc.Height("*"))
+        .Filterable()
+        .Sortable()
+        .Pageable()
+        .Render()
+        ;
+}
+@Scripts.Render("~/bundles/globalize")
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $.validator.methods.date = function (value, element) {
+                Globalize.culture("cs-CZ");
+                // you can alternatively pass the culture to parseDate instead of
+                // setting the culture above, like so:
+                // parseDate(value, null, "cs-CZ")
+                return this.optional(element)
+                                     || (Globalize.parseDate(value) !== null)
+                                     || (Globalize.parseDate(value, Globalize.culture().calendar.patterns.d + " " + Globalize.culture().calendar.patterns.t) !== null
+                    );
+            }
+        });
+        //$(function () {
+        //    $.validator.methods.date = function (value, element) {
+        //        Globalize.culture("cs-CZ");
+        //        // you can alternatively pass the culture to parseDate instead of
+        //        // setting the culture above, like so:
+        //        // parseDate(value, null, "cs-CZ")
+        //        return this.optional(element) || Globalize.parseDate(value) !== null;
+        //    }
+        //});
+
+</script>
+
+}
+
+<style type="text/css">
+    #contentcolumn {
+        margin-right: 0;
+    }
+
+    #rightcolumn {
+        display: none;
+    }
+</style>

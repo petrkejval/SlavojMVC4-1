@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Nastavení-Program na kuželně-Zápasy Barvy";
+}
+
+@{
+    Html.Telerik()
+        .Grid<KuzelnaProgramKategorieEditable>()
+        .Name("KuzelnaProgramKategoriesGrid")
+        .DataKeys(keys => keys.Add(c => c.KuzelnaProgramKategorieId))
+        .DataBinding(dataBinding => dataBinding.Ajax()
+            .Select("KuzelnaProgramKategoriesSelect", "KuzelnaProgramKategoriesGrid")
+            .Insert("KuzelnaProgramKategoriesInsert", "KuzelnaProgramKategoriesGrid")
+            .Update("KuzelnaProgramKategoriesUpdate", "KuzelnaProgramKategoriesGrid")
+            .Delete("KuzelnaProgramKategoriesDelete", "KuzelnaProgramKategoriesGrid")
+            )
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
+        .Editable(editing => editing.Mode(GridEditMode.InLine))
+        //.Editable(editing => editing.Mode(GridEditMode.InForm).TemplateName("ZapasBarvaEditable"))
+        .Columns(columns =>
+        {
+            columns.Command(commands =>
+            {
+                commands.Edit().ButtonType(GridButtonType.BareImage);
+                commands.Delete().ButtonType(GridButtonType.BareImage);
+            }).Width(80);//.Title("Commands");
+
+            columns.Bound(o => o.Nazev);
+            columns.Bound(o => o.Barva);
+
+        }
+            )
+        .Localizable("cs-CZ")
+        .Reorderable(reorder => reorder.Columns(true))
+        .Resizable(resize => resize.Columns(true))
+        .Scrollable(sc => sc.Height("*"))
+        .Filterable()
+        .Sortable()
+        .Pageable()
+        .Render()
+        ;
+}
+@Scripts.Render("~/bundles/globalize")
+
+<style type="text/css">
+    #contentcolumn {
+        margin-right: 0;
+    }
+
+    #rightcolumn {
+        display: none;
+    }
+</style>
+
+

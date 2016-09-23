@@ -1,0 +1,58 @@
+﻿
+@model SlavojMVC4_1.Models.ZapasEditable
+
+@{
+    ViewBag.Title = "Zapas - editace";
+}
+<fieldset class="turnaj-fields">
+    @Html.AntiForgeryToken()
+    @*@Html.ValidationSummary(true)*@
+
+    <div class="clen-osoba">
+        <div class="clen-nadpis editor-label">
+            Zápas
+        </div>
+        @Html.HiddenFor(model => model.ZapasId)
+
+        <div class="editor-label">@Html.LabelFor(model => model.SoutezId)</div><div class="editor-field">@Html.EditorFor(model => model.SoutezId)@Html.ValidationMessageFor(model => model.SoutezId)</div>
+        <div class="editor-label">@Html.LabelFor(model => model.KuzelnaNazev)</div><div class="editor-field">@Html.EditorFor(model => model.KuzelnaNazev)@Html.ValidationMessageFor(model => model.KuzelnaNazev)</div>
+        <div class="editor-label">@Html.LabelFor(model => model.KuzelnaDomaci)</div><div class="editor-field">@Html.EditorFor(model => model.KuzelnaDomaci)@Html.ValidationMessageFor(model => model.KuzelnaDomaci)</div>
+        <div class="editor-label">@Html.LabelFor(model => model.ZapasDatumCasOd)</div><div class="editor-field">@Html.EditorFor(model => model.ZapasDatumCasOd)@Html.ValidationMessageFor(model => model.ZapasDatumCasOd)</div>
+        <div class="editor-label">@Html.LabelFor(model => model.ZapasDatumCasDo)</div><div class="editor-field">@Html.EditorFor(model => model.ZapasDatumCasDo)@Html.ValidationMessageFor(model => model.ZapasDatumCasDo)</div>
+        <div class="editor-label">@Html.LabelFor(model => model.Druzstvo1Nazev)</div><div class="editor-field">@Html.EditorFor(model => model.Druzstvo1Nazev)@Html.ValidationMessageFor(model => model.Druzstvo1Nazev)</div>
+        <div class="editor-label">@Html.LabelFor(model => model.Druzstvo2Nazev)</div><div class="editor-field">@Html.EditorFor(model => model.Druzstvo2Nazev)@Html.ValidationMessageFor(model => model.Druzstvo2Nazev)</div>
+        <div class="editor-label">@Html.LabelFor(model => model.SrazDatumCas)</div><div class="editor-field">@Html.EditorFor(model => model.SrazDatumCas)@Html.ValidationMessageFor(model => model.SrazDatumCas)</div>
+        <div class="editor-label">@Html.LabelFor(model => model.MistoSrazu)</div><div class="editor-field">@Html.EditorFor(model => model.MistoSrazu)@Html.ValidationMessageFor(model => model.MistoSrazu)</div>
+        <div class="editor-label">@Html.LabelFor(model => model.Poznamka)</div><div class="editor-field">@Html.EditorFor(model => model.Poznamka)@Html.ValidationMessageFor(model => model.Poznamka)</div>
+        <div class="editor-label">@Html.LabelFor(model => model.RozhodciId)</div><div class="editor-field">@Html.EditorFor(model => model.RozhodciId)@Html.ValidationMessageFor(model => model.RozhodciId)</div>
+    </div>
+
+    <div>
+        @Html.ValidationMessage(String.Empty)
+
+    </div>
+
+
+</fieldset>
+<style type="text/css">
+    .t-grid .input-validation-error {
+        border-style: solid;
+    }
+
+    .t-input {
+        border-color: #e2e2e2;
+    }
+
+    .t-calendar {
+        color: black;
+    }
+
+    .t-content, .t-editable-area {
+        background-color: #87B9D6;
+    }
+
+    .t-footer {
+        background-color: #87B9D6;
+    }
+</style>
+

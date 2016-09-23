@@ -9,6 +9,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.SqlClient;
 using System.Data;
+using SlavojMVC4_1.Infrastructure;
 
 
 namespace SlavojMVC4_1.Controllers.Nastaveni
@@ -288,5 +289,48 @@ namespace SlavojMVC4_1.Controllers.Nastaveni
 
             return View(exportDat);
         }
+        [Authorize(Roles = ("superuser"))]
+        public ActionResult Zapasy(int zapasId = 0, string podmDruzstva = ItemDruzstva.Vse, string podmKde = ItemKde.DomaciIVenkovniKuzelna, int page = 0)
+        {
+            ViewBag.SoutezeListItem = new SlavojDBContainer().Souteze
+                                                 .Select(e => new { Id = e.SoutezId, Name = e.Nazev })
+                                                 .OrderBy(e => e.Name);
+
+            ViewBag.RozhodciListItem = new SlavojDBContainer().Rozhodcis
+                                                 .Where(w => (w.PlatnaDo >= DateTime.Now) && (w.Cleni.JeClen || w.Cleni.ClenId == 0))
+                                                 .Select(e => new { Id = e.ClenId, Name = e.Cleni.Prijmeni + " " + e.Cleni.Jmeno })
+                                                 .OrderBy(e => e.Name);
+            ViewBag.ZapasId = zapasId;
+            ViewBag.PodmDruzstva = podmDruzstva;
+            ViewBag.PodmKde = podmKde;
+            ViewBag.Page = page;
+
+            return View();
+        }
+
+        [Authorize(Roles = ("superuser"))]
+        public ActionResult ZapasyBarvy()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = ("superuser"))]
+        public ActionResult KuzelnaProgramy()
+        {
+            ViewBag.KuzelnaProgramSluzbaListItem = new SlavojDBContainer().Cleni
+                                                 .Where(w => (w.JeClen) || (w.ClenId == 0))
+                                                 .Select(e => new { Id = e.ClenId, Name = e.Prijmeni + " " + e.Jmeno })
+                                                 .OrderBy(e => e.Name);
+
+            ViewBag.ProgramKategorieListItem = new SlavojDBContainer().KuzelnaProgramKategories
+                                                        .Select(e => new { Id = e.KuzelnaProgramKategorieId, Name = e.Nazev })
+                                                        .OrderBy(e => e.Name);
+            return View();
+        }
+        public ActionResult KuzelnaProgramKategorie()
+        {
+            return View();
+        }
+
     }
 }

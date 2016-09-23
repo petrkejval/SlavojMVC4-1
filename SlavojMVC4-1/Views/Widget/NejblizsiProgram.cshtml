@@ -1,0 +1,82 @@
+﻿@model IEnumerable<SlavojMVC4_1.Models.KuzelnaProgramZapas>
+    
+<div class="widget">
+    <div class="t-header widget-header">
+        Nejbližší program na kuželně
+    </div>
+    @foreach (var item in Model)
+    {
+
+        string className = "widget-body";
+        if (!item.JeProgram) { className = "widget-body-color"; }
+        <div class=@className>
+            <div class="programy-header">
+                @if (item.JeProgram)
+                {
+                   @item.ProgramNazev
+                }
+                else
+                {
+                    if (item.Druzstvo1Barva != null)
+                    {
+                        <span style="color:@item.Druzstvo1Barva"> @item.Druzstvo1Nazev </span>
+                    }
+                    else
+                    {
+                        @item.Druzstvo1Nazev
+                    }
+
+                    <span>-</span>
+                    if (item.Druzstvo2Barva != null)
+                    {
+                        <span style="color:@item.Druzstvo2Barva"> @item.Druzstvo2Nazev </span>
+                    }
+                    else
+                    {
+                        @item.Druzstvo2Nazev
+                    }
+                }
+            </div>
+            <div class="programy-body">
+                @item.ProgramDatumCasOd.ToString("ddd d/M/yyyy HH:mm") - @item.ProgramDatumCasDo.ToString("ddd d/M/yyyy HH:mm")
+            </div>
+            <div class="programy-footer">
+                @item.Poznamka
+            </div>
+            @if (item.KuzelnaProgramSluzby != null && item.KuzelnaProgramSluzby.Count > 0)
+            {
+
+                string line = null;
+                string odDo = null;
+                foreach (var sluzba in item.KuzelnaProgramSluzby)
+                {
+                    if (line == null)
+                    {
+                        if (item.JeProgram)
+                        {
+                            line = "Služba: ";
+                        }
+                        else
+                        {
+                            line = "Rozhodčí: ";
+                        }
+
+                    }
+                    else { line = line + ", "; };
+                    if (sluzba.SluzbaDatumCasOd != null) { odDo = " od " + ((DateTime)sluzba.SluzbaDatumCasOd).ToString("d/M/yyyy HH:mm"); }
+                    if (sluzba.SluzbaDatumCasDo != null) { odDo = odDo + " do " + ((DateTime)sluzba.SluzbaDatumCasDo).ToString("d/M/yyyy HH:mm"); }
+                    if (odDo != null) { odDo = odDo + " "; }
+
+                    line = line + odDo + SlavojMVC4_1.Infrastructure.Tools.GetFullName(sluzba.Clen.TitulPred, sluzba.Clen.Jmeno, sluzba.Clen.Prijmeni, sluzba.Clen.TitulZa);
+                }
+                <div class="programy-footer">
+                    @line
+                </div>
+            }
+
+        </div>
+    }
+    <div>
+        @Html.ActionLink("Více zde...", "ProgramNaKuzelne", "Menu")
+    </div>
+</div>
